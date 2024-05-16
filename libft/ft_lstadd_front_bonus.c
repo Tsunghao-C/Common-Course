@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:39:29 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/10 12:41:22 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/16 10:56:13 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	main(void)
 	int	b = 3;
 	t_list	*tmp1;
 	t_list	*tmp2;
-
 	t_list	*lst_0;
 	t_list	*lst_1;
+
 	lst_0 = ft_lstnew(&a);
 	lst_1 = ft_lstnew(&b);
 	ft_lstadd_front(&lst_1, lst_0);

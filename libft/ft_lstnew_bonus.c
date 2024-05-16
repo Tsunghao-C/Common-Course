@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/10 14:54:24 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/13 21:55:02 by tsuchen          ###   ########.fr       */
+/*   Created: 2024/05/10 11:28:30 by tsuchen           #+#    #+#             */
+/*   Updated: 2024/05/16 10:50:33 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,45 +23,17 @@ t_list	*ft_lstnew(void *content)
 	lst->next = 0;
 	return (lst);
 }
-
-void	ft_lstadd_back(t_list **lst, t_list *new)
-{
-	t_list	*tmp;
-
-	tmp = *lst;
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = new;
-}
-
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
-{
-	t_list	*new_lst;
-	t_list	*tmp;
-	t_list	*tmp2;
-
-	new_lst = ft_lstnew(f(lst->content));
-	if (!new_lst)
-		return (0);
-	tmp = lst->next;
-	while (tmp)
-	{
-		ft_lstadd_back(&new_lst, ft_lstnew(f(tmp->content)));
-		tmp = tmp->next;
-	}
-	return (new_lst);
-}
-
+/*
 #include <stdio.h>
-void	*triple_data(void *data)
+int	main(void)
 {
-	void	*new;
+	int	a = 7;
+	t_list	*lst;
 
-	new = malloc(sizeof(int));
-	if (!new)
-		return (0);
-	*(int)new = (int)data * 3;
-	return (new);
-}
-
-
+	lst = ft_lstnew(&a);
+	printf("val_lst: %d, add_lst: %p\n", *((int *)(lst->content)), lst->content);
+	printf("val_a  : %d, add_a  : %p\n", a, &a);
+	printf("add of nex in lst: %p\n", lst->next);
+	free(lst);
+	return (0);
+}*/

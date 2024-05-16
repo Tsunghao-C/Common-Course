@@ -6,13 +6,13 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:14:02 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/09 17:02:15 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/16 14:42:51 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h" 
 
-int	ft_count_digit(int n)
+static int	ft_count_digit(int n)
 {
 	int	count;
 
@@ -32,7 +32,7 @@ int	ft_count_digit(int n)
 	return (count);
 }
 
-int	ft_power(int base, int pwr, int output)
+static int	ft_power(int base, int pwr, int output)
 {
 	if (pwr == 0)
 		return (output);
@@ -73,10 +73,12 @@ int	main(int ac, char *av[])
 {
 	if (ac != 2)
 		return (0);
+	int	nb;
 	char	*str;
 
-	str = ft_itoa(atoi(av[1]));
-	printf("%s\n", str);
+	nb = atoi(av[1]);
+	str = ft_itoa(nb);
+	printf("nbr: %d | str: %s\n", nb, str);
 	free(str);
 	return (0);
 }*/

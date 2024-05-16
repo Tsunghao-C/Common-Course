@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:40:23 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/10 14:54:05 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/16 12:04:39 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_list	*ft_lstnew(void *content);
 
 void	print_out(void *content)
 {
-	printf("%d\n", *(int *)content);
+	printf("%d\n", *(int *)content + 1);
 }
 
 int	main(void)

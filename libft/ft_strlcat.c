@@ -3,31 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/14 19:31:46 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/09 12:36:52 by tsuchen          ###   ########.fr       */
+/*   Created: 2024/05/16 09:34:10 by tsuchen           #+#    #+#             */
+/*   Updated: 2024/05/16 15:25:52 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-size_t	ft_strlcat(char *restrict dst, char const *restrict src, size_t dstsize)
+size_t	ft_strlcat(char *dst, const char *src, size_t siz)
 {
 	unsigned int	i;
 	unsigned int	dst_len;
 	unsigned int	src_len;
 
 	i = 0;
-	dst_len = 0;
-	src_len = 0;
-	while (dst[dst_len])
-		dst_len++;
-	while (src[src_len])
-		src_len++;
-	if (dstsize < (dst_len + 1))
-		return (src_len + dstsize);
-	while (src[i] && i < (dstsize - dst_len - 1))
+	dst_len = ft_strlen(dst);
+	src_len = ft_strlen(src);
+	if (siz < (dst_len + 1))
+		return (src_len + siz);
+	while (src[i] && i < (siz - dst_len - 1))
 	{
 		dst[i + dst_len] = src[i];
 		i++;
@@ -37,16 +33,16 @@ size_t	ft_strlcat(char *restrict dst, char const *restrict src, size_t dstsize)
 }
 /*
 #include <stdio.h>
-#include <string.h>
+#include <bsd/string.h>
 int	main(void)
 {
 	char	src[10] = "123456789";
-	char	dest_test[10] = "hello yo";
-	char	dest_real[10] = "hello yo";
+	char	dest_test[16] = "hello yo";
+	char	dest_real[16] = "hello yo";
 
-	printf("test: %u\n", ft_strlcat(dest_test, src, 10));
+	printf("test: %zu\n", ft_strlcat(dest_test, src, 16));
 	printf("test text: %s\n", dest_test);
-	printf("real: %zu\n", strlcat(dest_real, src, 10));
+	printf("real: %zu\n", strlcat(dest_real, src, 16));
 	printf("test real: %s\n", dest_real);
 	return (0);
 }*/

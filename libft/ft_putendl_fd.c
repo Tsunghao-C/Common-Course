@@ -6,16 +6,15 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 20:20:59 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/09 20:29:10 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/16 15:13:01 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h"
 
 void	ft_putendl_fd(char *s, int fd)
 {
-	while (*s)
-		write(fd, &(*(s++)), 1);
+	write(fd, s, ft_strlen(s));
 	write(fd, "\n", 1);
 }
 /*

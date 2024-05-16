@@ -3,29 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/12 09:35:53 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/09 12:37:43 by tsuchen          ###   ########.fr       */
+/*   Created: 2024/05/16 09:33:59 by tsuchen           #+#    #+#             */
+/*   Updated: 2024/05/16 15:27:53 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-size_t	ft_strlcpy(char *restrict dst, char const *restrict src, size_t dstsize)
+size_t	ft_strlcpy(char *dst, const char *src, size_t siz)
 {
 	unsigned int	src_len;
 	unsigned int	i;
 
-	src_len = 0;
+	src_len = ft_strlen(src);
 	i = 0;
-	while (src[src_len])
+	if (siz > 0)
 	{
-		src_len++;
-	}
-	if (dstsize > 0)
-	{
-		while ((i < (dstsize - 1)) && (src[i] != '\0'))
+		while ((i < (siz - 1)) && (src[i] != '\0'))
 		{
 			dst[i] = src[i];
 			i++;
@@ -35,8 +31,7 @@ size_t	ft_strlcpy(char *restrict dst, char const *restrict src, size_t dstsize)
 	return (src_len);
 }
 /*
-#include <unistd.h>
-#include <string.h>
+#include <bsd/string.h>
 #include <stdio.h>
 
 int	main(void)

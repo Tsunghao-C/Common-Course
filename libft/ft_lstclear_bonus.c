@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:09:48 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/10 14:19:06 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/16 11:52:18 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ int	main(void)
 		ft_lstadd_back(&begin_list, ft_lstnew(ft_lstnew(&b)));
 		i++;
 	}
-	printf("data	|current add	|next add\n");
+	printf("content		|current add	|next add\n");
 	while (tmp)
 	{
-		printf("%d 	|%p	|%p\n", *(int *)((*tmp).content), tmp, (*tmp).next);
+		printf("%p 	|%p	|%p\n", ((*tmp).content), tmp, (*tmp).next);
 		tmp = (*tmp).next;
 	}
 	// save original record
@@ -65,8 +65,9 @@ int	main(void)
 	tmp2 = begin_list;
 	ft_lstclear(&begin_list, &del_content);
 	printf("  ==> after free <==\n");
-	printf("bgn_lst	%p, %p\n", begin_list, &begin_list);
-	printf("tmp2	%p, %p\n", tmp2, &tmp2);
+	printf("bgn_lst	%p,	%p\n", begin_list, &begin_list);
+	printf("tmp2	%p,	%p\n", tmp2, &tmp2);
+	printf(" ======================= \n");
 	printf("data before: %p; after: %p\n", o_data, tmp2->content);
 	if (tmp2->content != o_data)
 		printf("==> list data no longer exists!\n");
@@ -74,4 +75,6 @@ int	main(void)
 	if (tmp2->next != o_next)
 		printf("==> list link no longer exists!\n");
 	return (0);
-}*/
+}
+// The 4 errors are due to tmp2->content and tmp2-> after free
+*/

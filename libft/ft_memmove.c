@@ -6,30 +6,35 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:57:53 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/09 12:34:09 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/15 11:52:40 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-void	*ft_memmove(void *dst, void const *src, size_t len)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
 	unsigned int		i;
-	unsigned char	buf[len];
+	unsigned char		*buf;
 
 	i = 0;
-	while (i < len)
+	buf = malloc((n + 1) * sizeof(char));
+	if (!buf)
+		return (0);
+	while (i < n)
 	{
 		buf[i] = ((unsigned char *)src)[i];
 		i++;
 	}
+	buf[i] = '\0';
 	i = 0;
-	while (i < len)
+	while (i < n)
 	{
-		((unsigned char *)dst)[i] = buf[i];
+		((unsigned char *)dest)[i] = buf[i];
 		i++;
 	}
-	return (dst);
+	free(buf);
+	return (dest);
 }
 /*
 #include <string.h>

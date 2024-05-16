@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/11 17:52:19 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/08 19:24:50 by tsuchen          ###   ########.fr       */
+/*   Created: 2024/05/16 10:17:21 by tsuchen           #+#    #+#             */
+/*   Updated: 2024/05/16 15:40:09 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_tolower(int c)
 {
@@ -17,7 +19,6 @@ int	ft_tolower(int c)
 	return (c);
 }
 /*
-#include <unistd.h>
 #include <ctype.h>
 int	ft_strlen(char *str)
 {

@@ -6,22 +6,22 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 11:13:17 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/09 12:29:21 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/16 14:38:12 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void			*ptr;
 	unsigned int	i;
 
 	i = 0;
-	ptr = (void *)malloc(count * size);
+	ptr = (void *)malloc(nmemb * size);
 	if (!ptr)
 		return (0);
-	while (i < (count * size))
+	while (i < (nmemb * size))
 		((unsigned char *)ptr)[i++] = 0;
 	return (ptr);
 }

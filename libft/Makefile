@@ -6,7 +6,7 @@
 #    By: tsuchen <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/29 16:51:02 by tsuchen           #+#    #+#              #
-#    Updated: 2024/05/10 11:27:28 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/05/16 15:09:05 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,15 +36,15 @@ SRCS = ft_isalpha.c \
        ft_calloc.c \
        ft_strdup.c \
 
-SRCS_2 = ft_lstnew.c \
-	 ft_lstadd_front.c \
-	 ft_lstsize.c \
-	 ft_lstlast.c \
-	 ft_lstadd_back.c \
-	 ft_lstdelone.c \
-	 ft_lstclear.c \
-	 ft_lstiter.c \
-	 ft_lstmap.c \
+SRCS_2 = ft_lstnew_bonus.c \
+	 ft_lstadd_front_bonus.c \
+	 ft_lstsize_bonus.c \
+	 ft_lstlast_bonus.c \
+	 ft_lstadd_back_bonus.c \
+	 ft_lstdelone_bonus.c \
+	 ft_lstclear_bonus.c \
+	 ft_lstiter_bonus.c \
+	 ft_lstmap_bonus.c \
 
 OBJS = $(SRCS:.c=.o)
 
@@ -54,17 +54,17 @@ HEAD = libft.h
 
 CFLAGS = -Wall -Wextra -Werror
 
+LIBC = ar rcs
+
 CC = gcc
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar rc $(NAME) $(OBJS)
-	ranlib $(NAME)
+	$(LIBC) $(NAME) $(OBJS)
 
-bonus: $(OBJS) $(OBJS_2)
-	ar rc $(NAME) $(OBJS) $(OBJS_2)
-	ranlib $(NAME)
+bonus: $(NAME) $(OBJS_2)
+	$(LIBC) $(NAME) $(OBJS_2)
 
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $@ -I$(dir $(HEAD))

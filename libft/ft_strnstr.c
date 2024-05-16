@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/14 15:55:01 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/09 12:40:38 by tsuchen          ###   ########.fr       */
+/*   Created: 2024/05/16 09:39:41 by tsuchen           #+#    #+#             */
+/*   Updated: 2024/05/16 15:29:35 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-char	*ft_strnstr(char const *haystack, char const *needle, size_t len)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	unsigned int	i;
 	unsigned int	j;
@@ -20,23 +20,23 @@ char	*ft_strnstr(char const *haystack, char const *needle, size_t len)
 
 	i = 0;
 	n_len = 0;
-	if (*needle == 0)
-		return ((char *)haystack);
-	while (needle[n_len])
+	if (*little == 0)
+		return ((char *)big);
+	while (little[n_len])
 		n_len++;
-	while (haystack[i] && (i < len))
+	while (big[i] && (i < len))
 	{
 		j = 0;
-		while ((j < n_len) && (haystack[i + j] == needle[j]))
+		while ((j < n_len) && (big[i + j] == little[j]) && (i + j < len))
 			j++;
 		if (j == n_len)
-			return ((char *)(haystack + i));
+			return ((char *)(big + i));
 		i++;
 	}
 	return (0);
 }
 /*
-#include <string.h>
+#include <bsd/string.h>
 #include <stdio.h>
 
 int	main(int ac, char *av[])

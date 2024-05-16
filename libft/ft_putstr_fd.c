@@ -6,16 +6,15 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 20:12:32 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/09 20:17:23 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/16 15:20:05 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h" 
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	while (*s)
-		write(fd, &(*(s++)), 1);	
+	write(fd, s, ft_strlen(s));
 }
 /*
 int	main(int ac, char *av[])

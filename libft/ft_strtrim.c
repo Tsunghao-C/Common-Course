@@ -6,13 +6,13 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:49:23 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/09 15:11:25 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/16 15:32:57 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-int	ft_isset(char c, char const *set)
+static int	ft_isset(char c, char const *set)
 {
 	int	i;
 

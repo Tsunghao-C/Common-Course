@@ -6,9 +6,11 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 19:10:55 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/09 20:09:58 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/16 15:23:14 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
@@ -24,7 +26,6 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 /*
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
 
 void	zero_even(unsigned int idx, char *s)
 {

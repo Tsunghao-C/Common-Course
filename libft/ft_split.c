@@ -6,13 +6,13 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:13:36 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/09 16:08:02 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/16 15:21:46 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-int	ft_count_subset(char const *s, char c)
+static int	ft_count_subset(char const *s, char c)
 {
 	int		i;
 	int		count;
@@ -35,7 +35,7 @@ int	ft_count_subset(char const *s, char c)
 	return (count);
 }
 
-char	*ft_strchop(char const *s, int start, int end)
+static char	*ft_strchop(char const *s, int start, int end)
 {
 	char	*str;
 	int		i;

@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/08 14:57:53 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/09 12:27:40 by tsuchen          ###   ########.fr       */
+/*   Created: 2024/05/15 10:13:46 by tsuchen           #+#    #+#             */
+/*   Updated: 2024/05/16 14:37:44 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h" 
 
 void	ft_bzero(void *s, size_t n)
 {
@@ -18,7 +18,7 @@ void	ft_bzero(void *s, size_t n)
 
 	i = 0;
 	while (i < n)
-		((unsigned char *)s)[i++] = 0;
+		((unsigned char *)s)[i++] = '\0';
 }
 /*
 #include <string.h>
@@ -48,8 +48,8 @@ int	main(void)
 	write(1, "\n", 1);
 	ft_putstr(arr_real, sizeof(arr_real));
 	write(1, "\n", 1);
-	ft_bzero(arr_test, sizeof(arr_test));
-	bzero(arr_real, sizeof(arr_real));
+	ft_bzero(arr_test, 6);
+	bzero(arr_real, 6);
 	ft_putstr(arr_test, sizeof(arr_test));
 	write(1, "\n", 1);
 	ft_putstr(arr_real, sizeof(arr_real));

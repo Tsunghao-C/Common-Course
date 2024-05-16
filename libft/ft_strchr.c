@@ -6,11 +6,13 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 19:27:21 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/09 12:35:15 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/16 15:22:10 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strchr(char const *s, int c)
+#include "libft.h"
+
+char	*ft_strchr(const char *s, int c)
 {
 	int		len;
 	char	*tmp;
@@ -43,10 +45,10 @@ int	main(int ac, char *av[])
 	char	*real_strchr;
 
 	test = ft_strchr(av[1], *(av[2]));
-	real_strrchr = strrchr(av[1], *(av[2]));
 	real_strchr = strchr(av[1], *(av[2]));
-	printf("test address: %p\n", test);
+	real_strrchr = strrchr(av[1], *(av[2]));
+	printf("test address	    : %p\n", test);
+	printf("real_strchr address : %p\n", real_strchr);
 	printf("real_strrchr address: %p\n", real_strrchr);
-	printf("real_strchr address: %p\n", real_strchr);
 	return (0);
 }*/
