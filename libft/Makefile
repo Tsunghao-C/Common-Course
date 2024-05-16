@@ -6,7 +6,7 @@
 #    By: tsuchen <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/29 16:51:02 by tsuchen           #+#    #+#              #
-#    Updated: 2024/05/16 15:09:05 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/05/16 16:25:40 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,3 +76,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY:	all clean fclean re bonus
