@@ -6,7 +6,7 @@
 #    By: tsuchen <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/29 16:51:02 by tsuchen           #+#    #+#              #
-#    Updated: 2024/05/16 16:25:40 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/05/17 10:19:52 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,17 @@ SRCS = ft_isalpha.c \
        ft_atoi.c \
        ft_calloc.c \
        ft_strdup.c \
+       ft_substr.c \
+       ft_strjoin.c \
+       ft_strtrim.c \
+       ft_split.c \
+       ft_itoa.c \
+       ft_strmapi.c \
+       ft_striteri.c \
+       ft_putchar_fd.c \
+       ft_putstr_fd.c \
+       ft_putendl_fd.c \
+       ft_putnbr_fd.c \
 
 SRCS_2 = ft_lstnew_bonus.c \
 	 ft_lstadd_front_bonus.c \
