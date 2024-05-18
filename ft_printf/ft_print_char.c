@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   ft_print_char.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 10:42:50 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/17 18:16:38 by tsuchen          ###   ########.fr       */
+/*   Created: 2024/05/17 18:11:14 by tsuchen           #+#    #+#             */
+/*   Updated: 2024/05/17 18:19:12 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFTPRINTF_H
-# define LIBFTPRINTF_H
-
-# include "libft.h"
-# include <stdarg.h>
+#include "libftprintf.h"
 
 char	*ft_print_char(const char *fmt)
-
-#endif
+{
+	ft_putchar_fd(*fmt, STDOUT_FILENO);
+	fmt++;
+	return (fmt);
+}

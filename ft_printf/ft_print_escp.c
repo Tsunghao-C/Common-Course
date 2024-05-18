@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   ft_print_escp.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 10:42:50 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/17 18:16:38 by tsuchen          ###   ########.fr       */
+/*   Created: 2024/05/17 18:19:32 by tsuchen           #+#    #+#             */
+/*   Updated: 2024/05/18 08:49:39 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFTPRINTF_H
-# define LIBFTPRINTF_H
+#include "libftprintf.h"
 
-# include "libft.h"
-# include <stdarg.h>
+char	*ft_print_escp(char *fmt)
+{
+	int	i;
 
-char	*ft_print_char(const char *fmt)
-
-#endif
+	i = 1;
+	if (fmt[i]) == 7 || fmt[i] == 8 || 
+}
