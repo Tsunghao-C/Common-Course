@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_char.c                                    :+:      :+:    :+:   */
+/*   ft_print_str.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/17 18:11:14 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/19 10:29:31 by tsuchen          ###   ########.fr       */
+/*   Created: 2024/05/19 11:00:15 by tsuchen           #+#    #+#             */
+/*   Updated: 2024/05/19 11:46:21 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	ft_print_char(char c)
+int	ft_print_str(char *s)
 {
-	return (write(STDOUT_FILENO, &c, 1));
+	int	count;
+
+	count = 0;
+	while (*s)
+		count += ft_print_char(*(s++)); 
+	return (count);
 }

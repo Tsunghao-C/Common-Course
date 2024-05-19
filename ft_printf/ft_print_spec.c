@@ -6,31 +6,34 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 11:26:11 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/18 12:49:36 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/19 13:13:39 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-char	*ft_print_spec(char *fmt, void **args, va_list *ap)
+int	ft_print_spec(char c, va_list *ap)
 {
-	if (*(fmt + 1) == 'c')
-	{
-		ft_putchar_fd((char)(*args), STDOUT_FILENO);
-		*args = va_arg(*ap, char);
-	}
-	if (*(fmt + 1) == 's')
-	{
-		ft_putstr_fd((char *)(*args), STDOUT_FILENO);
-		*args = va_arg(*ap, char *);
-	}
-	if (*(fmt + 1) == 'p')
-	{
-		ft_putmem_fd((void *)(*args), STDOUT_FILENO);
-		*args = va_arg(*ap, void *);
-	}
-	if (*(fmt + 1) == '%')
-		ft_putchar_fd('%', STDOUT_FILENO);
-	fmt+=2;
-	return (fmt);
+	int	count;
+
+	count = 0;
+	if (c == 'c')
+		count += ft_print_char(va_arg(*ap, int));
+	else if (c == 's')
+		count += ft_print_str(va_arg(*ap, char *));
+	else if (c == 'p')
+		count += ft_print_mem(va_arg(*ap, void *));
+	else if (c == 'd')
+		count += ft_print_digit(va_arg(*ap, int), DEC_TAB);
+	else if (c == 'i')
+		count += ft_print_digit(va_arg(*ap, int), DEC_TAB);
+	else if (c == 'u')
+		count += ft_print_digit(va_arg(*ap, unsigned int), DEC_TAB);
+	else if (c == 'x')
+		count += ft_print_digit(va_arg(*ap, unsigned int), HEX_TAB);
+	else if (c == 'X')
+		count += ft_print_digit(va_arg(*ap, unsigned int), HEX_TAB_U);
+	else
+		count += ft_print_char(c);
+	return (count);
 }
