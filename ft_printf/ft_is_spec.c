@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_digit.c                                   :+:      :+:    :+:   */
+/*   ft_is_flag.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/19 12:43:21 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/20 15:30:19 by tsuchen          ###   ########.fr       */
+/*   Created: 2024/05/20 15:49:11 by tsuchen           #+#    #+#             */
+/*   Updated: 2024/05/20 16:31:29 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	ft_print_digit(long nbr, char *base)
+int	ft_is_spec(char c)
 {
-	int		count;
-	long	base_len;
-
-	count = 0;
-	base_len = (long)ft_strlen(base);
-	if (nbr < 0)
-	{
-		count += write(STDOUT_FILENO, "-", 1);
-		nbr *= (-1);
-	}
-	if (nbr >= base_len)
-		count += ft_print_digit((nbr / base_len), base);
-	count += ft_print_char(base[(nbr % base_len)]);
-	return (count);
+	if (c == '%' || c == 'd' || c == 'd' || c == 'u' || c == 'x'
+		|| c == 'X' || c == 'c' || c == 's' || c == 'p')
+		return (1);
+	return (0);
 }
