@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 11:51:13 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/19 12:11:07 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/20 10:55:13 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	ft_print_mem(void *addr)
 {
-	int	count;
-	int	i;
+	int				count;
+	int				i;
 	unsigned long	ad;
-	char	temp[(AD_SIZE + 1)];
+	char			temp[(AD_SIZE + 1)];
 
 	i = 0;
 	ad = (unsigned long)addr;

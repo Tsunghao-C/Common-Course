@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:42:50 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/19 13:10:22 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/20 11:06:26 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "libft.h"
 # include <stdarg.h>
 # define ER STDERR_FILENO
-# define AD_SIZE 12
+# define AD_SIZE 16
 # define HEX_SIZE 16
 # define DEC_TAB "0123456789"
 # define HEX_TAB "0123456789abcdef"
