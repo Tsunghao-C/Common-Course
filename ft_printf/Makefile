@@ -6,7 +6,7 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/17 13:53:44 by tsuchen           #+#    #+#              #
-#    Updated: 2024/05/20 15:28:28 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/05/21 16:36:23 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,11 @@ SRCS = ft_print_char.c \
        ft_print_mem.c \
        ft_print_spec.c \
        ft_print_str.c \
+       ft_gen_wid_pre.c \
+       ft_is_spec.c \
+       ft_print_digit_flag.c \
+       ft_print_spec_flag.c \
+       ft_procs_spec_flag.c \
 
 SRCSB = ft_something_bonus.c \
 

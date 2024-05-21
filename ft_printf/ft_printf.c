@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 13:59:04 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/20 19:35:51 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/21 19:05:52 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_printf(const char *fmt, ...)
 			if (ft_is_spec(*(fmt + 1)) == 1)
 				count += ft_print_spec(*(++fmt), &ap);
 			else
-				fmt = ft_print_spec_flag(++fmt, &ap, &count); /*TBD*/
+				fmt = ft_procs_spec_flag(++fmt, &ap, &count);
 		}
 		else
 			count += ft_print_char(*fmt);

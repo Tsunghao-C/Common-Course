@@ -6,11 +6,12 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:18:13 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/20 19:35:45 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/21 19:07:56 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include "libftprintf.h"
 /*
 int	main(void)
 {
@@ -33,18 +34,34 @@ int	main(void)
 int main()
 {
 	int num = 42;
-	double pi = 3.14159;
-	char str[] = "Hello, World!";
+	//double pi = 3.14159;
+	//char str[] = "Hello, World!";
 	// Combinations
-	printf(" int \n");
-	printf("%-10d\n", num);         // Left-justify within width 10
+	printf("Real function int \n");
+	fflush(stdout);
+
+	printf("%d\n", num);         // Left-justify within width 10
+	printf("%-5d\n", num);         // Left-justify within width 10
 	printf("%10d\n", num);         // space-pad within width 10
 	printf("%010d\n", num);         // Zero-pad within width 10
 	printf("%.5d\n", num);          // Precision of 5 for integer
 	printf("%-.10d\n", num);        // Left-justify overrides zero-padding
 	printf("%10.5d\n", num);       // Precision 5 overrides zero-padding
+	printf("%5.10d\n", num);       // Precision 5 overrides zero-padding
 	printf("%-10.5d\n", num);      // Left-justify with precision 5
+	printf("\n Test function int \n");
+	fflush(stdout);
 
+	ft_printf("%d\n", num);         // Left-justify within width 10
+	ft_printf("%-5d\n", num);         // space-pad within width 10
+	ft_printf("%10d\n", num);         // space-pad within width 10
+	ft_printf("%010d\n", num);         // Zero-pad within width 10
+	ft_printf("%.5d\n", num);          // Precision of 5 for integer
+	ft_printf("%-.10d\n", num);        // Left-justify overrides zero-padding
+	ft_printf("%10.5d\n", num);       // Precision 5 overrides zero-padding
+	ft_printf("%5.10d\n", num);       // Precision 5 overrides zero-padding
+	ft_printf("%-10.5d\n", num);      // Left-justify with precison 5
+/*	
 	printf("\n hex \n");
 	printf("%-10x\n", num);         // Left-justify within width 10
 	printf("%10x\n", num);         // space-pad within width 10
@@ -63,6 +80,7 @@ int main()
 	printf("%-10.5s\n", str);       // Left-justify with precision 5
 	printf("%10.5s\n", str);       // Zero-pad with precision 5 (unusual case)
 	printf("%-10.5s\n", str);      // Left-justify with precision 5
+	*/
 	return 0;
 }
 

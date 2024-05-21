@@ -5,34 +5,87 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 16:13:22 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/20 19:35:42 by tsuchen          ###   ########.fr       */
+/*   Created: 2024/05/18 11:26:11 by tsuchen           #+#    #+#             */
+/*   Updated: 2024/05/21 19:05:37 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-char	*ft_print_spec_flag(const char *fmt, va_list *ap, int *count)
+int	ft_print_spec_left(char c, va_list *ap, int wid, int pre)
 {
-	int	i;
-	int	sign;
-	int	min_wid;
-	int	pre_spc;
+	int	count;
 
-	i = 0;
-	sign = 1;
-	if (*fmt == '-' || *fmt == '0')
-	{
-		if (*fmt == '-')
-			sign = -1;
-		else
-			sign = 0;
-		fmt++;
-	}
-	while (ft_is_spec(fmt[i]) == 0)
-		i++;
-	ft_gen_wid_pre(fmt, i, &min_wid, &pre_spc);
-	*count += ft_print_spec(*fmt, &ap, sign, min_wid, pre_spc);
-	/* printf_digit, print_str need to genralize */
-	return (fmt + i);
+	count = 0;
+	if (c == 'c')
+		count += ft_print_char(va_arg(*ap, int));
+	else if (c == 's')
+		count += ft_print_str(va_arg(*ap, char *));
+	else if (c == 'p')
+		count += ft_print_mem(va_arg(*ap, void *));
+	else if (c == 'd')
+		count += ft_print_digit_left(va_arg(*ap, int), DEC_TAB, wid, pre);
+	else if (c == 'i')
+		count += ft_print_digit(va_arg(*ap, int), DEC_TAB);
+	else if (c == 'u')
+		count += ft_print_digit(va_arg(*ap, unsigned int), DEC_TAB);
+	else if (c == 'x')
+		count += ft_print_digit(va_arg(*ap, unsigned int), HEX_TAB);
+	else if (c == 'X')
+		count += ft_print_digit(va_arg(*ap, unsigned int), HEX_TAB_U);
+	else
+		count += ft_print_char(c);
+	return (count);
+}
+
+int	ft_print_spec_zero(char c, va_list *ap, int wid, int pre)
+{
+	int	count;
+
+	count = 0;
+	if (c == 'c')
+		count += ft_print_char(va_arg(*ap, int));
+	else if (c == 's')
+		count += ft_print_str(va_arg(*ap, char *));
+	else if (c == 'p')
+		count += ft_print_mem(va_arg(*ap, void *));
+	else if (c == 'd')
+		count += ft_print_digit_zero(va_arg(*ap, int), DEC_TAB, wid, pre);
+	else if (c == 'i')
+		count += ft_print_digit(va_arg(*ap, int), DEC_TAB);
+	else if (c == 'u')
+		count += ft_print_digit(va_arg(*ap, unsigned int), DEC_TAB);
+	else if (c == 'x')
+		count += ft_print_digit(va_arg(*ap, unsigned int), HEX_TAB);
+	else if (c == 'X')
+		count += ft_print_digit(va_arg(*ap, unsigned int), HEX_TAB_U);
+	else
+		count += ft_print_char(c);
+	return (count);
+}
+
+int	ft_print_spec_emty(char c, va_list *ap, int wid, int pre)
+{
+	int	count;
+
+	count = 0;
+	if (c == 'c')
+		count += ft_print_char(va_arg(*ap, int));
+	else if (c == 's')
+		count += ft_print_str(va_arg(*ap, char *));
+	else if (c == 'p')
+		count += ft_print_mem(va_arg(*ap, void *));
+	else if (c == 'd')
+		count += ft_print_digit_emty(va_arg(*ap, int), DEC_TAB, wid, pre);
+	else if (c == 'i')
+		count += ft_print_digit(va_arg(*ap, int), DEC_TAB);
+	else if (c == 'u')
+		count += ft_print_digit(va_arg(*ap, unsigned int), DEC_TAB);
+	else if (c == 'x')
+		count += ft_print_digit(va_arg(*ap, unsigned int), HEX_TAB);
+	else if (c == 'X')
+		count += ft_print_digit(va_arg(*ap, unsigned int), HEX_TAB_U);
+	else
+		count += ft_print_char(c);
+	return (count);
 }
