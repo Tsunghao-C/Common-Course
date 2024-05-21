@@ -6,7 +6,7 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/17 13:53:44 by tsuchen           #+#    #+#              #
-#    Updated: 2024/05/21 16:36:23 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/05/21 20:32:01 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 LIBC = ar rcs 
 
-CC = gcc
+CC = cc
 
 all: $(NAME)
 
