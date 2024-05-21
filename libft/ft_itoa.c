@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:14:02 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/16 14:42:51 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/21 23:37:16 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ char	*ft_itoa(int n)
 	int		size;
 	int		i;
 
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
 	size = ft_count_digit(n);
 	str = (char *)malloc((size + 1) * sizeof(char));
 	if (!str)

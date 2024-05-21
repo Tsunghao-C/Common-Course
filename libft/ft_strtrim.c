@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:49:23 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/16 15:32:57 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/21 23:22:33 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,29 @@ char	*ft_strtrim(char const *s1, char const *set)
 }
 /*
 #include <stdio.h>
+#include <unistd.h>
+
+void	ft_print_result(char const *s)
+{
+	int		len;
+
+	len = 0;
+	while (s[len])
+		len++;
+	write(1, s, len);
+}
+
+int	main(void)
+{
+	char s1[] = " lorem ipsum dolor sit amet";
+	
+	char *strtrim;
+
+	strtrim = ft_strtrim(s1, "l ");
+	ft_print_result(strtrim);
+	return (0);
+}
+
 int	main(int ac, char *av[])
 {
 	if (ac != 3)
