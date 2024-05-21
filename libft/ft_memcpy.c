@@ -6,53 +6,44 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:57:53 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/16 09:32:29 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/21 10:22:01 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	unsigned int	i;
 
 	i = 0;
 	while (i < n)
 	{
-		((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
+		((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
 		i++;
 	}
-	return (dst);
+	return (dest);
 }
 /*
 #include <string.h>
-#include <unistd.h>
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-void	ft_putstr(char *str, unsigned int len)
-{
-	unsigned int	i;
-
-	i = 0;
-	while (i < len)
-		ft_putchar(str[i++]);
-}
-
+#include <stdio.h>
 int	main(void)
 {
-	char	arr_src[10];
-	char	arr_test[13];
-	char	arr_real[13];
+	char	arr_t[50] = "Standard Deviation";
+	char	arr_r[50] = "Standard Deviation";
+	char	arr_c[50] = "Standard Deviation";
+	char	*test1;
+	char	*real1, *real2;
 
-	memset(arr_src, 50, sizeof(arr_src));
-	memset(arr_test, 48, sizeof(arr_test));
-	memset(arr_real, 49, sizeof(arr_real));
-	ft_putstr(ft_memcpy(arr_test, arr_src, sizeof(arr_src)), sizeof(arr_test));
-	write(1, "\n", 1);
-	ft_putstr(memcpy(arr_real, arr_src, sizeof(arr_src)), sizeof(arr_real));
-	write(1, "\n", 1);
+	printf("Original string    :%s\n", arr_t);
+	test1 = arr_t;
+	real1 = arr_r;
+	real2 = arr_c;
+	ft_memcpy(test1 + 8, test1, 12);
+	printf("ft_memcpy overlap  :%s\n", arr_t + 8);
+	memcpy(real2 + 8, real2, 12);
+	printf("memcpy overlap     :%s\n", (arr_c + 8));
+	memmove(real1 + 8, real1, 12);
+	printf("memmove overlap    :%s\n", arr_r + 8);
 	return (0);
 }*/

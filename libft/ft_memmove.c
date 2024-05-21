@@ -6,12 +6,32 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:57:53 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/15 11:52:40 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/21 10:16:01 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+void	*ft_memmove(void *dest, const void *src, size_t n)
+{
+	void	*tmp;
+
+	tmp = dest;
+	if (src == dest)
+		return (tmp);
+	if (src > dest)
+	{
+		while (n-- > 0)
+			*(unsigned char *)(dest++) = *(unsigned char *)(src++);
+	}
+	else
+	{
+		while (n-- > 0)
+			((unsigned char *)dest)[n] = ((unsigned char *)src)[n];
+	}
+	return (tmp);
+}
+/*//malloc version 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
 	unsigned int		i;
@@ -35,38 +55,27 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	}
 	free(buf);
 	return (dest);
-}
+}*/
 /*
 #include <string.h>
-#include <unistd.h>
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-void	ft_putstr(char *str, unsigned int len)
-{
-	unsigned int	i;
-
-	i = 0;
-	while (i < len)
-		ft_putchar(str[i++]);
-}
-
+#include <stdio.h>
 int	main(void)
 {
-	char	arr_test[] = "Standard Deviation";
-	char	arr_real[] = "Standard Deviation";
-	char	arr_real_cpy[] = "Standard Deviation";
+	char	arr_t[50] = "Standard Deviation";
+	char	arr_r[50] = "Standard Deviation";
+	char	arr_c[50] = "Standard Deviation";
+	char	*test1;
+	char	*real1, *real2;
 
-	ft_memmove(arr_test + 4, arr_test + 9, 9 * sizeof(char));
-	ft_putstr(arr_test, sizeof(arr_test));
-	write(1, "\n", 1);
-	memmove(arr_real + 4, arr_real + 9, 9 * sizeof(char));
-	ft_putstr(arr_real, sizeof(arr_real));
-	write(1, "\n", 1);
-	memcpy(arr_real_cpy + 4, arr_real_cpy + 9, 9 * sizeof(char));
-	ft_putstr(arr_real_cpy, sizeof(arr_real_cpy));
-	write(1, "\n", 1);
+	printf("Original string    :%s\n", arr_t);
+	test1 = arr_t;
+	real1 = arr_r;
+	real2 = arr_c;
+	ft_memmove(test1 + 8, test1, 12);
+	printf("ft_memmove overlap :%s\n", arr_t + 8);
+	memmove(real1 + 8, real1, 12);
+	printf("memmove overlap    :%s\n", arr_r + 8);
+	memcpy(real2 + 8, real2, 12);
+	printf("memcpy overlap     :%s\n", (arr_c + 8));
 	return (0);
 }*/
