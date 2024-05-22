@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 19:27:21 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/22 10:35:06 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/22 10:54:26 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	size_t	len;
+	int		len;
 	char	*tmp;
 
-	len = ft_strlen(s);
 	tmp = 0;
+	len = 0;
+	while (s[len])
+		len++;
 	while (len >= 0)
 	{
 		if (s[len] == (unsigned char)c)
@@ -39,8 +41,8 @@ int	main(void)
 	char	*test;
 	char	*real;
 
-	test = ft_strrchr(s, 't' + 256);
-	real = strrchr(s, 't' + 256);
+	test = ft_strrchr(s, 'z');
+	real = strrchr(s, 'z');
 	printf("test :%s\n", test);
 	printf("real :%s\n", real);
 	printf("cmp  :%d\n", strcmp(test, real));

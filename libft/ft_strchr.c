@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 19:27:21 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/22 10:28:32 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/22 10:56:45 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ char	*ft_strchr(const char *s, int c)
 	}
 	return (tmp);
 }
-/*
+
 #include <stdio.h>
 #include <string.h>
-
+/*
 int	main(void)
 {
 	char	s[] = "tripouille";
