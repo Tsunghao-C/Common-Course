@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 11:13:17 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/22 11:42:59 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/22 12:52:02 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 		if (nmemb && ULONG_MAX / nmemb < size)
 			return (NULL);
 	}
-	else 
+	else
 	{
 		if (nmemb && UINT_MAX / nmemb < size)
 			return (NULL);
