@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 19:27:21 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/16 15:30:02 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/22 10:35:06 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,14 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int		len;
+	size_t	len;
 	char	*tmp;
 
-	len = 0;
+	len = ft_strlen(s);
 	tmp = 0;
-	while (s[len])
-		len++;
 	while (len >= 0)
 	{
-		if (s[len] == c)
+		if (s[len] == (unsigned char)c)
 		{
 			tmp = (char *)(s + len);
 			return (tmp);
@@ -35,7 +33,20 @@ char	*ft_strrchr(const char *s, int c)
 /*
 #include <stdio.h>
 #include <string.h>
+int	main(void)
+{
+	char	s[] = "tripouille";
+	char	*test;
+	char	*real;
 
+	test = ft_strrchr(s, 't' + 256);
+	real = strrchr(s, 't' + 256);
+	printf("test :%s\n", test);
+	printf("real :%s\n", real);
+	printf("cmp  :%d\n", strcmp(test, real));
+	return (0);
+}*/
+/*
 int	main(int ac, char *av[])
 {
 	if ((ac != 3) || (strlen(av[2]) != 1))
