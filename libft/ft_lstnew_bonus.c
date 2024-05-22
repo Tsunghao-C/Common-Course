@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:28:30 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/16 10:50:33 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/22 09:33:22 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ t_list	*ft_lstnew(void *content)
 
 	lst = (t_list *)malloc(sizeof(t_list));
 	if (!lst)
-		return (0);
+		return (NULL);
 	lst->content = content;
-	lst->next = 0;
+	lst->next = NULL;
 	return (lst);
 }
 /*

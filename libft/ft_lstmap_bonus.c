@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:54:24 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/16 14:49:58 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/22 09:47:17 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	t_list	*tmp2;
 	void	*tmp3;
 
-	tmp3 = f(lst->content);
-	new_lst = ft_lstnew(tmp3);
-	if (!new_lst)
-	{
-		del(tmp3);
-		return (0);
-	}
-	lst = lst->next;
+	new_lst = NULL;
 	while (lst)
 	{
 		tmp3 = f(lst->content);
