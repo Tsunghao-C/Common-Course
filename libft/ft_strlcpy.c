@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 09:33:59 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/16 15:27:53 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/23 23:27:43 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t siz)
 {
-	unsigned int	src_len;
-	unsigned int	i;
+	size_t	src_len;
+	size_t	i;
 
 	src_len = ft_strlen(src);
 	i = 0;
