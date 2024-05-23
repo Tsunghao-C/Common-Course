@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:18:13 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/21 19:07:56 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/22 17:44:10 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(void)
 
 int main()
 {
-	int num = 42;
+	int num = -444444442;
 	//double pi = 3.14159;
 	//char str[] = "Hello, World!";
 	// Combinations
