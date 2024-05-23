@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:57:53 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/21 10:16:01 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/23 18:48:11 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,33 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	free(buf);
 	return (dest);
 }*/
-/*
+/* Check NULL conditions
 #include <string.h>
 #include <stdio.h>
+int	main(void)
+{
+	char	*ptr1;
+	char	*ptr2;
+
+	ptr1 = NULL;
+	ptr2 = NULL;
+	printf("case 1: one of src and dest are null\n");
+	printf("%s\n", (char *)memmove(ptr1, "SSS", 0));
+	printf("%s\n", (char *)ft_memmove(ptr2, "SSS", 0));
+	//printf("%s\n", (char *)memmove(ptr1, "SSS", 2));
+	//printf("%s\n", (char *)ft_memmove(ptr2, "SSS", 2));
+	printf("%s\n", (char *)memmove("SSS", ptr1, 0));
+	printf("%s\n", (char *)ft_memmove("SSS", ptr2, 0));
+	//printf("%s\n", (char *)memmove("SSS", ptr1, 2));
+	//printf("%s\n", (char *)ft_memmove("SSS", ptr2, 2));
+	printf("case 2: both src and dest are null\n");
+	printf("%s\n", (char *)memmove(ptr1, ptr1, 0));
+	printf("%s\n", (char *)memmove(ptr1, ptr1, 0));
+	printf("%s\n", (char *)ft_memmove(ptr2, ptr2, 2));
+	printf("%s\n", (char *)ft_memmove(ptr2, ptr2, 2));
+	return (0);
+}*/
+/*
 int	main(void)
 {
 	char	arr_t[50] = "Standard Deviation";
