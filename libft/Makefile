@@ -6,7 +6,7 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/17 13:54:44 by tsuchen           #+#    #+#              #
-#    Updated: 2024/05/21 19:42:52 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/05/23 08:59:08 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,6 +76,10 @@ $(NAME): $(OBJS)
 
 bonus: $(NAME) $(OBJS_2)
 	$(LIBC) $(NAME) $(OBJS_2)
+
+so:
+	$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRCS) $(SRCS_2)
+	gcc -nostartfiles -shared -o libft.so $(OBJS) $(OBJS_2)
 
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $@ -I$(dir $(HEAD))

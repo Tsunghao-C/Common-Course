@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 09:34:10 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/16 15:25:52 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/23 09:38:18 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,17 @@
 
 size_t	ft_strlcat(char *dst, const char *src, size_t siz)
 {
-	unsigned int	i;
-	unsigned int	dst_len;
-	unsigned int	src_len;
+	size_t	i;
+	size_t	dst_len;
+	size_t	src_len;
 
-	i = 0;
-	dst_len = ft_strlen(dst);
 	src_len = ft_strlen(src);
-	if (siz < (dst_len + 1))
+	if (siz == 0)
+		return (src_len);
+	dst_len = ft_strlen(dst);
+	if (siz < dst_len + 1)
 		return (src_len + siz);
+	i = 0;
 	while (src[i] && i < (siz - dst_len - 1))
 	{
 		dst[i + dst_len] = src[i];
@@ -33,7 +35,18 @@ size_t	ft_strlcat(char *dst, const char *src, size_t siz)
 }
 /*
 #include <stdio.h>
-#include <bsd/string.h>
+#include <string.h>
+//#include <bsd/string.h>
+
+int	main(void)
+{
+	char	b[0xF] = "nyan !";
+
+	printf("%lu\n", strlcat(NULL, b, 0));
+	printf("%zu\n", ft_strlcat(NULL, b, 0));
+	return (0);
+}*/
+/*
 int	main(void)
 {
 	char	src[10] = "123456789";
