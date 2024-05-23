@@ -6,21 +6,38 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 19:27:21 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/22 10:54:26 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/23 23:10:09 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <string.h>
 
+char	*ft_strrchr(const char *s, int c)
+{
+	const char	*tmp;
+	const char	*last;
+
+	tmp = s;
+	last = NULL;
+	while (*tmp != '\0')
+	{
+		if (*tmp == (unsigned char)c)
+			last = tmp;
+		tmp++;
+	}
+	if ((unsigned char)c == 0)
+		return ((char *)tmp);
+	return ((char *)last);
+}
+/* //Int Counter Version
 char	*ft_strrchr(const char *s, int c)
 {
 	int		len;
 	char	*tmp;
 
 	tmp = 0;
-	len = 0;
-	while (s[len])
-		len++;
+	len = (int)ft_strlen(s);
 	while (len >= 0)
 	{
 		if (s[len] == (unsigned char)c)
@@ -31,7 +48,7 @@ char	*ft_strrchr(const char *s, int c)
 		len--;
 	}
 	return (tmp);
-}
+}*/
 /*
 #include <stdio.h>
 #include <string.h>
