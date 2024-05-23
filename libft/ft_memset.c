@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:57:53 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/15 11:55:02 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/23 16:17:59 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	*ft_memset(void *s, int c, size_t n)
 {
-	unsigned int	i;
+	size_t	i;
 
 	i = 0;
 	while (i < n)
-		((unsigned char *)s)[i++] = c;
+		((unsigned char *)s)[i++] = (unsigned char)c;
 	return (s);
 }
 /*
