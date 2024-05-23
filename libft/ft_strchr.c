@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 19:27:21 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/22 12:52:26 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/23 19:59:14 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,18 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	int		len;
-	char	*tmp;
+	const char	*tmp;
 
-	len = 0;
-	tmp = 0;
-	while (s[len])
-		len++;
-	while (len >= 0)
+	tmp = s;
+	while (*tmp)
 	{
-		if (s[len] == (unsigned char)c)
-			tmp = (char *)(s + len);
-		len--;
+		if (*tmp == (unsigned char)c)
+			return ((char *)tmp);
+		tmp++;
 	}
-	return (tmp);
+	if (*tmp == (unsigned char)c)
+		return ((char *)tmp);
+	return (NULL);
 }
 /*
 #include <stdio.h>
@@ -45,6 +43,24 @@ int	main(void)
 	printf("real  :%s\n", real);
 	printf("strcmp:%d\n", strcmp(test, real));
 	return (0);
+}*/
+/* // Int counter method
+char	*ft_strchr(const char *s, int c)
+{
+	int		len;
+	char	*tmp;
+
+	len = 0;
+	tmp = 0;
+	while (s[len])
+		len++;
+	while (len >= 0)
+	{
+		if (s[len] == (unsigned char)c)
+			tmp = (char *)(s + len);
+		len--;
+	}
+	return (tmp);
 }*/
 /*
 int	main(int ac, char *av[])

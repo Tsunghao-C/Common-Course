@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 19:27:21 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/15 11:27:37 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/23 19:10:46 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	unsigned int	i;
+	size_t	i;
 
 	i = 0;
 	if (n == 0)
@@ -24,10 +24,28 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 		i++;
 	return (((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]);
 }
-/*
+/* //Add NULL tests
 #include <stdio.h>
 #include <string.h>
+int	main(void)
+{
+	char	*ptr;
 
+	ptr = NULL;
+	printf("Check ptr conditions\n");
+	printf("one of s1 s2 is ptr\n");
+	printf("%d\n", memcmp(ptr, "  ", 0));
+	printf("%d\n", ft_memcmp(ptr, "  ", 0));
+	//printf("%d\n", memcmp(ptr, "  ", 2));
+	//printf("%d\n", ft_memcmp(ptr, "  ", 2));
+	printf("both s1 s2 is ptr\n");
+	printf("%d\n", memcmp(ptr, ptr, 0));
+	printf("%d\n", ft_memcmp(ptr, ptr, 0));
+	//printf("%d\n", memcmp(ptr, ptr, 2));
+	//printf("%d\n", ft_memcmp(ptr, ptr, 2));
+	return (0);
+}*/
+/*
 int	main(int ac, char *av[])
 {
 	if (ac != 4)
