@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 09:34:10 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/23 09:38:18 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/23 17:29:56 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,15 @@ size_t	ft_strlcat(char *dst, const char *src, size_t siz)
 }
 /*
 #include <stdio.h>
-#include <string.h>
-//#include <bsd/string.h>
+//#include <string.h>
+#include <bsd/string.h>
 
 int	main(void)
 {
 	char	b[0xF] = "nyan !";
 
-	printf("%lu\n", strlcat(NULL, b, 0));
-	printf("%zu\n", ft_strlcat(NULL, b, 0));
+	printf("%lu\n", strlcat(NULL, "fake", 2));
+	printf("%zu\n", ft_strlcat(NULL, "fake", 2));
 	return (0);
 }*/
 /*

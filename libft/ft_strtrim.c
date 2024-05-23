@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:49:23 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/22 09:15:27 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/23 17:46:44 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ int	main(void)
 	
 	char *strtrim;
 
-	strtrim = ft_strtrim(s1, "te");
+	strtrim = ft_strtrim(NULL, "te");
 	printf("%s\n", s1);
-	ft_print_result(strtrim);
+	printf("%s\n", strtrim);
 	return (0);
 }*/
 /*

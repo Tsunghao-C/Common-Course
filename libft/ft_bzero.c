@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 10:13:46 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/16 14:37:44 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/23 17:55:32 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,7 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	unsigned int	i;
-
-	i = 0;
-	while (i < n)
-		((unsigned char *)s)[i++] = '\0';
+	ft_memset(s, 0, n);
 }
 /*
 #include <string.h>

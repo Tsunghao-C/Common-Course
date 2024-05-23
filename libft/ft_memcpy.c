@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:57:53 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/22 15:09:30 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/23 18:32:16 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	size_t	i;
 
 	i = 0;
-	if (!src && !dest)
-		return (NULL);
 	while (i < n)
 	{
 		((unsigned char *)dest)[i] = ((const unsigned char *)src)[i];
@@ -36,8 +34,13 @@ int	main(void)
 	char	arr_r[50] = "Standard Deviation";
 	char	arr_c[50] = "Standard Deviation";
 	char	*test1;
+	int	i = 0;
+	char	*ptr;
+	char	*ptr2;
 	char	*real1, *real2;
 
+	ptr = NULL;
+	ptr2 = NULL;
 	printf("Original string    :%s\n", arr_t);
 	test1 = arr_t;
 	real1 = arr_r;
@@ -48,5 +51,14 @@ int	main(void)
 	printf("memcpy overlap     :%s\n", (arr_c + 8));
 	memmove(real1 + 8, real1, 12);
 	printf("memmove overlap    :%s\n", arr_r + 8);
+	printf("My function\n");
+	printf("%s\n", (char *)ft_memcpy(ptr2, ptr, 0));
+	printf("%s\n", (char *)memcpy(ptr2, ptr, 0));
+	printf("%s\n", (char *)ft_memcpy(&i, &i, 1));
+	printf("%s\n", (char *)ft_memcpy(&i, "fake", 1));
+	printf("%s\n", (char *)ft_memcpy("fake", &i, 1));
+	printf("%s\n", (char *)memcpy(&i, &i, 1));
+	printf("%s\n", (char *)memcpy(&i, "fake", 1));
+	printf("%s\n", (char *)memcpy("fake", &i, 1));
 	return (0);
 }*/
