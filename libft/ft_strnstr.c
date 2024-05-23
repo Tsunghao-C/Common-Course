@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 09:39:41 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/16 15:29:35 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/23 14:51:21 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	unsigned int	i;
-	unsigned int	j;
-	unsigned int	n_len;
+	size_t	i;
+	size_t	j;
+	size_t	n_len;
 
-	i = 0;
-	n_len = 0;
-	if (*little == 0)
+	if (!(*little))
 		return ((char *)big);
-	while (little[n_len])
-		n_len++;
+	if (len == 0)
+		return (0);
+	i = 0;
+	n_len = ft_strlen(little);
 	while (big[i] && (i < len))
 	{
 		j = 0;
@@ -36,9 +36,17 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	return (0);
 }
 /*
-#include <bsd/string.h>
 #include <stdio.h>
+#include <string.h>
 
+int	main(void)
+{
+	printf("%s\n", strnstr(NULL, "fake", 0));
+	printf("%s\n", ft_strnstr(NULL, "fake", 0));
+	return (0);
+}*/
+/*
+#include <bsd/string.h>
 int	main(int ac, char *av[])
 {
 	if (ac != 4)
