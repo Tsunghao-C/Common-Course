@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:33:59 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/16 15:22:40 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/23 23:36:03 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,11 @@
 char	*ft_strdup(const char *s)
 {
 	char	*dup;
-	int		n;
+	size_t	n;
 	int		i;
 
 	i = 0;
-	n = 0;
-	while (s[n])
-		n++;
+	n = ft_strlen(s);
 	dup = (char *)malloc((n + 1) * sizeof(char));
 	if (!dup)
 		return (0);
