@@ -6,38 +6,49 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:13:22 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/24 16:02:01 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/24 17:52:37 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_procs_spec_flag(const char *fmt, va_list *ap, int *count)
+static int	ft_is_flag(char c)
+{
+	if (c == '-' || c == '+' || c == ' ' || c == '#' || c == '0')
+		return (1);
+	return (0);
+}
+
+char	*ft_procs_flag(const char *fmt, va_list *ap, int *count)
 {
 	int	i;
-	int	min_wid;
-	int	sign;
-	int	pre_spc;
+	int	wid;
+	int	pre;
+	char	*flags;
 
 	i = 0;
-	sign = 1;
-	if (*fmt == '-' || *fmt == '0')
-	{
-		if (*fmt == '-')
-			sign = -1;
-		else
-			sign = 0;
-		fmt++;
-	}
-	while (ft_is_spec(fmt[i]) == 0)
+	/* the flags '-' '#' '+' '0' don't have a certain order
+	 * but must be before width numbers and precisions '.'
+	 */
+	// moved to non-flags
+	while (ft_is_flag(fmt[i]) == 1)
 		i++;
-	ft_gen_wid_pre(fmt, i, &min_wid, &pre_spc);
+	flags = (char *)malloc((i + 1) * sizeof(char));
+	if (!flags)
+		return (0);
+	ft_strlcpy(flags, fmt, (i + 1));
+	fmt = fmt + i;
+	// checked wid and pre
+	while (ft_is_spec(fmt[i]) == 1)
+		i++;
+	ft_gen_wid_pre(fmt, i, &wid, &pre);
+	// analyze flags and add wid, pre to print accordingly
 	if (sign == -1)
-		*count += ft_print_spec_left(*(fmt + i), ap, min_wid, pre_spc);
+		*count += ft_print_spec_left(*(fmt + i), ap, wid, pre);
 	else if (sign == 0)
-		*count += ft_print_spec_zero(*(fmt + i), ap, min_wid, pre_spc);
+		*count += ft_print_spec_zero(*(fmt + i), ap, wid, pre);
 	else
-		*count += ft_print_spec_emty(*(fmt + i), ap, min_wid, pre_spc);
+		*count += ft_print_spec_emty(*(fmt + i), ap, wid, pre);
 	return ((char *)(fmt + i));
 }
 /* sign =  1 => right-empty
