@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:49:23 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/23 17:46:44 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/24 10:11:29 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,11 @@ char	*ft_strtrim(char const *s1, char const *set)
 	int		end;
 	int		len;
 
-	if (!s1 || !set)
-		return (NULL);
 	start = 0;
 	end = ft_strlen(s1) - 1;
 	while (ft_isset(s1[start], set) == 1)
 		start++;
-	while (end >= start && ft_isset(s1[end], set) == 1)
+	while (end > start && ft_isset(s1[end], set) == 1)
 		end--;
 	len = end - start + 1;
 	output = (char *)malloc((len + 1) * sizeof(char));
@@ -48,6 +46,11 @@ char	*ft_strtrim(char const *s1, char const *set)
 	ft_strlcpy(output, s1 + start, (len + 1));
 	return (output);
 }
+/* Note
+ * 1. if s1 || set is NULL, it will crash
+ * 2. if every char in s1 is part of set, it returns a free-able empty string ""
+ * 3. if malloc fail, it returns NULL
+ */
 /*
 #include <stdio.h>
 #include <unistd.h>
@@ -65,10 +68,10 @@ void	ft_print_result(char const *s)
 int	main(void)
 {
 	char s1[] = "lorem ipsum dolor sit amet";
-	
+
 	char *strtrim;
 
-	strtrim = ft_strtrim(NULL, "te");
+	strtrim = ft_strtrim("tetetet0tetetete", "te");
 	printf("%s\n", s1);
 	printf("%s\n", strtrim);
 	return (0);
