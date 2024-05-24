@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:39:29 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/22 09:48:51 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/24 11:47:50 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		tmp = tmp->next;
 	tmp->next = new;
 }
+/* Note
+ * 1. if lst (or bgn_lst) is NULL, new will be the 1st lst
+ */
 /*
 #include <string.h>
 void	ft_print_result(t_list *elem)
