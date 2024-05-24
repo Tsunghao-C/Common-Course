@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:54:24 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/22 17:10:49 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/24 12:10:22 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,30 @@
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	t_list	*new_lst;
-	t_list	*tmp2;
-	void	*tmp3;
+	t_list	*tmp_lst;
+	void	*tmp_data;
 
 	new_lst = NULL;
 	while (lst)
 	{
-		tmp3 = f(lst->content);
-		tmp2 = ft_lstnew(tmp3);
-		if (!tmp2)
+		tmp_data = f(lst->content);
+		tmp_lst = ft_lstnew(tmp_data);
+		if (!tmp_lst)
 		{
-			del(tmp3);
+			del(tmp_data);
 			ft_lstclear(&new_lst, del);
 			return (0);
 		}
-		ft_lstadd_back(&new_lst, tmp2);
+		ft_lstadd_back(&new_lst, tmp_lst);
 		lst = lst->next;
 	}
 	return (new_lst);
 }
+/* Note
+ * 1. if lst is NULL, it will return NULL
+ * 2. if malloc fail, it will return NULL
+ * 3. if either function "f" or "del" is NULL, it will crash
+ */
 /*
 #include <stdio.h>
 void	*triple_data(void *data)
