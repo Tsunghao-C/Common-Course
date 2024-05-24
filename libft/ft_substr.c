@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 12:02:22 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/23 17:32:34 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/24 09:25:06 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static unsigned int	ft_min(unsigned int a, unsigned int b)
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char			*sub;
-	unsigned int	i;
-	unsigned int	size;
+	char	*sub;
+	size_t	i;
+	size_t	size;
 
 	i = 0;
 	if (start > ft_strlen(s))
@@ -41,6 +41,11 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	sub[i] = '\0';
 	return (sub);
 }
+/* Note
+ * 1. if len is 0, it will return an empty str "" that is able to free
+ * 2. if s is NULL, it will crash since input is not protected
+ * 3. if malloc failed, it will return NULL
+ */
 /*
 #include <stdio.h>
 #include <string.h>
