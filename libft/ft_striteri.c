@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 19:10:55 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/22 08:44:12 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/24 11:24:02 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 		i++;
 	}
 }
+/* Note
+ * 1. if s or f is NULL, it will crash
+ */
 /*
 #include <stdio.h>
 #include <string.h>
