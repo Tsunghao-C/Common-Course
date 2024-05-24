@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:40:23 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/16 12:04:39 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/24 12:13:18 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ void	ft_lstiter(t_list *lst, void (*f)(void *))
 		tmp = tmp->next;
 	}
 }
+/* Note
+ * 1. if lst is NULL, nothing happen
+ * 2. if funciton "f" is NULL but lst is not NULL, it will crash
+ */
 /*
 #include <stdio.h>
 void	ft_lstadd_back(t_list **lst, t_list *new);

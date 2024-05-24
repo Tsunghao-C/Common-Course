@@ -6,11 +6,11 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 13:59:04 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/21 19:05:52 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/24 16:00:14 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	ft_printf(const char *fmt, ...)
 {
@@ -25,8 +25,8 @@ int	ft_printf(const char *fmt, ...)
 		{
 			if (ft_is_spec(*(fmt + 1)) == 1)
 				count += ft_print_spec(*(++fmt), &ap);
-			else
-				fmt = ft_procs_spec_flag(++fmt, &ap, &count);
+			//else
+			//	fmt = ft_procs_spec_flag(++fmt, &ap, &count);
 		}
 		else
 			count += ft_print_char(*fmt);

@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/05/17 13:56:14 by tsuchen           #+#    #+#              #
-#    Updated: 2024/05/20 14:44:21 by tsuchen          ###   ########.fr        #
+#    Created: 2024/05/17 13:54:44 by tsuchen           #+#    #+#              #
+#    Updated: 2024/05/24 15:31:39 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 LIBC = ar rcs
 
-CC = gcc
+CC = cc
 
 all: $(NAME)
 

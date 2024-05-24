@@ -6,12 +6,12 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:18:13 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/22 17:44:10 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/24 16:12:21 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "libftprintf.h"
+#include "ft_printf.h"
 /*
 int	main(void)
 {
@@ -31,7 +31,14 @@ int	main(void)
 	return (0);
 }*/
 
-int main()
+int	main(void)
+{
+	printf("%d\n", printf(" NULL %s NULL \n", (char *)NULL));
+	ft_printf("%d\n", ft_printf(" NULL %s NULL \n", (char *)NULL));
+	return (0);
+}
+/* test bonus
+int main(void)
 {
 	int num = -444444442;
 	//double pi = 3.14159;
@@ -61,7 +68,7 @@ int main()
 	ft_printf("%10.5d\n", num);       // Precision 5 overrides zero-padding
 	ft_printf("%5.10d\n", num);       // Precision 5 overrides zero-padding
 	ft_printf("%-10.5d\n", num);      // Left-justify with precison 5
-/*	
+	
 	printf("\n hex \n");
 	printf("%-10x\n", num);         // Left-justify within width 10
 	printf("%10x\n", num);         // space-pad within width 10
@@ -80,7 +87,6 @@ int main()
 	printf("%-10.5s\n", str);       // Left-justify with precision 5
 	printf("%10.5s\n", str);       // Zero-pad with precision 5 (unusual case)
 	printf("%-10.5s\n", str);      // Left-justify with precision 5
-	*/
 	return 0;
 }
-
+*/

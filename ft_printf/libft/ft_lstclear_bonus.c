@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:09:48 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/16 11:52:18 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/24 12:04:41 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,13 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 	{
 		tmp = *lst;
 		*lst = (*lst)->next;
-		del(tmp->content);
-		free(tmp);
+		ft_lstdelone(tmp, del);
 	}
 }
+/* Note
+ * 1. if *lst (or bgn_lst) is NULL, do nothing (already cleared)
+ * 2. if function "del" is NULL, it will crash at lstdelone
+ */
 /*
 #include <stdio.h>
 t_list	*ft_lstnew(void *content);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:09:48 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/16 11:39:03 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/24 12:04:45 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *))
 	del(lst->content);
 	free(lst);
 }
+/* Note
+ * 1. if lst is NULL, it will crash. Make sure the input node is not NULL
+ * 2. if function "del" is NULL, it will crash as well
+ */
 /*
 #include <stdio.h>
 t_list	*ft_lstnew(void *content);

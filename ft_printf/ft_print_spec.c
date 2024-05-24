@@ -6,11 +6,11 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 11:26:11 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/21 13:07:09 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/24 16:00:54 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	ft_print_spec(char c, va_list *ap)
 {

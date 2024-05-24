@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 11:13:17 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/16 14:38:12 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/24 15:30:27 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	void			*ptr;
-	unsigned int	i;
+	void	*ptr;
 
-	i = 0;
+	if (nmemb && SIZE_MAX / nmemb < size)
+		return (NULL);
 	ptr = (void *)malloc(nmemb * size);
 	if (!ptr)
-		return (0);
-	while (i < (nmemb * size))
-		((unsigned char *)ptr)[i++] = 0;
+		return (NULL);
+	ft_memset(ptr, 0, nmemb * size);
 	return (ptr);
 }
 /*

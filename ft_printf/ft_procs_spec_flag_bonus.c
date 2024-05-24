@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_procs_spec_flag.c                               :+:      :+:    :+:   */
+/*   ft_procs_spec_flag_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:13:22 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/21 16:40:28 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/24 16:02:01 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
-#include <stdio.h>
+#include "ft_printf.h"
 
 char	*ft_procs_spec_flag(const char *fmt, va_list *ap, int *count)
 {

@@ -6,7 +6,7 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/17 13:53:44 by tsuchen           #+#    #+#              #
-#    Updated: 2024/05/22 17:55:48 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/05/24 15:58:43 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCS = ft_print_char.c \
        ft_print_mem.c \
        ft_print_spec.c \
        ft_print_str.c \
+       ft_is_spec_bonus.c \
 
 SRCSB = ft_gen_wid_pre_bonus.c \
 	ft_is_spec_bonus.c \
@@ -29,7 +30,7 @@ OBJS = $(SRCS:.c=.o)
 
 OBJSB = $(SRCSB:.c=.o)
 
-HEAD = libftprintf.h
+HEAD = ft_printf.h
 
 CFLAGS = -Wall -Wextra -Werror
 
@@ -45,8 +46,8 @@ libft:
 $(NAME): libft $(OBJS)
 	$(LIBC) $(NAME) $(OBJS) libft/*.o
 
-bonus: $(NAME) $(OBJSB)
-	$(LIBC) $(NAME) $(OBJSB)
+#bonus: $(NAME) $(OBJSB)
+#	$(LIBC) $(NAME) $(OBJSB)
 
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $@ -I$(dir $(HEAD))

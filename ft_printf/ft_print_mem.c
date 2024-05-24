@@ -6,11 +6,11 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 11:51:13 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/20 14:49:43 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/24 16:00:43 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	ft_print_mem(void *addr)
 {
@@ -19,6 +19,8 @@ int	ft_print_mem(void *addr)
 	unsigned long	ad;
 	char			temp[(AD_SIZE + 1)];
 
+	if (!addr)
+		return (write(STDOUT_FILENO, "(nil)", 5));
 	i = 0;
 	ad = (unsigned long)addr;
 	count = 0;

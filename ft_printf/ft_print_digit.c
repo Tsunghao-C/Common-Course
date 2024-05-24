@@ -6,11 +6,11 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 12:43:21 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/20 15:30:19 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/24 15:59:38 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	ft_print_digit(long nbr, char *base)
 {

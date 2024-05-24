@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:14:02 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/16 14:42:51 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/24 11:05:40 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ char	*ft_itoa(int n)
 	int		size;
 	int		i;
 
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
 	size = ft_count_digit(n);
 	str = (char *)malloc((size + 1) * sizeof(char));
 	if (!str)
@@ -56,8 +58,6 @@ char	*ft_itoa(int n)
 		str[++i] = '-';
 		n *= -1;
 	}
-	if (n == 0)
-		str[++i] = '0';
 	while (++i < size)
 	{
 		str[i] = (n / ft_power(10, size - i - 1, 1)) + '0';
@@ -66,6 +66,10 @@ char	*ft_itoa(int n)
 	str[i] = '\0';
 	return (str);
 }
+/* Note
+ * 1. if n exceed MAX_INT or MIN_INT, the output will overflow
+ * 2. if malloc failed, return NULL
+ */
 /*
 #include <stdio.h>
 

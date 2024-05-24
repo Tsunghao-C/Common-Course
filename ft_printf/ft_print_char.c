@@ -6,11 +6,11 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 18:11:14 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/19 10:29:31 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/24 15:59:20 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	ft_print_char(char c)
 {
