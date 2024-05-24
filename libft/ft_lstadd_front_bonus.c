@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:39:29 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/22 09:35:19 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/24 11:40:08 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ void	ft_lstadd_front(t_list **lst, t_list *new)
 	new->next = *lst;
 	*lst = new;
 }
+/* Note
+ * 1. if new is NULL, it won't do anything
+ * 2. if lst (or bgn_lst) is NULL, it will be replaced with new
+ */
 /*
 #include <stdio.h>
 t_list *ft_lstnew(void	*content);
