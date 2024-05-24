@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 11:13:17 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/22 12:52:02 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/24 15:30:27 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,8 @@ void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void	*ptr;
 
-	if (sizeof(size_t) == sizeof(unsigned long))
-	{
-		if (nmemb && ULONG_MAX / nmemb < size)
-			return (NULL);
-	}
-	else
-	{
-		if (nmemb && UINT_MAX / nmemb < size)
-			return (NULL);
-	}
+	if (nmemb && SIZE_MAX / nmemb < size)
+		return (NULL);
 	ptr = (void *)malloc(nmemb * size);
 	if (!ptr)
 		return (NULL);

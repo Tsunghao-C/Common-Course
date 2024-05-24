@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:42:50 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/22 11:40:51 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/24 15:27:22 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
+# include <stdint.h>
 # include <errno.h>
 
 typedef struct s_list
