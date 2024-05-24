@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 19:10:55 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/16 15:28:49 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/24 11:19:43 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,11 @@
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
 	char			*str;
+	size_t			s_len;
 	unsigned int	i;
 
-	i = 0;
-	while (s[i])
-		i++;
-	str = (char *)malloc((i + 1) * sizeof(char));
+	s_len = ft_strlen(s);
+	str = (char *)malloc((s_len + 1) * sizeof(char));
 	if (!str)
 		return (0);
 	i = 0;
@@ -32,6 +31,11 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	str[i] = '\0';
 	return (str);
 }
+/* Note
+ * 1. if s or f is NULL, it will crash
+ * 2. if s is empty, it will return a new empty string
+ * 3. if malloc failed, return NULL
+ */
 /*
 #include <stdio.h>
 
