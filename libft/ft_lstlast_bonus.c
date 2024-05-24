@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 12:53:24 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/22 09:31:35 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/24 11:45:17 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ t_list	*ft_lstlast(t_list *lst)
 		tmp = tmp->next;
 	return (tmp);
 }
+/* Note
+ * 1. if lst is NULL, it will return NULL
+ */
 /*
 #include <stdio.h>
 void    ft_lstadd_front(t_list **lst, t_list *new);
