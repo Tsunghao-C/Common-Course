@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_digit_flag_bonus.c                        :+:      :+:    :+:   */
+/*   ft_print_digit_f_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 12:43:21 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/24 15:59:52 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/27 16:18:14 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,16 @@ static int	ft_max(int a, int b)
 	if (a > b)
 		return (a);
 	return (b);
+}
+
+int	ft_print_digit_f(long nbr, char *base, char *flags, char **wid_pre)
+{
+	int		count;
+	int		dig_cnt;
+
+	count = 0;
+	dig_cnt = 0;
+	return (count);
 }
 
 int	ft_print_digit_left(long nbr, char *base, int wid, int pre)

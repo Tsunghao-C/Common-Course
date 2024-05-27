@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:38:12 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/24 15:57:14 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/27 17:28:56 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,58 +14,59 @@
 
 static int	ft_with_pre(char *s)
 {
-	int	i;
-
-	i = -1;
-	while (s[++i])
+	while (*s)
 	{
-		if (s[i] == '.')
+		if (*s == '.')
 			return (1);
+		s++;
 	}
 	return (0);
 }
 
-static void	ft_assign_wid_pre(char *cpy, char **arr, int *wid, int *pre)
+static void	ft_assign_wid_pre(char *cpy, char **arr, char **wid_pre)
 {
 	if (ft_with_pre(cpy) == 0)
 	{
-		*wid = ft_atoi(arr[0]);
-		*pre = 0;
+		if (arr[0])
+			wid_pre[0] = ft_strdup(arr[0]);
 	}
 	else
 	{
 		if (!arr[1])
-		{
-			*wid = 0;
-			*pre = ft_atoi(arr[0]);
-		}
+			wid_pre[1] = ft_strdup(arr[0]);
 		else
 		{
-			*wid = ft_atoi(arr[0]);
-			*pre = ft_atoi(arr[1]);
+			wid_pre[0] = ft_strdup(arr[0]);
+			wid_pre[1] = ft_strdup(arr[1]);
 		}
 	}
 }
+static void	ft_free_all(char **arr)
+{
+	int	i;
 
-void	ft_gen_wid_pre(const char *fmt, size_t len, int *wid, int *pre)
+	i = 0;
+	while (arr[i])
+		free(arr[i++]);
+	free(arr);
+}
+
+void	ft_gen_wid_pre(const char *fmt, size_t len, char **wid_pre)
 {
 	char	*cpy;
 	char	**arr;
-	int		i;
-	int		j;
 
-	i = 0;
-	j = 0;
 	cpy = (char *)malloc((len + 1) * sizeof(char));
 	if (!cpy)
 		return ;
 	ft_strlcpy(cpy, fmt, (len + 1));
 	arr = ft_split(cpy, '.');
-	ft_assign_wid_pre(cpy, arr, wid, pre);
-	while (arr[i])
-		i++;
-	while (j < i)
-		free(arr[j++]);
-	free(arr);
+	if (!arr)
+	{
+		free(cpy);
+		return ;
+	}
+	ft_assign_wid_pre(cpy, arr, wid_pre);
+	ft_free_all(arr);
 	free(cpy);
 }

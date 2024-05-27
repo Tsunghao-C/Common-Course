@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_procs_spec_flag_bonus.c                         :+:      :+:    :+:   */
+/*   ft_procs_flag_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:13:22 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/24 17:52:37 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/27 17:59:48 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,39 +19,55 @@ static int	ft_is_flag(char c)
 	return (0);
 }
 
-char	*ft_procs_flag(const char *fmt, va_list *ap, int *count)
+static void	ft_free_all(char **arr)
 {
 	int	i;
-	int	wid;
-	int	pre;
-	char	*flags;
 
 	i = 0;
-	/* the flags '-' '#' '+' '0' don't have a certain order
-	 * but must be before width numbers and precisions '.'
-	 */
-	// moved to non-flags
-	while (ft_is_flag(fmt[i]) == 1)
-		i++;
-	flags = (char *)malloc((i + 1) * sizeof(char));
+	while (arr[i])
+		free(arr[i++]);
+	free(arr);
+}
+
+char	*ft_procs_flag(const char *fmt, va_list *ap, int *count)
+{
+	const char	*tmp;
+	char		*flags;
+	char		**wid_pre;
+
+	tmp = fmt;
+	while (ft_is_flag(*tmp) == 1)
+		tmp++;
+	flags = (char *)malloc((tmp - fmt + 1) * sizeof(char));
 	if (!flags)
 		return (0);
-	ft_strlcpy(flags, fmt, (i + 1));
-	fmt = fmt + i;
-	// checked wid and pre
-	while (ft_is_spec(fmt[i]) == 1)
-		i++;
-	ft_gen_wid_pre(fmt, i, &wid, &pre);
-	// analyze flags and add wid, pre to print accordingly
+	ft_strlcpy(flags, fmt, (tmp - fmt + 1));
+	fmt = tmp;
+	while (ft_is_spec(*tmp) == 0)
+		tmp++;
+	wid_pre = (char **)ft_calloc(3, sizeof(char *));
+	if (!wid_pre)
+	{
+		free(flags);
+		return (0);
+	}
+	ft_gen_wid_pre(fmt, tmp - fmt, wid_pre);
+	*count += ft_print_spec_f(*(tmp), ap, flags, wid_pre);
+	free(flags);
+	ft_free_all(wid_pre);
+	return ((char *)(tmp));
+}
+/* the flags '-' '#' '+' '0' don't have a certain order
+ * but must be before width numbers and precisions '.'
+ */
+// 1. move to non-flags and save all the flags into a string (flags)
+// 2. move to specifier and generate wid and pre into a tab of int (wid_pre)
+// 3. send "flags" and "wid_pre" together with ap to print and return cnt
+/*
 	if (sign == -1)
 		*count += ft_print_spec_left(*(fmt + i), ap, wid, pre);
 	else if (sign == 0)
 		*count += ft_print_spec_zero(*(fmt + i), ap, wid, pre);
 	else
 		*count += ft_print_spec_emty(*(fmt + i), ap, wid, pre);
-	return ((char *)(fmt + i));
-}
-/* sign =  1 => right-empty
- * sign =  0 => right-zero
- * sign = -1 => left-empty
 */

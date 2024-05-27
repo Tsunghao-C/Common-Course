@@ -1,50 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_mem.c                                     :+:      :+:    :+:   */
+/*   ft_print_mem_f_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/18 11:51:13 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/27 15:52:01 by tsuchen          ###   ########.fr       */
+/*   Created: 2024/05/27 15:31:48 by tsuchen           #+#    #+#             */
+/*   Updated: 2024/05/27 17:57:41 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_print_mem(void *addr)
+int	ft_print_mem_f(void *addr, char *flags, char **wid_pre)
 {
 	int				count;
-	int				i;
+	int				wid;
+	int				prt_len;
 	unsigned long	ad;
-	char			temp[(AD_SIZE + 1)];
 
-	i = 0;
-	//if (!addr)
-	//	return (write(STDOUT_FILENO, "(nil)", 5));
-	if (!addr)
-		temp[i++] = '0';
 	ad = (unsigned long)addr;
-	count = 0;
+	prt_len = 3;
 	while (ad > 0)
 	{
-		temp[i++] = HEX_TAB[ad % HEX_SIZE];
+		prt_len += 1;
 		ad /= HEX_SIZE;
 	}
-	temp[i] = '\0';
-	count += write(STDOUT_FILENO, "0x", 2);
-	while (--i >= 0)
-		count += write(STDOUT_FILENO, &temp[i], 1);
+	wid = 0;
+	if (wid_pre[0])
+		wid = ft_atoi(wid_pre[0]);
+	count = 0;
+	if (ft_is_left(flags) == 1)
+		count += ft_print_mem(addr);
+	while (wid-- >= prt_len)
+		count += write(STDOUT_FILENO, " ", 1);
+	if (ft_is_left(flags) == 0)
+		count += ft_print_mem(addr);
 	return (count);
 }
-/*
-#include <unistd.h>
-#include <stdio.h>
-int	main(void)
-{
-	int	i = 3;
-
-	ft_putmem_fd(&i, STDOUT_FILENO);
-	printf("\n%p\n", &i);
-	return (0);
-}*/
+/* Note
+ * 1. Only '-', '0' are acceptable flags.
+ * 2. There is no precision allowed in "p" -> use origin function
+ * 3. min prt_len is 3 becaus "0x_"
+ */
