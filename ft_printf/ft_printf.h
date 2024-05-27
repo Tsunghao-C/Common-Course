@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:42:50 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/27 15:20:44 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/27 19:58:16 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,11 @@ int		ft_print_str_f(char *s, char *flags, char **wid_pre);
 int		ft_print_mem(void *addr);
 int		ft_print_mem_f(void *addr, char *flags, char **wid_pre);
 int		ft_print_digit(long nbr, char *base);
-int		ft_print_digit_f(long nbr, char *base, char *flags, char **wid_pre);
+int		ft_print_uint_f(long nbr, char *base, char *flags, char **wid_pre);
 int		ft_printf(const char *fmt, ...);
 int		ft_is_spec(char c);
 int		ft_is_left(char *str);
+int		ft_have_zero(char *str);
 char	*ft_procs_flag(const char *fmt, va_list *ap, int *count);
 void	ft_gen_wid_pre(const char *fmt, size_t len, char **wid_pre);
 int		ft_print_digit_left(long nbr, char *base, int wid, int pre);

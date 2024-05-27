@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 11:37:36 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/27 17:43:40 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/27 18:41:07 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,12 @@ int	ft_print_char_f(char c, char *flags, char **wid_pre)
 	if (ft_is_left(flags) == 1)
 		count += ft_print_char(c);
 	while (wid-- > 1)
-		count += write(STDOUT_FILENO, " ", 1);
+	{
+		if (c == '%' && ft_have_zero(flags) == 1)
+			count += write(STDOUT_FILENO, "0", 1);
+		else
+			count += write(STDOUT_FILENO, " ", 1);
+	}
 	if (ft_is_left(flags) == 0)
 		count += ft_print_char(c);
 	return (count);

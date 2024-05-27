@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 13:50:23 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/27 17:45:45 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/27 19:25:43 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,8 @@ int	ft_print_str_f(char *s, char *flags, char **wid_pre)
 	if (!s)
 		tmp = "(null)";
 	count = 0;
-	if (!wid_pre[1])
-		prt_len = ft_strlen(tmp);
-	else
+	prt_len = ft_strlen(tmp);
+	if (wid_pre[1])
 		prt_len = ft_min(ft_strlen(tmp), ft_atoi(wid_pre[1]));
 	if (ft_is_left(flags) == 1)
 		count += write(STDOUT_FILENO, tmp, prt_len);
