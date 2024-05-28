@@ -6,7 +6,7 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/17 13:53:44 by tsuchen           #+#    #+#              #
-#    Updated: 2024/05/27 19:57:05 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/05/28 19:38:01 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,15 +20,21 @@ SRCS = ft_print_char.c \
        ft_print_str.c \
        ft_is_spec.c \
        ft_is_left.c \
+       ft_dgt_cnt_abs.c \
 
 SRCSB = ft_gen_wid_pre_bonus.c \
 	ft_have_zero_bonus.c \
+	ft_have_alt_bonus.c \
+	ft_have_space_bonus.c \
+	ft_have_plus_bonus.c \
 	ft_print_char_f_bonus.c \
 	ft_print_str_f_bonus.c \
 	ft_print_mem_f_bonus.c \
 	ft_print_spec_f_bonus.c \
 	ft_print_uint_f_bonus.c \
+	ft_print_sint_f_bonus.c \
 	ft_procs_flag_bonus.c \
+	ft_rm_plus_space_bonus.c \
 
 OBJS = $(SRCS:.c=.o)
 

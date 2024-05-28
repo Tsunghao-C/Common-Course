@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:38:12 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/27 17:28:56 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/28 18:14:53 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,43 @@ static int	ft_with_pre(char *s)
 	return (0);
 }
 
+static int	ft_arr_size(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i])
+		i++;
+	return (i);
+}
+
 static void	ft_assign_wid_pre(char *cpy, char **arr, char **wid_pre)
 {
-	if (ft_with_pre(cpy) == 0)
+	if (ft_arr_size(arr) == 0)
 	{
-		if (arr[0])
-			wid_pre[0] = ft_strdup(arr[0]);
+		if (ft_with_pre(cpy) == 1)
+			wid_pre[1] = ft_strdup("0");
+		return ;
 	}
-	else
+	else if (ft_arr_size(arr) == 1)
 	{
-		if (!arr[1])
+		if (ft_with_pre(cpy) == 0)
+			wid_pre[0] = ft_strdup(arr[0]);
+		else if (*cpy == '.')
 			wid_pre[1] = ft_strdup(arr[0]);
 		else
 		{
 			wid_pre[0] = ft_strdup(arr[0]);
-			wid_pre[1] = ft_strdup(arr[1]);
+			wid_pre[1] = ft_strdup("0");
 		}
 	}
+	else
+	{
+		wid_pre[0] = ft_strdup(arr[0]);
+		wid_pre[1] = ft_strdup(arr[1]);
+	}
 }
+
 static void	ft_free_all(char **arr)
 {
 	int	i;
@@ -70,3 +89,6 @@ void	ft_gen_wid_pre(const char *fmt, size_t len, char **wid_pre)
 	ft_free_all(arr);
 	free(cpy);
 }
+/* Note
+ * If there is a '.' flag, the precision will always be not null
+ */

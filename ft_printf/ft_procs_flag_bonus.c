@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:13:22 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/27 17:59:48 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/28 09:55:32 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,17 @@ static int	ft_is_flag(char c)
 	return (0);
 }
 
-static void	ft_free_all(char **arr)
+static void	ft_free_all(int n, char **arr)
 {
 	int	i;
 
 	i = 0;
-	while (arr[i])
-		free(arr[i++]);
+	while (i < n)
+	{
+		if (arr[i])
+			free(arr[i]);
+		i++;
+	}
 	free(arr);
 }
 
@@ -54,7 +58,7 @@ char	*ft_procs_flag(const char *fmt, va_list *ap, int *count)
 	ft_gen_wid_pre(fmt, tmp - fmt, wid_pre);
 	*count += ft_print_spec_f(*(tmp), ap, flags, wid_pre);
 	free(flags);
-	ft_free_all(wid_pre);
+	ft_free_all(3, wid_pre);
 	return ((char *)(tmp));
 }
 /* the flags '-' '#' '+' '0' don't have a certain order

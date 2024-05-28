@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:42:50 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/27 19:58:16 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/28 19:37:28 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,17 @@ int		ft_print_mem(void *addr);
 int		ft_print_mem_f(void *addr, char *flags, char **wid_pre);
 int		ft_print_digit(long nbr, char *base);
 int		ft_print_uint_f(long nbr, char *base, char *flags, char **wid_pre);
+int		ft_print_sint_f(long nbr, char *base, char *flags, char **wid_pre);
 int		ft_printf(const char *fmt, ...);
+int		ft_dgt_cnt_abs(long nbr, char *base);
 int		ft_is_spec(char c);
 int		ft_is_left(char *str);
 int		ft_have_zero(char *str);
+int		ft_have_alt(char *str);
+int		ft_have_space(char *str);
+int		ft_have_plus(char *str);
 char	*ft_procs_flag(const char *fmt, va_list *ap, int *count);
 void	ft_gen_wid_pre(const char *fmt, size_t len, char **wid_pre);
-int		ft_print_digit_left(long nbr, char *base, int wid, int pre);
-int		ft_print_digit_zero(long nbr, char *base, int wid, int pre);
-int		ft_print_digit_emty(long nbr, char *base, int wid, int pre);
+void	ft_rm_plus_space(char *str);
 
 #endif
