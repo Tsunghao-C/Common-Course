@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 11:26:11 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/28 16:03:29 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/29 16:12:10 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ int	ft_print_spec_f(char c, va_list *ap, char *flags, char **wid_pre)
 	else if (c == 'X')
 		count += ft_print_uint_f(va_arg(*ap, unsigned int),
 				HEX_TAB_U, flags, wid_pre);
+	else if (c == '%')
+		count += ft_print_char(c);
 	else
-		count += ft_print_char_f(c, flags, wid_pre);
+		return (count);
 	return (count);
 }

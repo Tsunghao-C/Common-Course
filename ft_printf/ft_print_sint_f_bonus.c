@@ -6,12 +6,11 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 12:43:21 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/28 19:40:24 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/29 15:35:36 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 static int	ft_print_pre2(long *nbr, char *base, int *prt_len, char *flags)
 {
@@ -33,12 +32,10 @@ static int	ft_print_pre2(long *nbr, char *base, int *prt_len, char *flags)
 			count += write(STDOUT_FILENO, "+", 1);
 		*prt_len -= 1;
 	}
-	while (*prt_len > dgt_cnt)
-	{
+	while (*prt_len > dgt_cnt++)
 		count += write(STDOUT_FILENO, "0", 1);
-		dgt_cnt++;
-	}
-	count += ft_print_digit(*nbr, base);
+	if (*prt_len)
+		count += ft_print_digit(*nbr, base);
 	return (count);
 }
 
@@ -90,12 +87,10 @@ static int	ft_print_pre1(long *nbr, char *base, int *prt_len, char *flags)
 			count += write(STDOUT_FILENO, "+", 1);
 		*prt_len -= 1;
 	}
-	while (*prt_len > dgt_cnt)
-	{
+	while (*prt_len > dgt_cnt++)
 		count += write(STDOUT_FILENO, "0", 1);
-		dgt_cnt++;
-	}
-	count += ft_print_digit(*nbr, base);
+	if (*prt_len)
+		count += ft_print_digit(*nbr, base);
 	return (count);
 }
 
@@ -108,7 +103,7 @@ static int	ft_print_wid2(long nbr, char **wid_pre, char *flags, int *prt_len)
 	wid = 0;
 	if (wid_pre[0])
 		wid = ft_atoi(wid_pre[0]);
-	if (nbr < 0)
+	if (nbr < 0 || ft_have_space(flags) == 1 || ft_have_plus(flags) == 1)
 		wid -= 1;
 	while (wid > *prt_len)
 	{
@@ -132,6 +127,8 @@ int	ft_print_sint_f(long nbr, char *base, char *flags, char **wid_pre)
 	prt_len = ft_dgt_cnt_abs(nbr, base);
 	if (wid_pre[1] && ft_atoi(wid_pre[1]) > prt_len)
 		prt_len = ft_atoi(wid_pre[1]);
+	if (wid_pre[1] && ft_atoi(wid_pre[1]) == 0 && nbr == 0)
+		prt_len -= 1;
 	if (nb < 0 || ft_have_space(flags) == 1 || ft_have_plus(flags) == 1)
 		prt_len += 1;
 	if (ft_is_left(flags) == 1)

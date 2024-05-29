@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 13:59:04 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/24 17:30:42 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/29 15:35:31 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_printf(const char *fmt, ...)
 	va_list	ap;
 	int		count;
 
+	if (!fmt)
+		return (0);
 	va_start(ap, fmt);
 	count = 0;
 	while (*fmt)

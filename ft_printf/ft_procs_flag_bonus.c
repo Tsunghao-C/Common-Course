@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:13:22 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/28 09:55:32 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/29 12:36:31 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	ft_free_all(int n, char **arr)
 	free(arr);
 }
 
-char	*ft_procs_flag(const char *fmt, va_list *ap, int *count)
+const char	*ft_procs_flag(const char *fmt, va_list *ap, int *count)
 {
 	const char	*tmp;
 	char		*flags;
@@ -59,7 +59,7 @@ char	*ft_procs_flag(const char *fmt, va_list *ap, int *count)
 	*count += ft_print_spec_f(*(tmp), ap, flags, wid_pre);
 	free(flags);
 	ft_free_all(3, wid_pre);
-	return ((char *)(tmp));
+	return (tmp);
 }
 /* the flags '-' '#' '+' '0' don't have a certain order
  * but must be before width numbers and precisions '.'

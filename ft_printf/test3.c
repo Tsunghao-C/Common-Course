@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test2.c                                            :+:      :+:    :+:   */
+/*   test3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 11:40:16 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/28 19:46:07 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/29 16:12:25 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,65 @@ int	main(void)
 {
 	//int	*ptr;
 	//int	a = 3;
-	//char	*ptr;
+	char	*null_str;
+	char	*ept_str;
 	//char	c;
 
 	//c = 'Q';
-	//ptr = NULL;
+	/*printf("R:%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c//%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c\n", ' ','!','"','#','$', '%','&','\'','(',')','*','+',',','-','.','/','0','1','2','3','4','5','6','7','8','9',':', ';','<','=','>','?','@','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q', 'R','S','T','U', 'V','W','X','Y','Z','[','\\',']','^','_','`','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p', 'q','r','s','t','u','v','w','x','y','z','{','|','~');
+	ft_printf("T:%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c//%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c\n", ' ','!','"','#','$', '%','&','\'','(',')','*','+',',','-','.','/','0','1','2','3','4','5','6','7','8','9',':', ';','<','=','>','?','@','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q', 'R','S','T','U', 'V','W','X','Y','Z','[','\\',']','^','_','`','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p', 'q','r','s','t','u','v','w','x','y','z','{','|','~');
+	 // % tests
+	printf("1 %5%\n");
+	ft_printf("1 %5%\n");
+	printf("2 %-5%\n");
+	ft_printf("2 %-5%\n");
+	printf("3 %-05%\n");
+	ft_printf("3 %-05%\n");
+	printf("4 percent 2 %12%\n");
+	ft_printf("4 percent 2 %12%\n");
+	printf("5 percent 3 %-12%\n");
+	ft_printf("5 percent 3 %-12%\n");*/
+	/*
+	printf("R %0d\n", 0);
+	ft_printf("T %0d\n", 0);
+	printf("R %10.8d\n", 0);
+	ft_printf("T %10.8d\n", 0);
+	printf("R %10.d\n", 0);
+	ft_printf("T %10.d\n", 0);
+	printf("R %-10.d\n", 0);
+	ft_printf("T %-10.d\n", 0);
+	printf("R %.0d\n", 1);
+	ft_printf("T %.0d\n", 1);*/
+	/*null_str = NULL;
+	ept_str = "";
+	printf("R %.1s\n", null_str);
+	ft_printf("T %.1s\n", null_str);
+	printf("R %.s\n", null_str);
+	ft_printf("T %.s\n", null_str);
+	printf("R %s\n", null_str);
+	ft_printf("T %s\n", null_str);
+	printf("R %10s\n", null_str);
+	ft_printf("T %10s\n", null_str);
+	printf("R %10.2s\n", null_str);
+	ft_printf("T %10.2s\n", null_str);
+	printf("R %.1s\n", ept_str);
+	ft_printf("T %.1s\n", ept_str);*/
+	/*printf("R Mandatory test c :%c, s :%s, p :%p, d :%d, x :%x\n", '$', "POP", NULL, -42, 42);
+	ft_printf("T Mandatory test c :%c, s :%s, p :%p, d :%d, x :%x\n", '$', "POP", NULL, -42, 42);*/
+/*	printf("R Bonus test c :%-5c, s :%5.1s, p :%15p, d :%-+10.6d, x :%#010x\n", '$', "POP", NULL, 42, 42);
+	ft_printf("T Bonus test c :%-5c, s :%5.1s, p :%15p, d :%-+10.6d, x :%#010x\n", '$', "POP", NULL, 42, 42);
+	printf("R Bonus test c :%-5c, s :%5.1s, p :%15p, d :%+10.6d, x :%#010x\n", '$', "POP", NULL, 42, 42);
+	ft_printf("T Bonus test c :%-5c, s :%5.1s, p :%15p, d :%+10.6d, x :%#010x\n", '$', "POP", NULL, 42, 42);
+	printf("R Bonus test c :%-5c, s :%5.1s, p :%15p, d :%+10.6d, x :%#10x\n", '$', "POP", NULL, -42, 42);
+	ft_printf("T Bonus test c :%-5c, s :%5.1s, p :%15p, d :%+10.6d, x :%#10x\n", '$', "POP", NULL, -42, 42);
+	printf("R Bonus test c :%-5c, s :%5.1s, p :%15p, d :%- 10.6d, x :%-#10x\n", '$', "POP", NULL, -42, 42);
+	ft_printf("T Bonus test c :%-5c, s :%5.1s, p :%15p, d :%- 10.6d, x :%-#10x\n", '$', "POP", NULL, -42, 42);
+	printf("R Bonus test c :%-5c, s :%5.1s, p :%15p, d :%- 10.6d, x :%-#10x\n", '$', "POP", NULL, 42, 42);
+	ft_printf("T Bonus test c :%-5c, s :%5.1s, p :%15p, d :%- 10.6d, x :%-#10x\n", '$', "POP", NULL, 42, 42);
+	printf("R Bonus test c :%-5c, s :%5.1s, p :%15p, d :%-+6.10d, x :%-#10x\n", '$', "POP", NULL, -42, 0);
+	ft_printf("T Bonus test c :%-5c, s :%5.1s, p :%15p, d :%-+6.10d, x :%-#10x\n", '$', "POP", NULL, -42, 0);*/
 	//ptr = "THIS IS A String!";
-	// space flag test on d
+	/* // space flag test on d
 	printf("R 11 |% d\n", -1);
 	ft_printf("T 11 |% d\n", -1);
 	printf("R 11 |% 3d\n", -1);
@@ -35,7 +87,7 @@ int	main(void)
 	printf("R 11 |%+3d\n", -1);
 	ft_printf("T 11 |%+3d\n", -1);
 	printf("R 11 |%+03d\n", -1);
-	ft_printf("T 11 |%+03d\n", -1);
+	ft_printf("T 11 |%+03d\n", -1);*/
 	// . flag test on s
 	/*printf("1 |%.s\n", "");
 	ft_printf("1 |%.s\n", "");
