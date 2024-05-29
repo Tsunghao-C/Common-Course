@@ -6,7 +6,7 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/17 13:53:44 by tsuchen           #+#    #+#              #
-#    Updated: 2024/05/29 16:11:50 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/05/29 16:37:04 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,8 @@ HEAD		= ft_printf.h
 
 CFLAGS		= -Wall -Wextra -Werror
 
+PICFLAGS	= -fPIC
+
 ARC		= ar rcs 
 
 CC		= cc
@@ -56,7 +58,7 @@ LIBFT_OBJS	= $(shell $(AR) t $(LIBFT))
 all: $(NAME)
 
 libft:
-	$(MAKE) -C $(LIBFT_PATH)
+	$(MAKE) -C $(LIBFT_PATH) CFLAGS="$(CFLAGS) $(PICFLAGS)"
 
 $(NAME): libft $(OBJS)
 	$(ARC) $(NAME) $(OBJS)
@@ -66,7 +68,7 @@ bonus: $(NAME) $(OBJSB)
 	$(ARC) $(NAME) $(OBJSB)
 
 .c.o:
-	$(CC) $(CFLAGS) -c $< -o $@ -I. -I$(LIBFT_PATH)
+	$(CC) $(CFLAGS) $(PICFLAGS) -c $< -o $@ -I. -I$(LIBFT_PATH)
 
 clean: libft-clean root-clean
 

@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 13:50:23 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/29 15:39:32 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/29 17:10:39 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int	ft_print_str_f(char *s, char *flags, char **wid_pre)
 
 	tmp = s;
 	if (!s)
-		tmp = "";
-	if (!s && (!wid_pre[1] || (wid_pre[1] && ft_atoi(wid_pre[1]) >= 6)))
 		tmp = "(null)";
+	if (!s && wid_pre[1] && ft_atoi(wid_pre[1]) < 6)
+		tmp = "";
 	count = 0;
 	prt_len = ft_strlen(tmp);
 	if (wid_pre[1])
