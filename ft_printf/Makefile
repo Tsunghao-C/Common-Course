@@ -6,66 +6,84 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/17 13:53:44 by tsuchen           #+#    #+#              #
-#    Updated: 2024/05/28 19:38:01 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/05/29 10:40:16 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
+NAME 		= libftprintf.a
 
-SRCS = ft_print_char.c \
-       ft_print_digit.c \
-       ft_printf.c \
-       ft_print_mem.c \
-       ft_print_spec.c \
-       ft_print_str.c \
-       ft_is_spec.c \
-       ft_is_left.c \
-       ft_dgt_cnt_abs.c \
+SRCS 		= ft_print_char.c \
+		  ft_print_digit.c \
+		  ft_printf.c \
+		  ft_print_mem.c \
+		  ft_print_spec.c \
+		  ft_print_str.c \
+		  ft_is_spec.c \
+		  ft_is_left.c \
+		  ft_dgt_cnt_abs.c \
+		  ft_gen_wid_pre_bonus.c \
+		  ft_have_zero_bonus.c \
+		  ft_have_alt_bonus.c \
+		  ft_have_space_bonus.c \
+		  ft_have_plus_bonus.c \
+		  ft_print_char_f_bonus.c \
+		  ft_print_str_f_bonus.c \
+		  ft_print_mem_f_bonus.c \
+		  ft_print_spec_f_bonus.c \
+		  ft_print_uint_f_bonus.c \
+		  ft_print_sint_f_bonus.c \
+		  ft_procs_flag_bonus.c \
+		  ft_rm_plus_space_bonus.c \
 
-SRCSB = ft_gen_wid_pre_bonus.c \
-	ft_have_zero_bonus.c \
-	ft_have_alt_bonus.c \
-	ft_have_space_bonus.c \
-	ft_have_plus_bonus.c \
-	ft_print_char_f_bonus.c \
-	ft_print_str_f_bonus.c \
-	ft_print_mem_f_bonus.c \
-	ft_print_spec_f_bonus.c \
-	ft_print_uint_f_bonus.c \
-	ft_print_sint_f_bonus.c \
-	ft_procs_flag_bonus.c \
-	ft_rm_plus_space_bonus.c \
+SRCSB 		= ft_gen_wid_pre_bonus.c \
+		  ft_have_zero_bonus.c \
+		  ft_have_alt_bonus.c \
+		  ft_have_space_bonus.c \
+		  ft_have_plus_bonus.c \
+		  ft_print_char_f_bonus.c \
+		  ft_print_str_f_bonus.c \
+		  ft_print_mem_f_bonus.c \
+		  ft_print_spec_f_bonus.c \
+		  ft_print_uint_f_bonus.c \
+		  ft_print_sint_f_bonus.c \
+		  ft_procs_flag_bonus.c \
+		  ft_rm_plus_space_bonus.c \
 
-OBJS = $(SRCS:.c=.o)
+OBJS		= $(SRCS:.c=.o)
 
-OBJSB = $(SRCSB:.c=.o)
+OBJSB		= $(SRCSB:.c=.o)
 
-HEAD = ft_printf.h
+HEAD		= ft_printf.h
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror
 
-LIBC = ar rcs 
+ARC		= ar rcs 
 
-CC = cc
+CC		= cc
+
+LIBFT_PATH	= libft/
+LIBFT		= $(LIBFT_PATH)libft.a
+LIBFT_OBJS	= $(shell $(AR) t $(LIBFT))
 
 all: $(NAME)
 
 libft:
-	$(MAKE) -C libft
+	$(MAKE) -C $(LIBFT_PATH)
 
 $(NAME): libft $(OBJS)
-	$(LIBC) $(NAME) $(OBJS) libft/*.o
+	$(ARC) $(NAME) $(OBJS)
+	$(ARC) $(NAME) $(addprefix $(LIBFT_PATH), $(LIBFT_OBJS))
 
 bonus: $(NAME) $(OBJSB)
-	$(LIBC) $(NAME) $(OBJSB)
+	$(ARC) $(NAME) $(OBJSB)
 
 .c.o:
-	$(CC) $(CFLAGS) -c $< -o $@ -I$(dir $(HEAD))
+	$(CC) $(CFLAGS) -c $< -o $@ -I. -I$(LIBFT_PATH)
 
 clean: libft-clean root-clean
 
 libft-clean:
-	$(MAKE) -C libft clean
+	$(MAKE) -C $(LIBFT_PATH) clean
 
 root-clean:
 	rm -f $(OBJS) $(OBJSB)
@@ -73,7 +91,7 @@ root-clean:
 fclean: libft-fclean root-fclean
 
 libft-fclean:
-	$(MAKE) -C libft fclean
+	$(MAKE) -C $(LIBFT_PATH) fclean
 
 root-fclean: root-clean
 	rm -f $(NAME)
