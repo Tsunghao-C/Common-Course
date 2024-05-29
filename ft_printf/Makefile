@@ -6,7 +6,7 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/17 13:53:44 by tsuchen           #+#    #+#              #
-#    Updated: 2024/05/29 16:37:04 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/05/29 23:43:05 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,9 +51,12 @@ ARC		= ar rcs
 
 CC		= cc
 
+AR		= ar
+AWK		= awk
+
 LIBFT_PATH	= libft/
 LIBFT		= $(LIBFT_PATH)libft.a
-LIBFT_OBJS	= $(shell $(AR) t $(LIBFT))
+LIBFT_OBJS	= $(shell $(AR) t $(LIBFT) | $(AWK) '$$0 != "__.SYMDEF SORTED"')  
 
 all: $(NAME)
 
@@ -64,8 +67,8 @@ $(NAME): libft $(OBJS)
 	$(ARC) $(NAME) $(OBJS)
 	$(ARC) $(NAME) $(addprefix $(LIBFT_PATH), $(LIBFT_OBJS))
 
-bonus: $(NAME) $(OBJSB)
-	$(ARC) $(NAME) $(OBJSB)
+bonus: $(NAME) $(OBJS)
+	$(ARC) $(NAME) $(OBJS)
 
 .c.o:
 	$(CC) $(CFLAGS) $(PICFLAGS) -c $< -o $@ -I. -I$(LIBFT_PATH)
