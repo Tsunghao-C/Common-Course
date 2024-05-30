@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 13:59:04 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/29 15:35:31 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/30 18:44:12 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_printf(const char *fmt, ...)
 	int		count;
 
 	if (!fmt)
-		return (0);
+		return (-1);
 	va_start(ap, fmt);
 	count = 0;
 	while (*fmt)
@@ -32,6 +32,8 @@ int	ft_printf(const char *fmt, ...)
 		}
 		else
 			count += ft_print_char(*fmt);
+		if (!fmt)
+			return (va_end(ap), -1);
 		++fmt;
 	}
 	va_end(ap);

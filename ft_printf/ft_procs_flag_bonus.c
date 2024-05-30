@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:13:22 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/29 12:36:31 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/30 18:42:33 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	ft_is_flag(char c)
 	return (0);
 }
 
-static void	ft_free_all(int n, char **arr)
+static void	ft_free_all(int n, char **arr, char *flags)
 {
 	int	i;
 
@@ -31,6 +31,7 @@ static void	ft_free_all(int n, char **arr)
 		i++;
 	}
 	free(arr);
+	free(flags);
 }
 
 const char	*ft_procs_flag(const char *fmt, va_list *ap, int *count)
@@ -44,21 +45,19 @@ const char	*ft_procs_flag(const char *fmt, va_list *ap, int *count)
 		tmp++;
 	flags = (char *)malloc((tmp - fmt + 1) * sizeof(char));
 	if (!flags)
-		return (0);
+		return (NULL);
 	ft_strlcpy(flags, fmt, (tmp - fmt + 1));
 	fmt = tmp;
-	while (ft_is_spec(*tmp) == 0)
+	while (*tmp && ft_is_spec(*tmp) == 0)
 		tmp++;
 	wid_pre = (char **)ft_calloc(3, sizeof(char *));
 	if (!wid_pre)
-	{
-		free(flags);
-		return (0);
-	}
+		return (free(flags), NULL);
+	if (!*tmp)
+		return (ft_free_all(3, wid_pre, flags), NULL);
 	ft_gen_wid_pre(fmt, tmp - fmt, wid_pre);
 	*count += ft_print_spec_f(*(tmp), ap, flags, wid_pre);
-	free(flags);
-	ft_free_all(3, wid_pre);
+	ft_free_all(3, wid_pre, flags);
 	return (tmp);
 }
 /* the flags '-' '#' '+' '0' don't have a certain order

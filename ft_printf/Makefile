@@ -6,7 +6,7 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/17 13:53:44 by tsuchen           #+#    #+#              #
-#    Updated: 2024/05/30 14:10:05 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/05/30 19:57:49 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,8 @@ SRCS 		= ft_print_char.c \
 		  ft_print_spec_f_bonus.c \
 		  ft_print_uint_f_bonus.c \
 		  ft_print_sint_f_bonus.c \
+		  ft_print_sign_bonus.c \
+		  ft_print_alt_bonus.c \
 		  ft_procs_flag_bonus.c \
 		  ft_rm_plus_space_bonus.c \
 

@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_str.c                                     :+:      :+:    :+:   */
+/*   ft_print_alt_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/19 11:00:15 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/30 13:53:41 by tsuchen          ###   ########.fr       */
+/*   Created: 2024/05/30 19:55:10 by tsuchen           #+#    #+#             */
+/*   Updated: 2024/05/30 19:57:52 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_print_str(char *s)
+int	ft_print_alt(char *base)
 {
-	int		count;
-	char	*tmp;
+	int	count;
 
-	if (!s)
-		tmp = "(null)";
-	else
-		tmp = s;
 	count = 0;
-	count += write(STDOUT_FILENO, tmp, ft_strlen(tmp));
+	if (ft_strncmp(base, HEX_TAB, 16) == 0)
+		count += write(STDOUT_FILENO, "0x", 2);
+	else if (ft_strncmp(base, HEX_TAB_U, 16) == 0)
+		count += write(STDOUT_FILENO, "0X", 2);
+	else
+		count += 0;
 	return (count);
 }

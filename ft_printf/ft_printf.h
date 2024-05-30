@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:42:50 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/29 15:45:24 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/30 19:57:34 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int			ft_print_mem_f(void *addr, char *flags, char **wid_pre);
 int			ft_print_digit(long nbr, char *base);
 int			ft_print_uint_f(long nbr, char *base, char *flags, char **wid_pre);
 int			ft_print_sint_f(long nbr, char *base, char *flags, char **wid_pre);
+int			ft_print_sign(long *nbr, char *flags);
+int			ft_print_alt(char *base);
 int			ft_printf(const char *fmt, ...);
 int			ft_dgt_cnt_abs(long nbr, char *base);
 int			ft_is_spec(char c);
