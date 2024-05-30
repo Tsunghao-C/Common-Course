@@ -6,7 +6,7 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/17 13:53:44 by tsuchen           #+#    #+#              #
-#    Updated: 2024/05/29 23:43:05 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/05/30 14:10:05 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,8 +67,7 @@ $(NAME): libft $(OBJS)
 	$(ARC) $(NAME) $(OBJS)
 	$(ARC) $(NAME) $(addprefix $(LIBFT_PATH), $(LIBFT_OBJS))
 
-bonus: $(NAME) $(OBJS)
-	$(ARC) $(NAME) $(OBJS)
+bonus: $(NAME)
 
 .c.o:
 	$(CC) $(CFLAGS) $(PICFLAGS) -c $< -o $@ -I. -I$(LIBFT_PATH)
