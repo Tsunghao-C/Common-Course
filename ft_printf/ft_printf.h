@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:42:50 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/30 19:57:34 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/30 21:31:56 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ int			ft_have_plus(char *str);
 const char	*ft_procs_flag(const char *fmt, va_list *ap, int *count);
 void		ft_gen_wid_pre(const char *fmt, size_t len, char **wid_pre);
 void		ft_rm_plus_space(char *str);
+void		ft_rm_alt(char *str);
 
 #endif

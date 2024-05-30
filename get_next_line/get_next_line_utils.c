@@ -6,13 +6,13 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 18:58:34 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/29 19:33:53 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/30 21:39:13 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t siz)
+/*size_t	ft_strlcpy(char *dst, const char *src, size_t siz)
 {
 	size_t	src_len;
 	size_t	i;
@@ -29,6 +29,49 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t siz)
 		dst[i] = '\0';
 	}
 	return (src_len);
+}*/
+
+void	ft_read_n_copy(static char **str_rd, int fd)
+{
+	int		nu_rd;
+	int		i;
+	char		buff[BUFFER_SIZE];
+	char		*tmp;
+
+	nu_rd = read(fd, buff, BUFFER_SIZE);
+	if (nu_rd == -1)
+		return ;
+	i = 0;
+	tmp = NULL;
+	while (!ft_strchr(buff, '\n'))
+	{
+		i += nu_rd;
+		if (*str_rd)
+		{
+			tmp = ft_strdup(*str_rd);
+			free (*str_rd);
+		}
+		*str_rd = (char *)malloc((i + 1) * sizeof(char));
+		if (!str_rd)
+			return ;
+		**str_rd = 0;
+		if (tmp)
+		{
+			ft_strlcat(*str_rd, tmp, ft_strlen(tmp) + 1);
+			free (tmp);
+		}
+		ft_strlcat(*str_rd, buff, (i + 1));
+		nu_rd = read(fd, buff, BUFFER_SIZE);
+		if (nu_rd == -1)
+			return ;
+	}
+	i += nu_rd;
+	if (*str_rd)
+	{
+		tmp = ft_strdup(*str_rd);
+		free(*str_rd);
+	}
+	*str
 }
 
 size_t	ft_strlcat(char *dst, const char *src, size_t siz)
@@ -88,4 +131,20 @@ size_t	ft_strlen(const char *s)
 	while (*ptr)
 		ptr++;
 	return (ptr - s);
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	const char	*tmp;
+
+	tmp = s;
+	while (*tmp)
+	{
+		if (*tmp == (unsigned char)c)
+			return ((char *)tmp);
+		tmp++;
+	}
+	if (*tmp == (unsigned char)c)
+		return ((char *)tmp);
+	return (NULL);
 }

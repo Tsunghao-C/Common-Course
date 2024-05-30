@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 17:53:03 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/29 19:33:50 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/05/30 21:39:08 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,35 @@
 
 char	*get_next_line(int fd)
 {
-	char		buff[BUFFER_SIZE];
 	static char	*str_rd;
 	int		nu_rd;
+	char		buff[BUFFER_SIZE];
 	char		*tmp;
 	char		*opt;
 
 	if (fd == -1)
 		return (NULL);
-	nu_rd = read(fd, buff, BUFFER_SIZE);
-	if (nu_rd == -1)
-		return (NULL);
-	str_rd = (char *)malloc((nu_rd + 1) * sizeof(char));
+	str_rd = NULL;
 	if (!str_rd)
-		return (NULL);
-	ft_strlcpy(opt, buff, nu_rd + 1);
-	tmp = str_rd;
-	while (*tmp && *tmp != '\n')
-		tmp++;
-	if (tmp)	//create substring and return
+	{
+		nu_rd = read(fd, buff, BUFFER_SIZE);
+		if (nu_rd == -1)
+			return (NULL);
+		str_rd = (char *)malloc((nu_rd + 1) * sizeof(char));
+		if (!str_rd)
+			return (NULL);
+		ft_strlcpy(str_rd, buff, nu_rd + 1);
+	}
+	tmp = ft_strchr(str_rd, '\n');		// find the first '\n' in str_rd
+	if (tmp)				//create substring and return
 	{
 		opt = ft_substr(str_rd, 0, tmp - str_rd + 1);
 		str_rd = tmp + 1;
 	}
-	else
-		// read more!
-	
+	else					// read more!
+	{
+		d
+	}
 	return (opt);
 }
 

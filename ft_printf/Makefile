@@ -6,7 +6,7 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/17 13:53:44 by tsuchen           #+#    #+#              #
-#    Updated: 2024/05/30 19:57:49 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/05/30 21:32:24 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRCS 		= ft_print_char.c \
 		  ft_print_alt_bonus.c \
 		  ft_procs_flag_bonus.c \
 		  ft_rm_plus_space_bonus.c \
+		  ft_rm_alt_bonus.c \
 
 SRCSB		=
 
