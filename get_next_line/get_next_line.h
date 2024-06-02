@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 17:54:22 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/29 19:33:47 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/02 20:55:24 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,22 @@
 # include <limits.h>
 # include <stdint.h>
 # include <errno.h>
-# define BUFFER_SIZE 512 
+# define BUFFER_SIZE 42 
 # define ER STDERR_FILENO
 
-char	*get_next_line(int fd);
-char    *ft_substr(char const *s, unsigned int start, size_t len);
+typedef struct	s_list
+{
+	char		*str;
+	struct s_list	*next;
+}	t_list;
+
+void	ft_lst_append(t_list **lst, char *str);
+int	ft_have_nl_lst(t_list *bgn_lst);
+int	ft_line_size(t_list *lst);
 size_t  ft_strlen(const char *s);
-size_t  ft_strlcat(char *dst, const char *src, size_t siz);
-size_t  ft_strlcpy(char *dst, const char *src, size_t siz);
+char	*get_next_line(int fd);
+char	*ft_gen_nl(t_list **lst);
+void	ft_fetch_nl(int fd, t_list **bgn_lst);
+void	ft_update_list(t_list **lst);
 
 #endif

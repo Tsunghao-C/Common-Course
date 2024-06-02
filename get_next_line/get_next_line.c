@@ -6,44 +6,27 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 17:53:03 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/30 21:39:08 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/02 20:55:19 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 char	*get_next_line(int fd)
 {
-	static char	*str_rd;
-	int		nu_rd;
-	char		buff[BUFFER_SIZE];
-	char		*tmp;
-	char		*opt;
+	static t_list		*bgn_lst;
+	char		*next_line;
 
-	if (fd == -1)
+	if (fd == -1 || read(fd, &next_line, 0) < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	str_rd = NULL;
-	if (!str_rd)
-	{
-		nu_rd = read(fd, buff, BUFFER_SIZE);
-		if (nu_rd == -1)
-			return (NULL);
-		str_rd = (char *)malloc((nu_rd + 1) * sizeof(char));
-		if (!str_rd)
-			return (NULL);
-		ft_strlcpy(str_rd, buff, nu_rd + 1);
-	}
-	tmp = ft_strchr(str_rd, '\n');		// find the first '\n' in str_rd
-	if (tmp)				//create substring and return
-	{
-		opt = ft_substr(str_rd, 0, tmp - str_rd + 1);
-		str_rd = tmp + 1;
-	}
-	else					// read more!
-	{
-		d
-	}
-	return (opt);
+	if (!bgn_lst || ft_have_nl_lst(bgn_lst) == 0)
+		ft_fetch_nl(fd, &bgn_lst);	//read fd and generate str_lst until '\n' found
+	//printf("lst 1:%p, %s\n", bgn_lst, bgn_lst->str);
+	//printf("lst 2:%p, %s\n", bgn_lst->next, bgn_lst->next->str);
+	next_line = ft_gen_nl(&bgn_lst);
+	ft_update_list(&bgn_lst);
+	return (next_line);
 }
 
 #include <stdio.h>
@@ -58,8 +41,23 @@ int	main(int ac, char *av[])
 		fd = open(av[1], O_RDONLY);
 	else
 		return (0);
-	printf("1st call :%s", get_next_line(fd));
-	printf("2nd call :%s", get_next_line(fd));
+	int	i = 1;
+	//char	*line;
+
+	//line = get_next_line(fd);
+	/*
+	while (line)
+	{
+		printf("%d call :%s", i, line);
+		line = get_next_line(fd);
+		i++;
+	}*/
+	while (i++ < 30)
+	{
+		printf("%d call :%s", i, get_next_line(fd));
+	}
+	//printf("1st call :%s", get_next_line(fd));
+	//printf("2nd call :%s", get_next_line(fd));
 	close(fd);
 	return (0);
 }
