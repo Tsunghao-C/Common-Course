@@ -6,45 +6,37 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 17:53:03 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/04 15:35:13 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/04 22:11:16 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-size_t	ft_strlen(const char *s)
+char	*get_next_line(int fd)
 {
-	const char	*ptr;
+	static t_list	*bgn_lst[MAX_FD];
+	char			*next_line;
 
-	ptr = s;
-	while (*ptr)
-		ptr++;
-	return (ptr - s);
-}
-
-void	ft_delone(t_list *lst)
-{
-	free(lst->str);
-	free(lst);
-}
-
-size_t	ft_strlcpy(char *dst, const char *src, size_t siz)
-{
-	size_t	src_len;
-	size_t	i;
-
-	src_len = ft_strlen(src);
-	i = 0;
-	if (siz > 0)
+	if (fd == -1 || read(fd, &next_line, 0) < 0 || BUFFER_SIZE <= 0)
 	{
-		while ((i < (siz - 1)) && (src[i] != '\0'))
+		if (bgn_lst[fd])
 		{
-			dst[i] = src[i];
-			i++;
+			ft_delone(bgn_lst[fd]);
+			bgn_lst[fd] = NULL;
 		}
-		dst[i] = '\0';
+		return (NULL);
 	}
-	return (src_len);
+	if (!bgn_lst[fd] || ft_have_nl_lst(bgn_lst[fd]) == 0)
+		ft_fetch_nl(fd, &bgn_lst[fd]);
+	next_line = ft_gen_nl(bgn_lst[fd]);
+	if (bgn_lst[fd])
+		ft_update_list(&bgn_lst[fd]);
+	if (!next_line && bgn_lst[fd])
+	{
+		ft_delone(bgn_lst[fd]);
+		bgn_lst[fd] = NULL;
+	}
+	return (next_line);
 }
 
 int	ft_have_nl_lst(t_list *bgn_lst)
@@ -67,31 +59,82 @@ int	ft_have_nl_lst(t_list *bgn_lst)
 	return (0);
 }
 
-char	*get_next_line(int fd)
+void	ft_fetch_nl(int fd, t_list **bgn_lst)
 {
-	static t_list	*bgn_lst;
-	char			*next_line;
+	int		nu_rd;
+	char	*buff;
 
-	if (fd == -1 || read(fd, &next_line, 0) < 0 || BUFFER_SIZE <= 0)
+	while (!ft_have_nl_lst(*bgn_lst))
 	{
-		if (bgn_lst)
+		buff = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+		if (!buff)
+			return ;
+		nu_rd = read(fd, buff, BUFFER_SIZE);
+		if (!nu_rd || nu_rd == -1)
 		{
-			ft_delone(bgn_lst);
-			bgn_lst = NULL;
+			free(buff);
+			return ;
 		}
+		buff[nu_rd] = '\0';
+		ft_lst_append(bgn_lst, buff);
+	}
+}
+
+char	*ft_gen_nl(t_list *lst)
+{
+	char	*next_line;
+	char	*tmp2;
+	int		i;
+
+	if (ft_line_size(lst) == 0)
 		return (NULL);
-	}
-	if (!bgn_lst || ft_have_nl_lst(bgn_lst) == 0)
-		ft_fetch_nl(fd, &bgn_lst);
-	next_line = ft_gen_nl(bgn_lst);
-	if (bgn_lst)
-		ft_update_list(&bgn_lst);
-	if (!next_line && bgn_lst)
+	next_line = (char *)malloc((ft_line_size(lst) + 1) * sizeof(char));
+	if (!next_line)
+		return (NULL);
+	i = 0;
+	while (lst)
 	{
-		ft_delone(bgn_lst);
-		bgn_lst = NULL;
+		tmp2 = lst->str;
+		while (*tmp2 && *tmp2 != '\n')
+			next_line[i++] = *tmp2++;
+		if (*tmp2 == '\n')
+		{
+			next_line[i++] = '\n';
+			break ;
+		}
+		lst = lst->next;
 	}
+	next_line[i] = '\0';
 	return (next_line);
+}
+
+void	ft_update_list(t_list **lst)
+{
+	t_list	*tmp;
+	char	*str_left;
+	char	*tmp2;
+
+	if (!lst || !*lst)
+		return ;
+	tmp = *lst;
+	while ((*lst)->next)
+	{
+		tmp = *lst;
+		*lst = (*lst)->next;
+		ft_delone(tmp);
+	}
+	tmp2 = (*lst)->str;
+	while (*tmp2 && *tmp2 != '\n')
+		tmp2++;
+	if (*tmp2 == '\n')
+		tmp2++;
+	str_left = ft_strdup(tmp2);
+	ft_delone(*lst);
+	*lst = NULL;
+	if (str_left && *str_left != '\0')
+		ft_lst_append(lst, str_left);
+	else
+		free(str_left);
 }
 /*
 #include <stdio.h>

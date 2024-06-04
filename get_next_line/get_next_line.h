@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 17:54:22 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/03 18:05:06 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/04 21:20:17 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_delone(t_list *lst);
 int		ft_have_nl_lst(t_list *bgn_lst);
 int		ft_line_size(t_list *lst);
 size_t	ft_strlen(const char *s);
-size_t	ft_strlcpy(char *dst, const char *src, size_t siz);
+char	*ft_strdup(const char *s);
 char	*get_next_line(int fd);
 char	*ft_gen_nl(t_list *lst);
 void	ft_fetch_nl(int fd, t_list **bgn_lst);

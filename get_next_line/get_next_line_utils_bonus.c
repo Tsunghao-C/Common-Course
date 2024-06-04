@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 16:25:45 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/04 15:25:42 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/04 21:25:59 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,78 +56,38 @@ int	ft_line_size(t_list *lst)
 	return (len);
 }
 
-char	*ft_gen_nl(t_list *lst)
+void	ft_delone(t_list *lst)
 {
-	char	*next_line;
-	char	*tmp2;
+	free(lst->str);
+	free(lst);
+}
+
+size_t	ft_strlen(const char *s)
+{
+	const char	*ptr;
+
+	ptr = s;
+	while (*ptr)
+		ptr++;
+	return (ptr - s);
+}
+
+char	*ft_strdup(const char *s)
+{
+	char	*dup;
+	size_t	n;
 	int		i;
 
-	if (ft_line_size(lst) == 0)
-		return (NULL);
-	next_line = (char *)malloc((ft_line_size(lst) + 1) * sizeof(char));
-	if (!next_line)
-		return (NULL);
 	i = 0;
-	while (lst)
+	n = ft_strlen(s);
+	dup = (char *)malloc((n + 1) * sizeof(char));
+	if (!dup)
+		return (0);
+	while (s[i])
 	{
-		tmp2 = lst->str;
-		while (*tmp2 && *tmp2 != '\n')
-			next_line[i++] = *tmp2++;
-		if (*tmp2 == '\n')
-		{
-			next_line[i++] = '\n';
-			break ;
-		}
-		lst = lst->next;
+		dup[i] = s[i];
+		i++;
 	}
-	next_line[i] = '\0';
-	return (next_line);
-}
-
-void	ft_fetch_nl(int fd, t_list **bgn_lst)
-{
-	int		nu_rd;
-	char	*buff;
-
-	while (!ft_have_nl_lst(*bgn_lst))
-	{
-		buff = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-		if (!buff)
-			return ;
-		nu_rd = read(fd, buff, BUFFER_SIZE);
-		if (!nu_rd || nu_rd == -1)
-		{
-			free(buff);
-			return ;
-		}
-		buff[nu_rd] = '\0';
-		ft_lst_append(bgn_lst, buff);
-	}
-}
-
-void	ft_update_list(t_list **lst)
-{
-	t_list	*tmp;
-	char	*str_left;
-	char	*tmp2;
-
-	tmp = *lst;
-	while ((*lst)->next)
-	{
-		tmp = *lst;
-		*lst = (*lst)->next;
-		ft_delone(tmp);
-	}
-	tmp2 = (*lst)->str;
-	while (*tmp2 && *tmp2 != '\n')
-		tmp2++;
-	if (*tmp2 == '\n')
-		tmp2++;
-	str_left = (char *)malloc((ft_strlen(tmp2) + 1) * sizeof(char));
-	if (!str_left)
-		return ;
-	ft_strlcpy(str_left, tmp2, ft_strlen(tmp2) + 1);
-	ft_delone(*lst);
-	*lst = NULL;
-	ft_lst_append(lst, str_left);
+	dup[i] = '\0';
+	return (dup);
 }
