@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 17:53:03 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/04 22:11:16 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/07 15:13:47 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*get_next_line(int fd)
 
 	if (fd == -1 || read(fd, &next_line, 0) < 0 || BUFFER_SIZE <= 0)
 	{
-		if (bgn_lst[fd])
+		if (fd >= 0 && bgn_lst[fd])
 		{
 			ft_delone(bgn_lst[fd]);
 			bgn_lst[fd] = NULL;
