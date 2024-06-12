@@ -129,6 +129,20 @@ reference: https://www.youtube.com/watch?v=AtuAdk4MwWw
 
 reference: https://www.youtube.com/watch?v=XtRXm4FFK7Q
 
+## Cron
+
+### What is Cron?
+
+1. Cron or cron job is a service that can schedule commands or scripts to happen at specific intervals of time of in a specific frequency. For example, you want to back-up or clean the bin regualrly.
+2. "crontab -e" to edit the cron job.
+
+## TTY
+
+### What is TTY?
+
+1. TTY stands for TeleTypewriter, the name comes from old typewriters that used to telegraphs.
+2. A tty is something that can accept input from a keyboard, or STDIN.
+
 ## For peer review
 
 ### How to change hostname
@@ -136,6 +150,27 @@ reference: https://www.youtube.com/watch?v=XtRXm4FFK7Q
 1. sudo hostnamectl set-hostname <new_hostname>
 2. hostnamectl status
 
-### How to create, modify, and delete user accounts
+### How to create, modify, check, and delete user accounts
 
+1. Create new user          :sudo adduser <new_usrname>
+2. Create new group         :sudo groupadd <new_grpname>
+3. Add user to a group      :sudo usermod -aG <grpname> <usrname>
+4. Check user pw rule       :sudo chage -l <usrname>
+5. Check usrs in grp        :getent group <grpname>
+6. Check grps of a usr      :groups
+7. Check login usrs         :users / who
+8. Delete a user            :sudo userdel <usrname> (use -r to remove all directories of the user)
 
+### System services
+
+1. Show service status      :sudo systemctl status <svc_name>
+2. Start/Enable service     :sudo systemctl start/enable <svc_name>
+3. Download/Install service :sudo apt install <svc_name>
+4. Check download pkgs      :sudo dpkg -l | grep <svc_name>
+
+### Firewall and SSH link
+
+1. Check ufw status         :sudo ufw status numbered
+2. Add rules                :sudo ufw allow/deny <port_number>
+3. Delete rules             :sudo ufw delete <rule_number>
+4. Access through SSH       :ssh <user_id>@127.0.0.1 -p <port_number>
