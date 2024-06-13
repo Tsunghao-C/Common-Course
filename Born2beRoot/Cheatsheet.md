@@ -176,3 +176,21 @@ reference: https://www.youtube.com/watch?v=XtRXm4FFK7Q
 2. Add rules                :sudo ufw allow/deny (port_number)
 3. Delete rules             :sudo ufw delete (rule_number)
 4. Access through SSH       :ssh (user_id)@127.0.0.1 -p (port_number)
+
+## Bonus
+
+### What is Lighttpd?
+
+Lighttpd, pronounced “lighty”, is an open-source web server optimized for speed-critical environments while remaining standards-compliant, secure, and flexible. It’s designed to be lightweight and have a small memory footprint, making it particularly suited for servers suffering from load problems and memory leaks.
+
+reference: https://webhostinggeeks.com/blog/what-is-lighttpd-web-server-and-how-does-it-work/
+
+### MariaDB
+
+1. Password: WPpassword
+
+### WordPress
+
+1. Password: same as intra42
+2. username: tsuchen
+
