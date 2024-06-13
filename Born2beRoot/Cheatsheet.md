@@ -124,8 +124,8 @@ reference: https://www.youtube.com/watch?v=AtuAdk4MwWw
 
 1. "sudo ufw enable" to enable ufw at boot time
 2. "sudo ufw status numbered" to show all ufw rules
-3. "sudo ufw allow/deny <port number> to configure rules
-4. "sudo ufw delete <port number> to delete rules
+3. "sudo ufw allow/deny (port number) to configure rules
+4. "sudo ufw delete (port number) to delete rules
 
 reference: https://www.youtube.com/watch?v=XtRXm4FFK7Q
 
@@ -147,30 +147,32 @@ reference: https://www.youtube.com/watch?v=XtRXm4FFK7Q
 
 ### How to change hostname
 
-1. sudo hostnamectl set-hostname <new_hostname>
+1. sudo hostnamectl set-hostname (new_hostname)
 2. hostnamectl status
 
 ### How to create, modify, check, and delete user accounts
 
-1. Create new user          :sudo adduser <new_usrname>
-2. Create new group         :sudo groupadd <new_grpname>
-3. Add user to a group      :sudo usermod -aG <grpname> <usrname>
-4. Check user pw rule       :sudo chage -l <usrname>
-5. Check usrs in grp        :getent group <grpname>
-6. Check grps of a usr      :groups
-7. Check login usrs         :users / who
-8. Delete a user            :sudo userdel <usrname> (use -r to remove all directories of the user)
+1. Create new user		:sudo adduser (new_usrname)
+2. Create new group		:sudo groupadd (new_grpname)
+3. Add user to a group		:sudo usermod -aG (grpname) (usrname)
+4. Del user from a group	:sudo gpasswd -d (usrname) (grpname)
+5. Check user pw rule		:sudo chage -l (usrname)
+6. Check usrs in grp		:getent group (grpname)
+7. Check grps of a usr		:groups
+8. Check login usrs		:users / who
+9. Delete a user		:sudo userdel (usrname) (use -r to remove all directories of the user)
+10. Delete a group		:sudo groupdel (grpname)
 
 ### System services
 
-1. Show service status      :sudo systemctl status <svc_name>
-2. Start/Enable service     :sudo systemctl start/enable <svc_name>
-3. Download/Install service :sudo apt install <svc_name>
-4. Check download pkgs      :sudo dpkg -l | grep <svc_name>
+1. Show service status      :sudo systemctl status (svc_name)
+2. Start/Enable service     :sudo systemctl start/enable (svc_name)
+3. Download/Install service :sudo apt install (svc_name)
+4. Check download pkgs      :sudo dpkg -l | grep (svc_name)
 
 ### Firewall and SSH link
 
 1. Check ufw status         :sudo ufw status numbered
-2. Add rules                :sudo ufw allow/deny <port_number>
-3. Delete rules             :sudo ufw delete <rule_number>
-4. Access through SSH       :ssh <user_id>@127.0.0.1 -p <port_number>
+2. Add rules                :sudo ufw allow/deny (port_number)
+3. Delete rules             :sudo ufw delete (rule_number)
+4. Access through SSH       :ssh (user_id)@127.0.0.1 -p (port_number)
