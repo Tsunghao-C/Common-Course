@@ -194,3 +194,15 @@ reference: https://webhostinggeeks.com/blog/what-is-lighttpd-web-server-and-how-
 1. Password: same as intra42
 2. username: tsuchen
 
+### Additional service: Curl
+
+1. Curl stands for client url. It is an useful service to download information from http via interactive terminal.
+2. Examples:
+	- weather: curl wttr.in/(city name) or (airport abbr.)
+	- phase of moon: curl wttr.in/moon or curl wttr.in/Moon@2024-Jul-23
+	- geolocation: curl ipinfo.io/8.8.8.8
+
+### Additional service: telnet
+
+2. Examples:
+	- map: telnet mapascii.me (you can zoom in and out!!!)
