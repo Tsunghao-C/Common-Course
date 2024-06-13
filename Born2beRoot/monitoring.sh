@@ -28,7 +28,7 @@ wall "
 	CPU Load	: $CPU_LOAD
 	Last Boot	: $LAST_BOOT
 	LVM Use		: $LVM
-	TCP Connections	: $TCP ESTABLISHED
+	TCP Connections	: $TCP_COUNT ESTABLISHED
 	User Logged	: $USER_LOG
 	Network		: IP $IP_ADDR ($MAC_ADDR)
 	Sudo		: $SUDO_LOG COMMANDS USED
