@@ -68,7 +68,7 @@ reference: https://www.youtube.com/watch?v=214rUhQe7B4
 4. Introducing "Systemd", the master of all daemons.
     - systemd is the service manager for all daeman services
     - systemd is the initialization system (or "init", but different to init system)
-    Process of (re)boot a Linux system
+    - Process of (re)boot a Linux system
     1. Power on (Boot)
     2. Load the Kernel
     3. Kick off systemd (start forking)
