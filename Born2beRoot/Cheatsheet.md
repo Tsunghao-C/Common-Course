@@ -69,11 +69,11 @@ reference: https://www.youtube.com/watch?v=214rUhQe7B4
     - systemd is the service manager for all daeman services
     - systemd is the initialization system (or "init", but different to init system)
     - Process of (re)boot a Linux system
-    1. Power on (Boot)
-    2. Load the Kernel
-    3. Kick off systemd (start forking)
-        - Mounting file systems
-        - Starting all services
+        1. Power on (Boot)
+        2. Load the Kernel
+        3. Kick off systemd (start forking)
+            - Mounting file systems
+            - Starting all services
 5. To use systemd as a service manager, use the command "sudo systemctl" to start, stop, restart other daemon services. You can also enabled/disabled a service to define whether it shall start automatically at BOOT time.
 
 ## SSH
