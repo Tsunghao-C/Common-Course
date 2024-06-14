@@ -1,3 +1,21 @@
+# 42 Common Core Project - ft_printf
+
+## Objective
+
+1. Replicate the printf function in the library stdio.h.
+2. For mandatory part, only replicate the the specifiers of c, i, u, d, x, X, p, and %.
+3. For bonus part, need to add the flags of '-', '.', '0', '+', ' ', '#', and the minimun length.
+
+## Key Concept
+
+1. Variadic Functions
+2. Understanding of put_number_base
+3. Understanding of data type (ex. unsigned number vs signed number)
+4. [Optional] Using typedef struct for flags management.
+
+Note:
+    I didn't know the method of creating a struct to store and manage flags. It should be a more clever and stuctured wya to handle the flags. So instead, I used arrays to store the flags and created way much more helper functions for the bonus part.
+
 ## Flags in printf (from chatGPT)
 
 The `+` and space (` `) flags are only applicable to signed integer conversions (`d` and `i`) and floating-point conversions (`f`, `e`, `g`). They do not have any effect on unsigned conversions (`u`, `o`, `x`, `X`). The `+` flag forces a sign (`+` or `-`) to be shown before the number, and the space flag inserts a space before positive numbers. These are irrelevant for unsigned integers since they are always non-negative.
