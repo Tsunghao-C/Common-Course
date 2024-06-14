@@ -14,7 +14,7 @@
 4. [Optional] Using typedef struct for flags management.
 
 Note:
-    I didn't know the method of creating a struct to store and manage flags. It should be a more clever and stuctured wya to handle the flags. So instead, I used arrays to store the flags and created way much more helper functions for the bonus part.
+I didn't know the method of creating a struct to store and manage flags. It should be a more clever and stuctured way to handle the flags. So instead, I used arrays to store the flags and created way much more helper functions for the bonus part.
 
 ## Flags in printf (from chatGPT)
 
