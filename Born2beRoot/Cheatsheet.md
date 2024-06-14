@@ -158,10 +158,12 @@ reference: https://www.youtube.com/watch?v=XtRXm4FFK7Q
 4. Del user from a group	:sudo gpasswd -d (usrname) (grpname)
 5. Check user pw rule		:sudo chage -l (usrname)
 6. Check usrs in grp		:getent group (grpname)
-7. Check grps of a usr		:groups
-8. Check login usrs		:users / who
-9. Delete a user		:sudo userdel (usrname) (use -r to remove all directories of the user)
-10. Delete a group		:sudo groupdel (grpname)
+7. Check all existing grps	:getent group
+8. Check all existing usrs	:getent group users
+9. Check grps of a usr		:groups
+10. Check login usrs		:users / who
+11. Delete a user		:sudo userdel (usrname) (use -r to remove all directories of the user)
+12. Delete a group		:sudo groupdel (grpname)
 
 ### System services
 
