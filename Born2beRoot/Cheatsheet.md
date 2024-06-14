@@ -212,7 +212,10 @@ reference: https://webhostinggeeks.com/blog/what-is-lighttpd-web-server-and-how-
 
 ### MariaDB (database system)
 
--  Password: WPpassword
+- To check mariadb status: 
+	- '''mysql -u root -p'''
+	- '''show databases;'''
+- Password: WPpassword
 
 1. MariaDB is an open-source relational database management system (RDBMS) that is a fork of MySQL. After MySQL was acquired by Oracle, Maria aims to remain free and open-source while maintaining compatibility with MySQL, ensuring a drop-in replacement for MySQL users.
 2. Comparison to Similar Services
@@ -266,6 +269,7 @@ reference: https://webhostinggeeks.com/blog/what-is-lighttpd-web-server-and-how-
 
 ### WordPress (Content Management system CMS)
 
+- To check WordPress config '''/var/www/html/wp-config.php'''
 - Password: same as intra42
 - username: tsuchen
 
