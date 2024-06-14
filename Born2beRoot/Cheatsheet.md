@@ -189,7 +189,9 @@ reference: https://webhostinggeeks.com/blog/what-is-lighttpd-web-server-and-how-
 
 -  Password: WPpassword
 
-1. MariaDB is an open-source relational database management system (RDBMS) that is a fork of MySQL. After MySQL was acquired by Oracle, Maria
+1. MariaDB is an open-source relational database management system (RDBMS) that is a fork of MySQL. After MySQL was acquired by Oracle, Maria aims to remain free and open-source while maintaining compatibility with MySQL, ensuring a drop-in replacement for MySQL users.
+2. Comparison to Similar Services
+
 |------------------------|------------------------------------------|-----------------------------------|---------------------------------------------|-------------------------------|
 | License                | GPL, LGPL, BSD                           | GPL                               | PostgreSQL License                          | Public Domain                 |
 | Open Source            | Yes                                      | Yes                               | Yes                                         | Yes                           |
