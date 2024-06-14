@@ -179,13 +179,38 @@ reference: https://www.youtube.com/watch?v=XtRXm4FFK7Q
 
 ## Bonus
 
-### What is Lighttpd?
+### Lighttpd (web server)
 
-Lighttpd, pronounced “lighty”, is an open-source web server optimized for speed-critical environments while remaining standards-compliant, secure, and flexible. It’s designed to be lightweight and have a small memory footprint, making it particularly suited for servers suffering from load problems and memory leaks.
+1. Lighttpd, pronounced “lighty”, is an open-source web server optimized for speed-critical environments while remaining standards-compliant, secure, and flexible. It’s designed to be lightweight and have a small memory footprint, making it particularly suited for servers suffering from load problems and memory leaks.
+2. Characteristics of Lighttpd
+    1. Performance: Highly efficient and optimized for high-performance environments, with a small memory footprint.
+    2. Simplicity: Simple to set up and configure, with a straightforward configuration file.
+    3. Security: Built-in security features, including support for SSL/TLS, chroot support, and more.
+    4. Flexibility: Supports a wide range of web technologies and applications, including FastCGI, SCGI, and HTTP proxy.
+    5. Event-Driven: Uses an event-driven architecture to handle multiple connections efficiently.
+    6. Compatibility: Compatible with most Unix-like operating systems and Windows.
+3. Comparison to Similar Services
+
+| Feature/Service   | Lighttpd                                    | Apache HTTP Server                      | Nginx                                 | Microsoft IIS                                        |
+|-------------------|---------------------------------------------|-----------------------------------------|---------------------------------------|------------------------------------------------------|
+| License           | BSD                                         | Apache License 2.0                      | BSD-like                              | Proprietary (Windows)                                |
+| Open Source       | Yes                                         | Yes                                     | Yes                                   | No                                                   |
+| Developer         | Jan Kneschke, community                     | Apache Software Foundation              | Igor Sysoev, NGINX Inc.               | Microsoft                                            |
+| Initial Release   | 2003                                        | 1995                                    | 2004                                  | 1995                                                 |
+| Performance       | High (event-driven)                         | Moderate to High (process/thread-based) | High (event-driven)                   | High                                                 |
+| Memory Usage      | Low                                         | Moderate to High                        | Low                                   | High                                                 |
+| Scalability       | Good                                        | Good                                    | Excellent                             | Good                                                 |
+| Ease of Use       | Easy                                        | Moderate                                | Moderate                              | Easy (GUI-based)                                     |
+| Configuration     | Simple (single config file)                 | Extensive (many modules and configs)    | Simple (single config file)           | GUI-based, extensive                                 |
+| Security          | Strong                                      | Strong                                  | Strong                                | Strong                                               |
+| Flexibility       | Moderate                                    | Very High (many modules)                | High                                  | High                                                 |
+| Community Support | Moderate                                    | Very Strong                             | Strong                                | Moderate                                             |
+| Use Cases         | High-performance, low-resource environments | General-purpose, highly customizable    | High-traffic websites, load balancing | Enterprise environments, Windows-centric deployments |
+
 
 reference: https://webhostinggeeks.com/blog/what-is-lighttpd-web-server-and-how-does-it-work/
 
-### MariaDB
+### MariaDB (database system)
 
 -  Password: WPpassword
 
@@ -207,10 +232,74 @@ reference: https://webhostinggeeks.com/blog/what-is-lighttpd-web-server-and-how-
 | Community Support      | Strong                                   | Strong                            | Strong                                      | Moderate                      |
 | Use Cases              | General-purpose, enterprise              | General-purpose, web applications | Advanced data applications, complex queries | Embedded systems, mobile apps |
 
-### WordPress
+### PHP (Server-side scripting language)
 
-1. Password: same as intra42
-2. username: tsuchen
+1. PHP originally stands for Personal Home Page, then becomes Hypertext Preprocessor, is a widely-used open-source servier-side scripting language especially suited for web development. First created in 1994, PHPH has evolved into a powerful tool for creating dynamic and interactive websites. It is embedded within HTML code and executed on the server, generating HTML which is then sent to the client.
+2. Pros and Cons of PHP
+    1. Pros:
+    - Easy to learn and use, especially for beginners.
+    - Extensive database support and integration.
+    - Large community and vast resources.
+    - Great performance with opcode caching.
+    - Wide adoption and hosting support.
+    2. Cons:
+    - Historically criticized for security vulnerabilities if not properly managed.
+    - Mixed reputation for code quality and readability.
+    - Can be slower compared to some modern languages for certain tasks.
+3. Comparison to Similar Services
+
+| Feature/Service   | PHP                                                 | Python                                    | Ruby                                           | Node.js                              |
+|-------------------|-----------------------------------------------------|-------------------------------------------|------------------------------------------------|--------------------------------------|
+| License           | PHP License                                         | Python Software Foundation License        | MIT License                                    | MIT License                          |
+| Open Source       | Yes                                                 | Yes                                       | Yes                                            | Yes                                  |
+| Developer         | The PHP Group                                       | Python Software Foundation                | Yukihiro Matsumoto, community                  | Ryan Dahl, community                 |
+| Initial Release   | 1995                                                | 1991                                      | 1995                                           | 2009                                 |
+| Performance       | High with caching (e.g., OPCache)                   | Moderate to High                          | Moderate                                       | High                                 |
+| Ease of Use       | Easy                                                | Easy to Moderate                          | Easy to Moderate                               | Moderate                             |
+| Syntax            | C-like, embedded in HTML                            | Clear, readable                           | Elegant, concise                               | JavaScript-like                      |
+| Scalability       | Good                                                | Good                                      | Good                                           | Excellent                            |
+| Community Support | Very Strong                                         | Very Strong                               | Strong                                         | Strong                               |
+| Frameworks        | Laravel, Symfony, CodeIgniter                       | Django, Flask                             | Ruby on Rails, Sinatra                         | Express, Koa                         |
+| Use Cases         | Web development, dynamic web pages                  | Web development, data analysis, scripting | Web development, rapid prototyping             | Real-time applications, web services |
+| Concurrency       | Limited by default, improved with tools like Swoole | Limited, improved with asyncio            | Limited by default, improved with EventMachine | Excellent with non-blocking I/O      |
+| Hosting Support   | Widely supported                                    | Widely supported                          | Supported                                      | Supported                            |
+
+### WordPress (Content Management system CMS)
+
+- Password: same as intra42
+- username: tsuchen
+
+1. WordPress is a free and open-source content management system (CMS) that is the most popular platform for creating websites and blogs.
+2. Pros and Cons of WordPress
+    1. Pros:
+    - Highly customizable with themes and plugins.
+    - Large community and extensive support resources.
+    - SEO-friendly out of the box.
+    - User-friendly interface, ideal for non-developers.
+    - Regularly updated with new features and security patches.
+    2. Cons:
+    - Can be vulnerable to security issues if not properly managed.
+    - Performance can be affected by poorly coded plugins or themes.
+    - Can become complex and bloated with excessive plugins.
+    - Requires regular maintenance and updates.
+    - Limited scalability for extremely high-traffic websites without additional optimization.
+3. Comparison to Similar Services
+
+| Feature/Service   | WordPress                                     | Joomla                                        | Drupal                                   | Wix                                  | Squarespace                                  |
+|-------------------|-----------------------------------------------|-----------------------------------------------|------------------------------------------|--------------------------------------|----------------------------------------------|
+| License           | GPL                                           | GPL                                           | GPL                                      | Proprietary                          | Proprietary                                  |
+| Open Source       | Yes                                           | Yes                                           | Yes                                      | No                                   | No                                           |
+| Developer         | WordPress Foundation                          | Open Source Matters, Inc.                     | Drupal Association                       | Wix.com Ltd.                         | Squarespace, Inc.                            |
+| Initial Release   | 2003                                          | 2005                                          | 2001                                     | 2006                                 | 2004                                         |
+| Ease of Use       | Very Easy                                     | Moderate                                      | Difficult                                | Very Easy                            | Very Easy                                    |
+| Customizability   | High (Themes, Plugins)                        | High (Extensions, Modules)                    | Very High (Modules, Custom Code)         | Moderate (Templates, Apps)           | Moderate (Templates, Extensions)             |
+| Performance       | Moderate to High (with optimization)          | Moderate to High (with optimization)          | High (Optimized for large sites)         | Moderate                             | Moderate                                     |
+| Scalability       | Moderate                                      | Moderate to High                              | High                                     | Limited                              | Limited                                      |
+| Security          | Good (with regular updates and plugins)       | Good (with proper configuration)              | Excellent (with proper configuration)    | Good                                 | Good                                         |
+| Community Support | Very Strong                                   | Strong                                        | Strong                                   | Moderate                             | Moderate                                     |
+| SEO Features      | Excellent (Built-in and plugins)              | Good                                          | Good                                     | Good                                 | Good                                         |
+| Use Cases         | Blogs, business sites, e-commerce, portfolios | Business sites, e-commerce, social networking | Large, complex websites, community sites | Small business sites, personal blogs | Small business sites, portfolios, e-commerce |
+| Hosting Support   | Widely supported                              | Widely supported                              | Widely supported                         | Proprietary hosting                  | Proprietary hosting                          |
 
 ### Additional service: Curl
 
