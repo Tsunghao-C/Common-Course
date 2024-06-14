@@ -187,7 +187,22 @@ reference: https://webhostinggeeks.com/blog/what-is-lighttpd-web-server-and-how-
 
 ### MariaDB
 
-1. Password: WPpassword
+-  Password: WPpassword
+
+1. MariaDB is an open-source relational database management system (RDBMS) that is a fork of MySQL. After MySQL was acquired by Oracle, Maria
+|------------------------|------------------------------------------|-----------------------------------|---------------------------------------------|-------------------------------|
+| License                | GPL, LGPL, BSD                           | GPL                               | PostgreSQL License                          | Public Domain                 |
+| Open Source            | Yes                                      | Yes                               | Yes                                         | Yes                           |
+| Developer              | MariaDB Foundation                       | Oracle Corporation                | PostgreSQL Global Dev. Group                | D. Richard Hipp               |
+| Initial Release        | 2009                                     | 1995                              | 1996                                        | 2000                          |
+| Default Storage Engine | InnoDB (Aria, MyRocks optional)          | InnoDB (MyISAM optional)          | Multiple (e.g., MVCC)                       | Single file storage           |
+| SQL Compliance         | High (MySQL compatible)                  | High                              | Very High                                   | Moderate                      |
+| Performance            | High, with various optimization features | High                              | High, especially for complex queries        | High for local usage          |
+| Scalability            | High (Galera Cluster)                    | High                              | High (built-in replication, clustering)     | Limited to single application |
+| Security               | Advanced (encryption, plugins)           | Standard (encryption, plugins)    | Advanced (built-in security features)       | Basic                         |
+| Ease of Use            | Easy                                     | Easy                              | Moderate                                    | Very Easy                     |
+| Community Support      | Strong                                   | Strong                            | Strong                                      | Moderate                      |
+| Use Cases              | General-purpose, enterprise              | General-purpose, web applications | Advanced data applications, complex queries | Embedded systems, mobile apps |
 
 ### WordPress
 
