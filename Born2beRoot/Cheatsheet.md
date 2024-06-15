@@ -145,6 +145,8 @@ reference: https://www.youtube.com/watch?v=XtRXm4FFK7Q
 
 ## For peer review
 
+checklist: https://docs.google.com/document/d/1-BwCO0udUP7MhRh81Y681zz0BalXtKFtte_FHJc6G4s/edit
+
 ### How to change hostname
 
 1. sudo hostnamectl set-hostname (new_hostname)
