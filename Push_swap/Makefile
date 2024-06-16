@@ -6,7 +6,7 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/17 13:53:44 by tsuchen           #+#    #+#              #
-#    Updated: 2024/06/16 18:34:07 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/06/16 21:18:24 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,12 @@ NAME 		= push_swap
 SRCS 		= main.c \
 		  ft_err_utils.c \
 		  ft_lst_utils.c \
+		  ft_swap_commands.c \
+		  ft_push_commands.c \
+		  ft_rotate_commands.c \
+		  ft_rrotate_commands.c \
+		  ft_2nodes_sort.c \
+		  ft_3nodes_sort.c \
 
 SRCSB		=
 
