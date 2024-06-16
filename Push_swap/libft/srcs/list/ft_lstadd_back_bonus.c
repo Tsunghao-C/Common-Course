@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:39:29 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/24 11:47:50 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/16 16:27:55 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*tmp;
 
+	if (!new)
+		return ;
 	if (!(*lst))
 	{
 		*lst = new;
@@ -24,6 +26,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	tmp = *lst;
 	while (tmp->next)
 		tmp = tmp->next;
+	new->prev = tmp;
 	tmp->next = new;
 }
 /* Note

@@ -6,15 +6,15 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/17 13:53:44 by tsuchen           #+#    #+#              #
-#    Updated: 2024/06/15 17:04:20 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/06/16 18:34:07 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME 		= push_swap.a
+NAME 		= push_swap
 
 SRCS 		= main.c \
-		  ft_arg_check.c \
-
+		  ft_err_utils.c \
+		  ft_lst_utils.c \
 
 SRCSB		=
 
@@ -36,7 +36,6 @@ AWK		= awk
 LIBFT_PATH	= libft/
 LIBFT_H_PATH	= libft/includes/
 LIBFT		= $(LIBFT_PATH)libft.a
-LIBFT_OBJS	= $(shell $(AR) t $(LIBFT) | $(AWK) '$$0 != "__.SYMDEF SORTED"')  
 
 all: $(NAME)
 
@@ -44,8 +43,7 @@ libft:
 	$(MAKE) -C $(LIBFT_PATH)
 
 $(NAME): libft $(OBJS)
-	$(ARC) $(NAME) $(OBJS)
-	$(ARC) $(NAME) $(addprefix $(LIBFT_PATH), $(LIBFT_OBJS))
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
 bonus: $(NAME)
 
