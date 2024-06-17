@@ -6,7 +6,7 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/17 13:53:44 by tsuchen           #+#    #+#              #
-#    Updated: 2024/06/16 21:18:24 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/06/17 12:17:53 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,7 @@ SRCS 		= main.c \
 		  ft_push_commands.c \
 		  ft_rotate_commands.c \
 		  ft_rrotate_commands.c \
-		  ft_2nodes_sort.c \
-		  ft_3nodes_sort.c \
+		  ft_small_sort.c \
 
 SRCSB		=
 

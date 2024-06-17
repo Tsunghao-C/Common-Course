@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 16:23:11 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/16 21:18:07 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/17 12:17:26 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int ac, char *av[])
 		ft_2nodes_sort(&stk_a);
 	else if (nodes == 3)
 		ft_3nodes_sort(&stk_a, &stk_b);
-	else if (nodes <= 100)
+	else 
 		ft_sort_list(&stk_a, &stk_b);
 	free_all(stack_a);
 	return (0);

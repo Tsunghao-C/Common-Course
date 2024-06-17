@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 16:15:59 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/16 21:08:57 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/17 12:17:35 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	ft_rra(t_list **stk_a);
 void	ft_rrb(t_list **stk_b);
 void	ft_rrr(t_list **stk_a, t_list **stk_b);
 /* Sorting Methods */
+int	ft_cmp(t_list *lst);
 void	ft_2nodes_sort(t_list **stk_a);
-void	ft_3nodes_sort(t_list **stk_a, t_list **stk_b);
+void	ft_3nodes_sort(t_list **stk_a);
 
 #endif
