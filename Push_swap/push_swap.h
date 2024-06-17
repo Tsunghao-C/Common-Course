@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 16:15:59 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/17 12:17:35 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/17 19:15:32 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@
 void	ft_arg_check(char **av);
 void	ft_del(void *content);
 void	ft_init_stk(t_list **stk_a, char **av, void (*del)(void *));
+void	ft_print_all(t_list *lst);
 /* Operations */
 void	ft_sa(t_list **stk_a);
 void	ft_sb(t_list **stk_b);
-void	ft_ss(t_list **stk_a, **stk_b);
+void	ft_ss(t_list **stk_a, t_list **stk_b);
 void	ft_pa(t_list **stk_b, t_list **stk_a);
 void	ft_pb(t_list **stk_a, t_list **stk_b);
 void	ft_ra(t_list **stk_a);
@@ -39,7 +40,15 @@ void	ft_rrb(t_list **stk_b);
 void	ft_rrr(t_list **stk_a, t_list **stk_b);
 /* Sorting Methods */
 int	ft_cmp(t_list *lst);
-void	ft_2nodes_sort(t_list **stk_a);
 void	ft_3nodes_sort(t_list **stk_a);
+void	ft_tiny_sort(t_list **stk_a, t_list **stk_b, int nodes);
+void	ft_sort_list(t_list **stk_a, t_list **stk_b);
+/* sort utils */
+int	ft_peek(t_list *lst);
+int	ft_max(t_list *lst);
+int	ft_min(t_list *lst);
+int	ft_is_rotate(t_list *lst);
+void	ft_push_check(t_list **from, t_list **to);
+void	ft_sort_stk_a(t_list **stk_a);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 20:20:59 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/16 20:37:57 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/17 14:29:21 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	ft_rrotate(t_list **lst)
 	tmp = ft_lstlast(*lst);
 	if (!(tmp->prev))
 		return ;
-	tmp->prev->next = NULL;
+	(tmp->prev)->next = NULL;
 	tmp->prev = NULL;
 	ft_lstadd_front(lst, tmp);
 }

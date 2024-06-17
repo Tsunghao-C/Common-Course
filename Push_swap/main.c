@@ -6,11 +6,36 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 16:23:11 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/17 12:17:26 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/17 19:15:24 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static void	ft_free_all(char **av, int nodes)
+{
+	int	i;
+
+	i = 0;
+	while (i < nodes)
+		free(av[i++]);
+	free(av);
+}
+
+static int	ft_is_sorted(t_list *lst)
+{
+	int	ref;
+
+	ref = ft_peek(lst);
+	while (lst->next)
+	{
+		if (ft_peek(lst->next) < ref)
+			return (0);
+		ref = ft_peek(lst->next);
+		lst = lst->next;
+	}
+	return (1);
+}
 
 int	main(int ac, char *av[])
 {
@@ -27,12 +52,15 @@ int	main(int ac, char *av[])
 	ft_arg_check(av);
 	ft_init_stk(&stk_a, av, &ft_del);
 	nodes = ft_lstsize(stk_a);
-	if (nodes == 2)
-		ft_2nodes_sort(&stk_a);
-	else if (nodes == 3)
-		ft_3nodes_sort(&stk_a, &stk_b);
-	else 
-		ft_sort_list(&stk_a, &stk_b);
-	free_all(stack_a);
+	if (!ft_is_sorted(stk_a))
+	{
+		if (nodes <= 5)
+			ft_tiny_sort(&stk_a, &stk_b, nodes);
+		else
+			ft_sort_list(&stk_a, &stk_b);
+	}
+	ft_lstclear(&stk_a, &ft_del);
+	if (ac == 2)
+		ft_free_all(av, nodes);
 	return (0);
 }

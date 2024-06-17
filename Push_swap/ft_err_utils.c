@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 16:30:51 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/16 18:13:53 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/17 13:27:24 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	ft_value_check(char **av)
 	{
 		nbr = ft_atoi(av[i]);
 		tmp = ft_itoa(nbr);
-		if ((!nbr && ft_strcmp(av[i], "0") || ft_strcmp(tmp, av[i])))
+		if ((!nbr && ft_strcmp(av[i], "0")) || ft_strcmp(tmp, av[i]))
 		{
 			free(tmp);
 			return (-1);

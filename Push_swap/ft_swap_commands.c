@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 18:43:28 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/16 19:11:15 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/17 14:41:55 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static void	ft_swap(t_list **lst)
 	*lst = (*lst)->next;
 	tmp->next = (*lst)->next;
 	tmp->prev = (*lst);
+	if ((*lst)->next)
+		(*lst)->next->prev = tmp;
 	(*lst)->next = tmp;
 	(*lst)->prev = NULL;
 }
