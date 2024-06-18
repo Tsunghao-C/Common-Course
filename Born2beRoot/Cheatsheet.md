@@ -319,5 +319,26 @@ reference: https://webhostinggeeks.com/blog/what-is-lighttpd-web-server-and-how-
 
 ### Additional service: telnet
 
-2. Examples:
+1. Examples:
 	- map: telnet mapascii.me (you can zoom in and out!!!)
+
+## Final thougt about this project and bonus
+
+When I was doing the project, I had a question of why the bonus was about creating a personal webpage WordPress? Then I realized that the website is basically how two computers communicate via the port of 80 (or http)! Building a website is to create a interface for other people to visite your computer in a user friendly and structured presentation!
+
+Therefore, to conclude the objectives of this project (which are quite a lot..)
+
+1. Learn what is Virtual Machine? How does it work? Why and when we use it?
+2. Understand the necessary steps to set up a machine
+    1. Disk partition
+    2. file system
+    3. choice of OS
+3. System security
+    1. what is SELinux and AppArmor
+    2. what is SSH and how does it work?
+    3. what is UFW (Firewall) and how does it work?
+4. Admin and account management
+    1. what is Super user?
+    2. how to setup a "SAFE" password policty
+5. How to use do scheduled jobs with "cron"
+6. [Bonus] How to create a website on your machine and setup availabe ports to allow visitors to visit.
