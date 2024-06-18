@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:56:48 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/18 23:51:14 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/19 00:36:58 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,9 +120,9 @@ void	ft_push_checka2b(t_list **from, t_list **to)
 	while (ft_peek(*to) != target)
 	{
 		if (ft_is_rotate(*to, target))
-			ft_ra(to);
+			ft_rb(to);
 		else
-			ft_rra(to);
+			ft_rrb(to);
 	}
 }
 
