@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:35:48 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/17 18:32:19 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/18 18:34:39 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_print_all(t_list *lst)
 	tmp = lst;
 	while (tmp)
 	{
-		ft_printf("lst :%p | val :%d | prev :%p | next :%p\n", tmp, ft_peek(tmp), tmp->prev, tmp->next);
+		ft_printf("lst :%p | val :%d | prev :%14p | next :%14p\n", tmp, ft_peek(tmp), tmp->prev, tmp->next);
 		tmp = tmp->next;	
 	}
 }

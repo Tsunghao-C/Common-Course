@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 16:23:11 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/17 19:15:24 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/18 23:55:26 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,17 @@ int	main(int ac, char *av[])
 	ft_arg_check(av);
 	ft_init_stk(&stk_a, av, &ft_del);
 	nodes = ft_lstsize(stk_a);
+	//ft_printf("before sort:\n");
+	//ft_print_all(stk_a);
 	if (!ft_is_sorted(stk_a))
 	{
 		if (nodes <= 5)
 			ft_tiny_sort(&stk_a, &stk_b, nodes);
 		else
-			ft_sort_list(&stk_a, &stk_b);
+			ft_sort_list(&stk_a, &stk_b, nodes);
 	}
+	//ft_printf("after sort:\n");
+	//ft_print_all(stk_a);
 	ft_lstclear(&stk_a, &ft_del);
 	if (ac == 2)
 		ft_free_all(av, nodes);

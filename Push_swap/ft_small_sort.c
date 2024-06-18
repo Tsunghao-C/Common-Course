@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 21:03:15 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/17 18:45:50 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/18 23:51:24 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,29 +26,22 @@ int	ft_cmp(t_list *lst)
 
 void	ft_3nodes_sort(t_list **stk_a)
 {
-	t_list	*tmp;
+	int	max;
 
-	tmp = *stk_a;
-	while (tmp)
-	{
-		if (!(tmp->prev) && ft_cmp(tmp) > 0)
-		{
-			ft_sa(stk_a);
-			tmp = *stk_a;
-		}
-		else if (ft_cmp(tmp) > 0)
-		{
-			ft_rra(stk_a);
-			tmp = *stk_a;
-		}
-		else
-			tmp = tmp->next;
-	}
+	max = ft_max(*stk_a);
+	if (ft_peek(*stk_a) == max)
+		ft_ra(stk_a);
+	else if (ft_peek((*stk_a)->next) == max)
+		ft_rra(stk_a);
+	if (ft_cmp(*stk_a) > 0)
+		ft_sa(stk_a);
 }
 
 void	ft_tiny_sort(t_list **stk_a, t_list **stk_b, int nodes)
 {
-	if (nodes <= 3)
+	if (nodes == 2)
+		ft_sa(stk_a);
+	else if (nodes == 3)
 		ft_3nodes_sort(stk_a);
 	else
 	{
@@ -57,7 +50,7 @@ void	ft_tiny_sort(t_list **stk_a, t_list **stk_b, int nodes)
 		ft_3nodes_sort(stk_a);
 		while (*stk_b)
 		{
-			ft_push_check(stk_b, stk_a);
+			ft_push_checkb2a(stk_b, stk_a);
 			ft_pa(stk_b, stk_a);
 		}
 		ft_sort_stk_a(stk_a);

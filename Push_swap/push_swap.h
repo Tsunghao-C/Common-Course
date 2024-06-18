@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 16:15:59 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/17 19:15:32 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/18 23:50:56 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,16 @@ void	ft_rrr(t_list **stk_a, t_list **stk_b);
 int	ft_cmp(t_list *lst);
 void	ft_3nodes_sort(t_list **stk_a);
 void	ft_tiny_sort(t_list **stk_a, t_list **stk_b, int nodes);
-void	ft_sort_list(t_list **stk_a, t_list **stk_b);
+void	ft_sort_list(t_list **stk_a, t_list **stk_b, int size);
 /* sort utils */
 int	ft_peek(t_list *lst);
 int	ft_max(t_list *lst);
 int	ft_min(t_list *lst);
-int	ft_is_rotate(t_list *lst);
-void	ft_push_check(t_list **from, t_list **to);
+int	ft_target_ba(t_list *lst, int ref);
+int	ft_target_ab(t_list *lst, int ref);
+int	ft_is_rotate(t_list *lst, int target);
+void	ft_push_checkb2a(t_list **from, t_list **to);
+void	ft_push_checka2b(t_list **from, t_list **to);
 void	ft_sort_stk_a(t_list **stk_a);
 
 #endif
