@@ -6,7 +6,7 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/17 13:53:44 by tsuchen           #+#    #+#              #
-#    Updated: 2024/06/17 19:15:28 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/06/19 18:54:34 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,9 @@ SRCS 		= main.c \
 		  ft_small_sort.c \
 		  ft_sort_list.c \
 		  ft_sort_utils.c \
+		  ft_sort_utils1.c \
+		  ft_sort_utils2.c \
+		  ft_cheap_utils.c \
 
 SRCSB		=
 

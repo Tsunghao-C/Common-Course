@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 20:09:37 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/19 12:44:44 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/19 18:22:43 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,18 @@ void	ft_rr(t_list **stk_a, t_list **stk_b, int rep)
 	ft_rotate(stk_b);
 	write(STDOUT_FILENO, "rr\n", 3);
 	ft_rr(stk_a, stk_b, rep - 1);
+}
+
+void	ft_combo_rr_rx(t_list **from, t_list **to, int rep_1, int rep_2)
+{
+	if (rep_1 > rep_2)
+	{
+		ft_rr(from, to, rep_2);
+		ft_ra(from, rep_1 - rep_2);
+	}
+	else
+	{
+		ft_rr(from, to, rep_1);
+		ft_rb(to, rep_2 - rep_1);
+	}
 }

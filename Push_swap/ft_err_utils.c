@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 16:30:51 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/17 13:27:24 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/19 18:20:16 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int	ft_value_check(char **av)
 {
-	int	i;
-	int	nbr;
+	int		i;
+	int		nbr;
 	char	*tmp;
 
 	i = 0;
@@ -34,7 +34,6 @@ static int	ft_value_check(char **av)
 		i++;
 	}
 	return (i);
-	
 }
 
 static int	ft_dupli_check(char **av)

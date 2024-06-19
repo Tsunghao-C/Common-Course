@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:35:48 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/18 18:34:39 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/19 18:22:31 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_init_stk(t_list **stk_a, char **av, void (*del)(void *))
 {
 	t_list	*tmp_list;
 	char	*tmp_str;
-	int	i;
+	int		i;
 
 	i = 0;
 	if (ft_strcmp(av[i], P_NAME) == 0)
@@ -49,7 +49,8 @@ void	ft_print_all(t_list *lst)
 	tmp = lst;
 	while (tmp)
 	{
-		ft_printf("lst :%p | val :%d | prev :%14p | next :%14p\n", tmp, ft_peek(tmp), tmp->prev, tmp->next);
-		tmp = tmp->next;	
+		ft_printf("lst :%p | val :%d | prev :%14p | next :%14p\n", tmp,
+			ft_peek(tmp), tmp->prev, tmp->next);
+		tmp = tmp->next;
 	}
 }
