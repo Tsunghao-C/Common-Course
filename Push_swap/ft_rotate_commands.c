@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 20:09:37 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/17 19:05:28 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/19 12:44:44 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,29 +24,30 @@ static void	ft_rotate(t_list **lst)
 	ft_lstadd_back(lst, tmp);
 }
 
-void	ft_ra(t_list **stk_a)
+void	ft_ra(t_list **stk_a, int rep)
 {
-	if (!(*stk_a))
+	if (!(*stk_a) || !rep)
 		return ;
 	ft_rotate(stk_a);
 	write(STDOUT_FILENO, "ra\n", 3);
+	ft_ra(stk_a, rep - 1);
 }
 
-void	ft_rb(t_list **stk_b)
+void	ft_rb(t_list **stk_b, int rep)
 {
-	if (!(*stk_b))
+	if (!(*stk_b) || !rep)
 		return ;
 	ft_rotate(stk_b);
 	write(STDOUT_FILENO, "rb\n", 3);
+	ft_rb(stk_b, rep - 1);
 }
 
-void	ft_rr(t_list **stk_a, t_list **stk_b)
+void	ft_rr(t_list **stk_a, t_list **stk_b, int rep)
 {
-	if (!(*stk_a))
-		return ;
-	if (!(*stk_b))
+	if (!(*stk_a) || !(*stk_b) || !rep)
 		return ;
 	ft_rotate(stk_a);
 	ft_rotate(stk_b);
 	write(STDOUT_FILENO, "rr\n", 3);
+	ft_rr(stk_a, stk_b, rep - 1);
 }

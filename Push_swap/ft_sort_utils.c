@@ -6,11 +6,25 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:56:48 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/19 00:36:58 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/19 13:06:11 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	ft_bigger(int a, int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
+
+int	ft_smaller(int a, int b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}
 
 int	ft_max(t_list *lst)
 {
@@ -38,6 +52,19 @@ int	ft_min(t_list *lst)
 		lst = lst->next;
 	}
 	return (min);
+}
+
+int	ft_get_loc(t_list *lst, int target)
+{
+	int	tar_loc;
+
+	tar_loc = 0;
+	while (lst && ft_peek(lst) != target)
+	{
+		tar_loc++;
+		lst = lst->next;
+	}
+	return (tar_loc);
 }
 
 int	ft_target_ba(t_list *lst, int ref)
