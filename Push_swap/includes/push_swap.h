@@ -6,15 +6,15 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 16:15:59 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/19 19:00:24 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/19 19:28:29 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "libft/includes/libft.h"
-# include "libft/includes/ft_printf.h"
+# include "../libft/includes/libft.h"
+# include "../libft/includes/ft_printf.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <errno.h>
