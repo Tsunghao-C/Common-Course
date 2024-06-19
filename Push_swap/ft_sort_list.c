@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 13:18:35 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/18 23:52:21 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/19 10:31:28 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ void	ft_sort_list(t_list **stk_a, t_list **stk_b, int size)
 	int	cnt;
 
 	cnt = 0;
-	while (cnt++ < 2)
+	while (cnt < 2)
+	{
 		ft_pb(stk_a, stk_b);
+		cnt++;
+	}
 	while (size - cnt++ > 3)
 	{
 		ft_push_checka2b(stk_a, stk_b);
