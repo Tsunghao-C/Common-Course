@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 16:15:59 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/19 19:28:29 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/19 19:38:29 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdint.h>
 # define P_NAME "./push_swap"
 
+/* Error Check and init Stack */
 void	ft_arg_check(char **av);
 void	ft_del(void *content);
 void	ft_init_stk(t_list **stk_a, char **av, void (*del)(void *));
