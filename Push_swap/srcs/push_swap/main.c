@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 16:23:11 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/19 18:13:07 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/20 09:36:33 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	main(int ac, char *av[])
 			ft_sort_list(&stk_a, &stk_b, nodes);
 	}
 	ft_lstclear(&stk_a, &ft_del);
+	ft_lstclear(&stk_b, &ft_del);
 	if (ac == 2)
 		ft_free_all(av, nodes);
 	return (0);
