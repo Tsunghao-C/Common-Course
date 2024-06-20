@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 19:34:33 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/20 01:43:48 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/20 14:31:14 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@
 # include <errno.h>
 # include <limits.h>
 # include <stdint.h>
-# define P_NAME "./checker"
 
 /* Error Check and init Stack */
+void	ft_free_all(char **av);
 int		ft_peek(t_list *lst);
-void	ft_arg_check(char **av);
+void	ft_arg_check(int ac, char **av);
 void	ft_del(void *content);
-void	ft_init_stk(t_list **stk_a, char **av, void (*del)(void *));
+void	ft_init_stk(t_list **stk_a, int ac, char **av, void (*del)(void *));
 /* Operations */
 void	ft_sa(t_list **stk_a, t_list **stk_b);
 void	ft_sb(t_list **stk_a, t_list **stk_b);

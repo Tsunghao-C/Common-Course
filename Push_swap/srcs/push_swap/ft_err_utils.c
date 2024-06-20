@@ -6,20 +6,20 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 16:30:51 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/19 18:20:16 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/20 14:37:01 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	ft_value_check(char **av)
+static int	ft_value_check(int ac, char **av)
 {
 	int		i;
 	int		nbr;
 	char	*tmp;
 
 	i = 0;
-	if (ft_strcmp(av[i], P_NAME) == 0)
+	if (ac != 2)
 		i++;
 	while (av[i])
 	{
@@ -36,13 +36,13 @@ static int	ft_value_check(char **av)
 	return (i);
 }
 
-static int	ft_dupli_check(char **av)
+static int	ft_dupli_check(int ac, char **av)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	if (ft_strcmp(av[i], P_NAME) == 0)
+	if (ac != 2)
 		i++;
 	while (av[i])
 	{
@@ -57,11 +57,13 @@ static int	ft_dupli_check(char **av)
 	return (i);
 }
 
-void	ft_arg_check(char **av)
+void	ft_arg_check(int ac, char **av)
 {
-	if (ft_value_check(av) < 0 || ft_dupli_check(av) < 0)
+	if (ft_value_check(ac, av) < 0 || ft_dupli_check(ac, av) < 0)
 	{
 		write(STDERR_FILENO, "Error\n", 6);
+		if (ac == 2)
+			ft_free_all(av);
 		exit(0);
 	}
 }

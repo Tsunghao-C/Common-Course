@@ -6,18 +6,18 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 19:39:02 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/20 09:31:14 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/20 14:35:40 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-static void	ft_free_all(char **av, int nodes)
+void	ft_free_all(char **av)
 {
 	int	i;
 
 	i = 0;
-	while (i < nodes)
+	while (av[i])
 		free(av[i++]);
 	free(av);
 }
@@ -37,31 +37,43 @@ static int	ft_is_sorted(t_list *lst)
 	return (1);
 }
 
+static void	ft_clear_list(t_list **a, t_list **b)
+{
+	ft_lstclear(a, &ft_del);
+	ft_lstclear(b, &ft_del);
+}
+
+static void	ft_init(t_list **a, t_list **b)
+{
+	*a = NULL;
+	*b = NULL;
+}
+
 int	main(int ac, char *av[])
 {
 	t_list	*stk_a;
 	t_list	*stk_b;
-	int		nodes;
 
-	stk_a = NULL;
-	stk_b = NULL;
-	if (ac <= 1 || (ac == 2 && !av[1][0]))
+	ft_init(&stk_a, &stk_b);
+	if (ac < 2 || (ac == 2 && !av[1][0]))
+	{
+		if (ac == 2)
+			write(STDERR_FILENO, "Error\n", 6);
 		return (0);
+	}
 	else if (ac == 2)
 		av = ft_split(av[1], ' ');
-	ft_arg_check(av);
-	ft_init_stk(&stk_a, av, &ft_del);
-	nodes = ft_lstsize(stk_a);
+	ft_arg_check(ac, av);
+	ft_init_stk(&stk_a, ac, av, &ft_del);
 	if (ft_read_n_sort(&stk_a, &stk_b))
 	{
-		if (ft_is_sorted(stk_a) && ft_lstsize(stk_a) == nodes)
+		if (ft_is_sorted(stk_a) && !stk_b)
 			write(STDOUT_FILENO, "OK\n", 3);
 		else
 			write(STDOUT_FILENO, "KO\n", 3);
 	}
-	ft_lstclear(&stk_a, &ft_del);
-	ft_lstclear(&stk_b, &ft_del);
+	ft_clear_list(&stk_a, &stk_b);
 	if (ac == 2)
-		ft_free_all(av, nodes);
+		ft_free_all(av);
 	return (0);
 }

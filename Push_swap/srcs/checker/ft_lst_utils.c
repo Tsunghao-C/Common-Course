@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:35:48 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/20 01:46:00 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/20 11:31:03 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ void	ft_del(void *content)
 	free(content);
 }
 
-void	ft_init_stk(t_list **stk_a, char **av, void (*del)(void *))
+void	ft_init_stk(t_list **stk_a, int ac, char **av, void (*del)(void *))
 {
 	t_list	*tmp_list;
 	char	*tmp_str;
 	int		i;
 
 	i = 0;
-	if (ft_strcmp(av[i], P_NAME) == 0)
+	if (ac != 2)
 		i++;
 	while (av[i])
 	{
