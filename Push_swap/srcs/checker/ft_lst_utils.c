@@ -6,11 +6,16 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:35:48 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/19 18:22:31 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/20 01:46:00 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
+
+int	ft_peek(t_list *lst)
+{
+	return (ft_atoi((char *)(lst->content)));
+}
 
 void	ft_del(void *content)
 {
@@ -40,17 +45,4 @@ void	ft_init_stk(t_list **stk_a, char **av, void (*del)(void *))
 		i++;
 	}
 	return ;
-}
-
-void	ft_print_all(t_list *lst)
-{
-	t_list	*tmp;
-
-	tmp = lst;
-	while (tmp)
-	{
-		ft_printf("lst :%p | val :%d | prev :%14p | next :%14p\n", tmp,
-			ft_peek(tmp), tmp->prev, tmp->next);
-		tmp = tmp->next;
-	}
 }

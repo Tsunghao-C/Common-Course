@@ -6,11 +6,11 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 16:30:51 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/19 18:20:16 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/20 00:16:03 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
 static int	ft_value_check(char **av)
 {

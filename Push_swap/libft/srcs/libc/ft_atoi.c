@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 10:13:22 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/16 12:29:30 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/20 01:58:21 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,3 @@ int	ft_atoi(const char *nptr)
 	}
 	return ((num * sign));
 }
-/*
-#include <stdio.h>
-#include <stdlib.h>
-
-char	*ft_itoa(int nb);
-
-int	main(int ac, char *av[])
-{
-	if (ac != 2)
-		return (0);
-	printf("ft_atoi is: %d | itoa: %s\n", ft_atoi(av[1]), ft_itoa(ft_atoi(av[1])));
-	printf("atoi is   : %d | itoa: %s\n", atoi(av[1]), ft_itoa(atoi(av[1])));
-	return (0);
-}*/

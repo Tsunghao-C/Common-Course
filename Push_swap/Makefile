@@ -6,7 +6,7 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/17 13:53:44 by tsuchen           #+#    #+#              #
-#    Updated: 2024/06/19 19:54:50 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/06/20 01:25:46 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,9 @@ SRCS_PS		= ft_err_utils.c ft_lst_utils.c ft_swap_commands.c \
 		  ft_sort_utils1.c ft_sort_utils2.c ft_cheap_utils.c \
 		  main.c
 
-SRCS_CHECKER	= ft_err_utils.c ft_lst_utils.c main.c 
+SRCS_CHECKER	= ft_err_utils.c ft_lst_utils.c ft_swap_commands.c \
+		  ft_push_commands.c ft_rotate_commands.c ft_rrotate_commands.c \
+		  ft_read_n_sort.c main.c
 
 PS_PATH		= srcs/push_swap/
 CHECKER_PATH	= srcs/checker/
