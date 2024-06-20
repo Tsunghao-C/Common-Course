@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 19:39:02 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/20 01:41:21 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/20 09:31:14 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	main(int ac, char *av[])
 			write(STDOUT_FILENO, "KO\n", 3);
 	}
 	ft_lstclear(&stk_a, &ft_del);
+	ft_lstclear(&stk_b, &ft_del);
 	if (ac == 2)
 		ft_free_all(av, nodes);
 	return (0);
