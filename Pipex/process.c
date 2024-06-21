@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 09:02:01 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/21 13:04:06 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/21 17:38:59 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,95 @@
 #include <sys/wait.h>
 #include <errno.h>
 
-/* 3. demo of using pipe */
-int	main(int ac, char *av[])
+/* 4. demo of using a pipe part 2: parallel computing */
+/*int	main(int ac, char *av[])
+{
+	int	arr[] = { 7, 6, 9, 1, 2, 4, 5, 3, 1, 4 };
+	int	arr_size;
+	int	id;
+	int	id2;
+	int	fd[2];
+	int	start;
+	int	end;
+	int	sum;
+
+	arr_size = sizeof(arr) / sizeof(int);
+	if (pipe(fd) == -1)
+		return (1);
+	id = fork();
+	if (id == -1)
+		return (2);
+	// define job scope for each process
+	if (id == 0)
+	{
+		id2 = fork();
+		if (id2 == 0)
+		{
+			start = 0;
+			end = arr_size / 3;
+		}
+		else
+		{
+			start = arr_size / 3;
+			end = 2 * (arr_size / 3);
+		}
+
+	}
+	else
+	{
+		start = 2 * (arr_size / 3);
+		end = arr_size;
+	}
+	// do the job in each process
+	sum = 0;
+	while (start < end)
+		sum += arr[start++];
+	// deliver result through pipe
+	if (id == 0)
+	{
+		if (id2 == 0)
+		{
+			close(fd[0]);
+			if (write(fd[1], &sum, sizeof(int)) == -1)
+				return (3);
+			printf("sum from child_2 is %d\n", sum);
+			close(fd[1]);
+		}
+		else
+		{
+			printf("sum from child_1 is %d\n", sum);
+			wait(NULL);
+			if (read(fd[0], &start, sizeof(int)) == -1)
+				return (4);
+			sum += start;
+			close(fd[0]);
+			if (write(fd[1], &sum, sizeof(int)) == -1)
+				return (5);
+			close(fd[1]);
+		}
+	}
+	else
+	{
+		close(fd[1]);
+		printf("sum from parent is %d\n", sum);
+		wait(NULL);
+		if (read(fd[0], &start, sizeof(int)) == -1)
+			return (6);
+		sum += start;
+		printf("total sum is %d\n", sum);
+		close(fd[0]);
+	}
+	return (0);
+}
+// This exercise is trying to delagate a task into three parallel processes.
+// One tricky part is where to put the wait function matters!
+// Even the delegation is 3, the fd array for pipe is still 2:
+// 	fd[0] for reading
+// 	fd[1] for writing
+*/
+
+/* 3. demo of using a pipe */
+/*int	main(int ac, char *av[])
 {
 	int	fd[2];
 	int	id;
@@ -63,6 +150,9 @@ int	main(int ac, char *av[])
 	}
 	return (0);
 }
+// You can use pipe to create a channel that allow processes to communicate to 
+// each other.
+*/
 
 /* 2. demo for multiple forks */
 /*int	main(int ac, char *av[])
