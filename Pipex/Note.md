@@ -7,16 +7,33 @@
 
 ## Key Concepts
 
-1. How does process work?
-2. Why do we use pipe anyway?
+1. What is Pipeline (Unix)? How does it work?
+2. Why do we use pipeline?
 
-### Pipe
+
+## Pipeline "|"
+
+1. Unix pipeline is an inter-process communication machanism. It creates an anonymous "channel" as a buffer to store what is gnerated (WRITE) from the output of previous process, and will be sent (READ) by the next process as input.
+2. Pipeline "|" is an anonymous channel and will automatically be gone once it is both written and read. In contrary, there is the "named pipe" that is called "FIFO". It is works the same as pipe and it is existed permanently as FIFO files. Unlike normal files, the FIFO files will be suspended untill it is both READ and WRITTEN.
+
+### Two way communication between processes (IMPORTANT)
+
+1. Imagine that two processes A and B are communicating back and forth using only one pipeline. What could go wrong?
+    - Chances are, if A put something in the pipe and it should be processed by B. But today B is super busy and cannot process the data in the pipe.
+    - Then, after a while, A thinks it should be processed by B already, and take the retrieve the data from the pipe and continue with his process.
+2. The solution to avoid the above issue from happening is to CREATE TWO PIPES
+    - pipe_1: A -> B
+    - pipe_2: B -> A
+    - A always receives input from pipe_2, and output his effort on pipe_1.
+    - By creating two sigle directional pipe, we can make sure there is no jump between two processes.
+
+### Use function "pipe" to do parallel computing
 
 1. The benefit of using pipe is to create paralelle tasks that could increase the speed for processing.
 2. Imaging you are using array to do a sum of 1,000,000 numbers. Instead of use one process and go through 1 million times, you can create two forks and have 4 processes doing 1/4 of the array at the same time!
 3. To do so, you will utilize:
     1. "FORK" to create duplicate processes to do parallel jobs
-    2. "PIPE" to create a channel of file descriptors (fd) allowing different branch to communicate to each other through fds.
+    2. "PIPE" to create a "PASSBOX" of two doors (file descriptor), allowing different branch to communicate to each other through this channel. One door is for READ and the other is for WRITE.
     3. ""OPEN" "READ" "WRITE" "CLOSE" to manipulate on fds.
     4. "WAIT" to manage parallel processes
     5. "STRERROR" "PERROR" "ERRNO" to manage error situation.
@@ -28,7 +45,7 @@
 3. Suppose 
     ```int f_id = fork()```
     - ```f_id == 0``` if it is in child branch
-    - ```f_id == "pid_fork"``` if it is in original branch. It will be a number representing the process genrated by calling fork function.
+    - ```f_id == "pid_fork"``` if it is in original branch. It will be a number representing the process genrated by fork function.
 4. You can us the ```f_id``` to identify yourself whether you are in child branch or in the parent branch.
 
 Example:
