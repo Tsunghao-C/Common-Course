@@ -33,7 +33,7 @@
 
 Example:
 ```
-int main(int ac, char \*av[])
+int main(int ac, char *av[])
 {
     int f_id; //f_id stands for fork id
 
@@ -43,7 +43,8 @@ int main(int ac, char \*av[])
     printf("Current id=%d, pid=%d, parent pid=%d\n",
         f_id, getpid(), getppid());
     return (0);
-}```
+}
+```
 
 In this example, I use f_id to check which process I am doing, and I use "sleep" function to make main branch delay by 2 seconds. Without sleep, the child branch and main branch will process in parallel.
 
@@ -57,7 +58,7 @@ In this example, I use f_id to check which process I am doing, and I use "sleep"
 
 Example
 ```
-int main(int ac, char \*av[])
+int main(int ac, char *av[])
 {
     int f_id; //f_id stands for fork id
 
@@ -66,7 +67,8 @@ int main(int ac, char \*av[])
         f_id, getpid(), getppid());
     printf("process:%d wait for process:%d\n", getpid(), wait(NULL));
     return (0);
-}```
+}
+```
 
 In this example, you can see who is waiting for who.
 
