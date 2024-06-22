@@ -67,11 +67,34 @@ In this example, I use f_id to check which process I am doing, and I use "sleep"
 
 5. In order to avoid unpredictable behavior of excecuting child and main branch at the same time, we can use "wait" function to make on of them wait for the other(s).
 
+### dup dup2
+
+1. dup is to create a new duplicate file descriptor and the return is a new int of fd.
+2. dup2 takes two arguments, the first one is the fd you want to duplicate, and the second one is the fd number you want to assign to.
+    - If the fd already exists, it dup2 will close the original one and then assgin.
+    - It is useful to replace STDOUT to a specific fd you want. By doing so, you can still use functions like printf that by default is printed to STDOUT.
+    Example
+    ```
+    int main(int ac, char *av[])
+    {
+        int fd = open("A_FILE.txt", O_WRONLY | O_CREAT, 0777);
+        if (fd == -1)
+            return (1);
+        printf("The fd to A_FILE is %d", fd); //This shall be printed on terminal.
+        dup2(fd, STDOUT_FILENO);
+        close(fd);
+        printf(The fd to A_FILE is now %d", fd); //This shall be written to A_FILE.txt
+        return (0);
+    }
+    ```
+
 ### wait waitpid
 
 1. The function "wait" will keep the parent process alive until its child process dies.
 2. If we don't use wait and the parent process dies first, the system will arrange a new parent process to the child branch. (Always need a parent!)
 3. The return value of wait is a pid_t indicating the child process it is waiting. If there is no child process to wait, return value will be "-1".
+4. The argument of wait function is a pointer that you can save the return value of the child process. If not used, just put wait(NULL) instead.
+5. waitpid is similar to wait but need to indicate the process id that you want to wait in the argument. It is useful when you are creating multiple forks in the main.
 
 Example
 ```

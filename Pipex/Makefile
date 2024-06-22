@@ -6,18 +6,14 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/17 13:53:44 by tsuchen           #+#    #+#              #
-#    Updated: 2024/06/20 17:25:43 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/06/22 19:53:28 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= pipex
 
 
-SRCS_PX		= ft_err_utils.c ft_lst_utils.c ft_swap_commands.c \
-		  ft_push_commands.c ft_rotate_commands.c ft_rrotate_commands.c \
-		  ft_small_sort.c ft_sort_list.c ft_sort_utils.c \
-		  ft_sort_utils1.c ft_sort_utils2.c ft_cheap_utils.c \
-		  main.c
+SRCS_PX		= ft_err_utils.c ft_unix_utils.c main.c
 
 PX_PATH		= srcs/
 
@@ -32,8 +28,6 @@ OBJSB		= $(SRCSB:.c=.o)
 HEAD		= includes/
 
 CFLAGS		= -Wall -Wextra -Werror
-
-ARC		= ar rcs 
 
 CC		= cc
 
