@@ -2,11 +2,51 @@
 
 ## Objective
 
+1. Create a program that can list all necessary operations to sort an array of numbers stored in a stack (Stack_A) with an empty stack (Stack_B).
+2. Need to come up with an algorithm to find out the least steps to complete the sorting.
+
 ## Key concept
+
+1. What is stack? How is it different to the counterpart "Queue"?
+2. What are the algorithms used to solve a sorting problem.
+3. Basic understanding of data structure: array, linked-list, binary tree (optional).
+4. Linked list (or Btree) management
 
 ## Note
 
-### Different Sorting Methods
+### Data structure
+1. In this project, I used linked list as my primary data structure. It iseasy and straight forward to manipulate the operands on linked list.
+2. Although I wanted to try with btree at the beginning, it was too complicated for me to translate the push, swap, and rotation operands in btree structure. The benefit of using btree is that when you initiate a data structure with BST (Binary Search Tree), it is already partial sorted (the left childis always smaller than current node while the right child is always bigger than current node).
+3. I only used a simple linked list structure. Each node contains content, next node, and previous node. During the evaluation, I learned from peer that you actually create another struct call t_stack that contains the "profile" of each linked list. It could make the codes more concisely and structured, especially when calculating the least cost steps.
+
+```
+typedef struct s_list
+{
+    void            *content;
+    struct s_list   *next;
+    struct s_list   *prev;
+}   t_list;
+
+typedef struct s_stack
+{
+    t_list          **bgn_list;
+    t_list          *last;
+    int             list_size;
+}   t_stack;
+```
+### Algorithm
+
+1. Selecting the algorithm is also part of major topic in this project. However, since the project is push_swap sort, the methods you can choose is limited. I followed the following article and used thesame mehtod (machine turk) to do the sorting.
+2. The idea is:
+    1. If the stack length is <= 5, create a tiny sort function to solve it.
+    2. otherwise, first push the top 2 numbers to stack_b
+    3. then, continue to push elements from a to b in a decending order "in a most efficient way" until there is only 3 elements left in the stack_a.
+    4. use tiny sort to deal with 3 elements, that could be done without pushing to other stack.
+    5. Push every thing back from b to a, also in a most efficient way for each push.
+    6. Lastly, rotate a until the smallest number is at the beginning. 
+3. This method could sort 100 random numbers within 700 steps in all cases, and for 500 numbers with 5500 steps in "Most" cases. Only in certain worst cases the steps will exceed 5500 steps.
+
+### Different Sorting Methods (from chatgpt)
 
 | Sorting Method                      | Mechanism                                                                                                                                                | Pros                                                                                                 | Cons                                                                                                                | Estimated Steps for 500 Elements                                                      |   |
 |-------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|---|
