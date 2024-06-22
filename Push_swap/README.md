@@ -1,4 +1,4 @@
-# 42 Common Core Porject - Push_swap
+# 42 Common Core Project - Push_swap
 
 ## Objective
 
