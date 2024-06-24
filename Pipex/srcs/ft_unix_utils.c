@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 18:38:02 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/23 01:40:11 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/24 11:22:58 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,11 @@ int	ft_do_child(int fd[][2], int ac, char **av, int *pid)
 	i = -1;
 	while (++i < ac - 3)
 	{
+		pid[i] = fork();
+		if (pid[i] == -1)
+			ft_err4_fork(errno);
 		if (pid[i] == 0)
 		{
-			ft_printf("child %d, pid is %d\n", i, pid[i]);
 			ft_close_others(fd, i, ac - 2);
 			cmd = ft_split(av[i + 2], ' ');
 			if (!cmd)
@@ -116,7 +118,7 @@ int	ft_do_child(int fd[][2], int ac, char **av, int *pid)
 			close(fd[i][0]);
 			dup2(fd[i + 1][1], OUT);
 			close(fd[i + 1][1]);
-			execve(cmd[0], cmd, NULL);
+			execvp(cmd[0], cmd);
 			ft_free_all(cmd);
 			return (0);
 		}

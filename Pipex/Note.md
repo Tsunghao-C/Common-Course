@@ -13,19 +13,19 @@
 
 ## Pipeline "|"
 
-1. Unix pipeline is an inter-process communication machanism. It creates an anonymous "channel" as a buffer to store what is gnerated (WRITE) from the output of previous process, and will be sent (READ) by the next process as input.
-2. Pipeline "|" is an anonymous channel and will automatically be gone once it is both written and read. In contrary, there is the "named pipe" that is called "FIFO". It is works the same as pipe and it is existed permanently as FIFO files. Unlike normal files, the FIFO files will be suspended untill it is both READ and WRITTEN.
+1. Unix pipeline is an inter-process communication machanism. It creates an anonymous "channel" as a buffer to store what is generated (WRITE) from the output of previous process, and will be sent (READ) by the next process as input.
+2. Pipeline "|" is an anonymous channel and will automatically be gone once it is both written and read. In contrary, there is the "named pipe" that is called "FIFO". It is works the same as pipe and it exists permanently as FIFO files. Unlike normal files, the FIFO files will be suspended untill it is both READ and WRITTEN.
 
 ### Two way communication between processes (IMPORTANT)
 
 1. Imagine that two processes A and B are communicating back and forth using only one pipeline. What could go wrong?
     - Chances are, if A put something in the pipe and it should be processed by B. But today B is super busy and cannot process the data in the pipe.
     - Then, after a while, A thinks it should be processed by B already, and take the retrieve the data from the pipe and continue with his process.
-2. The solution to avoid the above issue from happening is to CREATE TWO PIPES
+2. The solution to avoid the above issue from happening is to CREATE TWO Uni-directional PIPES
     - pipe_1: A -> B
     - pipe_2: B -> A
     - A always receives input from pipe_2, and output his effort on pipe_1.
-    - By creating two sigle directional pipe, we can make sure there is no jump between two processes.
+    - By creating two uni-directional pipe, we can make sure there is no jump between two processes.
 
 ### Use function "pipe" to do parallel computing
 
@@ -36,7 +36,7 @@
     2. "PIPE" to create a "PASSBOX" of two doors (file descriptor), allowing different branch to communicate to each other through this channel. One door is for READ and the other is for WRITE.
     3. ""OPEN" "READ" "WRITE" "CLOSE" to manipulate on fds.
     4. "WAIT" to manage parallel processes
-    5. "STRERROR" "PERROR" "ERRNO" to manage error situation.
+    5. "STRERROR" "PERROR" "ERRNO" to manage error situations.
 
 ### fork
 
