@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:47:39 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/23 00:52:05 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/24 19:02:23 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,17 @@ void	ft_err6_malloc(int rep, int pid)
 	dup2(ERR, OUT);
 	ft_printf("%s: Child %d (PID:%d) malloc failed!\n", P_NAME, rep, pid);
 	exit(6);
+}
+
+void	ft_err7_write(int err_no, char *file)
+{
+	dup2(ERR, OUT);
+	ft_printf("%s: %s: %s\n", P_NAME, strerror(err_no), file);
+	exit(7);
+}
+
+void	ft_err8_unlink(int err_no)
+{
+	dup2(ERR, OUT);
+	ft_printf("%s: %s\n", P_NAME, strerror(err_no));
 }
