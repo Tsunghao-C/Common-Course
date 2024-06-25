@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:47:39 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/24 19:02:23 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/25 10:25:22 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_err1_argc(int ac)
 {
 	dup2(ERR, OUT);
-	ft_printf("Insufficient argument: %d is given, need 4\n", ac - 1);
+	ft_printf("Insufficient argument: %d is given\n", ac - 1);
 	exit(1);
 }
 
@@ -65,4 +65,10 @@ void	ft_err8_unlink(int err_no)
 {
 	dup2(ERR, OUT);
 	ft_printf("%s: %s\n", P_NAME, strerror(err_no));
+}
+
+void	ft_err9_access(int err_no, char *path)
+{
+	dup2(ERR, OUT);
+	ft_printf("%s: %s\n", strerror(err_no), path);
 }

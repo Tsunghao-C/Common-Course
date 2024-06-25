@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:41:35 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/24 19:02:18 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/25 12:29:40 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_free_all(char **arr)
 	free(arr);
 }
 
-int	main(int ac, char *av[])
+int	main(int ac, char *av[], char **env)
 {
 	char	**argv;
 	int		fd[MAX_FD][2];
@@ -48,7 +48,7 @@ int	main(int ac, char *av[])
 		return (0);
 	argv_len = ft_arrlen(argv);
 	ft_init_pipe(fd, argv_len - 2);
-	ft_do_child(fd, argv_len, argv, pid);
+	ft_do_child(fd, pid, argv, env);
 	ft_do_parent(fd, argv_len, argv);
 	ft_wait_all(argv_len - 3, pid);
 	ft_free_all(argv);

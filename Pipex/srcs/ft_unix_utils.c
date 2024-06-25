@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 18:38:02 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/24 19:02:25 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/25 12:29:33 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,80 @@ void	ft_init_pipe(int fd[][2], int n_pipes)
 	}
 }
 
-int	ft_do_child(int fd[][2], int ac, char **av, int *pid)
+char	**ft_get_allpath(char **env)
+{
+	int	i;
+	char	*path_all;
+	char	**paths;
+
+	i = 0;
+	while (env[i])
+	{
+		if (ft_strncmp(env[i], "PATH=", 5) == 0)
+		{
+			path_all = ft_strtrim(env[i], "PATH=");
+			paths = ft_split(path_all, ':');
+			free(path_all);
+			return (paths);
+		}
+		i++;
+	}
+	return (NULL);
+}
+
+char	*ft_get_path(char *file, char **env)
+{
+	char	**paths;
+	char	*path;
+	char	*exec;
+	int	i;
+
+	paths = ft_get_allpath(env);
+	i = -1;
+	while (paths[++i])
+	{
+		path = ft_strjoin(paths[i], "/");
+		exec = ft_strjoin(path, file);
+		free(path);
+		if (!access(exec, X_OK | F_OK))
+		{
+			ft_free_all(paths);
+			return (exec);
+		}
+		free(exec);
+	}
+	ft_free_all(paths);
+	return (ft_strdup(file));
+}
+
+int	ft_exec(char *av, char **env)
+{
+	char	**cmd;
+	char	*path;
+
+	cmd = ft_split(av, ' ');
+	if (!cmd)
+		return (-1);
+	path = ft_get_path(cmd[0], env);
+	if (execve(path, cmd, env) == -1)
+	{
+		ft_err9_access(errno, path);
+		ft_free_all(cmd);
+		free(path);
+		exit(9);
+	}
+	ft_free_all(cmd);
+	free(path);
+	return (0);
+}
+
+int	ft_do_child(int fd[][2], int *pid, char **av, char **env)
 {
 	int		i;
-	char	**cmd;
+	int		ac;
+	//char	**cmd;
 
+	ac = ft_arrlen(av);
 	i = -1;
 	while (++i < ac - 3)
 	{
@@ -114,15 +183,17 @@ int	ft_do_child(int fd[][2], int ac, char **av, int *pid)
 		if (pid[i] == 0)
 		{
 			ft_close_others(fd, i, ac - 2);
-			cmd = ft_split(av[i + 2], ' ');
-			if (!cmd)
-				ft_err6_malloc(i, pid[i]);
+			//cmd = ft_split(av[i + 2], ' ');
+			//if (!cmd)
+			//	ft_err6_malloc(i, pid[i]);
 			dup2(fd[i][0], IN);
 			close(fd[i][0]);
 			dup2(fd[i + 1][1], OUT);
 			close(fd[i + 1][1]);
-			execvp(cmd[0], cmd);
-			ft_free_all(cmd);
+			if (ft_exec(av[i + 2], env) == -1)
+				ft_err6_malloc(i, pid[i]);
+			//execvp(cmd[0], cmd);
+			//ft_free_all(cmd);
 			return (0);
 		}
 	}
@@ -170,6 +241,8 @@ char	**ft_av_check(int ac, char **av)
 
 	if (strcmp(av[1], "here_doc") == 0)
 	{
+		if (ac < 6)
+			ft_err1_argc(ac);
 		if (ft_init_here_doc(av[1], av[2]))
 			return (NULL);
 		ac -= 1;
