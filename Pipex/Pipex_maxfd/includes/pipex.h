@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:35:38 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/25 18:36:03 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/25 12:29:37 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <errno.h>
 # include <limits.h>
 # include <stdint.h>
-# include <stdio.h>
 # include <string.h>
 # include <sys/wait.h>
 # include <fcntl.h>
@@ -29,15 +28,19 @@
 # define IN STDIN_FILENO
 # define ERR STDERR_FILENO
 # define P_NAME "pipex"
+# define BUFF 4096
 
-/* for av init and here_doc */
-int		ft_init_fdio(int *fd_in, int *fd_out, int ac, char **av);
-int		ft_init_here_doc(char *file, char *eof);
-/* exec utils */
-int		ft_exec(char *av, char **env);
+/* unix utils */
+int		ft_arrlen(char **arr);
 void	ft_free_all(char **arr);
-void	ft_do_pipe(char *cmd, char **env);
-void	ft_do_fork(char *cmd, char **env);
+void	ft_init_pipe(int fd[][2], int n_pipes);
+void	ft_close_others(int fd[][2], int rep, int n_pipes);
+void	ft_read_n_write(char *file_in, int fd_pw);
+void	ft_read_n_write2(char *file_out, int fd_pr, int mode);
+void	ft_wait_all(int childs, int *pid);
+int		ft_do_child(int fd[][2], int *pid, char **av, char **env);
+int		ft_do_parent(int fd[][2], int ac, char **av);
+int		ft_exec(char *av, char **env);
 char	*ft_get_path(char *file, char **env);
 char	**ft_get_allpath(char **env);
 /* error functions */
@@ -45,6 +48,13 @@ void	ft_err1_argc(int ac);
 void	ft_err2_pipe(int err_no);
 void	ft_err3_open(int err_no, char *file);
 void	ft_err4_fork(int err_no);
-void	ft_err5_write(int err_no, char *file, char *line);
-void	ft_err6_cmd(char *path);
+void	ft_err5_read(int err_no, char *file);
+void	ft_err6_malloc(int rep, int pid);
+void	ft_err7_write(int err_no, char *file);
+void	ft_err8_unlink(int err_no);
+void	ft_err9_access(int err_no, char *path);
+/* for here_doc */
+char	**ft_av_check(int ac, char **av);
+int		ft_init_here_doc(char *file, char *eof);
+int		ft_init_argv(char **argv, int ac, char **av);
 #endif

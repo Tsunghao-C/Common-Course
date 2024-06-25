@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_have_alt_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/20 18:17:23 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/20 18:36:46 by tsuchen          ###   ########.fr       */
+/*   Created: 2024/05/28 10:20:54 by tsuchen           #+#    #+#             */
+/*   Updated: 2024/05/28 10:43:59 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "ft_printf.h"
 
-# include "../libft/includes/libft.h"
-# include "../libft/includes/ft_printf.h"
-# include <stdlib.h>
-# include <unistd.h>
-# include <errno.h>
-# include <fcntl.h>
-# include <string.h>
-
-
-#endif
+int	ft_have_alt(char *str)
+{
+	while (*str)
+	{
+		if (*str == '#')
+			return (1);
+		str++;
+	}
+	return (0);
+}

@@ -10,6 +10,28 @@
 1. What is Pipeline (Unix)? How does it work?
 2. Why do we use pipeline?
 
+## Notes about doing this project
+
+### Method 1: Create all necessary fds at the beginning
+At the begining, I try to create 2D array of fd[MAX_FD][2] at initiate it altogether. (Since norminette does not allow me to create a dynamic array, I used MAX_FD instead.)
+It did work, but I think it is not the best practice because I created a big chunck of fds in every fork. (See Pipex_maxfd folder)
+
+### Method 2: Set fd_in and fd_out first and only create pipe in each fork
+
+The improved method is to create fd[2] in every iteration of fork.
+
+1. Open fd_in and fd_out
+2. Connect STD_IN to fd_in
+3. Start the iteration to fork, in each loop of fork
+	- In child process
+		1. input is the STD_IN
+		2. set STD_OUT to fd[1]
+		3. exec cmd and write to pipe
+	- In parent process
+		1. set STD_IN to pipe
+		2. wait for the child process finish.
+4. When starting the next iteration, the STD_IN is already the output of previous cmd!
+5. Final remark, in order not to lose your main process by the last cmd, you do another fork just for the last cmd.
 
 ## Pipeline "|"
 
