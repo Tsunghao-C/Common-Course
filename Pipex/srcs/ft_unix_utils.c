@@ -6,85 +6,11 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 18:38:02 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/25 18:36:06 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/26 15:13:17 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-char	**ft_get_allpath(char **env)
-{
-	int		i;
-	char	*path_all;
-	char	**paths;
-
-	i = 0;
-	while (env[i])
-	{
-		if (ft_strncmp(env[i], "PATH=", 5) == 0)
-		{
-			path_all = ft_strtrim(env[i], "PATH=");
-			paths = ft_split(path_all, ':');
-			free(path_all);
-			return (paths);
-		}
-		i++;
-	}
-	return (NULL);
-}
-
-char	*ft_get_path(char *file, char **env)
-{
-	char	**paths;
-	char	*path;
-	char	*exec;
-	int		i;
-
-	paths = ft_get_allpath(env);
-	if (!paths)
-		return (NULL);
-	i = -1;
-	while (paths[++i])
-	{
-		path = ft_strjoin(paths[i], "/");
-		exec = ft_strjoin(path, file);
-		free(path);
-		if (!access(exec, X_OK | F_OK))
-		{
-			ft_free_all(paths);
-			return (exec);
-		}
-		free(exec);
-	}
-	ft_free_all(paths);
-	return (ft_strdup(file));
-}
-
-int	ft_exec(char *av, char **env)
-{
-	char	**cmd;
-	char	*path;
-
-	cmd = ft_split(av, ' ');
-	if (!cmd)
-		return (-1);
-	path = ft_get_path(cmd[0], env);
-	if (!path)
-	{
-		ft_free_all(cmd);
-		return (-1);
-	}
-	if (execve(path, cmd, env) == -1)
-	{
-		ft_err6_cmd(path);
-		ft_free_all(cmd);
-		free(path);
-		exit(6);
-	}
-	ft_free_all(cmd);
-	free(path);
-	return (0);
-}
 
 void	ft_free_all(char **arr)
 {
@@ -98,8 +24,50 @@ void	ft_free_all(char **arr)
 	free(arr);
 }
 
-void	ft_err6_cmd(char *path)
+void	ft_do_pipe(char *cmd, char **env)
 {
-	dup2(ERR, OUT);
-	ft_printf("%s: command not found: %s\n", P_NAME, path);
+	int	fd[2];
+	int	pid;
+
+	if (pipe(fd) == -1)
+		ft_err2_pipe(errno);
+	pid = fork();
+	if (pid == -1)
+		ft_err4_fork(errno);
+	if (!pid)
+	{
+		close(fd[0]);
+		dup2(fd[1], OUT);
+		close(fd[1]);
+		if (ft_exec(cmd, env) < 0)
+		{
+			close(IN);
+			close(OUT);
+			exit(6);
+		}
+		return ;
+	}
+	close(fd[1]);
+	dup2(fd[0], IN);
+	close(fd[0]);
+}
+
+void	ft_do_fork_main(char *cmd, char **env)
+{
+	int	pid;
+
+	pid = fork();
+	if (pid == -1)
+		ft_err4_fork(errno);
+	if (!pid)
+	{
+		if (ft_exec(cmd, env) < 0)
+		{
+			close(IN);
+			close(OUT);
+			exit(6);
+		}
+		return ;
+	}
+	wait(NULL);
 }

@@ -6,14 +6,14 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/17 13:53:44 by tsuchen           #+#    #+#              #
-#    Updated: 2024/06/22 19:53:28 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/06/26 17:05:39 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= pipex
 
 
-SRCS_PX		= ft_err_utils.c ft_unix_utils.c main.c
+SRCS_PX		= ft_err_utils.c ft_unix_utils.c ft_exec_utils.c main.c
 
 PX_PATH		= srcs/
 
@@ -43,10 +43,7 @@ libft:
 $(NAME): libft $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
-$(NAME_B): $(OBJSB)
-	$(CC) $(CFLAGS) $(OBJSB) $(LIBFT) -o $(NAME_B)
-
-bonus: $(NAME) $(NAME_B)
+bonus: $(NAME) 
 
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $@ -I$(HEAD) -I$(LIBFT_H_PATH)

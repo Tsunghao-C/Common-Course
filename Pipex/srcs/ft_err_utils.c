@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:47:39 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/25 17:43:41 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/26 11:23:18 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	ft_err3_open(int err_no, char *file)
 {
 	dup2(ERR, OUT);
 	ft_printf("%s: %s: %s\n", P_NAME, strerror(err_no), file);
-	exit(3);
 }
 
 void	ft_err4_fork(int err_no)
