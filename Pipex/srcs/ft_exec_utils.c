@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:08:10 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/26 16:56:55 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/26 22:55:24 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ int	ft_exec(char *av, char **env)
 	}
 	if (execve(path, cmd, env) == -1)
 	{
-		dup2(ERR, OUT);
-		ft_printf("%s: command not found: %s\n", P_NAME, path);
+		ft_err6_cmd(path, errno);
 		ft_free_all(cmd);
-		return (free(path), -1);
+		free(path);
+		return (-1);
 	}
 	ft_free_all(cmd);
 	free(path);
@@ -68,9 +68,11 @@ char	*ft_get_path(char *file, char **env)
 	char	*exec;
 	int		i;
 
+	if (!env || ft_isabs_path(file) == 1)
+		return (ft_strdup(file));
 	paths = ft_get_allpath(env);
 	if (!paths)
-		return (NULL);
+		return (ft_strdup(file));
 	i = -1;
 	while (paths[++i])
 	{
@@ -86,6 +88,16 @@ char	*ft_get_path(char *file, char **env)
 	}
 	ft_free_all(paths);
 	return (ft_strdup(file));
+}
+
+int	ft_isabs_path(char *file)
+{
+	while (*file)
+	{
+		if (*file++ == '/')
+			return (1);
+	}
+	return (0);
 }
 
 char	**ft_get_allpath(char **env)

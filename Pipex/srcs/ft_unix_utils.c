@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 18:38:02 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/26 18:12:51 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/26 22:50:29 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,13 @@ void	ft_do_fork_main(char *cmd, char **env)
 		}
 		return ;
 	}
-	//wait(NULL);
+}
+
+void	ft_err6_cmd(char *path, int err_no)
+{
+	dup2(ERR, OUT);
+	if (ft_isabs_path(path) == 1)
+		ft_printf("%s: %s: %s\n", P_NAME, strerror(err_no), path);
+	else
+		ft_printf("%s: command not found: %s\n", P_NAME, path);
 }
