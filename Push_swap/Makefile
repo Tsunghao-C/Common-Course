@@ -6,7 +6,7 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/17 13:53:44 by tsuchen           #+#    #+#              #
-#    Updated: 2024/06/20 01:25:46 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/06/26 21:23:05 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,8 +39,6 @@ HEAD		= includes/
 
 CFLAGS		= -Wall -Wextra -Werror
 
-ARC		= ar rcs 
-
 CC		= cc
 
 LIBFT_PATH	= libft/
@@ -49,10 +47,10 @@ LIBFT		= $(LIBFT_PATH)libft.a
 
 all: $(NAME)
 
-libft:
+$(LIBFT):
 	$(MAKE) -C $(LIBFT_PATH)
 
-$(NAME): libft $(OBJS)
+$(NAME): $(LIBFT) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
 $(NAME_B): $(OBJSB)

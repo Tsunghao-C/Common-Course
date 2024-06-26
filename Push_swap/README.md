@@ -5,7 +5,7 @@
 1. Create a program that can list all necessary operations to sort an array of numbers stored in a stack (Stack_A) with an empty stack (Stack_B).
 2. Need to come up with an algorithm to find out the least steps to complete the sorting.
 
-## Key concept
+## Key concepts
 
 1. What is stack? How is it different to the counterpart "Queue"?
 2. What are the algorithms used to solve a sorting problem.

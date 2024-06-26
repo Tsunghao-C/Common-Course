@@ -6,7 +6,7 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/17 13:53:44 by tsuchen           #+#    #+#              #
-#    Updated: 2024/05/30 21:32:24 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/06/26 21:21:09 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,10 +63,10 @@ LIBFT_OBJS	= $(shell $(AR) t $(LIBFT) | $(AWK) '$$0 != "__.SYMDEF SORTED"')
 
 all: $(NAME)
 
-libft:
+$(LIBFT):
 	$(MAKE) -C $(LIBFT_PATH) CFLAGS="$(CFLAGS) $(PICFLAGS)"
 
-$(NAME): libft $(OBJS)
+$(NAME): $(LIBFT) $(OBJS)
 	$(ARC) $(NAME) $(OBJS)
 	$(ARC) $(NAME) $(addprefix $(LIBFT_PATH), $(LIBFT_OBJS))
 
