@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 18:38:02 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/26 15:13:17 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/26 18:12:51 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,5 @@ void	ft_do_fork_main(char *cmd, char **env)
 		}
 		return ;
 	}
-	wait(NULL);
+	//wait(NULL);
 }

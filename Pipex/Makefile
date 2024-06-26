@@ -6,7 +6,7 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/17 13:53:44 by tsuchen           #+#    #+#              #
-#    Updated: 2024/06/26 17:05:39 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/06/26 17:58:20 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,13 +37,13 @@ LIBFT		= $(LIBFT_PATH)libft.a
 
 all: $(NAME)
 
-libft:
+$(LIBFT):
 	$(MAKE) -C $(LIBFT_PATH)
 
-$(NAME): libft $(OBJS)
+$(NAME): $(LIBFT) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
-bonus: $(NAME) 
+bonus:  $(NAME)
 
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $@ -I$(HEAD) -I$(LIBFT_H_PATH)

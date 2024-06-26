@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:41:35 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/26 16:56:50 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/26 18:22:25 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,12 @@ int	main(int ac, char *av[], char **env)
 	int	fd_in;
 	int	fd_out;
 	int	i;
+	int	j;
 
 	if (ac < 5 || (!strcmp(av[1], "here_doc") && ac < 6))
 		ft_err1_argc(ac);
 	i = ft_init_fdio(&fd_in, &fd_out, ac, av);
+	j = i;
 	if (fd_in == -1)
 		i++;
 	else
@@ -95,6 +97,11 @@ int	main(int ac, char *av[], char **env)
 	while (i < ac - 2)
 		ft_do_pipe(av[i++], env);
 	ft_do_fork_main(av[i], env);
+	while (j < ac - 1)
+	{
+		wait(NULL);
+		j++;
+	}
 	if (!ft_strcmp(av[1], "here_doc"))
 		unlink(av[1]);
 	return (0);
