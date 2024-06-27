@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 18:38:02 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/26 22:50:29 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/27 11:42:49 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,7 @@ void	ft_do_pipe(char *cmd, char **env)
 		dup2(fd[1], OUT);
 		close(fd[1]);
 		if (ft_exec(cmd, env) < 0)
-		{
-			close(IN);
-			close(OUT);
 			exit(6);
-		}
 		return ;
 	}
 	close(fd[1]);
@@ -62,13 +58,11 @@ void	ft_do_fork_main(char *cmd, char **env)
 	if (!pid)
 	{
 		if (ft_exec(cmd, env) < 0)
-		{
-			close(IN);
-			close(OUT);
 			exit(6);
-		}
 		return ;
 	}
+	close(IN);
+	close(OUT);
 }
 
 void	ft_err6_cmd(char *path, int err_no)

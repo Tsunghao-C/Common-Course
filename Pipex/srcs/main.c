@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:41:35 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/26 23:20:43 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/27 11:44:13 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,10 @@ int	ft_init_fdio(int *fd_in, int *fd_out, int ac, char **av)
 		*fd_out = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
 		i = 2;
 	}
+	if (*fd_in == -1)
+		ft_err3_open(errno, av[1]);
+	if (*fd_out == -1)
+		ft_err3_open(errno, av[ac - 1]);
 	return (i);
 }
 
@@ -76,7 +80,9 @@ int	main(int ac, char *av[], char **env)
 		ft_err1_argc(ac);
 	i = ft_init_fdio(&fd_in, &fd_out, ac, av);
 	if (fd_in == -1)
+	{
 		i++;
+	}
 	else
 		ft_dup_close(fd_in, IN);
 	ft_dup_close(fd_out, OUT);
