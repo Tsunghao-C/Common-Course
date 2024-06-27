@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:41:35 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/27 11:44:13 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/27 15:25:42 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,35 @@ int	ft_init_fdio(int *fd_in, int *fd_out, int ac, char **av)
 	return (i);
 }
 
-static void	ft_dup_close(int fd, int fd_new)
+static void	ft_false_io(int *start, int mode)
 {
-	dup2(fd, fd_new);
-	close(fd);
+	int	fd[2];
+
+	if (pipe(fd) == -1)
+		ft_err2_pipe(errno);
+	if (mode == 0)
+	{
+		ft_dup_close(fd[0], IN);
+		close(fd[1]);
+		*start += 1;
+	}
+	else
+	{
+		ft_dup_close(fd[1], OUT);
+		close(fd[0]);
+	}
+}
+
+static void	ft_check_fdio(int fd_in, int fd_out, int *start)
+{
+	if (fd_in == -1)
+		ft_false_io(start, 0);
+	else
+		ft_dup_close(fd_in, IN);
+	if (fd_out == -1)
+		ft_false_io(start, 1);
+	else
+		ft_dup_close(fd_out, OUT);
 }
 
 int	main(int ac, char *av[], char **env)
@@ -79,13 +104,7 @@ int	main(int ac, char *av[], char **env)
 	if (ac < 5 || (!strcmp(av[1], "here_doc") && ac < 6))
 		ft_err1_argc(ac);
 	i = ft_init_fdio(&fd_in, &fd_out, ac, av);
-	if (fd_in == -1)
-	{
-		i++;
-	}
-	else
-		ft_dup_close(fd_in, IN);
-	ft_dup_close(fd_out, OUT);
+	ft_check_fdio(fd_in, fd_out, &i);
 	j = i;
 	while (i < ac - 2)
 		ft_do_pipe(av[i++], env);

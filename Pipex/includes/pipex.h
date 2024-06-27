@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:35:38 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/26 23:13:08 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/27 15:14:11 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 /* for av init and here_doc */
 int		ft_init_fdio(int *fd_in, int *fd_out, int ac, char **av);
 int		ft_init_here_doc(char *file, char *eof);
+void	ft_dup_close(int fd, int fd_new);
 void	ft_free_all(char **arr);
 void	ft_do_pipe(char *cmd, char **env);
 void	ft_do_fork_main(char *cmd, char **env);

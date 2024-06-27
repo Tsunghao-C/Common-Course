@@ -6,11 +6,17 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 18:38:02 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/27 11:42:49 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/27 15:16:36 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	ft_dup_close(int fd, int fd_new)
+{
+	dup2(fd, fd_new);
+	close(fd);
+}
 
 void	ft_free_all(char **arr)
 {
@@ -37,15 +43,13 @@ void	ft_do_pipe(char *cmd, char **env)
 	if (!pid)
 	{
 		close(fd[0]);
-		dup2(fd[1], OUT);
-		close(fd[1]);
+		ft_dup_close(fd[1], OUT);
 		if (ft_exec(cmd, env) < 0)
 			exit(6);
 		return ;
 	}
 	close(fd[1]);
-	dup2(fd[0], IN);
-	close(fd[0]);
+	ft_dup_close(fd[0], IN);
 }
 
 void	ft_do_fork_main(char *cmd, char **env)
