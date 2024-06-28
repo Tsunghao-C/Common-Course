@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:35:38 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/27 15:14:11 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/28 14:23:52 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int		ft_exec(char *av, char **env);
 int		ft_isabs_path(char *file);
 char	*ft_get_path(char *file, char **env);
 char	**ft_get_allpath(char **env);
-char	**ft_parse_cmd(char *av);
 /* error functions */
 void	ft_err1_argc(int ac);
 void	ft_err2_pipe(int err_no);

@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:08:10 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/27 11:44:09 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/06/28 14:22:11 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_exec(char *av, char **env)
 	char	**cmd;
 	char	*path;
 
-	cmd = ft_parse_cmd(av);
+	cmd = ft_split_quote(av, ' ');
 	if (!cmd)
 		return (-1);
 	if (!cmd[0])
@@ -39,26 +39,6 @@ int	ft_exec(char *av, char **env)
 	ft_free_all(cmd);
 	free(path);
 	return (0);
-}
-
-char	**ft_parse_cmd(char *av)
-{
-	char	**cmd;
-	char	*tmp;
-	int		i;
-
-	cmd = ft_split(av, ' ');
-	if (!cmd)
-		return (NULL);
-	i = 0;
-	while (cmd[i])
-	{
-		tmp = cmd[i];
-		cmd[i] = ft_strtrim(cmd[i], "'");
-		free(tmp);
-		i++;
-	}
-	return (cmd);
 }
 
 char	*ft_get_path(char *file, char **env)

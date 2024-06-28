@@ -6,7 +6,7 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/15 10:05:55 by tsuchen           #+#    #+#              #
-#    Updated: 2024/06/15 16:59:30 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/06/28 13:58:16 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRCS_LIBC	= ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 
 SRCS_ARRAY	= ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c \
 		  ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c \
-		  ft_putnbr_fd.c
+		  ft_putnbr_fd.c ft_split_quote.c
 
 SRCS_LIST	= ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
 		  ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c \
