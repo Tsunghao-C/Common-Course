@@ -6,7 +6,7 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/17 13:53:44 by tsuchen           #+#    #+#              #
-#    Updated: 2024/06/28 17:49:29 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/07/01 14:46:01 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ LIBFT		= $(LIBFT_PATH)libft.a
 
 MLX		= mlx_linux
 
-MLXFLAGS	= -lmlx -lXext -lX11
+MLXFLAGS	= -lmlx_Linux -lXext -lX11 -lm -lz
 
 all: $(NAME)
 
@@ -45,12 +45,12 @@ $(LIBFT):
 	$(MAKE) -C $(LIBFT_PATH)
 
 $(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(MLXFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -L$(MLX) -I$(MLX) $(MLXFLAGS) $(LIBFT) -o $(NAME)
 
 bonus:  $(NAME)
 
-.c.o:
-	$(CC) $(CFLAGS) -c $< -o $@ -I$(HEAD) -I$(LIBFT_H_PATH) -I/usr/include -I$(MLX)
+%.o: %.c
+	$(CC) $(CFLAGS) -I$(HEAD) -I$(LIBFT_H_PATH) -I$(MLX) -c $< -o $@
 
 clean: libft-clean root-clean
 

@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 17:50:13 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/06/28 18:04:32 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/01 17:37:12 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,19 @@
 # include <fcntl.h>
 # include <math.h>
 # include <complex.h>
-# include <mlx.h>
+# include "mlx.h"
 # define OUT STDOUT_FILENO
 # define IN STDIN_FILENO
 # define ERR STDERR_FILENO
 # define P_NAME "fractol"
+
+typedef struct	s_data
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_data;
 
 #endif
