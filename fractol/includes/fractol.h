@@ -27,7 +27,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include <complex.h>
-# include <../minilibx_opengl/mlx.h>
+# include <mlx.h>
 # define OUT STDOUT_FILENO
 # define IN STDIN_FILENO
 # define ERR STDERR_FILENO

@@ -35,7 +35,9 @@ LIBFT_PATH	= libft/
 LIBFT_H_PATH	= libft/includes/
 LIBFT		= $(LIBFT_PATH)libft.a
 
-MLX		= mlx
+MLX		= mlx_linux
+
+MLXFLAGS	= -lmlx -lXext -lX11
 
 all: $(NAME)
 
@@ -43,12 +45,12 @@ $(LIBFT):
 	$(MAKE) -C $(LIBFT_PATH)
 
 $(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -L$(MLX) -l$(MLX) -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) $(CFLAGS) $(MLXFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
 bonus:  $(NAME)
 
 .c.o:
-	$(CC) $(CFLAGS) -c $< -o $@ -I$(HEAD) -I$(LIBFT_H_PATH) -I$(MLX)
+	$(CC) $(CFLAGS) -c $< -o $@ -I$(HEAD) -I$(LIBFT_H_PATH) -I/usr/include -I$(MLX)
 
 clean: libft-clean root-clean
 
