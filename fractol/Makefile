@@ -35,7 +35,7 @@ LIBFT_PATH	= libft/
 LIBFT_H_PATH	= libft/includes/
 LIBFT		= $(LIBFT_PATH)libft.a
 
-MLX		= mlx_linux
+MLX		= mlx
 
 MLXFLAGS	= -lmlx_Linux -lXext -lX11 -lm -lz
 
