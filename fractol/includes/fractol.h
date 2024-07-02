@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 17:50:13 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/01 17:37:12 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/02 13:21:23 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,15 @@
 # define IN STDIN_FILENO
 # define ERR STDERR_FILENO
 # define P_NAME "fractol"
+# define WARNING_THRESHOLD 1500
+
+typedef struct	s_state
+{
+	int	key_pressed;
+	int	frame_counter;
+	int	warning_printed;
+	int	key_code;
+}	t_state;
 
 typedef struct	s_data
 {
@@ -41,5 +50,11 @@ typedef struct	s_data
 	int		line_length;
 	int		endian;
 }	t_data;
+
+typedef struct	s_vars
+{
+	void	*mlx;
+	void	*win;
+}	t_vars;
 
 #endif
