@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 17:55:56 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/02 13:21:20 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/02 17:47:38 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ void	print_warning(t_state *state)
 	}
 }
 
-int	loop_hook(t_state *state)
+/*int	loop_hook(t_state *state)
 {
 	if (state->key_pressed)
 	{
@@ -168,8 +168,66 @@ int	loop_hook(t_state *state)
 		print_warning(state);
 	}
 	return (0);
+}*/
+
+/* Loops */
+
+int	loop_hook(t_vars *vars)
+{
+	char	counter_str[50];
+
+	mlx_clear_window(vars->mlx, vars->win);
+	vars->counter++;
+	sprintf(counter_str, "Counter: %d", vars->counter);
+	mlx_string_put(vars->mlx, vars->win, 50, 50, 0x00FFFFFF, counter_str);
+	return (0);
 }
 
+int	loop_hook2(t_vars *vars)
+{
+	t_img	img;
+	char	*path;
+
+	path = "./xpm_files/test.xpm";
+	mlx_clear_window(vars->mlx, vars->win);
+	vars->counter++;
+	img.img = mlx_xpm_file_to_image(vars->mlx, path, &(img.img_width), &(img.img_height));
+	mlx_put_image_to_window(vars->mlx, vars->win, img.img, (vars->counter % 600), (vars->counter % 800));
+	return (0);
+}
+
+int	main(void)
+{
+	t_vars	vars;
+	//t_img	img;
+	//char	*relative_path = "./xpm_files/test.xpm";
+
+	vars.mlx = mlx_init();
+	vars.win = mlx_new_window(vars.mlx, 800, 600, "image");
+	vars.counter = 0;
+	//img.img = mlx_xpm_file_to_image(vars.mlx, relative_path, &(img.img_width), &(img.img_height));
+	//mlx_put_image_to_window(vars.mlx, vars.win, img.img, 10, 10);
+	mlx_hook(vars.win, 2, 1L<<0, mlx_close, &vars);
+	mlx_loop_hook(vars.mlx, loop_hook2, &vars);
+	mlx_loop(vars.mlx);
+	return (0);
+}
+/*
+int	main(void)
+{
+	t_vars	vars;
+
+	vars.mlx = mlx_init();
+	if (!vars.mlx)
+		return (1);
+	vars.win = mlx_new_window(vars.mlx, 800, 600, "Counter");
+	vars.counter = 0;
+	mlx_hook(vars.win, 2, 1L<<0, mlx_close, &vars);
+	mlx_loop_hook(vars.mlx, loop_hook, &vars);
+	mlx_loop(vars.mlx);
+	return (0);
+}*/
+/*
 int	main(void)
 {
 	t_vars	vars;
@@ -207,4 +265,4 @@ int	main(void)
 	mlx_destroy_display(vars.mlx);
 	free(vars.mlx);
 	return (0);
-}
+}*/

@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 17:50:13 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/02 13:21:23 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/02 17:47:41 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@
 # define P_NAME "fractol"
 # define WARNING_THRESHOLD 1500
 
+typedef struct	s_img
+{
+	void	*img;
+	int	img_width;
+	int	img_height;
+}	t_img;
+
 typedef struct	s_state
 {
 	int	key_pressed;
@@ -55,6 +62,7 @@ typedef struct	s_vars
 {
 	void	*mlx;
 	void	*win;
+	int	counter;
 }	t_vars;
 
 #endif
