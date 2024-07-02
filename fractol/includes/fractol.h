@@ -62,6 +62,8 @@ typedef struct	s_vars
 {
 	void	*mlx;
 	void	*win;
+	int	x;
+	int	y;
 	int	counter;
 }	t_vars;
 

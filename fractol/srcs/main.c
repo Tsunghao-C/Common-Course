@@ -172,17 +172,6 @@ void	print_warning(t_state *state)
 
 /* Loops */
 
-int	loop_hook(t_vars *vars)
-{
-	char	counter_str[50];
-
-	mlx_clear_window(vars->mlx, vars->win);
-	vars->counter++;
-	sprintf(counter_str, "Counter: %d", vars->counter);
-	mlx_string_put(vars->mlx, vars->win, 50, 50, 0x00FFFFFF, counter_str);
-	return (0);
-}
-
 int	loop_hook2(t_vars *vars)
 {
 	t_img	img;
@@ -196,22 +185,99 @@ int	loop_hook2(t_vars *vars)
 	return (0);
 }
 
+/* Loops tests 1: moveable circle */
+
+int	move_center(int keycode, t_vars *vars)
+{
+	int	step;
+
+	step = 5;
+	if (keycode == 'a' || keycode == 65361)
+		vars->x = vars->x - step;
+	else if (keycode == 'd' || keycode == 65363)
+		vars->x = vars->x + step;
+	else if (keycode == 'w' || keycode == 65362)
+		vars->y = vars->y - step;
+	else if (keycode == 's' || keycode == 65364)
+		vars->y = vars->y + step;
+	else if (keycode == 65307)
+		on_destroy(vars);
+	else
+		ft_printf("keypress %d\n", keycode);
+	return (0);
+}
+
+void	draw_circle(t_vars *vars, int r, int color)
+{
+	int	x;
+	int	y;
+	int	d;
+
+	x = 0;
+	y = r;
+	d = 3 - 2 * r;
+	while (y >= x)
+	{
+		mlx_pixel_put(vars->mlx, vars->win, vars->x + x, vars->y + y, color);
+		mlx_pixel_put(vars->mlx, vars->win, vars->x - x, vars->y + y, color);
+		mlx_pixel_put(vars->mlx, vars->win, vars->x + x, vars->y - y, color);
+		mlx_pixel_put(vars->mlx, vars->win, vars->x - x, vars->y - y, color);
+		mlx_pixel_put(vars->mlx, vars->win, vars->x + y, vars->y + x, color);
+		mlx_pixel_put(vars->mlx, vars->win, vars->x - y, vars->y + x, color);
+		mlx_pixel_put(vars->mlx, vars->win, vars->x + y, vars->y - x, color);
+		mlx_pixel_put(vars->mlx, vars->win, vars->x - y, vars->y - x, color);
+		if (d <= 0)
+			d = d + 4 * x + 6;
+		else
+		{
+			d = d + 4 * (x - y) + 10;
+			y--;
+		}
+		x++;
+	}
+}
+
+int	show_circle(t_vars *vars)
+{
+	int	color;
+	int	radius;
+
+	color = create_trgb(0, 255, 0, 0);
+	radius = 50;
+	mlx_clear_window(vars->mlx, vars->win);
+	draw_circle(vars, radius, color);
+	return (0);
+}
+
 int	main(void)
 {
 	t_vars	vars;
-	//t_img	img;
-	//char	*relative_path = "./xpm_files/test.xpm";
 
 	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, 800, 600, "image");
+	vars.win = mlx_new_window(vars.mlx, 800, 800, "WASD_Circle");
+	vars.x = 400;
+	vars.y = 400;
+	mlx_hook(vars.win, 2, 1L<<0, move_center, &vars);
+	mlx_hook(vars.win, 17, 1L<<2, mlx_closeb, &vars);	//close button
+	mlx_loop_hook(vars.mlx, show_circle, &vars);
+	mlx_loop(vars.mlx);
+	on_destroy(&vars);
+	return (0);
+}
+
+/* Image test */
+/*int	main(void)
+{
+	t_vars	vars;
+
+	vars.mlx = mlx_init();
+	vars.win = mlx_new_window(vars.mlx, 800, 800, "image");
 	vars.counter = 0;
-	//img.img = mlx_xpm_file_to_image(vars.mlx, relative_path, &(img.img_width), &(img.img_height));
-	//mlx_put_image_to_window(vars.mlx, vars.win, img.img, 10, 10);
 	mlx_hook(vars.win, 2, 1L<<0, mlx_close, &vars);
 	mlx_loop_hook(vars.mlx, loop_hook2, &vars);
 	mlx_loop(vars.mlx);
 	return (0);
-}
+}*/
 /*
 int	main(void)
 {
