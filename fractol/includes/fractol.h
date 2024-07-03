@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 17:50:13 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/02 17:47:41 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/03 15:36:21 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ typedef struct	s_vars
 	void	*win;
 	int	x;
 	int	y;
+	t_data	img;
+	int	color;
 	int	counter;
 }	t_vars;
 

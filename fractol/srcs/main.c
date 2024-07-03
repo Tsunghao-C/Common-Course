@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 17:55:56 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/02 17:47:38 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/03 15:35:53 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,10 @@ int	get_opposite(int color)
 	return (create_trgb(new_t, new_r, new_g, new_b));
 }
 
+/* exit function */
 int	on_destroy(t_vars *vars)
 {
+	mlx_destroy_image(vars->mlx, vars->img.img);
 	mlx_destroy_window(vars->mlx, vars->win);
 	mlx_destroy_display(vars->mlx);
 	free(vars->mlx);
@@ -82,7 +84,6 @@ int	mlx_close(int keycode, t_vars *vars)
 	ft_printf("keycode is %d\n", keycode);
 	if (keycode == 65307)
 		on_destroy(vars);
-		//mlx_destroy_window(vars->mlx, vars->win);
 	return (0);
 }
 
@@ -97,7 +98,6 @@ int	mlx_release(int keycode, t_vars *vars)
 	ft_printf("release %d\n", keycode);
 	if (keycode == 65307)
 		on_destroy(vars);
-		//mlx_destroy_window(vars->mlx, vars->win);
 	return (0);
 }
 
@@ -191,7 +191,7 @@ int	move_center(int keycode, t_vars *vars)
 {
 	int	step;
 
-	step = 5;
+	step = 10;
 	if (keycode == 'a' || keycode == 65361)
 		vars->x = vars->x - step;
 	else if (keycode == 'd' || keycode == 65363)
@@ -200,6 +200,14 @@ int	move_center(int keycode, t_vars *vars)
 		vars->y = vars->y - step;
 	else if (keycode == 's' || keycode == 65364)
 		vars->y = vars->y + step;
+	else if (keycode == 'b')
+		vars->color = create_trgb(0, 0, 0, 255);
+	else if (keycode == 'r')
+		vars->color = create_trgb(0, 255, 0, 0);
+	else if (keycode == 'g')
+		vars->color = create_trgb(0, 0, 255, 0);
+	else if (keycode == ' ')
+		vars->color = create_trgb(0, 255, 255, 255);
 	else if (keycode == 65307)
 		on_destroy(vars);
 	else
@@ -218,14 +226,14 @@ void	draw_circle(t_vars *vars, int r, int color)
 	d = 3 - 2 * r;
 	while (y >= x)
 	{
-		mlx_pixel_put(vars->mlx, vars->win, vars->x + x, vars->y + y, color);
-		mlx_pixel_put(vars->mlx, vars->win, vars->x - x, vars->y + y, color);
-		mlx_pixel_put(vars->mlx, vars->win, vars->x + x, vars->y - y, color);
-		mlx_pixel_put(vars->mlx, vars->win, vars->x - x, vars->y - y, color);
-		mlx_pixel_put(vars->mlx, vars->win, vars->x + y, vars->y + x, color);
-		mlx_pixel_put(vars->mlx, vars->win, vars->x - y, vars->y + x, color);
-		mlx_pixel_put(vars->mlx, vars->win, vars->x + y, vars->y - x, color);
-		mlx_pixel_put(vars->mlx, vars->win, vars->x - y, vars->y - x, color);
+		my_mlx_pixel_put(&vars->img, vars->x + x, vars->y + y, color);
+		my_mlx_pixel_put(&vars->img, vars->x - x, vars->y + y, color);
+		my_mlx_pixel_put(&vars->img, vars->x + x, vars->y - y, color);
+		my_mlx_pixel_put(&vars->img, vars->x - x, vars->y - y, color);
+		my_mlx_pixel_put(&vars->img, vars->x + y, vars->y + x, color);
+		my_mlx_pixel_put(&vars->img, vars->x - y, vars->y + x, color);
+		my_mlx_pixel_put(&vars->img, vars->x + y, vars->y - x, color);
+		my_mlx_pixel_put(&vars->img, vars->x - y, vars->y - x, color);
 		if (d <= 0)
 			d = d + 4 * x + 6;
 		else
@@ -237,15 +245,85 @@ void	draw_circle(t_vars *vars, int r, int color)
 	}
 }
 
-int	show_circle(t_vars *vars)
+void	draw_square(t_vars *vars, int len, int color)
 {
-	int	color;
-	int	radius;
+	int	i;
+	int	off_set;
 
-	color = create_trgb(0, 255, 0, 0);
-	radius = 50;
-	mlx_clear_window(vars->mlx, vars->win);
-	draw_circle(vars, radius, color);
+	i = 0;
+	off_set = len / 2;
+	while (i < len)
+	{
+		my_mlx_pixel_put(&vars->img, vars->x - off_set + i, vars->y + off_set, color);
+		my_mlx_pixel_put(&vars->img, vars->x - off_set + i, vars->y - off_set, color);
+		my_mlx_pixel_put(&vars->img, vars->x + off_set, vars->y + off_set - i, color);
+		my_mlx_pixel_put(&vars->img, vars->x - off_set, vars->y + off_set - i, color);
+		i++;
+	}
+}
+
+void	draw_line(t_vars *vars, int *start, int *end, int color)
+{
+	int	dx;
+	int	dy;
+	int	x0 = start[0];
+	int	y0 = start[1];
+	int	intcpt;
+
+	dx = end[0] - start[0];
+	dy = end[1] - start[1];
+	if (!dx)
+	{
+		while (y0 != end[1])
+		{
+			my_mlx_pixel_put(&vars->img, x0, y0, color);
+			if (dy >= 0)
+				y0++;
+			else
+				y0--;
+		}
+	}
+	else
+	{
+		intcpt = y0 - ((dy * x0 / dx));
+		while (x0 != end[0] || y0 != end[1])
+		{
+			my_mlx_pixel_put(&vars->img, x0, y0, color);
+			if (dx >= 0)
+				x0 += 1;
+			else
+				x0 -= 1;
+			y0 = (dy * x0 / dx) + intcpt;
+		}
+	}
+}
+
+void	draw_triangular(t_vars *vars, int ends[3][2], int color)
+{
+	draw_line(vars, ends[0], ends[1], color);
+	draw_line(vars, ends[0], ends[2], color);
+	draw_line(vars, ends[1], ends[2], color);
+}
+
+void	mlx_clear_img(t_vars *vars)
+{
+	ft_bzero(vars->img.addr, sizeof(int) * 800 * 800);
+}
+
+int	show_img(t_vars *vars)
+{
+	int	radius;
+	int	ends[3][2] = {{400, 100}, {700, 700}, {100, 700}};
+	//int	start[2] = {400, 100};
+	//int	end[2] = {100, 700};
+
+	radius = 100;
+	mlx_clear_img(vars);
+	draw_circle(vars, radius, vars->color);
+	draw_square(vars, 2 * radius, vars->color);
+	draw_triangular(vars, ends, vars->color);
+	//draw_line(vars, start, end, color);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
 	return (0);
 }
 
@@ -254,12 +332,18 @@ int	main(void)
 	t_vars	vars;
 
 	vars.mlx = mlx_init();
+	if (!vars.mlx)
+		return (1);
 	vars.win = mlx_new_window(vars.mlx, 800, 800, "WASD_Circle");
 	vars.x = 400;
 	vars.y = 400;
+	vars.color = create_trgb(0, 255, 255, 255);
+	vars.img.img = mlx_new_image(vars.mlx, 800, 800);
+	vars.img.addr = mlx_get_data_addr(vars.img.img, &vars.img.bits_per_pixel,
+			&vars.img.line_length, &vars.img.endian);
+	mlx_loop_hook(vars.mlx, show_img, &vars);
 	mlx_hook(vars.win, 2, 1L<<0, move_center, &vars);
 	mlx_hook(vars.win, 17, 1L<<2, mlx_closeb, &vars);	//close button
-	mlx_loop_hook(vars.mlx, show_circle, &vars);
 	mlx_loop(vars.mlx);
 	on_destroy(&vars);
 	return (0);
