@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 16:54:02 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/03 18:28:04 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/04 19:40:38 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	dst = data->addr + (y * data->line_length + x * (data->bpp / 8));
 	*(unsigned int *)dst = color;
 }
 
@@ -51,6 +51,14 @@ int	add_shade(double factor, int color)
 	return (create_trgb(new_t, new_r, new_g, new_b));
 }
 
+int	get_color_grade(int i, int color)
+{
+	double	score;
+
+	score = 1. / log((double)i);
+	return (add_shade(score, color));
+}
+
 int	get_opposite(int color)
 {
 	int	new_t;
@@ -83,17 +91,18 @@ int	mlx_closeb(t_vars *vars)
 
 int	move_center(int keycode, t_vars *vars)
 {
-	int	step;
-
-	step = 10;
 	if (keycode == 'a' || keycode == 65361)
-		vars->x = vars->x - step;
+		vars->x0 = vars->x0 - STEP;
 	else if (keycode == 'd' || keycode == 65363)
-		vars->x = vars->x + step;
+		vars->x0 = vars->x0 + STEP;
 	else if (keycode == 'w' || keycode == 65362)
-		vars->y = vars->y - step;
+		vars->y0 = vars->y0 - STEP;
 	else if (keycode == 's' || keycode == 65364)
-		vars->y = vars->y + step;
+		vars->y0 = vars->y0 + STEP;
+	else if (keycode == 61 || keycode == 65451)
+		vars->max_iter += 2;
+	else if (keycode == 45 || keycode == 65453)
+		vars->max_iter -= 2;
 	else if (keycode == 65307)
 		on_destroy(vars);
 	else
@@ -101,7 +110,23 @@ int	move_center(int keycode, t_vars *vars)
 	return (0);
 }
 
+int	zoom(int button, int x, int y, t_vars *vars)
+{
+	double	fx;
+	double	fy;
+
+	fx = vars->x0 + (x - SIZE_W / 2) * vars->zoom;
+	fy = vars->y0 + (y - SIZE_H / 2) * vars->zoom;
+	if (button == 4)
+		vars->zoom /= ZOOM_FACTOR;
+	else if (button == 5)
+		vars->zoom *= ZOOM_FACTOR;
+	vars->x0 = fx - (x - SIZE_W / 2) * vars->zoom;
+	vars->y0 = fy - (y - SIZE_H / 2) * vars->zoom;
+	return (0);
+}
+
 void	mlx_clear_img(t_vars *vars)
 {
-	ft_bzero(vars->img.addr, sizeof(int) * 800 * 800);
+	ft_bzero(vars->img.addr, sizeof(int) * SIZE_W * SIZE_H);
 }
