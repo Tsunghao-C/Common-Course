@@ -51,6 +51,38 @@ int	add_shade(double factor, int color)
 	return (create_trgb(new_t, new_r, new_g, new_b));
 }
 
+int	get_pallete_1(int i)
+{
+	if (i % 8 == 0)
+		return (add_shade((i % 5) / 5, create_trgb(0, 133, 50, 33)));
+	else if (i % 8 == 1)
+		return (add_shade((i % 5) / 5, create_trgb(0, 254, 94, 65)));
+	else if (i % 8 == 2)
+		return (add_shade((i % 5) / 5, create_trgb(0, 249, 144, 93)));
+	else if (i % 8 == 3)
+		return (add_shade((i % 5) / 5, create_trgb(0, 243, 193, 120)));
+	else if (i % 8 == 4)
+		return (add_shade((i % 5) / 5, create_trgb(0, 230, 217, 140)));
+	else if (i % 8 == 5)
+		return (add_shade((i % 5) / 5, create_trgb(0, 216, 241, 160)));
+	else if (i % 8 == 6)
+		return (add_shade((i % 5) / 5, create_trgb(0, 108, 205, 140)));
+	else
+		return (add_shade((i % 5) / 5, create_trgb(0, 0, 168, 120)));
+}
+
+int	get_pallete_2(int i)
+{
+	if (i % 4 == 0)
+		return (add_shade((i % 5) / 5, create_trgb(0, 250, 112, 112)));
+	else if (i % 4 == 1)
+		return (add_shade((i % 5) / 5, create_trgb(0, 254, 253, 237)));
+	else if (i % 4 == 2)
+		return (add_shade((i % 5) / 5, create_trgb(0, 198, 235, 197)));
+	else
+		return (add_shade((i % 5) / 5, create_trgb(0, 161, 195, 152)));
+}
+
 int	get_color_grade(int i, int color)
 {
 	double	score;
@@ -92,13 +124,13 @@ int	mlx_closeb(t_vars *vars)
 int	move_center(int keycode, t_vars *vars)
 {
 	if (keycode == 'a' || keycode == 65361)
-		vars->x0 = vars->x0 - STEP;
+		vars->x0 = vars->x0 - STEP * vars->zoom;
 	else if (keycode == 'd' || keycode == 65363)
-		vars->x0 = vars->x0 + STEP;
+		vars->x0 = vars->x0 + STEP * vars->zoom;
 	else if (keycode == 'w' || keycode == 65362)
-		vars->y0 = vars->y0 - STEP;
+		vars->y0 = vars->y0 - STEP * vars->zoom;
 	else if (keycode == 's' || keycode == 65364)
-		vars->y0 = vars->y0 + STEP;
+		vars->y0 = vars->y0 + STEP * vars->zoom;
 	else if (keycode == 61 || keycode == 65451)
 		vars->max_iter += 2;
 	else if (keycode == 45 || keycode == 65453)
@@ -106,7 +138,7 @@ int	move_center(int keycode, t_vars *vars)
 	else if (keycode == 65307)
 		on_destroy(vars);
 	else
-		ft_printf("keypress %d\n", keycode);
+		return (0);
 	return (0);
 }
 

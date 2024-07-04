@@ -40,7 +40,7 @@ int	show_img(t_vars *vars)
 			if (vars->model == 1)
 				draw_mandelbrot(vars, x, y);
 			else if (vars->model == 2)
-				draw_julia(vars, x, y);
+				draw_julia(vars, x, y, -0.745, 0.15);
 			else if (vars->model == 3)
 				draw_bs(vars, x, y);
 			y++;

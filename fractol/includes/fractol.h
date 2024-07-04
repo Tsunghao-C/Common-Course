@@ -39,7 +39,7 @@
 # define F3 "Burning_Ship"
 # define SIZE_W 960
 # define SIZE_H 540
-# define STEP 0.3
+# define STEP 10.0
 # define ZOOM_FACTOR 1.2
 # define P_NAME "fractol"
 
@@ -73,6 +73,8 @@ int		ft_isfractol(char *str);
 /* mlx utils - colors */
 int		create_trgb(int t, int r, int g, int b);
 int		get_color(int trgb, char index);
+int		get_pallete_1(int i);
+int		get_pallete_2(int i);
 int		add_shade(double factor, int color);
 int		get_opposite(int color);
 int		get_color_grade(int i, int color);
@@ -87,7 +89,7 @@ void	mlx_clear_img(t_vars *vars);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 /* draw fractol */
 void	draw_mandelbrot(t_vars *vars, int x, int y);
-void	draw_julia(t_vars *vars, int x, int y);
+void	draw_julia(t_vars *vars, int x, int y, double cx, double cy);
 void	draw_bs(t_vars *vars, int x, int y);
 void	render(t_vars *vars);
 
