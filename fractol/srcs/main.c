@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 15:53:17 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/05 15:12:21 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/05 18:26:26 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ int	main(int ac, char *av[])
 	vars.mlx = mlx_init();
 	if (!vars.mlx)
 		ft_err2_mlx(av[1]);
-	vars.win = mlx_new_window(vars.mlx, SIZE_W, SIZE_H, av[1]);
 	ft_vars_init(&vars, av[1]);
+	vars.win = mlx_new_window(vars.mlx, SIZE_W, SIZE_H, av[1]);
 	mlx_loop_hook(vars.mlx, show_img, &vars);
 	mlx_hook(vars.win, KEY_PRESS, 1L << 0, key_hook, &vars);
 	mlx_hook(vars.win, MOUSE_PRESS, 1L << 2, zoom, &vars);
