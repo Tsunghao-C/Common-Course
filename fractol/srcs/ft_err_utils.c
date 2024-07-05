@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 16:00:21 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/05 12:04:01 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/05 14:53:35 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ int	ft_isfractol(char *str)
 		return (2);
 	else if (!strcmp(str, F3))
 		return (3);
+	else if (!strcmp(str, F4))
+		return (4);
+	else if (!strcmp(str, F5))
+		return (5);
 	else
 		return (0);
 }
@@ -27,7 +31,8 @@ int	ft_isfractol(char *str)
 void	ft_err1_args(void)
 {
 	ft_printf("%s: Invalid Input! Choose one of the following:\n", P_NAME);
-	ft_printf("\t- %s\n\t- %s\n\t- %s\n", F1, F2, F3);
+	ft_printf("\t- %s\n\t- %s\n\t- %s\n\t- %s\n\t- %s\n",
+		F1, F2, F3, F4, F5);
 	exit(1);
 }
 

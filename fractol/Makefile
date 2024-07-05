@@ -6,14 +6,15 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/17 13:53:44 by tsuchen           #+#    #+#              #
-#    Updated: 2024/07/04 19:40:47 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/07/05 15:12:14 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= fractol
 
 
-SRCS_F		= main.c ft_err_utils.c ft_mlx_utils.c ft_draw_fractol.c 
+SRCS_F		= main.c ft_err_utils.c ft_mlx_utils.c ft_draw_fractol.c \
+		  ft_color_utils.c ft_palette.c
 
 F_PATH		= srcs/
 

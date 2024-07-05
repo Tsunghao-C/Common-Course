@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 15:53:17 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/05 12:03:49 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/05 15:12:21 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,12 @@ int	show_img(t_vars *vars)
 	int	x;
 	int	y;
 
-	mlx_clear_img(vars);
 	mlx_clear_window(vars->mlx, vars->win);
-	x = 0;
-	y = 0;
-	while (x < SIZE_W)
+	x = -1;
+	while (++x < SIZE_W)
 	{
-		while (y < SIZE_H)
+		y = -1;
+		while (++y < SIZE_H)
 		{
 			if (vars->model == 1)
 				draw_mandelbrot(vars, x, y);
@@ -60,10 +59,11 @@ int	show_img(t_vars *vars)
 				draw_julia(vars, x, y);
 			else if (vars->model == 3)
 				draw_bs(vars, x, y);
-			y++;
+			else if (vars->model == 4)
+				draw_mandelbrot3(vars, x, y);
+			else if (vars->model == 5)
+				draw_mandelbrot4(vars, x, y);
 		}
-		y = 0;
-		x++;
 	}
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
 	return (0);
@@ -87,9 +87,9 @@ int	main(int ac, char *av[])
 	vars.win = mlx_new_window(vars.mlx, SIZE_W, SIZE_H, av[1]);
 	ft_vars_init(&vars, av[1]);
 	mlx_loop_hook(vars.mlx, show_img, &vars);
-	mlx_hook(vars.win, KEY_PRESS, 1L<<0, move_center, &vars);
-	mlx_hook(vars.win, MOUSE_PRESS, 1L<<2, zoom, &vars);
-	mlx_hook(vars.win, CLOSE_BUTTON, 1L<<2, mlx_closeb, &vars);
+	mlx_hook(vars.win, KEY_PRESS, 1L << 0, key_hook, &vars);
+	mlx_hook(vars.win, MOUSE_PRESS, 1L << 2, zoom, &vars);
+	mlx_hook(vars.win, CLOSE_BUTTON, 1L << 2, mlx_closeb, &vars);
 	mlx_expose_hook(vars.win, expose, &vars);
 	mlx_loop(vars.mlx);
 	on_destroy(&vars);

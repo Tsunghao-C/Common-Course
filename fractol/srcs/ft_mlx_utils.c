@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 16:54:02 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/05 12:04:04 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/05 15:10:08 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,98 +20,6 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-int	create_trgb(int t, int r, int g, int b)
-{
-	return (t << 24 | r << 16 | g << 8 | b);
-}
-
-int	get_color(int trgb, char index)
-{
-	if (index == 't')
-		return ((trgb >> 24) & 0xFF);
-	else if (index == 'r')
-		return ((trgb >> 16) & 0xFF);
-	else if (index == 'g')
-		return ((trgb >> 8) & 0xFF);
-	else
-		return (trgb & 0xFF);
-}
-
-int	add_shade(double factor, int color)
-{
-	int	new_t;
-	int	new_r;
-	int	new_g;
-	int	new_b;
-
-	new_t = get_color(color, 't');
-	new_r = get_color(color, 'r') * (1 - factor);
-	new_g = get_color(color, 'g') * (1 - factor);
-	new_b = get_color(color, 'b') * (1 - factor);
-	return (create_trgb(new_t, new_r, new_g, new_b));
-}
-
-int	get_pallete(int i, int pal_no)
-{
-	if (pal_no == 2)
-		return (get_pallete_2(i));
-	return (get_pallete_1(i));
-}
-
-int	get_pallete_1(int i)
-{
-	if (i % 8 == 0)
-		return (add_shade((i % 5) / 5, create_trgb(0, 133, 50, 33)));
-	else if (i % 8 == 1)
-		return (add_shade((i % 5) / 5, create_trgb(0, 254, 94, 65)));
-	else if (i % 8 == 2)
-		return (add_shade((i % 5) / 5, create_trgb(0, 249, 144, 93)));
-	else if (i % 8 == 3)
-		return (add_shade((i % 5) / 5, create_trgb(0, 243, 193, 120)));
-	else if (i % 8 == 4)
-		return (add_shade((i % 5) / 5, create_trgb(0, 230, 217, 140)));
-	else if (i % 8 == 5)
-		return (add_shade((i % 5) / 5, create_trgb(0, 216, 241, 160)));
-	else if (i % 8 == 6)
-		return (add_shade((i % 5) / 5, create_trgb(0, 108, 205, 140)));
-	else
-		return (add_shade((i % 5) / 5, create_trgb(0, 0, 168, 120)));
-}
-
-int	get_pallete_2(int i)
-{
-	if (i % 4 == 0)
-		return (add_shade((i % 5) / 5, create_trgb(0, 250, 112, 112)));
-	else if (i % 4 == 1)
-		return (add_shade((i % 5) / 5, create_trgb(0, 254, 253, 237)));
-	else if (i % 4 == 2)
-		return (add_shade((i % 5) / 5, create_trgb(0, 198, 235, 197)));
-	else
-		return (add_shade((i % 5) / 5, create_trgb(0, 161, 195, 152)));
-}
-
-int	get_color_grade(int i, int color)
-{
-	double	score;
-
-	score = 1. / log((double)i);
-	return (add_shade(score, color));
-}
-
-int	get_opposite(int color)
-{
-	int	new_t;
-	int	new_r;
-	int	new_g;
-	int	new_b;
-
-	new_t = get_color(color, 't');
-	new_r = 255 - get_color(color, 'r');
-	new_g = 255 - get_color(color, 'g');
-	new_b = 255 - get_color(color, 'b');
-	return (create_trgb(new_t, new_r, new_g, new_b));
-}
-
 int	on_destroy(t_vars *vars)
 {
 	mlx_destroy_image(vars->mlx, vars->img.img);
@@ -122,13 +30,7 @@ int	on_destroy(t_vars *vars)
 	return (0);
 }
 
-int	mlx_closeb(t_vars *vars)
-{
-	on_destroy(vars);
-	return (0);
-}
-
-int	move_center(int keycode, t_vars *vars)
+int	key_hook(int keycode, t_vars *vars)
 {
 	if (keycode == 'a' || keycode == 65361)
 		vars->x0 = vars->x0 - STEP * vars->zoom;
@@ -169,7 +71,8 @@ int	zoom(int button, int x, int y, t_vars *vars)
 	return (0);
 }
 
-void	mlx_clear_img(t_vars *vars)
+int	mlx_closeb(t_vars *vars)
 {
-	ft_bzero(vars->img.addr, sizeof(int) * SIZE_W * SIZE_H);
+	on_destroy(vars);
+	return (0);
 }
