@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 15:53:17 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/04 19:40:42 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/05 12:03:49 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,31 @@
 
 static void	ft_vars_init(t_vars *vars, char *model)
 {
+	char	*c_real;
+	char	*c_imag;
+
 	vars->x0 = 0.0;
 	vars->y0 = 0.0;
+	vars->cx = 0.0;
+	vars->cy = 0.0;
 	vars->zoom = 4.0 / SIZE_W;
 	vars->max_iter = 50;
+	vars->pal_no = 1;
 	vars->img.img = mlx_new_image(vars->mlx, SIZE_W, SIZE_H);
 	vars->img.addr = mlx_get_data_addr(vars->img.img, &vars->img.bpp,
 			&vars->img.line_length, &vars->img.endian);
 	vars->model = ft_isfractol(model);
+	if (vars->model == 2)
+	{
+		ft_printf("Input C_real in float: ");
+		c_real = get_next_line(IN);
+		ft_printf("Input C_imag in float: ");
+		c_imag = get_next_line(IN);
+		vars->cx = ft_atof(c_real);
+		vars->cy = ft_atof(c_imag);
+		free(c_real);
+		free(c_imag);
+	}
 }
 
 int	show_img(t_vars *vars)
@@ -40,7 +57,7 @@ int	show_img(t_vars *vars)
 			if (vars->model == 1)
 				draw_mandelbrot(vars, x, y);
 			else if (vars->model == 2)
-				draw_julia(vars, x, y, -0.745, 0.15);
+				draw_julia(vars, x, y);
 			else if (vars->model == 3)
 				draw_bs(vars, x, y);
 			y++;

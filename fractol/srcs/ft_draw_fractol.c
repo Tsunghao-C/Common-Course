@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 10:33:10 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/04 19:40:21 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/05 12:03:47 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,10 @@ void	draw_mandelbrot(t_vars *vars, int x, int y)
 	if (i == vars->max_iter)
 		my_mlx_pixel_put(&vars->img, x, y, create_trgb(0, 11, 5, 0));
 	else
-		//my_mlx_pixel_put(&vars->img, x, y, add_shade((1.0 / log10(i)), create_trgb(0, 255, 255, 255)));
-		//my_mlx_pixel_put(&vars->img, x, y, create_trgb(0, 255, 255, 255) / (i % 255));
-		my_mlx_pixel_put(&vars->img, x, y, get_pallete_2(i));
+		my_mlx_pixel_put(&vars->img, x, y, get_pallete(i, vars->pal_no));
 }
 
-void	draw_julia(t_vars *vars, int x, int y, double cx, double cy)
+void	draw_julia(t_vars *vars, int x, int y)
 {
 	int	i;
 	double	tmp;
@@ -51,15 +49,15 @@ void	draw_julia(t_vars *vars, int x, int y, double cx, double cy)
 	while (++i < vars->max_iter)
 	{
 		tmp = vars->zx;
-		vars->zx = vars->zx * vars->zx - vars->zy * vars->zy + cx;
-		vars->zy = 2 * vars->zy * tmp + cy;
+		vars->zx = vars->zx * vars->zx - vars->zy * vars->zy + vars->cx;
+		vars->zy = 2 * vars->zy * tmp + vars->cy;
 		if (vars->zx * vars->zx + vars->zy * vars->zy >= __DBL_MAX__)
 			break;
 	}
 	if (i == vars->max_iter)
 		my_mlx_pixel_put(&vars->img, x, y, create_trgb(0, 11, 5, 0));
 	else
-		my_mlx_pixel_put(&vars->img, x, y, get_pallete_1(i));
+		my_mlx_pixel_put(&vars->img, x, y, get_pallete(i, vars->pal_no));
 }
 
 void	draw_bs(t_vars *vars, int x, int y)
@@ -85,5 +83,5 @@ void	draw_bs(t_vars *vars, int x, int y)
 	if (i == vars->max_iter)
 		my_mlx_pixel_put(&vars->img, x, y, create_trgb(0, 11, 5, 0));
 	else
-		my_mlx_pixel_put(&vars->img, x, y, get_pallete_1(i));
+		my_mlx_pixel_put(&vars->img, x, y, get_pallete(i, vars->pal_no));
 }

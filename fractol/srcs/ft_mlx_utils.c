@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 16:54:02 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/04 19:40:38 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/05 12:04:04 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,13 @@ int	add_shade(double factor, int color)
 	new_g = get_color(color, 'g') * (1 - factor);
 	new_b = get_color(color, 'b') * (1 - factor);
 	return (create_trgb(new_t, new_r, new_g, new_b));
+}
+
+int	get_pallete(int i, int pal_no)
+{
+	if (pal_no == 2)
+		return (get_pallete_2(i));
+	return (get_pallete_1(i));
 }
 
 int	get_pallete_1(int i)
@@ -137,8 +144,12 @@ int	move_center(int keycode, t_vars *vars)
 		vars->max_iter -= 2;
 	else if (keycode == 65307)
 		on_destroy(vars);
-	else
-		return (0);
+	else if (keycode == 65470)
+		vars->pal_no = 1;
+	else if (keycode == 65471)
+		vars->pal_no = 2;
+	else if (keycode == 65472)
+		vars->pal_no = 3;
 	return (0);
 }
 

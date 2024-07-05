@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 17:50:13 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/04 19:40:45 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/05 12:04:07 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,14 @@ typedef struct	s_vars
 	void	*win;
 	int	model;
 	int	max_iter;
+	int	pal_no;
 	t_data	img;
 	double	x0;
 	double	y0;
 	double	zx;
 	double	zy;
+	double	cx;
+	double	cy;
 	double	zoom;
 }	t_vars;
 
@@ -73,6 +76,7 @@ int		ft_isfractol(char *str);
 /* mlx utils - colors */
 int		create_trgb(int t, int r, int g, int b);
 int		get_color(int trgb, char index);
+int		get_pallete(int i, int pal_no);
 int		get_pallete_1(int i);
 int		get_pallete_2(int i);
 int		add_shade(double factor, int color);
@@ -89,7 +93,7 @@ void	mlx_clear_img(t_vars *vars);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 /* draw fractol */
 void	draw_mandelbrot(t_vars *vars, int x, int y);
-void	draw_julia(t_vars *vars, int x, int y, double cx, double cy);
+void	draw_julia(t_vars *vars, int x, int y);
 void	draw_bs(t_vars *vars, int x, int y);
 void	render(t_vars *vars);
 
