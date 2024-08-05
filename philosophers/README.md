@@ -10,9 +10,10 @@
 1. What is threads and how does it work? Why do we use it?
 2. What is MUTEX? Why it matters in threads?
 
-## The difference between THREAD and PROCESS
-    1. THREAD shares memories but PRCOESSES don't
-    2. A PROCESS can contain multiple THREADS, but a thread can only belong to one PROCESS.
+### The difference between THREAD and PROCESS
+
+1. THREAD shares memories but PRCOESSES don't
+2. A PROCESS can contain multiple THREADS, but a thread can only belong to one PROCESS.
 
 ### Deadlock
 
@@ -39,8 +40,7 @@ void    *routine(void *arg)
     }
 }
 ```
-
-            If thread 1 happen to start mutexA first and tread 2 start with mutexB, it will reach to a deadlock that both of the threads are waiting each other to do the second lock
+If thread 1 happen to start mutexA first and tread 2 start with mutexB, it will reach to a deadlock that both of the threads are waiting each other to do the second lock
 | Table   | MutexA    | MutexB |
 |---------|-----------|--------|
 | Thread 1| lock      | waiting|
