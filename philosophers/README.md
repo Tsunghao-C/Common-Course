@@ -1,8 +1,14 @@
-# 42 common core project - Philosophers
+# 42 Common Core Project - Philosophers
 
 ## Objective
 
-## Key
+1. This project is about developing parallel tasks using "Threads"
+2. To a more advanced level, also know the differences between processes and threads, and try to do the same thing with processes.
+
+## Key Concepts
+
+1. What is threads and how does it work? Why do we use it?
+2. What is MUTEX? Why it matters in threads?
 
 ## The difference between THREAD and PROCESS
     1. THREAD shares memories but PRCOESSES don't
@@ -34,8 +40,7 @@ void    *routine(void *arg)
 ```
 
             If thread 1 happen to start mutexA first and tread 2 start with mutexB, it will reach to a deadlock that both of the threads are waiting each other to do the second lock
-            | Table   | MutexA    | MutexB
-            ----------------------------
-            | Thread 1| lock  | waiting
-            ----------------------------
-            | Thread 2| waiting | lock
+| Table   | MutexA    | MutexB |
+|---------|-----------|--------|
+| Thread 1| lock      | waiting|
+| Thread 2| waiting   | lock   |
