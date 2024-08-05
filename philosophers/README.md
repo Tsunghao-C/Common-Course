@@ -15,11 +15,12 @@
     2. A PROCESS can contain multiple THREADS, but a thread can only belong to one PROCESS.
 
 ### Deadlock
-    1. Deadlock is a situation when the thread(s) stay constantly waiting for unlock, which could never happen.
-    2. Types of deadlock situations:
-        1. There are more ```pthread_mutex_lock``` than ```pthread_mutex_unlock```
-        2. There are more than one MUTEX but the order of the MUTEX are not consistent
-            ex: suppose there are two mutex and there are 2 threads running the following routine:
+
+1. Deadlock is a situation when the thread(s) stay constantly waiting for unlock, which could never happen.
+2. Types of deadlock situations:
+    1. There are more ```pthread_mutex_lock``` than ```pthread_mutex_unlock```
+    2. There are more than one MUTEX but the order of the MUTEX are not consistent
+    Ex: suppose there are two mutex and there are 2 threads running the following routine:
 ```
 pthread_mutex_t mutexA
 pthread_mutex_t mutexB
