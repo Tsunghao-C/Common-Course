@@ -14,28 +14,28 @@
         1. There are more ```pthread_mutex_lock``` than ```pthread_mutex_unlock```
         2. There are more than one MUTEX but the order of the MUTEX are not consistent
             ex: suppose there are two mutex and there are 2 threads running the following routine:
-            ```
-            pthread_mutex_t mutexA
-            pthread_mutex_t mutexB
+```
+pthread_mutex_t mutexA
+pthread_mutex_t mutexB
 
-            void    *routine(void *arg)
-            {
-                if (rand() %2 == 0)
-                {
-                    pthread_mutex_lock(&mutexA);
-                    pthread_mutex_lock(&mutexB);
-                }
-                else
-                {
-                    pthread_mutex_lock(&mutexB);
-                    pthread_mutex_lock(&mutexA);
-                }
-            }
-            ```
+void    *routine(void *arg)
+{
+    if (rand() %2 == 0)
+    {
+        pthread_mutex_lock(&mutexA);
+        pthread_mutex_lock(&mutexB);
+    }
+    else
+    {
+    pthread_mutex_lock(&mutexB);
+    pthread_mutex_lock(&mutexA);
+    }
+}
+```
 
             If thread 1 happen to start mutexA first and tread 2 start with mutexB, it will reach to a deadlock that both of the threads are waiting each other to do the second lock
-            Table   | MutexA    | MutexB
+            | Table   | MutexA    | MutexB
             ----------------------------
-            Thread 1| lock  | waiting
+            | Thread 1| lock  | waiting
             ----------------------------
-            Thread 2| waiting | lock
+            | Thread 2| waiting | lock
