@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:28:18 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/06 18:56:40 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/06 19:42:22 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,57 @@ static int	input_check(int ac, char *av[], t_phil *phil)
 	return (0);
 }
 
-void	show_struct(t_phil *phil)
+// void	show_struct(t_phil *phil)
+// {
+// 	printf("num_of_phils :%d\n", phil->num_of_phils);
+// 	printf("time_to_die :%lu\n", phil->time_to_die);
+// 	printf("time_to_die :%lu\n", phil->time_to_die);
+// 	printf("time_to_sleep :%lu\n", phil->time_to_sleep);
+// 	printf("must_eat_times :%d\n", phil->must_eat_times);
+// }
+
+void	*routine(void *arg)
 {
-	printf("num_of_phils :%d\n", phil->num_of_phils);
-	printf("time_to_die :%lu\n", phil->time_to_die);
-	printf("time_to_die :%lu\n", phil->time_to_die);
-	printf("time_to_sleep :%lu\n", phil->time_to_sleep);
-	printf("must_eat_times :%d\n", phil->must_eat_times);
+	//lock
+	printf("Thread created!\n");
+	//unlock
+	return (arg);
+}
+
+void	init_thread(t_phil *phil, pthread_t *th)
+{
+	unsigned int		i;
+
+	i = 0;
+	while (i < phil->num_of_phils)
+	{
+		if (pthread_create(th + i, NULL, &routine, phil))
+			perror("Failed to create thread");
+		i++;
+	}
+}
+
+void	join_thread(t_phil *phil, pthread_t *th)
+{
+	unsigned int		i;
+
+	i = 0;
+	while (i < phil->num_of_phils)
+	{
+		if (pthread_join(th[i], NULL))
+			perror("Failed to join thread");
+		printf("Tread finished\n");
+		i++;
+	}
 }
 
 int	main(int ac, char *av[])
 {
-	t_phil	phil;
+	t_phil		phil;
+	pthread_t	*th;
 
+	(void)phil;
+	th = NULL;
 	if (ac < 5 || ac > 6)
 	{
 		write(ER, "Need 4 or 5 args in the following order:\n", 41);
@@ -58,6 +96,12 @@ int	main(int ac, char *av[])
 		return (1);
 	}
 	printf("Start philosophers!\n");
-	show_struct(&phil);
+	//show_struct(&phil);
+	th = malloc((phil.num_of_phils + 1) * sizeof(pthread_t));
+	if (!th)
+		return (2);
+	init_thread(&phil, th);
+	join_thread(&phil, th);
+	free(th);
 	return (0);
 }
