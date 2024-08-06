@@ -6,7 +6,7 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/17 13:53:44 by tsuchen           #+#    #+#              #
-#    Updated: 2024/06/27 15:25:38 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/08/06 14:23:52 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,8 @@ SRCS		= $(addprefix $(PX_PATH), $(SRCS_PX))
 
 SRCSB		=
 
+HEADERS		= pipex.h
+
 OBJS		= $(SRCS:.c=.o)
 
 OBJSB		= $(SRCSB:.c=.o)
@@ -31,6 +33,8 @@ CFLAGS		= -Wall -Wextra -Werror
 
 CC		= cc
 
+H_DEPS		= $(addprefix $(HEAD), $(HEADERS))
+
 LIBFT_PATH	= libft/
 LIBFT_H_PATH	= libft/includes/
 LIBFT		= $(LIBFT_PATH)libft.a
@@ -40,7 +44,7 @@ all: $(NAME)
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_PATH)
 
-$(NAME): $(LIBFT) $(OBJS)
+$(NAME): $(LIBFT) $(OBJS) $(H_DEPS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
 bonus:  $(NAME)
