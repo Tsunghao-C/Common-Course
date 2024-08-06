@@ -6,7 +6,7 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/17 13:53:44 by tsuchen           #+#    #+#              #
-#    Updated: 2024/07/05 15:12:14 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/08/06 14:18:47 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,11 +22,15 @@ SRCS		= $(addprefix $(F_PATH), $(SRCS_F))
 
 SRCSB		=
 
+HEADERS		= fractol.h
+
 OBJS		= $(SRCS:.c=.o)
 
 OBJSB		= $(SRCSB:.c=.o)
 
 HEAD		= includes/
+
+H_DEPS		= $(addprefix $(HEAD), $(HEADERS))
 
 CFLAGS		= -Wall -Wextra -Werror
 
@@ -45,7 +49,7 @@ all: $(NAME)
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_PATH)
 
-$(NAME): $(LIBFT) $(OBJS)
+$(NAME): $(LIBFT) $(OBJS) $(H_DEPS)
 	$(CC) $(CFLAGS) $(OBJS) -L$(MLX) -I$(MLX) $(MLXFLAGS) $(LIBFT) -o $(NAME)
 
 bonus:  $(NAME)
