@@ -6,18 +6,21 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 15:10:21 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/07 15:12:05 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/07 17:33:36 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-unsigned long	get_time(void)
+unsigned long	get_time_diff(struct timeval *ref)
 {
-	struct timeval	current;
+	struct timeval  current;
+    unsigned long   diff;
 
-	gettimeofday(&current, NULL);
-	return (current.tv_usec);
+    gettimeofday(&current, NULL);
+    diff = (current.tv_sec - ref->tv_sec) * 1000;
+    diff += (current.tv_usec - ref->tv_usec) / 1000;
+	return (diff);
 }
 
 void	init_phil(t_philo *phil, int i, t_setup *setting)
@@ -37,15 +40,18 @@ int	input_check(int ac, char *av[], t_setup *setting)
 	while (++i < ac)
 	{
 		if (ft_atol(av[i]) < 1)
-			return (1);
+        {
+            write(ER, "Wrong input. Must be positive numbers\n", 38);
+            return (1);
+        }
 	}
 	setting->num_of_phils = ft_atol(av[1]);
-	setting->time_to_die = ft_atol(av[2]) * 1000;
-	setting->time_to_eat = ft_atol(av[3]) * 1000;
-	setting->time_to_sleep = ft_atol(av[4]) * 1000;
+	setting->time_to_die = ft_atol(av[2]);
+	setting->time_to_eat = ft_atol(av[3]);
+	setting->time_to_sleep = ft_atol(av[4]);
 	setting->must_eat_times = 0;
 	if (ac == 6)
 		setting->must_eat_times = ft_atol(av[5]);
-	setting->start_time = get_time();
+	gettimeofday(&setting->start_time, NULL);
 	return (0);
 }

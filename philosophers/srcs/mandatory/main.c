@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:28:18 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/07 15:17:35 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/07 17:34:29 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,30 +30,31 @@ void	*life_of_philo(void *arg)
 	{
 		if (philo->status == THINKING)
 		{
-			printf("%lu philo %d is thinking\n", (get_time() - philo->setting->start_time) / 1000, philo->id);
+			printf("%lu philo %d is thinking\n", get_time_diff(&philo->setting->start_time), philo->id);
 			philo->status = EATING;
 		}
 		else if (philo->status == EATING)
 		{
 			//lock
 			//try to eat
-			printf("%lu philo %d is eating\n", (get_time() - philo->setting->start_time) / 1000, philo->id);
+			printf("%lu philo %d is eating\n", get_time_diff(&philo->setting->start_time), philo->id);
 			philo->num_meals += 1;
-			philo->beg_lastmeal = get_time();
-			usleep(philo->setting->time_to_eat);
+			gettimeofday(&philo->beg_lastmeal, NULL);
+			// philo->beg_lastmeal = get_time();
+			usleep(philo->setting->time_to_eat * 1000);
 			//unlock
 			philo->status = SLEEPING;
 		}
-		else
+		else if (philo->status == SLEEPING)
 		{
-			printf("%lu philo %d is sleeping\n", (get_time() - philo->setting->start_time) / 1000, philo->id);
-			usleep(philo->setting->time_to_sleep);
+			printf("%lu philo %d is sleeping\n", get_time_diff(&philo->setting->start_time), philo->id);
+			usleep(philo->setting->time_to_sleep * 1000);
 			philo->status = THINKING;
 		}
-		if (get_time() - philo->beg_lastmeal > philo->setting->time_to_die)
+		if (get_time_diff(&philo->beg_lastmeal)> philo->setting->time_to_die)
 			break ;
 	}
-	printf("%lu philo %d died\n", (get_time() - philo->setting->start_time) / 1000, philo->id);
+	printf("%lu philo %d died\n", get_time_diff(&philo->setting->start_time), philo->id);
 	return (arg);
 }
 
@@ -96,20 +97,12 @@ int	main(int ac, char *av[])
 	pthread_t	*th;
 
 	th = NULL;
-	if (ac < 5 || ac > 6)
-	{
-		write(ER, "Need 4 or 5 args in the following order:\n", 41);
-		write(ER, "num_of_phils time_to_die time_to_eat ", 37);
-		write(ER, "time_to_sleep [optional]must_eat_times\n", 39);
+	if (ac_check(ac))
 		return (1);
-	}
 	if (input_check(ac, av, &setting))
-	{
-		write(ER, "Wrong input. Must be positive numbers\n", 38);
 		return (1);
-	}
 	printf("Start philosophers!\n");
-	th = malloc((setting.num_of_phils + 1) * sizeof(pthread_t));
+	th = malloc((setting.num_of_phils) * sizeof(pthread_t));
 	if (!th)
 		return (2);
 	init_thread(&setting, th);

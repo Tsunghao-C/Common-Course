@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:13:01 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/07 15:14:16 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/07 16:43:04 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ typedef struct s_setup
 	unsigned long	time_to_eat;
 	unsigned long	time_to_sleep;
 	unsigned int	must_eat_times;
-	unsigned long	start_time;
+	struct timeval	start_time;
 }	t_setup;
 
 typedef struct s_philo
 {
 	int				id;
 	t_task			status;
-	unsigned long	beg_lastmeal;
+	struct timeval	beg_lastmeal;
 	unsigned int	num_meals;
 	t_setup			*setting;
 }	t_philo;
@@ -52,8 +52,10 @@ typedef struct s_philo
 /* utils libft functions */
 long	ft_atol(const char *nptr);
 /* utils functions */
-unsigned long	get_time(void);
+unsigned long	get_time_diff(struct timeval *ref);
 void	init_phil(t_philo *phil, int i, t_setup *setting);
 int		input_check(int ac, char *av[], t_setup *setting);
+/* error functions */
+int		ac_check(int ac);
 
 #endif
