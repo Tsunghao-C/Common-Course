@@ -1,5 +1,11 @@
 # 42 Common Core Project - Philosophers
 
+## To do list
+
+1. Use pthread_detach to terminate program when any of the philosopher dies.
+2. Find a way to continuously checking dead or alive even when waiting or usleep.
+3. Norminette check
+
 ## Objective
 
 1. This project is about developing parallel tasks using "Threads"

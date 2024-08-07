@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:13:01 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/07 16:43:04 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/07 18:06:46 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_setup
 	unsigned long	time_to_sleep;
 	unsigned int	must_eat_times;
 	struct timeval	start_time;
+	pthread_mutex_t	*mutexFork;
 }	t_setup;
 
 typedef struct s_philo
@@ -55,6 +56,8 @@ long	ft_atol(const char *nptr);
 unsigned long	get_time_diff(struct timeval *ref);
 void	init_phil(t_philo *phil, int i, t_setup *setting);
 int		input_check(int ac, char *av[], t_setup *setting);
+void    init_mutex(t_setup *setting, pthread_mutex_t *mutexFork);
+void	destroy_mutex(t_setup *setting, pthread_mutex_t *mutexFork);
 /* error functions */
 int		ac_check(int ac);
 
