@@ -6,16 +6,23 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:28:18 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/07 12:30:27 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/07 13:27:08 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+unsigned long	get_time(void)
+{
+	struct timeval	current;
+
+	gettimeofday(&current, NULL);
+	return (current.tv_usec);
+}
+
 static int	input_check(int ac, char *av[], t_setup *setting)
 {
 	int	i;
-	struct timeval	start;
 
 	i = 0;
 	while (++i < ac)
@@ -24,14 +31,13 @@ static int	input_check(int ac, char *av[], t_setup *setting)
 			return (1);
 	}
 	setting->num_of_phils = ft_atol(av[1]);
-	setting->time_to_die = ft_atol(av[2]);
-	setting->time_to_eat = ft_atol(av[3]);
-	setting->time_to_sleep = ft_atol(av[4]);
+	setting->time_to_die = ft_atol(av[2]) * 1000;
+	setting->time_to_eat = ft_atol(av[3]) * 1000;
+	setting->time_to_sleep = ft_atol(av[4]) * 1000;
 	setting->must_eat_times = 0;
 	if (ac == 6)
 		setting->must_eat_times = ft_atol(av[5]);
-	gettimeofday(&start, NULL);
-	setting->start_time = start.tv_usec;
+	setting->start_time = get_time();
 	return (0);
 }
 
@@ -44,14 +50,39 @@ static int	input_check(int ac, char *av[], t_setup *setting)
 // 	printf("must_eat_times :%d\n", phil->must_eat_times);
 // }
 
-void	*routine(void *arg)
+void	*life_of_philo(void *arg)
 {
-	struct timeval	current_time;
-	unsigned long	starve_time;
+	t_philo			*philo;
 
-	gettimeofday(&current_time, NULL);
-	starve_time = current_time.tv_usec - ((t_philo *)arg)->beg_lastmeal;
-	printf("Philo %d starved for %lu\n", ((t_philo *)arg)->id, starve_time);
+	philo = (t_philo *)arg;
+	while (1)
+	{
+		if (philo->status == THINKING)
+		{
+			printf("%lu philo %d is thinking\n", (get_time() - philo->setting->start_time) / 1000, philo->id);
+			philo->status = EATING;
+		}
+		else if (philo->status == EATING)
+		{
+			//lock
+			//try to eat
+			printf("%lu philo %d is eating\n", (get_time() - philo->setting->start_time) / 1000, philo->id);
+			philo->num_meals += 1;
+			philo->beg_lastmeal = get_time();
+			usleep(philo->setting->time_to_eat);
+			//unlock
+			philo->status = SLEEPING;
+		}
+		else
+		{
+			printf("%lu philo %d is sleeping\n", (get_time() - philo->setting->start_time) / 1000, philo->id);
+			usleep(philo->setting->time_to_sleep);
+			philo->status = THINKING;
+		}
+		if (get_time() - philo->beg_lastmeal > philo->setting->time_to_die)
+			break ;
+	}
+	printf("%lu philo %d died\n", (get_time() - philo->setting->start_time) / 1000, philo->id);
 	return (arg);
 }
 
@@ -76,7 +107,7 @@ void	init_thread(t_setup *setting, pthread_t *th)
 		if (!phil)
 			return ;
 		init_phil(phil, i, setting);
-		if (pthread_create(th + i, NULL, &routine, phil))
+		if (pthread_create(th + i, NULL, &life_of_philo, phil))
 			perror("Failed to create thread");
 		i++;
 	}
@@ -86,15 +117,12 @@ void	join_thread(t_setup *setting, pthread_t *th)
 {
 	unsigned int		i;
 	t_philo				*body;
-	struct timeval		current;
 
 	i = 0;
 	while (i < setting->num_of_phils)
 	{
 		if (pthread_join(th[i], (void **)&body))
 			perror("Failed to join thread");
-		gettimeofday(&current, NULL);
-		printf("%lu philo %d died\n", current.tv_usec - setting->start_time, ((t_philo *)body)->id);
 		free(body);
 		i++;
 	}
@@ -103,7 +131,6 @@ void	join_thread(t_setup *setting, pthread_t *th)
 int	main(int ac, char *av[])
 {
 	t_setup		setting;
-	//struct timeval	start;
 	pthread_t	*th;
 
 	th = NULL;
