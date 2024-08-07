@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:13:01 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/07 12:16:12 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/07 15:14:16 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,11 @@ typedef struct s_philo
 	t_setup			*setting;
 }	t_philo;
 
-/* utils functions */
+/* utils libft functions */
 long	ft_atol(const char *nptr);
+/* utils functions */
+unsigned long	get_time(void);
+void	init_phil(t_philo *phil, int i, t_setup *setting);
+int		input_check(int ac, char *av[], t_setup *setting);
 
 #endif
