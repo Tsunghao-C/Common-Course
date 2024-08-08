@@ -6,41 +6,11 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:28:18 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/08 18:32:21 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/08 19:09:39 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int	eating_with_fork(t_philo *philo)
-{
-	int	i;
-
-	i = philo->id;
-	pthread_mutex_lock(philo->setting->mutexFork + i);
-	if (philo->setting->died)
-		return (1);
-	printf("%05lu %2d has taken a fork\n", get_time_diff(&philo->setting->start_time), i);
-	pthread_mutex_lock(philo->setting->mutexFork + (i + 1) % philo->setting->num_of_phils);
-	if (philo->setting->died)
-		return (1);
-	printf("%05lu %2d has taken a fork\n", get_time_diff(&philo->setting->start_time), i);
-	printf("%05lu %2d is eating\n", get_time_diff(&philo->setting->start_time), philo->id);
-	gettimeofday(philo->setting->last_meal + i, NULL);
-	usleep(philo->setting->time_to_eat * 1000);
-	philo->num_meals += 1;
-	pthread_mutex_unlock(philo->setting->mutexFork + i);
-	pthread_mutex_unlock(philo->setting->mutexFork + (i + 1) % philo->setting->num_of_phils);
-	philo->status = SLEEPING;
-	return (0);
-}
-
-void	sleeping(t_philo *philo)
-{
-	printf("%05lu %2d is sleeping\n", get_time_diff(&philo->setting->start_time), philo->id);
-	usleep(philo->setting->time_to_sleep * 1000);
-	philo->status = THINKING;
-}
 
 void	*life_of_philo(void *arg)
 {
@@ -52,10 +22,7 @@ void	*life_of_philo(void *arg)
 	while (!philo->setting->died)
 	{
 		if (philo->status == THINKING)
-		{
-			printf("%05lu %2d is thinking\n", get_time_diff(&philo->setting->start_time), philo->id);
-			philo->status = EATING;
-		}
+			thinking(philo);
 		else if (philo->status == EATING)
 		{
 			if (eating_with_fork(philo))
@@ -79,12 +46,12 @@ void	*starvation_check(void *arg)
 	while (!setting->died)
 	{
 		i = 0;
-		while (i < setting->num_of_phils)
+		while (i < setting->phils)
 		{
-			if (get_time_diff(setting->last_meal + i) > setting->time_to_die)
+			if (get_time(setting->last_meal + i) > setting->time_to_die)
 			{
 				setting->died = 1;
-				printf("%05lu %2d died\n", get_time_diff(&setting->start_time), i);
+				printf("%05lu %2d died\n", get_time(&setting->start), i);
 				break ;
 			}
 			i++;
@@ -99,7 +66,7 @@ int	init_thread(t_setup *setting, pthread_t *th)
 	t_philo			*phil;
 
 	i = 0;
-	while (i < setting->num_of_phils)
+	while (i < setting->phils)
 	{
 		phil = malloc(sizeof(t_philo));
 		if (!phil)
@@ -123,7 +90,7 @@ void	join_thread(t_setup *setting, pthread_t *th)
 	t_philo				*body;
 
 	i = 0;
-	while (i < setting->num_of_phils)
+	while (i < setting->phils)
 	{
 		if (pthread_join(th[i], (void **)&body))
 		{
@@ -138,25 +105,25 @@ void	join_thread(t_setup *setting, pthread_t *th)
 
 int	main(int ac, char *av[])
 {
-	t_setup		setting;
-	pthread_t	*th;
-	pthread_mutex_t	*mutexFork;
+	t_setup			setting;
+	pthread_t		*th;
+	pthread_mutex_t	*mtx_fork;
 
 	if (ac_check(ac))
 		return (1);
 	if (input_check(ac, av, &setting))
 		return (1);
-	th = malloc((setting.num_of_phils + 1) * sizeof(pthread_t));
+	th = malloc((setting.phils + 1) * sizeof(pthread_t));
 	if (!th)
 		return (2);
-	mutexFork = malloc((setting.num_of_phils) * sizeof(pthread_mutex_t));
-	if (!mutexFork)
+	mtx_fork = malloc((setting.phils) * sizeof(pthread_mutex_t));
+	if (!mtx_fork)
 		return (free(th), 2);
-	init_mutex(&setting, mutexFork);
+	init_mutex(&setting, mtx_fork);
 	if (init_thread(&setting, th))
-		return (free(th), destroy_mutex(&setting, mutexFork), 3);
+		return (free(th), destroy_mutex(&setting, mtx_fork), 3);
 	join_thread(&setting, th);
-	destroy_mutex(&setting, mutexFork);
+	destroy_mutex(&setting, mtx_fork);
 	free(setting.last_meal);
 	free(th);
 	return (0);

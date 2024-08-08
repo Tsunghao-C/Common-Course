@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:13:01 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/08 18:24:17 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/08 19:11:48 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ typedef enum e_task
 
 typedef struct s_setup
 {
-	unsigned int	num_of_phils;
+	unsigned int	phils;
 	unsigned long	time_to_die;
 	unsigned long	time_to_eat;
 	unsigned long	time_to_sleep;
 	unsigned int	must_eat_times;
-	struct timeval	start_time;
+	struct timeval	start;
 	struct timeval	*last_meal;
-	pthread_mutex_t	*mutexFork;
+	pthread_mutex_t	*mtx_fork;
 	int				died;
 }	t_setup;
 
@@ -54,12 +54,16 @@ typedef struct s_philo
 /* utils libft functions */
 long	ft_atol(const char *nptr);
 /* utils functions */
-unsigned long	get_time_diff(struct timeval *ref);
+unsigned long	get_time(struct timeval *ref);
 void	init_phil(t_philo *phil, int i, t_setup *setting);
 int		input_check(int ac, char *av[], t_setup *setting);
 void    init_mutex(t_setup *setting, pthread_mutex_t *mutexFork);
 void	destroy_mutex(t_setup *setting, pthread_mutex_t *mutexFork);
 /* error functions */
 int		ac_check(int ac);
+/* activity functions */
+int		eating_with_fork(t_philo *philo);
+void	sleeping(t_philo *philo);
+void	thinking(t_philo *philo);
 
 #endif
