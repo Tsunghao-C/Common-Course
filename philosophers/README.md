@@ -2,7 +2,7 @@
 
 ## To do list
 
-1. Use pthread_detach to terminate program when any of the philosopher dies.
+~~1. Use pthread_detach to terminate program when any of the philosopher dies.~~
 2. Find a way to continuously checking dead or alive even when waiting or usleep.
 3. Norminette check
 
@@ -51,3 +51,8 @@ If thread 1 happen to start mutexA first and tread 2 start with mutexB, it will 
 |---------|-----------|--------|
 | Thread 1| lock      | waiting|
 | Thread 2| waiting   | lock   |
+
+
+### Concurrency vs Parallelism
+- **Concurrency** is when two or more tasks can start, run, and complete in overlapping time periods. It doesn't necessarily mean they'll ever both be running at the same instant. For example, multitasking on a single-core machine.
+- **Parallelism** is when tasks literally run at the same time, e.g., on a multicore processor.

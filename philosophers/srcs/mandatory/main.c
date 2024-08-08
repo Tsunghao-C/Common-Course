@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:28:18 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/07 19:27:23 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/08 15:28:20 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	eating_with_fork(t_philo *philo)
 
 	i = philo->id;
 	pthread_mutex_lock(philo->setting->mutexFork + i);
+	printf("%05lu %2d has taken a fork\n", get_time_diff(&philo->setting->start_time), i);
 	pthread_mutex_lock(philo->setting->mutexFork + (i + 1) % philo->setting->num_of_phils);
 	if (get_time_diff(&philo->beg_lastmeal) > philo->setting->time_to_die)
 	{
@@ -79,10 +80,12 @@ void	*life_of_philo(void *arg)
 			break ;
 	}
 	printf("%05lu %2d died\n", get_time_diff(&philo->setting->start_time), philo->id);
-	return (arg);
+	free(arg); //If detached, need to free arg before thread terminates
+	// return (arg);
+	return (NULL);
 }
 
-void	init_thread(t_setup *setting, pthread_t *th)
+int	init_thread(t_setup *setting, pthread_t *th)
 {
 	unsigned int	i;
 	t_philo			*phil;
@@ -92,28 +95,71 @@ void	init_thread(t_setup *setting, pthread_t *th)
 	{
 		phil = malloc(sizeof(t_philo));
 		if (!phil)
-			return ;
+			return (1);
 		init_phil(phil, i, setting);
 		if (pthread_create(th + i, NULL, &life_of_philo, phil))
-			return ;
+		{
+			printf("Failed to create thread %d\n", i);
+			return (2);
+		}
+		// detach right after thread creation
+		if (pthread_detach(th[i]))
+		{
+			printf("Failed to detadch thread %d\n", i);
+			return (3);
+		}
 		i++;
 	}
+	return (0);
 }
 
 void	join_thread(t_setup *setting, pthread_t *th)
 {
 	unsigned int		i;
-	t_philo				*body;
+	int					ret;
+	// t_philo				*body;
 
 	i = 0;
-	while (i < setting->num_of_phils)
+	// while (i < setting->num_of_phils)
+	// {
+	// 	if (pthread_join(th[i], (void **)&body))
+	// 	{
+	// 		printf("Failed to join thread %d\n", i);
+	// 		return ;
+	// 	}
+	// 	free(body);
+	// 	i++;
+	// }
+	while (1)
 	{
-		if (pthread_join(th[i], (void **)&body))
-			return ;
-		free(body);
-		i++;
+		i = 0;
+		while(i < setting->num_of_phils)
+		{
+			ret = pthread_join(th[i], NULL);
+			// printf("ret is %d\n", ret);
+			if (ret == 0 || ret == ESRCH)
+				return ;
+			i++;
+		}
+		usleep(500);
 	}
 }
+
+// void	detach_thread(t_setup *setting, pthread_t *th)
+// {
+// 	unsigned int		i;
+	
+// 	i = 0;
+// 	while (i < setting->num_of_phils)
+// 	{
+// 		if (pthread_detach(th[i]))
+// 		{
+// 			printf("Failed to detach thread %d\n", i);
+// 			return ;
+// 		}
+// 		i++;
+// 	}
+// }
 
 int	main(int ac, char *av[])
 {
@@ -130,9 +176,10 @@ int	main(int ac, char *av[])
 		return (2);
 	mutexFork = malloc((setting.num_of_phils) * sizeof(pthread_mutex_t));
 	if (!mutexFork)
-		return (2);
+		return (free(th), 2);
 	init_mutex(&setting, mutexFork);
-	init_thread(&setting, th);
+	if (init_thread(&setting, th))
+		return (free(th), destroy_mutex(&setting, mutexFork), 3);
 	join_thread(&setting, th);
 	destroy_mutex(&setting, mutexFork);
 	free(th);
