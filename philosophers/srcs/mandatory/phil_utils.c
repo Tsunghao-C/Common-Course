@@ -6,16 +6,16 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 15:10:21 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/08 19:20:04 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/08 19:40:20 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-unsigned long	get_time(struct timeval *ref)
+uint32_t	get_time(struct timeval *ref)
 {
 	struct timeval	current;
-	unsigned long	diff;
+	uint32_t		diff;
 
 	gettimeofday(&current, NULL);
 	diff = (current.tv_sec - ref->tv_sec) * 1000;
@@ -63,7 +63,7 @@ int	input_check(int ac, char *av[], t_setup *setting)
 
 void	init_mutex(t_setup *setting, pthread_mutex_t *mtx_fork)
 {
-	unsigned int	i;
+	uint32_t	i;
 
 	i = 0;
 	while (i < setting->phils)
@@ -76,7 +76,7 @@ void	init_mutex(t_setup *setting, pthread_mutex_t *mtx_fork)
 
 void	destroy_mutex(t_setup *setting, pthread_mutex_t *mtx_fork)
 {
-	unsigned int	i;
+	uint32_t	i;
 
 	i = 0;
 	while (i < setting->phils)

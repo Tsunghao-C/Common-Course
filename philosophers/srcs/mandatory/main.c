@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:28:18 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/08 19:09:39 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/08 19:37:23 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	*life_of_philo(void *arg)
 
 void	*starvation_check(void *arg)
 {
-	t_setup				*setting;
-	unsigned int		i;
+	t_setup			*setting;
+	uint32_t		i;
 
 	setting = (t_setup *)arg;
 	while (!setting->died)
@@ -51,7 +51,7 @@ void	*starvation_check(void *arg)
 			if (get_time(setting->last_meal + i) > setting->time_to_die)
 			{
 				setting->died = 1;
-				printf("%05lu %2d died\n", get_time(&setting->start), i);
+				printf("%05u %2d died\n", get_time(&setting->start), i);
 				break ;
 			}
 			i++;
@@ -62,8 +62,8 @@ void	*starvation_check(void *arg)
 
 int	init_thread(t_setup *setting, pthread_t *th)
 {
-	unsigned int	i;
-	t_philo			*phil;
+	uint32_t	i;
+	t_philo		*phil;
 
 	i = 0;
 	while (i < setting->phils)
@@ -86,8 +86,8 @@ int	init_thread(t_setup *setting, pthread_t *th)
 
 void	join_thread(t_setup *setting, pthread_t *th)
 {
-	unsigned int		i;
-	t_philo				*body;
+	uint32_t		i;
+	t_philo			*body;
 
 	i = 0;
 	while (i < setting->phils)
