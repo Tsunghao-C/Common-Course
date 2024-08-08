@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 15:10:21 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/08 18:47:33 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/08 19:20:04 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 unsigned long	get_time(struct timeval *ref)
 {
-	struct timeval  current;
-    unsigned long   diff;
+	struct timeval	current;
+	unsigned long	diff;
 
-    gettimeofday(&current, NULL);
-    diff = (current.tv_sec - ref->tv_sec) * 1000;
-    diff += (current.tv_usec - ref->tv_usec) / 1000;
+	gettimeofday(&current, NULL);
+	diff = (current.tv_sec - ref->tv_sec) * 1000;
+	diff += (current.tv_usec - ref->tv_usec) / 1000;
 	return (diff);
 }
 
@@ -27,7 +27,7 @@ void	init_phil(t_philo *phil, int i, t_setup *setting)
 {
 	phil->id = i;
 	phil->status = THINKING;
-    *(setting->last_meal + i) = setting->start;
+	*(setting->last_meal + i) = setting->start;
 	phil->num_meals = 0;
 	phil->setting = setting;
 }
@@ -40,10 +40,10 @@ int	input_check(int ac, char *av[], t_setup *setting)
 	while (++i < ac)
 	{
 		if (ft_atol(av[i]) < 1)
-        {
-            write(ER, "Wrong input. Must be positive numbers\n", 38);
-            return (1);
-        }
+		{
+			write(ER, "Wrong input. Must be positive numbers\n", 38);
+			return (1);
+		}
 	}
 	setting->phils = ft_atol(av[1]);
 	setting->time_to_die = ft_atol(av[2]);
@@ -53,37 +53,36 @@ int	input_check(int ac, char *av[], t_setup *setting)
 	if (ac == 6)
 		setting->must_eat_times = ft_atol(av[5]);
 	gettimeofday(&setting->start, NULL);
-    setting->last_meal = malloc(setting->phils * sizeof(struct timeval));
-    if (!setting->last_meal)
-        return (2);
-    
-    setting->mtx_fork = NULL;
-    setting->died = 0;
+	setting->last_meal = malloc(setting->phils * sizeof(struct timeval));
+	if (!setting->last_meal)
+		return (2);
+	setting->mtx_fork = NULL;
+	setting->died = 0;
 	return (0);
 }
 
-void    init_mutex(t_setup *setting, pthread_mutex_t *mtx_fork)
+void	init_mutex(t_setup *setting, pthread_mutex_t *mtx_fork)
 {
-    unsigned int i;
+	unsigned int	i;
 
-    i = 0;
-    while (i < setting->phils)
-    {
-        pthread_mutex_init(mtx_fork + i, NULL);
-        i++;
-    }
-    setting->mtx_fork = mtx_fork;
+	i = 0;
+	while (i < setting->phils)
+	{
+		pthread_mutex_init(mtx_fork + i, NULL);
+		i++;
+	}
+	setting->mtx_fork = mtx_fork;
 }
 
 void	destroy_mutex(t_setup *setting, pthread_mutex_t *mtx_fork)
 {
-    unsigned int i;
+	unsigned int	i;
 
-    i = 0;
-    while (i <setting->phils)
-    {
-        pthread_mutex_destroy(mtx_fork + i);
-        i++;
-    }
-    free(mtx_fork);
+	i = 0;
+	while (i < setting->phils)
+	{
+		pthread_mutex_destroy(mtx_fork + i);
+		i++;
+	}
+	free(mtx_fork);
 }
