@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:13:01 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/07 18:06:46 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/08 18:24:17 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,15 @@ typedef struct s_setup
 	unsigned long	time_to_sleep;
 	unsigned int	must_eat_times;
 	struct timeval	start_time;
+	struct timeval	*last_meal;
 	pthread_mutex_t	*mutexFork;
+	int				died;
 }	t_setup;
 
 typedef struct s_philo
 {
 	int				id;
 	t_task			status;
-	struct timeval	beg_lastmeal;
 	unsigned int	num_meals;
 	t_setup			*setting;
 }	t_philo;

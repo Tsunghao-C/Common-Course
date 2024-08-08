@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 15:10:21 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/07 18:37:52 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/08 18:33:38 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	init_phil(t_philo *phil, int i, t_setup *setting)
 {
 	phil->id = i;
 	phil->status = THINKING;
-	phil->beg_lastmeal = setting->start_time;
+    *(setting->last_meal + i) = setting->start_time;
 	phil->num_meals = 0;
 	phil->setting = setting;
 }
@@ -53,7 +53,12 @@ int	input_check(int ac, char *av[], t_setup *setting)
 	if (ac == 6)
 		setting->must_eat_times = ft_atol(av[5]);
 	gettimeofday(&setting->start_time, NULL);
+    setting->last_meal = malloc(setting->num_of_phils * sizeof(struct timeval));
+    if (!setting->last_meal)
+        return (2);
+    
     setting->mutexFork = NULL;
+    setting->died = 0;
 	return (0);
 }
 
