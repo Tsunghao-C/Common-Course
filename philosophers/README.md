@@ -86,3 +86,17 @@ If thread 1 happen to start mutexA first and tread 2 start with mutexB, it will 
 
 1. Parallelism is always more efficient than concurrency. Should try to make each thread as independent as possible.
 2. If concurrency if inevitable, always try to minimized the degree of concurrency.
+
+### Semaphore
+
+1. Semaphores is a library that can create a semaphore object which is initialized with a number (sem_int).
+2. Combined with the use of sem_wait and sem_post, it can work like a lock as mutex:
+    a. sem_wait: if num == 0 then wait, else decrement the sem_int and continue.
+    b. sem_post: increment the sem_int and continue.
+
+#### Difference between Semaphore and MUTEX
+
+1. MUTEX is expected to **lock and unlock within a same thread**. Otherwise, the behaviour is undefined.
+2. Semaphore is index based using a semaphore object. It can lock (sem_wait) and unlock (sem_post) in different threads.
+3. MUTEX can be considered as a kind of **binary semaphore** that should be used in pair in a thread. Semaphore is more general in dealing with concurrency tasks.
+
