@@ -2,9 +2,9 @@
 
 ## To do list
 
-~~1. Use pthread_detach to terminate program when any of the philosopher dies.~~
-2. Find a way to continuously checking dead or alive even when waiting or usleep.
-3. Norminette check
+1. ~~Use pthread_detach to terminate program when any of the philosopher dies.~~
+2. ~~Find a way to continuously checking dead or alive even when waiting or usleep.~~
+3. ~~Norminette check~~
 
 ## Objective
 
@@ -14,12 +14,32 @@
 ## Key Concepts
 
 1. What is threads and how does it work? Why do we use it?
-2. What is MUTEX? Why it matters in threads?
+2. What is Race Condition? Why it matters in threads?
+3. What is MUTEX? What is deadlock?
+4. What is SEMAPHORE and why do we use it? How is it different to MUTEX?
+5. What do CONCURRENCY and PARALLELISM mean in programming?
 
 ### The difference between THREAD and PROCESS
 
 1. THREAD shares memories but PRCOESSES don't
 2. A PROCESS can contain multiple THREADS, but a thread can only belong to one PROCESS.
+
+### Race Condition
+
+1. Race conditions happens in concurrency.
+2. When multiple threads are using the same resource (reading and writing a variable maybe), chances are multiple threads try to access (read) or update (write) the resource at the same time which could lead to data overwrite.
+|Table  |Thread 1   |Thread 2   |rsc    |
+|-------|-----------|-----------|-------|
+|Initial|start      |start      |2      |
+|access |2          |2          |2      |
+|process|2 + 1 = 3  |2 + 1 = 3  |2      |
+|update |rsc = 3    |rsc = 3    |3      |
+
+In the table above, the rsc should be 4 after being processed twice, but the result is 3 instead. It is because both threads didn't use the resource in the proper order so the rsc is not updated correctly.
+
+3. The solution to race condition is applying a LOCK SYSTEM on the shared resources to make sure the resources are used once at a time. The LOCK SYSTEM can be
+    a. MUTEX (Mutual Exclusion Lock)
+    b. Semaphores
 
 ### Deadlock
 
@@ -56,3 +76,13 @@ If thread 1 happen to start mutexA first and tread 2 start with mutexB, it will 
 ### Concurrency vs Parallelism
 - **Concurrency** is when two or more tasks can start, run, and complete in overlapping time periods. It doesn't necessarily mean they'll ever both be running at the same instant. For example, multitasking on a single-core machine.
 - **Parallelism** is when tasks literally run at the same time, e.g., on a multicore processor.
+
+#### More explanations about Concurrency and Parallelism
+
+1. Parallelism means all threads are processes INDEPENDENTLY. They don't share a common memory are source.
+2. Concurrency means all there are common memory or resouces shared by each thread. All the threads can be running at the same time, BUT when it comes to using the shared memory, they need to queue.
+
+#### RULE of THUMB when structuring a program in terms of performance
+
+1. Parallelism is always more efficient than concurrency. Should try to make each thread as independent as possible.
+2. If concurrency if inevitable, always try to minimized the degree of concurrency.
