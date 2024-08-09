@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:28:18 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/08 19:37:23 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/09 10:53:42 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	*life_of_philo(void *arg)
 			&& philo->num_meals >= philo->setting->must_eat_times)
 			philo->setting->died = 1;
 	}
+	free(philo);
 	return (NULL);
 }
 
@@ -77,30 +78,44 @@ int	init_thread(t_setup *setting, pthread_t *th)
 			printf("Failed to create thread %d\n", i);
 			return (2);
 		}
+		// try detach every philos
+		if (pthread_detach(th[i]))
+		{
+			printf("Failed to detach thread %d\n", i);
+			return (3);
+		}
 		i++;
 	}
 	if (pthread_create(th + i, NULL, &starvation_check, setting))
 		return (4);
+	// if (pthread_detach(th[i]))
+	// {
+	// 	printf("Failed to detach thread %d\n", i);
+	// 	return (3);
+	// }
 	return (0);
 }
 
 void	join_thread(t_setup *setting, pthread_t *th)
 {
-	uint32_t		i;
-	t_philo			*body;
+	// uint32_t		i;
+	// t_philo			*body;
 
-	i = 0;
-	while (i < setting->phils)
-	{
-		if (pthread_join(th[i], (void **)&body))
-		{
-			printf("Failed to join thread %d\n", i);
-			return ;
-		}
-		free(body);
-		i++;
-	}
-	pthread_join(th[i], NULL);
+	// i = 0;
+	// while (i < setting->phils)
+	// {
+	// 	if (pthread_join(th[i], (void **)&body))
+	// 	{
+	// 		printf("Failed to join thread %d\n", i);
+	// 		return ;
+	// 	}
+	// 	free(body);
+	// 	i++;
+	// }
+	// pthread_join(th[i], NULL);
+	if (pthread_join(th[setting->phils], NULL))
+		printf("Failed to join thread\n");
+	return ;
 }
 
 int	main(int ac, char *av[])
