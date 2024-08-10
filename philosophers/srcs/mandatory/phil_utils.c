@@ -6,16 +6,16 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 15:10:21 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/08 19:40:20 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/10 15:12:26 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-uint32_t	get_time(struct timeval *ref)
+__uint32_t	get_time(struct timeval *ref)
 {
 	struct timeval	current;
-	uint32_t		diff;
+	__uint32_t		diff;
 
 	gettimeofday(&current, NULL);
 	diff = (current.tv_sec - ref->tv_sec) * 1000;
@@ -29,6 +29,7 @@ void	init_phil(t_philo *phil, int i, t_setup *setting)
 	phil->status = THINKING;
 	*(setting->last_meal + i) = setting->start;
 	phil->num_meals = 0;
+	phil->is_full = 0;
 	phil->setting = setting;
 }
 
@@ -61,9 +62,10 @@ int	input_check(int ac, char *av[], t_setup *setting)
 	return (0);
 }
 
-void	init_mutex(t_setup *setting, pthread_mutex_t *mtx_fork)
+void	init_mutex(t_setup *setting, pthread_mutex_t *mtx_fork,
+		pthread_mutex_t *mtx_full)
 {
-	uint32_t	i;
+	__uint16_t	i;
 
 	i = 0;
 	while (i < setting->phils)
@@ -71,12 +73,15 @@ void	init_mutex(t_setup *setting, pthread_mutex_t *mtx_fork)
 		pthread_mutex_init(mtx_fork + i, NULL);
 		i++;
 	}
+	pthread_mutex_init(mtx_full, NULL);
 	setting->mtx_fork = mtx_fork;
+	setting->mtx_full = mtx_full;
 }
 
-void	destroy_mutex(t_setup *setting, pthread_mutex_t *mtx_fork)
+void	destroy_mutex(t_setup *setting, pthread_mutex_t *mtx_fork,
+		pthread_mutex_t *mtx_full)
 {
-	uint32_t	i;
+	__uint16_t	i;
 
 	i = 0;
 	while (i < setting->phils)
@@ -84,5 +89,6 @@ void	destroy_mutex(t_setup *setting, pthread_mutex_t *mtx_fork)
 		pthread_mutex_destroy(mtx_fork + i);
 		i++;
 	}
+	pthread_mutex_destroy(mtx_full);
 	free(mtx_fork);
 }
