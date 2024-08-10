@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:13:01 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/10 15:11:43 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/10 19:52:06 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@ typedef enum e_task
 	SLEEPING
 }	t_task;
 
+typedef enum e_mtx
+{
+	FULL,
+	DEAD,
+	MEAL
+}	t_mtx;
+
 typedef struct s_setup
 {
 	__uint16_t		phils;
@@ -38,11 +45,13 @@ typedef struct s_setup
 	__uint32_t		time_to_sleep;
 	__uint16_t		must_eat_times;
 	struct timeval	start;
+	int				died;
+	__uint16_t		fulled_phils;
 	struct timeval	*last_meal;
 	pthread_mutex_t	*mtx_fork;
 	pthread_mutex_t	*mtx_full;
-	int				died;
-	__uint16_t		fulled_phils;
+	pthread_mutex_t	*mtx_dead;
+	pthread_mutex_t	*mtx_meal;
 }	t_setup;
 
 typedef struct s_philo
@@ -58,17 +67,19 @@ typedef struct s_philo
 long		ft_atol(const char *nptr);
 /* utils functions */
 __uint32_t	get_time(struct timeval *ref);
+int			init_setting(int ac, char *av[], t_setup *setting);
 void		init_phil(t_philo *phil, int i, t_setup *setting);
-int			input_check(int ac, char *av[], t_setup *setting);
 void		init_mutex(t_setup *setting, pthread_mutex_t *mtx_fork,
-				pthread_mutex_t *mtx_full);
+				pthread_mutex_t mtx[3]);
 void		destroy_mutex(t_setup *setting, pthread_mutex_t *mtx_fork,
-				pthread_mutex_t *mtx_full);
+				pthread_mutex_t mtx[3]);
 /* error functions */
-int			ac_check(int ac);
+int			input_check(int ac, char *av[]);
+int			check_all_full(t_setup *setting);
+int			check_starved_time(int id, t_setup *setting);
+int			check_sb_dead(t_setup *setting);
 /* activity functions */
-int			eating_with_fork(t_philo *philo);
-void		check_full(t_philo *philo);
+int			eating_with_forks(t_philo *philo);
 void		sleeping(t_philo *philo);
 void		thinking(t_philo *philo);
 
