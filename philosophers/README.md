@@ -100,6 +100,8 @@ If thread 1 happen to start mutexA first and tread 2 start with mutexB, it will 
 
 1. Parallelism is always more efficient than concurrency. Should try to make each thread as independent as possible.
 2. If concurrency if inevitable, always try to minimized the degree of concurrency.
+3. Make sure EVERY RESOURCES used in concurrency program must be handled with synchronization tools like mutex or semaphore. (Even the STDOUT used by printf needs to be handled)
+4. Be sure to wait (join) every lead before destroying a mutex or syncronization object. Otherwise, there could be data race.
 
 ### Semaphore
 
