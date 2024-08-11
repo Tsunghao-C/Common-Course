@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:13:01 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/11 10:49:11 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/11 17:07:43 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,17 @@ typedef enum e_task
 {
 	THINKING,
 	EATING,
-	SLEEPING
+	SLEEPING,
+	FORK,
+	DIED
 }	t_task;
 
 typedef enum e_mtx
 {
 	FULL,
 	DEAD,
-	MEAL
+	MEAL,
+	PRINT
 }	t_mtx;
 
 typedef struct s_setup
@@ -52,6 +55,7 @@ typedef struct s_setup
 	pthread_mutex_t	*mtx_full;
 	pthread_mutex_t	*mtx_dead;
 	pthread_mutex_t	*mtx_meal;
+	pthread_mutex_t	*mtx_print;
 }	t_setup;
 
 typedef struct s_philo
@@ -70,9 +74,9 @@ __uint32_t	get_time(struct timeval *ref);
 int			init_setting(int ac, char *av[], t_setup *setting);
 void		init_phil(t_philo *phil, int i, t_setup *setting);
 void		init_mutex(t_setup *setting, pthread_mutex_t *mtx_fork,
-				pthread_mutex_t mtx[3]);
+				pthread_mutex_t mtx[4]);
 void		destroy_mutex(t_setup *setting, pthread_mutex_t *mtx_fork,
-				pthread_mutex_t mtx[3]);
+				pthread_mutex_t mtx[4]);
 /* error functions */
 int			input_check(int ac, char *av[]);
 int			check_all_full(t_setup *setting);
@@ -83,5 +87,6 @@ void		turn_dead(t_setup *setting);
 int			eating_with_forks(t_philo *philo);
 void		sleeping(t_philo *philo);
 void		thinking(t_philo *philo);
+void		print_message(t_setup *setting, int id, t_task action);
 
 #endif

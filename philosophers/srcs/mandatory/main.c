@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:28:18 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/11 11:36:47 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/11 17:09:03 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	join_thread(t_setup *setting, pthread_t *th)
 	{
 		if (pthread_join(th[i], (void **)&body))
 		{
-			printf("Failed to join thread %d\n", i + 1);
+			write(ER, "Failed to join thread\n", 23);
 			return ;
 		}
 		free(body);
@@ -112,7 +112,7 @@ int	main(int ac, char *av[])
 	t_setup			setting;
 	pthread_t		*th;
 	pthread_mutex_t	*mtx_fork;
-	pthread_mutex_t	mtx[3];
+	pthread_mutex_t	mtx[4];
 	int				ret;
 
 	if (input_check(ac, av))

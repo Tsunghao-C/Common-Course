@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 15:20:51 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/11 11:38:26 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/11 17:31:28 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	check_starved_time(int id, t_setup *setting)
 		i = 1;
 	pthread_mutex_unlock(setting->mtx_meal);
 	if (i == 1)
-		printf("%05u %2d died\n", get_time(&setting->start), id + 1);
+		print_message(setting, id + 1, DIED);
 	return (i);
 }
 

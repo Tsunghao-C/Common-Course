@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 15:10:21 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/10 19:58:49 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/11 16:41:15 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	init_setting(int ac, char *av[], t_setup *setting)
 }
 
 void	init_mutex(t_setup *setting, pthread_mutex_t *mtx_fork,
-		pthread_mutex_t mtx[3])
+		pthread_mutex_t mtx[4])
 {
 	__uint16_t	i;
 
@@ -69,14 +69,16 @@ void	init_mutex(t_setup *setting, pthread_mutex_t *mtx_fork,
 	pthread_mutex_init(mtx + FULL, NULL);
 	pthread_mutex_init(mtx + DEAD, NULL);
 	pthread_mutex_init(mtx + MEAL, NULL);
+	pthread_mutex_init(mtx + PRINT, NULL);
 	setting->mtx_fork = mtx_fork;
 	setting->mtx_full = mtx + FULL;
 	setting->mtx_dead = mtx + DEAD;
 	setting->mtx_meal = mtx + MEAL;
+	setting->mtx_print = mtx + PRINT;
 }
 
 void	destroy_mutex(t_setup *setting, pthread_mutex_t *mtx_fork,
-		pthread_mutex_t mtx[3])
+		pthread_mutex_t mtx[4])
 {
 	__uint16_t	i;
 
@@ -89,5 +91,6 @@ void	destroy_mutex(t_setup *setting, pthread_mutex_t *mtx_fork,
 	pthread_mutex_destroy(mtx + FULL);
 	pthread_mutex_destroy(mtx + DEAD);
 	pthread_mutex_destroy(mtx + MEAL);
+	pthread_mutex_destroy(mtx + PRINT);
 	free(mtx_fork);
 }
