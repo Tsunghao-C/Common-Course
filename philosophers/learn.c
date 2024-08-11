@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 16:23:37 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/11 20:38:32 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/11 21:18:58 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 void	*routine(void *arg)
 {
-	printf("Process %d start")
+	printf("Process %d start");
 	return (arg);
 }
 
