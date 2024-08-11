@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 19:08:46 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/10 19:45:48 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/11 11:43:11 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ static void	eating(t_philo *philo)
 {
 	int	i;
 
-	i = philo->id;
-	printf("%05u %2d has taken a fork\n", get_time(&philo->setting->start), i + 1);
-	printf("%05u %2d is eating\n", get_time(&philo->setting->start), i + 1);
+	i = philo->id + 1;
+	printf("%05u %2d has taken a fork\n", get_time(&philo->setting->start), i);
+	printf("%05u %2d is eating\n", get_time(&philo->setting->start), i);
 	pthread_mutex_lock(philo->setting->mtx_meal);
-	gettimeofday(philo->setting->last_meal + i, NULL);
+	gettimeofday(philo->setting->last_meal + i - 1, NULL);
 	pthread_mutex_unlock(philo->setting->mtx_meal);
-	usleep(philo->setting->time_to_eat * 1000);
 	check_full(philo);
+	usleep(philo->setting->time_to_eat * 1000);
 }
 
 int	eating_with_forks(t_philo *philo)
@@ -46,27 +46,27 @@ int	eating_with_forks(t_philo *philo)
 	int			i;
 	__uint16_t	num_phils;
 
-	i = philo->id;
+	i = philo->id + 1;
 	num_phils = philo->setting->phils;
-	pthread_mutex_lock(philo->setting->mtx_fork + i);
+	pthread_mutex_lock(philo->setting->mtx_fork + i - 1);
 	if (check_sb_dead(philo->setting))
-		return (pthread_mutex_unlock(philo->setting->mtx_fork + i), 1);
-	printf("%05u %2d has taken a fork\n", get_time(&philo->setting->start), i + 1);
+		return (pthread_mutex_unlock(philo->setting->mtx_fork + i - 1), 1);
+	printf("%05u %2d has taken a fork\n", get_time(&philo->setting->start), i);
 	if (num_phils == 1)
 	{
-		pthread_mutex_unlock(philo->setting->mtx_fork + i);
+		pthread_mutex_unlock(philo->setting->mtx_fork + i - 1);
 		return (usleep(philo->setting->time_to_die * 1100), 1);
 	}
-	pthread_mutex_lock(philo->setting->mtx_fork + (i + 1) % num_phils);
+	pthread_mutex_lock(philo->setting->mtx_fork + i % num_phils);
 	if (check_sb_dead(philo->setting))
 	{
-		pthread_mutex_unlock(philo->setting->mtx_fork + i);
-		pthread_mutex_unlock(philo->setting->mtx_fork + (i + 1) % num_phils);
+		pthread_mutex_unlock(philo->setting->mtx_fork + i - 1);
+		pthread_mutex_unlock(philo->setting->mtx_fork + i % num_phils);
 		return (1);
 	}
 	eating(philo);
-	pthread_mutex_unlock(philo->setting->mtx_fork + i);
-	pthread_mutex_unlock(philo->setting->mtx_fork + (i + 1) % num_phils);
+	pthread_mutex_unlock(philo->setting->mtx_fork + i - 1);
+	pthread_mutex_unlock(philo->setting->mtx_fork + i % num_phils);
 	return (0);
 }
 

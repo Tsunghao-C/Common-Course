@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 15:20:51 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/10 20:03:46 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/11 11:38:26 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int	check_starved_time(int id, t_setup *setting)
 	if (get_time(setting->last_meal + id) > setting->time_to_die)
 		i = 1;
 	pthread_mutex_unlock(setting->mtx_meal);
+	if (i == 1)
+		printf("%05u %2d died\n", get_time(&setting->start), id + 1);
 	return (i);
 }
 
@@ -63,10 +65,17 @@ int	check_sb_dead(t_setup *setting)
 {
 	int	i;
 
-	i = -1;
+	i = 0;
 	pthread_mutex_lock(setting->mtx_dead);
 	if (setting->died)
-		i = 0;
+		i = 1;
 	pthread_mutex_unlock(setting->mtx_dead);
 	return (i);
+}
+
+void	turn_dead(t_setup *setting)
+{
+	pthread_mutex_lock(setting->mtx_dead);
+	setting->died = 1;
+	pthread_mutex_unlock(setting->mtx_dead);
 }

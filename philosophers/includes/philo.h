@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:13:01 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/10 19:52:06 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/11 10:49:11 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int			input_check(int ac, char *av[]);
 int			check_all_full(t_setup *setting);
 int			check_starved_time(int id, t_setup *setting);
 int			check_sb_dead(t_setup *setting);
+void		turn_dead(t_setup *setting);
 /* activity functions */
 int			eating_with_forks(t_philo *philo);
 void		sleeping(t_philo *philo);

@@ -5,9 +5,10 @@
 1. ~~Use pthread_detach to terminate program when any of the philosopher dies.~~
 2. ~~Find a way to continuously checking dead or alive even when waiting or usleep.~~
 3. ~~Norminette check~~
-4. Consider whether I should detach each philosopher or detach the starvation_check thread.
+4. ~~Consider whether I should detach each philosopher or detach the starvation_check thread.~~
 5. Check extreme cases when time_to_die is very close to 2 * time_to_eat for even philos.
-6. Need to add MUTEX on EVERY Variable in the struct that could be updated over time!!!
+6. ~~Need to add MUTEX on EVERY Variable in the struct that could be updated over time!!!~~
+7. Use Helgrind to check if there is any thread errors
 
 ## Objective
 

@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:28:18 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/10 20:03:36 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/11 11:36:47 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,13 @@ void	*starvation_check(void *arg)
 		{
 			if (check_starved_time(i, setting))
 			{
-				pthread_mutex_lock(setting->mtx_dead);
-				setting->died = 1;
-				printf("%05u %2d died\n", get_time(&setting->start), i + 1);
-				pthread_mutex_unlock(setting->mtx_dead);
+				turn_dead(setting);
 				return (NULL);
 			}
 			i++;
 		}
 		if (check_all_full(setting))
-		{
-			pthread_mutex_lock(setting->mtx_dead);
-			setting->died = 1;
-			pthread_mutex_unlock(setting->mtx_dead);
-		}
+			turn_dead(setting);
 	}
 	return (NULL);
 }
@@ -84,19 +77,13 @@ int	init_thread(t_setup *setting, pthread_t *th)
 			return (1);
 		init_phil(phil, i, setting);
 		if (pthread_create(th + i, NULL, &life_of_philo, phil))
-		{
-			printf("Failed to create thread %d\n", i + 1);
 			return (2);
-		}
 		i++;
 	}
 	if (pthread_create(th + i, NULL, &starvation_check, setting))
-		return (4);
+		return (2);
 	if (pthread_detach(th[i]))
-	{
-		printf("Failed to detach thread %d\n", i + 1);
 		return (3);
-	}
 	return (0);
 }
 
@@ -116,6 +103,8 @@ void	join_thread(t_setup *setting, pthread_t *th)
 		free(body);
 		i++;
 	}
+	free(th);
+	free(setting->last_meal);
 }
 
 int	main(int ac, char *av[])
@@ -124,6 +113,7 @@ int	main(int ac, char *av[])
 	pthread_t		*th;
 	pthread_mutex_t	*mtx_fork;
 	pthread_mutex_t	mtx[3];
+	int				ret;
 
 	if (input_check(ac, av))
 		return (1);
@@ -136,11 +126,23 @@ int	main(int ac, char *av[])
 	if (!mtx_fork)
 		return (free(setting.last_meal), free(th), 2);
 	init_mutex(&setting, mtx_fork, mtx);
-	if (init_thread(&setting, th))
-		return (free(setting.last_meal), free(th), destroy_mutex(&setting, mtx_fork, mtx), 3);
+	ret = init_thread(&setting, th);
+	if (ret)
+		turn_dead(&setting);
 	join_thread(&setting, th);
 	destroy_mutex(&setting, mtx_fork, mtx);
-	free(setting.last_meal);
-	free(th);
 	return (0);
 }
+
+// void	show_setting(t_setup *set)
+// {
+// 	printf("phils %d\n", set->phils);
+// 	printf("time to die %u\n", set->time_to_die);
+// 	printf("time to eat %u\n", set->time_to_eat);
+// 	printf("time to sleep %u\n", set->time_to_sleep);
+// 	printf("must_eat_times %d\n", set->must_eat_times);
+// 	printf("died %d\n", set->died);
+// 	printf("fulled_phils %d\n", set->fulled_phils);
+// 	printf("start sec %ld, usec %d\n", set->start.tv_sec, set->start.tv_usec);
+// 	printf("current time %u\n", get_time(&set->start));
+// }
