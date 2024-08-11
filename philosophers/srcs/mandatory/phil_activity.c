@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 19:08:46 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/11 17:31:21 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/11 18:09:52 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	eating_with_forks(t_philo *philo)
 	if (num_phils == 1)
 	{
 		pthread_mutex_unlock(philo->setting->mtx_fork + i - 1);
-		return (usleep(philo->setting->time_to_die * 1100), 1);
+		return (usleep(philo->setting->time_to_die * 1000), 1);
 	}
 	pthread_mutex_lock(philo->setting->mtx_fork + i % num_phils);
 	if (check_sb_dead(philo->setting))

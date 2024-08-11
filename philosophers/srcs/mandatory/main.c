@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:28:18 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/11 17:09:03 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/11 18:35:42 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	*life_of_philo(void *arg)
 		else if (philo->status == SLEEPING)
 			sleeping(philo);
 	}
-	return (arg);
+	free(philo);
+	return (NULL);
 }
 
 void	*starvation_check(void *arg)
@@ -82,25 +83,18 @@ int	init_thread(t_setup *setting, pthread_t *th)
 	}
 	if (pthread_create(th + i, NULL, &starvation_check, setting))
 		return (2);
-	if (pthread_detach(th[i]))
-		return (3);
 	return (0);
 }
 
 void	join_thread(t_setup *setting, pthread_t *th)
 {
 	__uint16_t		i;
-	t_philo			*body;
 
 	i = 0;
-	while (i < setting->phils)
+	while (i < setting->phils + 1)
 	{
-		if (pthread_join(th[i], (void **)&body))
-		{
-			write(ER, "Failed to join thread\n", 23);
+		if (pthread_join(th[i], NULL))
 			return ;
-		}
-		free(body);
 		i++;
 	}
 	free(th);

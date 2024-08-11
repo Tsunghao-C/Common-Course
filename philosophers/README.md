@@ -9,7 +9,8 @@
 5. Check extreme cases when time_to_die is very close to 2 * time_to_eat for even philos.
 6. ~~Need to add MUTEX on EVERY Variable in the struct that could be updated over time!!!~~
 7. ~~Fixed data race on printf (STDOUT) and checking setting.dead and setting.last_meal~~
-8. Use Helgrind to check if there is any thread errors
+8. ~~Use Helgrind to check if there is any thread errors~~
+9. Find out why using helgrind the philo won't work properly.
 
 ## Objective
 
