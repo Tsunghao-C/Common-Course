@@ -12,6 +12,14 @@
 8. ~~Use Helgrind to check if there is any thread errors~~
 9. Find out why using helgrind the philo won't work properly. (Looks like usleep is not functioning well when calling valgrind)
 
+## To do list BONUS
+
+1. create pid_t pointer and malloc in main
+2. use sem_forks to control total number of forks
+3. create one more fork and use sem_t sem_died to check if it should kill all processes
+4. each philosopher (process) has a thread just to constantly checking the starvation time and it he is fulled
+
+
 ## Objective
 
 1. This project is about developing parallel tasks using "Threads"

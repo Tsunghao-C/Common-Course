@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 16:23:37 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/05 15:21:01 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/11 20:38:32 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,54 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <pthread.h>
+#include <semaphore.h>
+#include <fcntl.h>
 #include <time.h>
 
-/* Passing args to and getting args from threads */
+#define SEM_LOG	"sem_log"
 
+/* Semaphore tests */
+
+void	*routine(void *arg)
+{
+	printf("Process %d start")
+	return (arg);
+}
+
+int	main(int ac,char *av[])
+{
+	sem_t	*num_forks;
+	pthread_t	th[3];
+	int		i;
+
+	num_forks = sem_open(SEM_LOG, O_CREAT, 0644, 1);
+	if (num_forks == SEM_FAILED)
+	{
+		perror("Failed to open sem_log");
+		exit(EXIT_FAILURE);
+	}
+	i = 0;
+	while (i < 3)
+	{
+		pthread_create(th + i, NULL, &routine, NULL);
+	}
+	
+	if (sem_close(num_forks))
+	{
+		perror("Failed to close sem_log");
+		exit(EXIT_FAILURE);
+	}
+	if (sem_unlink(num_forks))
+	{
+		perror("Failed to unlink sem_log");
+		exit(EXIT_FAILURE);
+	}
+	return (0);
+}
+
+
+/* Passing args to and getting args from threads */
+/*
 int	prime[10] = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29 };
 
 void	*routine(void *arg)
@@ -70,7 +114,7 @@ int	main(int ac, char *av[])
 	// IMPORTANT: return the same pointer in the ROUTINE function to keep
 	// track of the status and free until it is joined. It is malloced in
 	// the loop of thread creation and freed in the loop of thread joint.
-}
+}*/
 
 /* Passing arguments to threads*/
 /*
