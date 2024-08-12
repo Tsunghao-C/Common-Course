@@ -6,129 +6,60 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:28:18 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/12 15:09:55 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/12 21:22:40 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-void	*life_of_philo(void *arg)
+void	*check_sb_dead(void *arg)
 {
-	t_philo			*philo;
-
-	philo = (t_philo *)arg;
-	if (philo->id % 2)
-		usleep(philo->setting->time_to_eat * 500);
-	while (1)
-	{
-		if (check_sb_dead(philo->setting))
-			break ;
-		if (philo->status == THINKING)
-			thinking(philo);
-		else if (philo->status == EATING)
-		{
-			if (eating_with_forks(philo))
-				break ;
-			philo->status = SLEEPING;
-		}
-		else if (philo->status == SLEEPING)
-			sleeping(philo);
-	}
-	free(philo);
-	return (NULL);
-}
-
-void	*starvation_check(void *arg)
-{
-	t_setup			*setting;
-	__uint16_t		i;
+	t_setup	*setting;
 
 	setting = (t_setup *)arg;
-	usleep(setting->time_to_eat * 500);
-	while (1)
-	{
-		if (check_sb_dead(setting))
-			break ;
-		i = 0;
-		while (i < setting->phils)
-		{
-			if (check_starved_time(i, setting))
-			{
-				turn_dead(setting);
-				return (NULL);
-			}
-			i++;
-		}
-		if (check_all_full(setting))
-			turn_dead(setting);
-	}
-	return (NULL);
-}
-
-int	init_thread(t_setup *setting, pthread_t *th)
-{
-	__uint16_t	i;
-	t_philo		*phil;
-
-	i = 0;
-	while (i < setting->phils)
-	{
-		phil = malloc(sizeof(t_philo));
-		if (!phil)
-			return (1);
-		init_phil(phil, i, setting);
-		if (pthread_create(th + i, NULL, &life_of_philo, phil))
-			return (2);
-		i++;
-	}
-	if (pthread_create(th + i, NULL, &starvation_check, setting))
-		return (2);
-	return (0);
-}
-
-void	join_thread(t_setup *setting, pthread_t *th)
-{
-	__uint16_t		i;
-
-	i = 0;
-	while (i < setting->phils + 1)
-	{
-		if (pthread_join(th[i], NULL))
-			return ;
-		i++;
-	}
-	free(th);
-}
-
-void	check_dead(void *arg)
-{
 	// in each philo process, use sem_post(dead) if he dies
-	// sem_wait(arg->dead);
+	sem_wait(setting->dead);
+	kill(-1, SIGTERM);
+	return (NULL);
 	// kill every other processes
 }
 
-void	check_fulled(void *arg)
+void	*check_all_fulled(void *arg)
 {
-	// in each philo process, use sem_post(full) if he is fulled.
-	int	fulled_philos;
+	t_setup			*setting;
+	__uint16_t		fulled_philos;
 
+	setting = (t_setup *)arg;
 	fulled_philos = 0;
-	while (fulled_philos < total_philos)
+	while (fulled_philos < setting->phils)
 	{
-		// sem_wait(arg->full);
-		// fulled_philos += 1;
+		sem_wait(setting->full);
+		fulled_philos += 1;
 	}
-	// sem_post(arg->dead);
+	sem_post(setting->dead);
+	return (NULL);
 }
 
 int	main(int ac, char *av[])
 {
 	t_setup	setting;
-	int		i;
+	pthread_t	th[2];
 
 	if (input_check(ac, av))
 		return (1);
-	init_setting(ac, av, &setting);
+	if (init_setting(ac, av, &setting))
+		return (2);
+	// create philos with fork
+	do_philos(&setting);
+	// init checing threads
+	if (pthread_create(th, NULL, &check_sb_dead, &setting))
+		err_exit_main(&setting);
+	if (pthread_create(th + 1, NULL, &check_all_fulled, &setting))
+		err_exit_main(&setting);
+	if (pthread_detach(th[1]))
+		err_exit_main(&setting);
+	if (pthread_join(th[0], NULL))
+		write(ER, "Failed to join kill thread\n", 28);
 	destroy_setting(&setting);
 	return (0);
 }
