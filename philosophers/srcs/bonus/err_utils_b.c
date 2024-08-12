@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 17:34:42 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/12 20:59:26 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/13 01:32:26 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,16 @@ void    err_exit_detach(void)
 
 void    err_exit_main(t_setup *setting)
 {
+    int i;
+
+    i = 0;
     write(ER, "Failed to create checker thread\n", 33);
-    kill(-1, SIGTERM);
+    while (i < setting->phils)
+    {
+        if (setting->philos[i])
+            kill(setting->philos[i], SIGTERM);
+        i++;
+    }
     destroy_setting(setting);
     exit(EXIT_FAILURE);
 }

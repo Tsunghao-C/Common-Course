@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:55:20 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/12 21:12:06 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/13 01:37:17 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	input_check(int ac, char *av[])
 
 static int	init_sem(t_setup *setting)
 {
-	// Open semaphores
 	setting->forks = sem_open(SEM_FORKS, O_CREAT, 0644, setting->phils);
 	if (setting->forks == SEM_FAILED)
 		return (1);
@@ -50,7 +49,7 @@ static int	init_sem(t_setup *setting)
 	setting->meal = sem_open(SEM_MEAL, O_CREAT, 0644, 1);
 	if (setting->meal == SEM_FAILED)
 		return (4);
-	setting->print = sem_open(SEM_PRINT, 0644, 1);
+	setting->print = sem_open(SEM_PRINT, O_CREAT, 0644, 1);
 	if (setting->print == SEM_FAILED)
 		return (5);
 	return (0);
@@ -100,9 +99,9 @@ void	destroy_setting(t_setup *setting)
 		write(ER, "Failed to destroy sem_dead\n", 28);
 	if (setting->full != SEM_FAILED && destroy_sem(setting->full, SEM_FULL))
 		write(ER, "Failed to destroy sem_full\n", 28);
-	if (setting->meal != SEM_FAILED && destroy_sem(setting->meal, SEM_FULL))
+	if (setting->meal != SEM_FAILED && destroy_sem(setting->meal, SEM_MEAL))
 		write(ER, "Failed to destroy sem_meal\n", 28);
-	if (setting->print != SEM_FAILED && destroy_sem(setting->print, SEM_FULL))
+	if (setting->print != SEM_FAILED && destroy_sem(setting->print, SEM_PRINT))
 		write(ER, "Failed to destroy sem_print\n", 29);
 }
 
@@ -119,7 +118,7 @@ void	start_philo(int id, t_setup *setting)
 {
 	pthread_t	th;
 	t_philo		philo;
-	
+
 	init_philo(id, setting, &philo);
 	if (pthread_create(&th, NULL, &starvation_check, &philo))
 		exit(EXIT_FAILURE);
