@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:13:01 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/11 20:47:42 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/12 12:52:54 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ typedef struct s_setup
 	__uint32_t		time_to_sleep;
 	__uint16_t		must_eat_times;
 	struct timeval	start;
-	int				died;
-	__uint16_t		fulled_phils;
+	sem_t			*forks;
+	sem_t			*dead;
+	sem_t			*full;
 }	t_setup;
 
 typedef struct s_philo
@@ -61,11 +62,11 @@ typedef struct s_philo
 /* utils libft functions */
 long		ft_atol(const char *nptr);
 /* utils functions */
+int			input_check(int ac, char *av[]);
 __uint32_t	get_time(struct timeval *ref);
 int			init_setting(int ac, char *av[], t_setup *setting);
-void		init_phil(t_philo *phil, int i, t_setup *setting);
+int			destroy_setting(t_setup *setting);
 /* error functions */
-int			input_check(int ac, char *av[]);
 int			check_all_full(t_setup *setting);
 int			check_starved_time(int id, t_setup *setting);
 int			check_sb_dead(t_setup *setting);

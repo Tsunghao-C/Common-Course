@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:28:18 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/11 21:17:01 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/12 15:09:55 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,27 +124,12 @@ void	check_fulled(void *arg)
 int	main(int ac, char *av[])
 {
 	t_setup	setting;
-	sem_t	*forks;
-	sem_t	*dead;
-	sem_t	*full;
 	int		i;
 
 	if (input_check(ac, av))
 		return (1);
 	init_setting(ac, av, &setting);
-		return (2);
-	// Open semaphores
-	forks = sem_open(SEM_FORKS, O_CREAT, 0644, 1);
-	dead = sem_open(SEM_DEAD, O_CREAT, 0644, 1);
-	full = sem_open(SEM_FULL, O_CREAT, 0644, 1);
-	// Initialize semaphores
-	i = 0;
-	while (i < setting.phils)
-	{
-		sem_post(forks);
-		sem_post(full);
-		i++;
-	}
+	destroy_setting(&setting);
 	return (0);
 }
 

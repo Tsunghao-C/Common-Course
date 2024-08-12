@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:13:01 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/11 17:07:43 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/12 15:08:27 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_philo
 long		ft_atol(const char *nptr);
 /* utils functions */
 __uint32_t	get_time(struct timeval *ref);
+void		ft_usleep(__uint32_t time, t_setup *setting);
 int			init_setting(int ac, char *av[], t_setup *setting);
 void		init_phil(t_philo *phil, int i, t_setup *setting);
 void		init_mutex(t_setup *setting, pthread_mutex_t *mtx_fork,

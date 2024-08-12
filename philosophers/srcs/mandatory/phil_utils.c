@@ -6,22 +6,11 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 15:10:21 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/11 16:41:15 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/12 15:31:43 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-__uint32_t	get_time(struct timeval *ref)
-{
-	struct timeval	current;
-	__uint32_t		diff;
-
-	gettimeofday(&current, NULL);
-	diff = (current.tv_sec - ref->tv_sec) * 1000;
-	diff += (current.tv_usec - ref->tv_usec) / 1000;
-	return (diff);
-}
 
 void	init_phil(t_philo *phil, int i, t_setup *setting)
 {

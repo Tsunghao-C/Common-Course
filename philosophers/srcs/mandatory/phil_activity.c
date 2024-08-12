@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 19:08:46 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/11 19:09:07 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/12 15:26:48 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	eating(t_philo *philo)
 			philo->is_full = 1;
 		}
 	}
-	usleep(philo->setting->time_to_eat * 1000);
+	ft_usleep(philo->setting->time_to_eat, philo->setting);
 }
 
 int	eating_with_forks(t_philo *philo)
@@ -50,7 +50,7 @@ int	eating_with_forks(t_philo *philo)
 	if (num_phils == 1)
 	{
 		pthread_mutex_unlock(philo->setting->mtx_fork + i - 1);
-		return (usleep(philo->setting->time_to_die * 1000), 1);
+		return (ft_usleep(philo->setting->time_to_die, philo->setting), 1);
 	}
 	pthread_mutex_lock(philo->setting->mtx_fork + i % num_phils);
 	if (check_sb_dead(philo->setting))
@@ -71,7 +71,7 @@ void	sleeping(t_philo *philo)
 
 	i = philo->id + 1;
 	print_message(philo->setting, i, SLEEPING);
-	usleep(philo->setting->time_to_sleep * 1000);
+	ft_usleep(philo->setting->time_to_sleep, philo->setting);
 	philo->status = THINKING;
 }
 
