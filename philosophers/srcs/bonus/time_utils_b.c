@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   time_utils.c                                       :+:      :+:    :+:   */
+/*   time_utils_b.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 15:29:15 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/12 15:30:08 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/13 13:38:07 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,11 @@ void	ft_usleep(__uint32_t time, t_setup *setting)
 	struct timeval	current;
 
 	gettimeofday(&current, NULL);
+	(void)setting;
 	while (get_time(&current) < time)
 	{
-		if (check_sb_dead(setting))
-			break ;
+		// if (check_sb_dead(setting))
+		// 	break ;
 		usleep(100);
 	}
 }

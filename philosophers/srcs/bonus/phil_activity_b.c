@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 18:09:47 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/12 21:10:40 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/13 18:38:12 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,29 +31,29 @@ void	*starvation_check(void *arg)
 	return (NULL);
 }
 
-void    eating_with_forks(t_philo *philo)
+void	eating_with_forks(t_philo *philo)
 {
-    sem_wait(philo->setting->forks);
-    print_message(philo->setting, philo->id, FORK);
-    sem_wait(philo->setting->forks);
-    print_message(philo->setting, philo->id, FORK);
-    print_message(philo->setting, philo->id, EATING);
-    sem_wait(philo->setting->meal);
-    gettimeofday(&philo->last_meal, NULL);
-    sem_post(philo->setting->meal);
-    philo->num_meals += 1;
-    if (philo->setting->must_eat_times && !philo->is_full)
-    {
-        if (philo->num_meals >= philo->setting->must_eat_times)
-        {
-            sem_post(philo->setting->full);
-            philo->is_full = 1;
-        }
-    }
-    ft_usleep(philo->setting->time_to_eat, philo->setting);
-    sem_post(philo->setting->forks);
-    sem_post(philo->setting->forks);
-    philo->status = SLEEPING;
+	sem_wait(philo->setting->forks);
+	print_message(philo->setting, philo->id, FORK);
+	sem_wait(philo->setting->forks);
+	print_message(philo->setting, philo->id, FORK);
+	sem_wait(philo->setting->meal);
+	gettimeofday(&philo->last_meal, NULL);
+	sem_post(philo->setting->meal);
+	print_message(philo->setting, philo->id, EATING);
+	philo->num_meals += 1;
+	if (philo->setting->must_eat_times && !philo->is_full)
+	{
+		if (philo->num_meals >= philo->setting->must_eat_times)
+		{
+			sem_post(philo->setting->full);
+			philo->is_full = 1;
+		}
+	}
+	ft_usleep(philo->setting->time_to_eat, philo->setting);
+	sem_post(philo->setting->forks);
+	sem_post(philo->setting->forks);
+	philo->status = SLEEPING;
 }
 
 void	sleeping(t_philo *philo)
@@ -66,12 +66,14 @@ void	sleeping(t_philo *philo)
 void	thinking(t_philo *philo)
 {
 	print_message(philo->setting, philo->id, THINKING);
+	if (philo->setting->phils % 2)
+		ft_usleep(philo->setting->time_to_eat / 2, philo->setting);
 	philo->status = EATING;
 }
 
 void	print_message(t_setup *setting, int id, t_task action)
 {
-    sem_wait(setting->print);
+	sem_wait(setting->print);
 	if (action == THINKING)
 		printf("%05u %2d is thinking\n", get_time(&setting->start), id);
 	else if (action == EATING)
@@ -82,5 +84,5 @@ void	print_message(t_setup *setting, int id, t_task action)
 		printf("%05u %2d has taken a fork\n", get_time(&setting->start), id);
 	else if (action == DIED)
 		printf("%05u %2d died\n", get_time(&setting->start), id);
-    sem_post(setting->print);
+	sem_post(setting->print);
 }

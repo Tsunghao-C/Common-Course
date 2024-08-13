@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:13:01 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/13 00:59:09 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/13 18:07:40 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <sys/wait.h>
 # include <sys/types.h>
 # include <fcntl.h>
+# include <string.h>
 # include <signal.h>
 
 # define ER STDERR_FILENO
@@ -32,6 +33,9 @@
 # define SEM_FULL "sem_full"
 # define SEM_MEAL "sem_meal"
 # define SEM_PRINT "sem_print"
+# ifndef MAX_PHILO
+#  define MAX_PHILO 200
+# endif
 
 typedef enum e_task
 {
@@ -50,7 +54,7 @@ typedef struct s_setup
 	__uint32_t		time_to_sleep;
 	__uint16_t		must_eat_times;
 	struct timeval	start;
-	pid_t			*philos;
+	pid_t			philos[MAX_PHILO];
 	sem_t			*forks;
 	sem_t			*dead;
 	sem_t			*full;
@@ -82,7 +86,7 @@ void		do_philos(t_setup *setting);
 void		start_philo(int id, t_setup *setting);
 void		init_philo(int id, t_setup *setting, t_philo *philo);
 /* error functions */
-void    	err_exit_fork(t_setup *setting);
+void		err_exit_fork(t_setup *setting);
 void		err_exit_detach(void);
 void		err_exit_main(t_setup *setting);
 void		*check_all_fulled(void *arg);

@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:55:20 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/13 01:37:17 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/13 18:47:59 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ int	input_check(int ac, char *av[])
 
 static int	init_sem(t_setup *setting)
 {
+	sem_unlink(SEM_FORKS);
+	sem_unlink(SEM_DEAD);
+	sem_unlink(SEM_FULL);
+	sem_unlink(SEM_MEAL);
+	sem_unlink(SEM_PRINT);
 	setting->forks = sem_open(SEM_FORKS, O_CREAT, 0644, setting->phils);
 	if (setting->forks == SEM_FAILED)
 		return (1);
@@ -74,14 +79,12 @@ int	init_setting(int ac, char *av[], t_setup *setting)
 	if (ac == 6)
 		setting->must_eat_times = ft_atol(av[5]);
 	gettimeofday(&setting->start, NULL);
+	memset(setting->philos, -1, MAX_PHILO);
 	setting->forks = NULL;
 	setting->dead = NULL;
 	setting->full = NULL;
 	setting->meal = NULL;
 	setting->print = NULL;
-	setting->philos = malloc(setting->phils * sizeof(pid_t));
-	if (!setting->philos)
-		return (1);
 	if (init_sem(setting))
 	{
 		destroy_setting(setting);
@@ -92,7 +95,6 @@ int	init_setting(int ac, char *av[], t_setup *setting)
 
 void	destroy_setting(t_setup *setting)
 {
-	free(setting->philos);
 	if (setting->forks != SEM_FAILED && destroy_sem(setting->forks, SEM_FORKS))
 		write(ER, "Failed to destroy sem_fork\n", 28);
 	if (setting->dead != SEM_FAILED && destroy_sem(setting->dead, SEM_DEAD))
@@ -110,6 +112,7 @@ void	init_philo(int id, t_setup *setting, t_philo *philo)
 	philo->id = id + 1;
 	philo->status = THINKING;
 	philo->num_meals = 0;
+	philo->is_full = 0;
 	philo->last_meal = setting->start;
 	philo->setting = setting;
 }
@@ -135,7 +138,7 @@ void	start_philo(int id, t_setup *setting)
 		else if (philo.status == SLEEPING)
 			sleeping(&philo);
 	}
-	exit (EXIT_SUCCESS);	
+	exit(EXIT_SUCCESS);
 }
 
 void	do_philos(t_setup *setting)

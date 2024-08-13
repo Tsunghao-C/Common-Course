@@ -6,7 +6,7 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/06 14:29:42 by tsuchen           #+#    #+#              #
-#    Updated: 2024/08/12 21:22:17 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/08/13 15:14:47 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME_BONUS	= philo_bonus
 
 SRCS_MAN	= main.c ft_atol.c phil_utils.c err_utils.c phil_activity.c time_utils.c
 
-SRCS_BONUS	= main.c ft_atol.c ft_itoa.c phil_utils_b.c time_utils_b.c err_utils_b.c phil_activity_b.c
+SRCS_BONUS	= main.c ft_atol.c phil_utils_b.c time_utils_b.c err_utils_b.c phil_activity_b.c
 
 MAN_PATH	= srcs/mandatory/
 
