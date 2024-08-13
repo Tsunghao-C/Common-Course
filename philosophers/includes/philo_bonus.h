@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:13:01 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/13 18:07:40 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/13 19:52:33 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,20 +74,18 @@ typedef struct s_philo
 
 /* utils libft functions */
 long		ft_atol(const char *nptr);
-char		*ft_itoa(int n);
 /* time functions */
 __uint32_t	get_time(struct timeval *ref);
 void		ft_usleep(__uint32_t time, t_setup *setting);
-/* utils functions */
-int			input_check(int ac, char *av[]);
+/* init setting and semaphore functions */
 int			init_setting(int ac, char *av[], t_setup *setting);
 void		destroy_setting(t_setup *setting);
-void		do_philos(t_setup *setting);
-void		start_philo(int id, t_setup *setting);
-void		init_philo(int id, t_setup *setting, t_philo *philo);
-/* error functions */
-void		err_exit_fork(t_setup *setting);
-void		err_exit_detach(void);
+int			init_sem(t_setup *setting);
+int			destroy_sem(sem_t *sem, const char *file_name);
+int			init_checker_thread(t_setup *setting, pthread_t th[2]);
+void		wait_all(t_setup *setting);
+/* checker and error functions */
+int			input_check(int ac, char *av[]);
 void		err_exit_main(t_setup *setting);
 void		*check_all_fulled(void *arg);
 void		*check_sb_dead(void *arg);
@@ -97,5 +95,9 @@ void		eating_with_forks(t_philo *philo);
 void		sleeping(t_philo *philo);
 void		thinking(t_philo *philo);
 void		print_message(t_setup *setting, int id, t_task action);
+/* child handling functions */
+void		do_philos(t_setup *setting);
+void		start_philo(int id, t_setup *setting);
+void		init_philo(int id, t_setup *setting, t_philo *philo);
 
 #endif

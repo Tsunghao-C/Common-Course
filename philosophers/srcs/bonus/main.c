@@ -6,71 +6,51 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:28:18 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/13 18:18:28 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/13 19:48:41 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-void	*check_sb_dead(void *arg)
+int	init_checker_thread(t_setup *setting, pthread_t th[2])
 {
-	t_setup	*setting;
-	int		i;
+	if (pthread_create(th, NULL, &check_sb_dead, &setting))
+		return (1);
+	if (pthread_create(th + 1, NULL, &check_all_fulled, &setting))
+		return (2);
+	if (pthread_detach(th[1]))
+		return (3);
+	return (0);
+}
 
-	setting = (t_setup *)arg;
+void	wait_all(t_setup *setting)
+{
+	int	i;
+
 	i = 0;
-	sem_wait(setting->dead);
 	while (i < setting->phils)
 	{
 		if (setting->philos[i])
-			kill(setting->philos[i], SIGTERM);
-		sem_post(setting->full);
+			waitpid(setting->philos[i], NULL, 0);
 		i++;
 	}
-	return (NULL);
-}
-
-void	*check_all_fulled(void *arg)
-{
-	t_setup			*setting;
-	__uint16_t		fulled_philos;
-
-	setting = (t_setup *)arg;
-	fulled_philos = 0;
-	while (fulled_philos < setting->phils)
-	{
-		sem_wait(setting->full);
-		fulled_philos += 1;
-	}
-	sem_post(setting->dead);
-	return (NULL);
 }
 
 int	main(int ac, char *av[])
 {
 	t_setup		setting;
 	pthread_t	th[2];
-	int			i;
 
 	if (input_check(ac, av))
 		return (1);
 	if (init_setting(ac, av, &setting))
 		return (2);
 	do_philos(&setting);
-	if (pthread_create(th, NULL, &check_sb_dead, &setting))
-		err_exit_main(&setting);
-	if (pthread_create(th + 1, NULL, &check_all_fulled, &setting))
-		err_exit_main(&setting);
-	if (pthread_detach(th[1]))
+	if (init_checker_thread(&setting, th))
 		err_exit_main(&setting);
 	if (pthread_join(th[0], NULL))
 		write(ER, "Failed to join kill thread\n", 28);
-	i = -1;
-	while (++i < setting.phils)
-	{
-		if (setting.philos[i])
-			waitpid(setting.philos[i], NULL, 0);
-	}
+	wait_all(&setting);
 	destroy_setting(&setting);
 	return (0);
 }

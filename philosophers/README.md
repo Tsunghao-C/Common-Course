@@ -14,11 +14,7 @@
 
 ## To do list BONUS
 
-1. create pid_t pointer and malloc in main
-2. use sem_forks to control total number of forks
-3. create one more fork and use sem_t sem_died to check if it should kill all processes
-4. each philosopher (process) has a thread just to constantly checking the starvation time and it he is fulled
-
+1. review thinking time so that philo_bonus 3 200 1000 100 should at least eat one time
 
 ## Objective
 
