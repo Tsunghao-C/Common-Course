@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 18:09:47 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/13 18:38:12 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/13 19:09:59 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,9 @@ void	print_message(t_setup *setting, int id, t_task action)
 	else if (action == FORK)
 		printf("%05u %2d has taken a fork\n", get_time(&setting->start), id);
 	else if (action == DIED)
+	{
 		printf("%05u %2d died\n", get_time(&setting->start), id);
+		return ;
+	}
 	sem_post(setting->print);
 }
