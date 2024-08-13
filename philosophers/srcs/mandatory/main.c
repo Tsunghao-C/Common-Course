@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:28:18 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/12 15:26:21 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/13 21:45:58 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*life_of_philo(void *arg)
 	t_philo			*philo;
 
 	philo = (t_philo *)arg;
-	if (philo->id % 2)
+	if (!(philo->id % 2))
 		ft_usleep(philo->setting->time_to_eat / 2, philo->setting);
 	while (1)
 	{
@@ -27,8 +27,12 @@ void	*life_of_philo(void *arg)
 			thinking(philo);
 		else if (philo->status == EATING)
 		{
-			if (eating_with_forks(philo))
-				break ;
+			// if (eating_with_forks(philo))
+			// 	break ;
+			if (philo->id % 2)
+				eating_with_forks(philo);
+			else
+				eating_with_forks_right(philo);
 			philo->status = SLEEPING;
 		}
 		else if (philo->status == SLEEPING)

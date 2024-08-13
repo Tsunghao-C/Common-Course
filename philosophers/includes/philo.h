@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:13:01 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/12 15:08:27 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/13 21:26:58 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int			check_sb_dead(t_setup *setting);
 void		turn_dead(t_setup *setting);
 /* activity functions */
 int			eating_with_forks(t_philo *philo);
+int			eating_with_forks_right(t_philo *philo);
 void		sleeping(t_philo *philo);
 void		thinking(t_philo *philo);
 void		print_message(t_setup *setting, int id, t_task action);

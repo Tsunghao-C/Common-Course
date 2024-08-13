@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 15:10:21 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/12 15:31:43 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/13 21:13:54 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_phil(t_philo *phil, int i, t_setup *setting)
 {
-	phil->id = i;
+	phil->id = i + 1;
 	phil->status = THINKING;
 	*(setting->last_meal + i) = setting->start;
 	phil->num_meals = 0;
@@ -41,6 +41,7 @@ int	init_setting(int ac, char *av[], t_setup *setting)
 	setting->mtx_full = NULL;
 	setting->mtx_dead = NULL;
 	setting->mtx_meal = NULL;
+	setting->mtx_print = NULL;
 	return (0);
 }
 
