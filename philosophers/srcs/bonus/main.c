@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:28:18 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/13 19:48:41 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/13 20:26:07 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	init_checker_thread(t_setup *setting, pthread_t th[2])
 {
-	if (pthread_create(th, NULL, &check_sb_dead, &setting))
+	if (pthread_create(th, NULL, &check_sb_dead, setting))
 		return (1);
-	if (pthread_create(th + 1, NULL, &check_all_fulled, &setting))
+	if (pthread_create(th + 1, NULL, &check_all_fulled, setting))
 		return (2);
 	if (pthread_detach(th[1]))
 		return (3);

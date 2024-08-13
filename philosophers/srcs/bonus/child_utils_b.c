@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 19:24:18 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/13 19:29:20 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/13 20:29:20 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	do_philos(t_setup *setting)
 	{
 		setting->philos[i] = fork();
 		if (setting->philos[i] == -1)
-        {
-            destroy_setting(setting);
-            exit(EXIT_FAILURE);
-        }
+		{
+			destroy_setting(setting);
+			exit(EXIT_FAILURE);
+		}
 		else if (!setting->philos[i])
 			start_philo(i, setting);
 		i++;
@@ -40,10 +40,10 @@ void	start_philo(int id, t_setup *setting)
 	if (pthread_create(&th, NULL, &starvation_check, &philo))
 		exit(EXIT_FAILURE);
 	if (pthread_detach(th))
-    {
-        write(ER, "Failed to detach a thread\n", 27);
-        exit(EXIT_FAILURE);
-    }
+	{
+		write(ER, "Failed to detach a thread\n", 27);
+		exit(EXIT_FAILURE);
+	}
 	if (id % 2)
 		ft_usleep(setting->time_to_eat / 2, setting);
 	while (1)
