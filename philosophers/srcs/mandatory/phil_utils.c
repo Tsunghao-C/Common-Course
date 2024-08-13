@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 15:10:21 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/14 01:44:29 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/14 01:50:47 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	init_phil(t_philo *phil, int i, t_setup *setting)
 {
 	phil->id = i + 1;
-	// phil->status = THINKING;
 	phil->status = EATING;
 	*(setting->last_meal + i) = setting->start;
 	phil->num_meals = 0;
@@ -87,4 +86,20 @@ void	destroy_mutex(t_setup *setting, pthread_mutex_t *mtx_fork,
 	pthread_mutex_destroy(mtx + MEAL);
 	pthread_mutex_destroy(mtx + PRINT);
 	free(mtx_fork);
+}
+
+void	print_message(t_setup *setting, int id, t_task action)
+{
+	pthread_mutex_lock(setting->mtx_print);
+	if (action == THINKING)
+		printf("%05u %2d is thinking\n", get_time(&setting->start), id);
+	else if (action == EATING)
+		printf("%05u %2d is eating\n", get_time(&setting->start), id);
+	else if (action == SLEEPING)
+		printf("%05u %2d is sleeping\n", get_time(&setting->start), id);
+	else if (action == FORK)
+		printf("%05u %2d has taken a fork\n", get_time(&setting->start), id);
+	else if (action == DIED)
+		printf("%05u %2d died\n", get_time(&setting->start), id);
+	pthread_mutex_unlock(setting->mtx_print);
 }

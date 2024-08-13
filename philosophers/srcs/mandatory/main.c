@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:28:18 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/13 21:45:58 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/14 01:49:37 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ void	*life_of_philo(void *arg)
 			thinking(philo);
 		else if (philo->status == EATING)
 		{
-			// if (eating_with_forks(philo))
-			// 	break ;
 			if (philo->id % 2)
 				eating_with_forks(philo);
 			else

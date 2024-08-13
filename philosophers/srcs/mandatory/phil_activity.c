@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 19:08:46 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/14 01:39:01 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/14 01:50:14 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,20 +105,4 @@ void	thinking(t_philo *philo)
 	if (philo->setting->phils % 2)
 		ft_usleep(philo->setting->time_to_think, philo->setting);
 	philo->status = EATING;
-}
-
-void	print_message(t_setup *setting, int id, t_task action)
-{
-	pthread_mutex_lock(setting->mtx_print);
-	if (action == THINKING)
-		printf("%05u %2d is thinking\n", get_time(&setting->start), id);
-	else if (action == EATING)
-		printf("%05u %2d is eating\n", get_time(&setting->start), id);
-	else if (action == SLEEPING)
-		printf("%05u %2d is sleeping\n", get_time(&setting->start), id);
-	else if (action == FORK)
-		printf("%05u %2d has taken a fork\n", get_time(&setting->start), id);
-	else if (action == DIED)
-		printf("%05u %2d died\n", get_time(&setting->start), id);
-	pthread_mutex_unlock(setting->mtx_print);
 }
