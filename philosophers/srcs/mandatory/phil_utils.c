@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 15:10:21 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/13 21:13:54 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/14 01:44:29 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,37 @@
 void	init_phil(t_philo *phil, int i, t_setup *setting)
 {
 	phil->id = i + 1;
-	phil->status = THINKING;
+	// phil->status = THINKING;
+	phil->status = EATING;
 	*(setting->last_meal + i) = setting->start;
 	phil->num_meals = 0;
 	phil->is_full = 0;
 	phil->setting = setting;
 }
 
-int	init_setting(int ac, char *av[], t_setup *setting)
+int	init_setting(int ac, char *av[], t_setup *set)
 {
-	setting->phils = ft_atol(av[1]);
-	setting->time_to_die = ft_atol(av[2]);
-	setting->time_to_eat = ft_atol(av[3]);
-	setting->time_to_sleep = ft_atol(av[4]);
-	setting->must_eat_times = 0;
+	set->phils = ft_atol(av[1]);
+	set->time_to_die = ft_atol(av[2]);
+	set->time_to_eat = ft_atol(av[3]);
+	set->time_to_sleep = ft_atol(av[4]);
+	set->time_to_think = 0;
+	if (set->time_to_sleep <= set->time_to_eat)
+		set->time_to_think = 2 * set->time_to_eat - set->time_to_sleep;
+	set->must_eat_times = 0;
 	if (ac == 6)
-		setting->must_eat_times = ft_atol(av[5]);
-	gettimeofday(&setting->start, NULL);
-	setting->died = 0;
-	setting->fulled_phils = 0;
-	setting->last_meal = malloc(setting->phils * sizeof(struct timeval));
-	if (!setting->last_meal)
+		set->must_eat_times = ft_atol(av[5]);
+	gettimeofday(&set->start, NULL);
+	set->died = 0;
+	set->fulled_phils = 0;
+	set->last_meal = malloc(set->phils * sizeof(struct timeval));
+	if (!set->last_meal)
 		return (1);
-	setting->mtx_fork = NULL;
-	setting->mtx_full = NULL;
-	setting->mtx_dead = NULL;
-	setting->mtx_meal = NULL;
-	setting->mtx_print = NULL;
+	set->mtx_fork = NULL;
+	set->mtx_full = NULL;
+	set->mtx_dead = NULL;
+	set->mtx_meal = NULL;
+	set->mtx_print = NULL;
 	return (0);
 }
 

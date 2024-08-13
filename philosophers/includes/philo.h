@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:13:01 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/13 21:26:58 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/14 01:33:57 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_setup
 	__uint32_t		time_to_die;
 	__uint32_t		time_to_eat;
 	__uint32_t		time_to_sleep;
+	__uint32_t		time_to_think;
 	__uint16_t		must_eat_times;
 	struct timeval	start;
 	int				died;
