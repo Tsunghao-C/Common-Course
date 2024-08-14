@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:28:18 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/14 01:49:37 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/14 13:23:37 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ void	*starvation_check(void *arg)
 	setting = (t_setup *)arg;
 	while (1)
 	{
-		if (check_sb_dead(setting))
-			break ;
 		i = 0;
 		while (i < setting->phils)
 		{
@@ -61,7 +59,10 @@ void	*starvation_check(void *arg)
 			i++;
 		}
 		if (check_all_full(setting))
+		{
 			turn_dead(setting);
+			return (NULL);
+		}
 	}
 	return (NULL);
 }
