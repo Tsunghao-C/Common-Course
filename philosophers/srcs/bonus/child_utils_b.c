@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 19:24:18 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/13 20:29:20 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/14 02:01:58 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	start_philo(int id, t_setup *setting)
 void	init_philo(int id, t_setup *setting, t_philo *philo)
 {
 	philo->id = id + 1;
-	philo->status = THINKING;
+	philo->status = EATING;
 	philo->num_meals = 0;
 	philo->is_full = 0;
 	philo->last_meal = setting->start;

@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:13:01 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/13 19:52:33 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/14 01:56:36 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_setup
 	__uint32_t		time_to_die;
 	__uint32_t		time_to_eat;
 	__uint32_t		time_to_sleep;
+	__uint32_t		time_to_think;
 	__uint16_t		must_eat_times;
 	struct timeval	start;
 	pid_t			philos[MAX_PHILO];
@@ -78,7 +79,7 @@ long		ft_atol(const char *nptr);
 __uint32_t	get_time(struct timeval *ref);
 void		ft_usleep(__uint32_t time, t_setup *setting);
 /* init setting and semaphore functions */
-int			init_setting(int ac, char *av[], t_setup *setting);
+int			init_setting(int ac, char *av[], t_setup *set);
 void		destroy_setting(t_setup *setting);
 int			init_sem(t_setup *setting);
 int			destroy_sem(sem_t *sem, const char *file_name);

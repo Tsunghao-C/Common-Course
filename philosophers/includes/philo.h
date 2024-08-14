@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:13:01 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/14 01:33:57 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/14 01:56:48 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ long		ft_atol(const char *nptr);
 /* utils functions */
 __uint32_t	get_time(struct timeval *ref);
 void		ft_usleep(__uint32_t time, t_setup *setting);
-int			init_setting(int ac, char *av[], t_setup *setting);
+int			init_setting(int ac, char *av[], t_setup *set);
 void		init_phil(t_philo *phil, int i, t_setup *setting);
 void		init_mutex(t_setup *setting, pthread_mutex_t *mtx_fork,
 				pthread_mutex_t mtx[4]);

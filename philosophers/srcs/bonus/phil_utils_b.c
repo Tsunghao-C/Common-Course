@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:55:20 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/08/13 19:51:49 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/14 01:56:23 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,25 +46,28 @@ int	destroy_sem(sem_t *sem, const char *file_name)
 	return (0);
 }
 
-int	init_setting(int ac, char *av[], t_setup *setting)
+int	init_setting(int ac, char *av[], t_setup *set)
 {
-	setting->phils = ft_atol(av[1]);
-	setting->time_to_die = ft_atol(av[2]);
-	setting->time_to_eat = ft_atol(av[3]);
-	setting->time_to_sleep = ft_atol(av[4]);
-	setting->must_eat_times = 0;
+	set->phils = ft_atol(av[1]);
+	set->time_to_die = ft_atol(av[2]);
+	set->time_to_eat = ft_atol(av[3]);
+	set->time_to_sleep = ft_atol(av[4]);
+	set->time_to_think = 0;
+	if (set->time_to_sleep <= set->time_to_eat)
+		set->time_to_think = 2 * set->time_to_eat - set->time_to_sleep;
+	set->must_eat_times = 0;
 	if (ac == 6)
-		setting->must_eat_times = ft_atol(av[5]);
-	gettimeofday(&setting->start, NULL);
-	memset(setting->philos, -1, MAX_PHILO);
-	setting->forks = NULL;
-	setting->dead = NULL;
-	setting->full = NULL;
-	setting->meal = NULL;
-	setting->print = NULL;
-	if (init_sem(setting))
+		set->must_eat_times = ft_atol(av[5]);
+	gettimeofday(&set->start, NULL);
+	memset(set->philos, -1, MAX_PHILO);
+	set->forks = NULL;
+	set->dead = NULL;
+	set->full = NULL;
+	set->meal = NULL;
+	set->print = NULL;
+	if (init_sem(set))
 	{
-		destroy_setting(setting);
+		destroy_setting(set);
 		exit(EXIT_FAILURE);
 	}
 	return (0);
