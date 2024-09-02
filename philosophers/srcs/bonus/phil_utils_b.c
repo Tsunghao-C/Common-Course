@@ -12,6 +12,16 @@
 
 #include "philo_bonus.h"
 
+static void	*ft_memset(void *s, int c, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < n)
+		((unsigned char *)s)[i++] = (unsigned char)c;
+	return (s);
+}
+
 int	init_sem(t_setup *setting)
 {
 	sem_unlink(SEM_FORKS);
@@ -59,7 +69,7 @@ int	init_setting(int ac, char *av[], t_setup *set)
 	if (ac == 6)
 		set->must_eat_times = ft_atol(av[5]);
 	gettimeofday(&set->start, NULL);
-	memset(set->philos, -1, MAX_PHILO);
+	ft_memset(set->philos, -1, MAX_PHILO);
 	set->forks = NULL;
 	set->dead = NULL;
 	set->full = NULL;
