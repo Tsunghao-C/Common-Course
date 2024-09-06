@@ -3,20 +3,20 @@
 ## Objective
 
 1. This is an advanced graphical project that we create a simplified 3D game.
-2. The goal is to learn a rendering techniqe called Ray Casting.
+2. The goal is to learn a rendering technique called Ray Casting.
 
 ## Key Concepts
 
-1. Parsing Maps, Wall texture paths, and initialize images.
-2. Use a recursive function (floodfill) to check if a Map is valid that the player will never go out side of bound.
-3. Building a vector library for all the vector calculations (optional)
+1. Parsing Maps, Wall texture paths, and initializing images.
+2. Use a recursive function (floodfill) to check if a Map is valid that the player will never go outside of bound.
+3. Building a vector library for vector calculations (optional)
 4. What is Raycasting and how it helps to make 3D rendering efficient?
-5. What is DDA algorithm? Why it helps to optimize the rendering?
-6. Rendering resized images (Wall rendering)
-6. Creating multiple images and put in in the same window (Mini map, Sprite)
-7. Creating a script of frames and generate animation effects (Animation)
+5. What is DDA algorithm? Why it helps to optimize rendering?
+6. Rendering images in a resized fashion (Wall texture rendering)
+6. Create multiple images and put in in the same window (Mini map, Sprite)
+7. Create a script of frames and generate animation effects (Animation)
 
-## Notes of this big and challenging project
+## Notes of this fun and interesting graphic project
 
 Link to our minishell git repo: https://github.com/Haliris/cub3d.git
 
@@ -32,7 +32,7 @@ Link to our minishell git repo: https://github.com/Haliris/cub3d.git
 	- Set up pull request rules and pull branch to main only when every co-workers have reviewed
 	- Define a reasonable and clear scope for each branch
 	- Make good uses of the Issues and Comments features on github
-### Notes
+### Other notes
 1. This time we used git clone mlx in the Makefile, so every time when you try to launch, you check whether the mlx library exists or not. If not, you download it.
 2. I built a library for all the vector operations and the structure definition. For me it is very useful later when I need to deal with vectors like shifting or rotation.
 3. I learned from a senior student that you can create a script of frames. Later I got the idea of using linked list to generate all the frames in a linked list. It is super usefull.
