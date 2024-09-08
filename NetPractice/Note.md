@@ -96,7 +96,7 @@ Question: How to create 5 networks?
 2. Hack the host bits
     - had 3 bits from the host bits, the subnet Mask will be like:
 ```
-Mask: 11111111.11111111.11111111.11100000 | 255.255.254.224
+Mask: 11111111.11111111.11111111.11100000 | 255.255.255.224
 ```
 3. Find the increment
     - since we uses 3 bits, the increment will be 2^(8 - 3) = 32
