@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:12:42 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/10 16:52:43 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/11 13:54:47 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,27 @@ class	Sample {
 		// later when you extend your classes, it could easily blow up if
 		// you don't add "const" to protect certain variables.
 
-		int	getFoo(void) const;		// getter
+		int	getFoo(void) const;	// getter
 		void	setFoo(int value);	// setter
 		// Create a member function that allows user to access or update the value 
 		// in the private part in a class
+
+		static int	getNumIns(void);
+		// We can use "static" to store data in a class level, not in instance level.
+		// To interact with the static attribute, the function also needs to be "static"
+		// To each instance, the class level variable is a non-member variable
 
 	private:
 
 		int	_foo;
 		void	_bar(void) const;
-
 		// Every private identifiers can only be reached in side the class,
 		// which means in the constructor or deconstructors
 		// keep all the private identifiers starting with a prefix of "_"
+
+		static int	_num_ins;
+		// static variables make it a class level stuff, you cannot initialize it
+		// in a constructor.
 };
 
 /* Class vs Struct */
