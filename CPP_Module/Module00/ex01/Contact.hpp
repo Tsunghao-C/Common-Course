@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:59:41 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/12 17:00:43 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/12 20:29:08 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@
 # include <iostream>
 
 class	Contact {
+
+	private:
+		std::string _fname;
+		std::string _lname;
+		std::string _nick;
+		std::string _phone;
+		std::string _secret;
 
 	public:
 		Contact(void);
@@ -31,12 +38,6 @@ class	Contact {
 		void		set_phone(std::string str);
 		void		set_secret(std::string str);		
 
-	private:
-		std::string _fname;
-		std::string _lname;
-		std::string _nick;
-		std::string _phone;
-		std::string _secret;
 };
 
 #endif

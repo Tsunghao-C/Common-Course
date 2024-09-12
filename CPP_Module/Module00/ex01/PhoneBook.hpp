@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 15:20:51 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/12 18:59:14 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/12 20:35:40 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ class	PhoneBook {
 		~PhoneBook(void);
 
 		void	addContact(void);
-		void	searchContact(void);
+		void	searchContact(void) const;
 		void	printContact(void) const;
 
 };

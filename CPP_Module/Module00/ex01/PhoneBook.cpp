@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 15:34:57 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/12 19:28:17 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/12 20:35:44 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void PhoneBook::addContact(void) {
 	this->_index++;
 }
 
-void	PhoneBook::searchContact(void) {
+void	PhoneBook::searchContact(void) const{
 
 	std::string	input;
 	int			index;
@@ -94,9 +94,30 @@ void	PhoneBook::searchContact(void) {
 	std::cout << "Darkest_Secret: " << this->_contacts[index - 1].get_secret() << std::endl;
 }
 
+static	std::string fixed_size(std::string str, u_int32_t max) {
+	
+	if (str.length() > max) {
+		str.resize(max);
+		str[str.size() - 1] = '.';
+	}
+	return (str);
+}
+
 void	PhoneBook::printContact(void) const {
 
+	int		i;
+
+	i = 0;
 	std::cout << "|----------|----------|----------|----------|" << std::endl;
 	std::cout << "|Index     |F_Name    |L_Name    |N_Name    |" << std::endl;
 	std::cout << "|----------|----------|----------|----------|" << std::endl;
+	while (i < this->_index && i < 8) {
+		std::cout << "|" << std::setw(10) << i + 1;
+		std::cout << "|" << std::setw(10) << fixed_size(this->_contacts[i].get_fname(), 10);
+		std::cout << "|" << std::setw(10) << fixed_size(this->_contacts[i].get_lname(), 10);
+		std::cout << "|" << std::setw(10) << fixed_size(this->_contacts[i].get_nick(), 10);
+		std::cout << "|" << std::endl;
+		i++;
+	}
+	std::cout << "|__________|__________|__________|__________|" << std::endl;
 }
