@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 15:47:44 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/12 16:07:21 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/12 19:30:59 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,29 @@ int	main(void) {
 	std::string buff;
 	PhoneBook	my_phone_book;
 
-	std::cout << "Enter a command: ";
-	while (std::getline(std::cin, buff)) {
-
+	std::cout << "Welcome to My_Phone_Book!" << std::endl;
+	while (!std::cin.eof()) {
+		std::cout << "Enter a command: ";
+		if (!std::getline(std::cin, buff)) {
+			std::cout << std::endl;
+			break ;
+		}
 		if (buff == "EXIT")
 			break ;
 		else if (buff == "ADD") {
-			std::cout << std::setw(10) << 12345 << std::endl;
 			// Add contact;
+			my_phone_book.addContact();
 		}
 		else if (buff == "SEARCH") {
-			std::cout << std::setw(10) << 12345678 << std::endl;
+			// print all contacts in summary mode
+			my_phone_book.printContact();
 			// Search contact;
+			my_phone_book.searchContact();
 		}
-		std::cout << "Enter a command: ";
 	}
-	if (std::cin.eof()) {
-		std::cout << std::endl << "EOF detected. Exiting program." << std::endl;
-	}
+	if (std::cin.eof())
+		std::cout << "EOF detected. Exiting program." << std::endl;
+	else
+		std::cout << "Bye~~~~~" << std::endl;
 	return (0);
 }

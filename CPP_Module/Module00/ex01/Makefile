@@ -6,15 +6,15 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/06 14:29:42 by tsuchen           #+#    #+#              #
-#    Updated: 2024/09/11 19:34:35 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/09/12 17:04:52 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= phonebook
 
-SRCS		= PhoneBook.cpp main.cpp
+SRCS		= PhoneBook.cpp Contact.cpp main.cpp
 
-HEADERS		= PhoneBook.hpp
+HEADERS		= PhoneBook.hpp Contact.hpp
 
 OBJS		= $(SRCS:.cpp=.o)
 
