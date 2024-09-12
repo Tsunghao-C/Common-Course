@@ -6,13 +6,15 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 15:20:51 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/11 19:59:49 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/12 15:43:03 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHONEBOOK_HPP
 # define PHONEBOOK_HPP
 # include <string>
+# include <iostream>
+# include <iomanip>
 
 class	Contact {
 
