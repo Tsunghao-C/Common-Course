@@ -6,13 +6,13 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/06 14:29:42 by tsuchen           #+#    #+#              #
-#    Updated: 2024/09/12 21:04:26 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/09/13 00:48:48 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= saveass
 
-SRCS		= Account.cpp test.cpp
+SRCS		= Account.cpp tests.cpp
 
 HEADERS		= Account.hpp
 
