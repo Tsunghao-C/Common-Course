@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:44:58 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/15 17:35:21 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/15 18:40:56 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,17 @@
 class Sed
 {
 	private:
-		std::string		_filename;
-		std::string		_s1;
-		std::string		_s2;
+		std::string	const	_filename;
+		std::string	const	_s1;
+		std::string	const	_s2;
+		// const here means once it is initialized, it can't chage
 
 		void	sed_next_line(std::string buff, std::ofstream& ofs);
 
 	public:
 		Sed(const std::string& f_name, const std::string& s1, const std::string& s2);
+		// const in the constructor means it always reference to its member reference
+		// you cannot change the referenced data during construction.
 		~Sed(void);
 		
 		int		SedReplacer(void);
