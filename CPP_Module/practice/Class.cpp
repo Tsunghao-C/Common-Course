@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:11:56 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/11 13:54:35 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/13 14:18:22 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,17 @@ int	main(void) {
 	// across all instances.
 	int	Sample::*foo_p = &Sample::foo;			//ptr to an int in the class structure
 	void	(Sample::*bar_p)(void) const = &Sample::bar;	//ptr to a f in the class structure
+	
+	/* Reference */
+	int	num = 42;
+	int	*num_ptr = &num;
+	int	&num_ref = num;		//reference is a dereferenced constant ptr that always point to sth.
+	
+	std::cout << num << " " << *num_ptr << " " << num_ref << std::endl;
+
+	*num_ptr = 21;
+	num_ref = 84;			//change number with reference
+	std::cout << num << " " << *num_ptr << " " << num_ref << std::endl;
 
 
 	std::cout << "The number of instances is: " << Sample::getNumIns() << std::endl;
