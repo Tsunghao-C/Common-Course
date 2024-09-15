@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:44:58 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/15 18:40:56 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/15 18:49:36 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class Sed
 		std::string	const	_s2;
 		// const here means once it is initialized, it can't chage
 
-		void	sed_next_line(std::string buff, std::ofstream& ofs);
+		void	_sed_next_line(std::string buff, std::ofstream& ofs);
 
 	public:
 		Sed(const std::string& f_name, const std::string& s1, const std::string& s2);

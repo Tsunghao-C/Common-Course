@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:51:13 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/15 18:24:30 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/15 18:49:53 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ int Sed::SedReplacer(void) {
 	}
 	std::string     buff;
 	while (std::getline(ifs, buff)) {
-		this->sed_next_line(buff, ofs);
+		this->_sed_next_line(buff, ofs);
 		if (!ifs.eof())
 			ofs << std::endl;
 	}
 	return EXIT_SUCCESS;
 }
 
-void	Sed::sed_next_line(std::string buff, std::ofstream& ofs) {
+void	Sed::_sed_next_line(std::string buff, std::ofstream& ofs) {
 	std::size_t	pos = 0;
 	std::size_t	found = buff.find(this->_s1);
 	while (found != std::string::npos) {
