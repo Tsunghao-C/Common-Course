@@ -6,15 +6,15 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/06 14:29:42 by tsuchen           #+#    #+#              #
-#    Updated: 2024/09/15 15:55:47 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/09/15 17:34:43 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= sed
 
-SRCS		= main.cpp sed_utils.cpp
+SRCS		= main.cpp Sed.cpp
 
-HEADERS		= sed.hpp
+HEADERS		= Sed.hpp
 
 OBJS		= $(SRCS:.cpp=.o)
 

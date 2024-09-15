@@ -1,26 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sed_utils.cpp                                      :+:      :+:    :+:   */
+/*   sed.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/13 19:24:26 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/15 16:33:22 by tsuchen          ###   ########.fr       */
+/*   Created: 2024/09/15 16:44:58 by tsuchen           #+#    #+#             */
+/*   Updated: 2024/09/15 17:35:21 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sed.hpp"
+#ifndef SED_HPP
+# define SED_HPP
 
-int sed(std::ofstream &ofs, const char *s1, const char *s2, std::string buff) {
-    std::size_t pos = 0;
-    std::size_t found = buff.find(s1);
-    while (found != std::string::npos) {
-        ofs << buff.substr(pos, found - pos) << s2;
-        found += strlen(s1);
-        pos = found;
-        found = buff.find(s1, found);
-    }
-    ofs << buff.substr(pos);
-    return 0;
-}
+# include <iostream>
+# include <string>
+# include <fstream>
+
+class Sed
+{
+	private:
+		std::string		_filename;
+		std::string		_s1;
+		std::string		_s2;
+
+		void	sed_next_line(std::string buff, std::ofstream& ofs);
+
+	public:
+		Sed(const std::string& f_name, const std::string& s1, const std::string& s2);
+		~Sed(void);
+		
+		int		SedReplacer(void);
+
+};
+
+#endif

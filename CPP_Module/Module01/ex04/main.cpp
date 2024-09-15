@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 19:11:57 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/13 20:18:29 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/15 15:53:58 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int main(int ac, char *av[]) {
 	
-	if (ac != 4 || !av || !av[1] || !av[2] || !av[3]) {
-		std::cout << "Wrong input arguments" << std::endl;
+	if (ac != 4 || !av || !av[1] || !av[2] || !av[3] || !strlen(av[2])) {
+		std::cerr << "Wrong input arguments" << std::endl;
 		return EXIT_FAILURE;
 	}
 	std::ifstream	ifs(av[1], std::ifstream::in);
@@ -31,9 +31,10 @@ int main(int ac, char *av[]) {
 		ifs.close();
 		return EXIT_FAILURE;
 	}
-	while (!ifs.eof()) {
-		std::getline(ifs, buff);
+	while (std::getline(ifs, buff)) {
 		sed(ofs, av[2], av[3], buff);
+		if (!ifs.eof())
+			ofs << std::endl;
 	}
 	ifs.close();
 	ofs.close();

@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sed_utils.cpp                                      :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/13 19:24:26 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/15 16:33:22 by tsuchen          ###   ########.fr       */
+/*   Created: 2024/09/13 19:11:57 by tsuchen           #+#    #+#             */
+/*   Updated: 2024/09/15 17:34:17 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sed.hpp"
+#include "Sed.hpp"
 
-int sed(std::ofstream &ofs, const char *s1, const char *s2, std::string buff) {
-    std::size_t pos = 0;
-    std::size_t found = buff.find(s1);
-    while (found != std::string::npos) {
-        ofs << buff.substr(pos, found - pos) << s2;
-        found += strlen(s1);
-        pos = found;
-        found = buff.find(s1, found);
-    }
-    ofs << buff.substr(pos);
-    return 0;
+int main(int ac, char *av[]) {
+	
+	if (ac != 4 || !av || !av[1] || !av[2] || !av[3] || !strlen(av[2])) {
+		std::cerr << "Wrong input arguments" << std::endl;
+		return EXIT_FAILURE;
+	}
+	Sed	sed1(av[1], av[2], av[3]);
+	if (sed1.SedReplacer())
+		return EXIT_FAILURE;
+	return EXIT_SUCCESS;
 }
