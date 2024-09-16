@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 10:34:59 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/13 16:39:19 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/16 13:05:06 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ class	Zombie {
 	
 	public:
 		Zombie(void);
-		Zombie(std::string name);
+		Zombie(const std::string& name);
 		~Zombie(void);
 		void	announce(void) const;
 		void	setName(std::string name);

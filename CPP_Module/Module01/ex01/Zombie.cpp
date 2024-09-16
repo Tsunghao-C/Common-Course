@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 10:44:31 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/13 16:51:28 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/16 13:01:42 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ Zombie::Zombie(void) {
 	std::cout << "A nameless Zombie class created." << std::endl;
 }
 
-Zombie::Zombie(std::string name) : _name(name) {
+Zombie::Zombie(const std::string& name) : _name(name) {
 	std::cout << this->_name << " from Zombie class created." << std::endl;
 }
 
