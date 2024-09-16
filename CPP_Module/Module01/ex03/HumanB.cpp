@@ -6,13 +6,13 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 18:35:08 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/13 18:58:20 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/16 11:55:02 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "HumanB.hpp"
 
-HumanB::HumanB(std::string name) : _name(name) {
+HumanB::HumanB(const std::string& name) : _name(name) {
     this->_weapon_b = nullptr;
     std::cout << "HumanB " << this->_name << " is created" << std::endl;
 }

@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 18:33:11 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/13 18:56:37 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/16 11:54:52 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ class HumanB
 		std::string	_name;
 		Weapon*		_weapon_b;
 	public:
-		HumanB(std::string name);
+		HumanB(const std::string& name);
 		~HumanB(void);
 		void	attack(void);
 		void	setWeapon(Weapon &w);
