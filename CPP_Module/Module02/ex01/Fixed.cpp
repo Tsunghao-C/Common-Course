@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 10:07:31 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/17 15:28:12 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/17 15:45:45 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ Fixed::Fixed(const int i) {
 
 Fixed::Fixed(const float f) {
 	std::cout << "Float constructor called" << std::endl;
-	this->setRawBits(static_cast<int>(std::round(f * (1 << this->_frac_bits))));
+	this->setRawBits(static_cast<int>(std::roundf(f * (1 << this->_frac_bits))));
 }
 
 Fixed::Fixed(const Fixed& other) {
