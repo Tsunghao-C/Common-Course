@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 10:07:31 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/17 13:28:01 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/17 15:28:12 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Fixed::Fixed(void) {
 
 Fixed::Fixed(const int i) {
 	std::cout << "Int constructor called" << std::endl;
-	this->setRawBits(i * (1 << this->_frac_bits));
+	this->setRawBits(i << this->_frac_bits);
 }
 
 Fixed::Fixed(const float f) {
@@ -56,8 +56,7 @@ float	Fixed::toFloat(void) const {
 }
 
 int		Fixed::toInt(void) const {
-	const float	reverseScalar = 1.0f / (1 << this->_frac_bits);
-	return this->getRawBits() * reverseScalar;
+	return this->getRawBits() >> this->_frac_bits;
 }
 
 const int	Fixed::_frac_bits = 8;
