@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 10:07:31 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/17 10:29:43 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/17 13:33:09 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 Fixed::Fixed(void) {
 	std::cout << "Default constructor called" << std::endl;
-	this->_raw = 0;
+	this->setRawBits(0);
 }
 
 Fixed::Fixed(const Fixed& other) {
@@ -25,7 +25,7 @@ Fixed::Fixed(const Fixed& other) {
 
 Fixed&	Fixed::operator=(const Fixed& other) {
 	std::cout << "Copy assignment operator called" << std::endl;
-	this->_raw = other.getRawBits();
+	this->setRawBits(other.getRawBits());
 	return *this;
 }
 
