@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:17:33 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/18 17:13:04 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/18 17:19:13 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ protected:
 	unsigned int	_ATK;
 
 	virtual	unsigned int	_getMaxHP() const;
+	// A virtual function that can be overridden by derived classes
 
 public:
 	ClapTrap(void);

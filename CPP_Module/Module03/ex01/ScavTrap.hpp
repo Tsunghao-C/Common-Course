@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 14:34:49 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/18 17:13:10 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/18 17:19:36 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ private:
 	/* data */
 	int		_isGuarded;
 	unsigned int	_getMaxHP() const override;
+	// to overide the virtual function in base class
 
 public:
 	ScavTrap();
