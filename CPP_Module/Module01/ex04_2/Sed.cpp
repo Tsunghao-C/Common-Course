@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:51:13 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/15 18:49:53 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/18 09:50:02 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ Sed::~Sed(void) {
 }
 
 int Sed::SedReplacer(void) {
+	if (this->_s1.size() == 0) {
+		std::cerr << "Error: target string cannot be empty" << std::endl;
+		return EXIT_FAILURE;
+	}
 	std::ifstream   ifs(this->_filename, std::ifstream::in);
 	if (ifs.fail()) {
 		std::cerr << "Error: Failed to open infile " << this->_filename << std::endl;
