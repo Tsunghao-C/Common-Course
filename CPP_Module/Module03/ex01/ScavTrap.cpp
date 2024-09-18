@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 14:55:02 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/18 17:13:18 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/19 01:20:08 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ ScavTrap::ScavTrap() : _isGuarded(0)  {
 	std::cout << "A ScavTrap object " << this->getName() << " is created!" << std::endl;
 }
 
-ScavTrap::ScavTrap(std::string name) : _isGuarded(0) {
+ScavTrap::ScavTrap(const std::string &name) : _isGuarded(0) {
 	this->_Name = name;
 	this->_HP = SC_HP;
 	this->_ENG = SC_ENG;

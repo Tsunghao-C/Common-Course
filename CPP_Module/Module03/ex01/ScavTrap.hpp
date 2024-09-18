@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 14:34:49 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/18 17:19:36 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/19 01:19:58 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ private:
 
 public:
 	ScavTrap();
-	ScavTrap(std::string name);
+	ScavTrap(const std::string &name);
 	ScavTrap(const ScavTrap &other);
 	ScavTrap	&operator=(const ScavTrap &other);
 	~ScavTrap();
