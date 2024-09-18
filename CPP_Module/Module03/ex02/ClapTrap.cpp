@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:25:55 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/18 17:14:06 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/19 01:18:51 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ ClapTrap::ClapTrap(void) : _Name("No name"), _HP(CL_HP), _ENG(CL_ENG), _ATK(CL_A
 	std::cout << "A ClapTrap object " << this->_Name << " is created!" << std::endl;
 }
 
-ClapTrap::ClapTrap(std::string name) : _Name(name), _HP(CL_HP), _ENG(CL_ENG), _ATK(CL_ATK) {
+ClapTrap::ClapTrap(const std::string &name) : _Name(name), _HP(CL_HP), _ENG(CL_ENG), _ATK(CL_ATK) {
 	std::cout << "A ClapTrap object " << this->_Name << " is created!" << std::endl;
 }
 

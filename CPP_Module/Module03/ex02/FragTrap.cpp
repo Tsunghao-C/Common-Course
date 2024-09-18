@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 14:55:02 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/18 17:31:26 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/19 01:18:25 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ FragTrap::FragTrap() {
 	std::cout << "A FragTrap object " << this->getName() << " is created!" << std::endl;
 }
 
-FragTrap::FragTrap(std::string name) {
+FragTrap::FragTrap(const std::string &name) {
 	this->_Name = name;
 	this->_HP = FR_HP;
 	this->_ENG = FR_ENG;
