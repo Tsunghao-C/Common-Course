@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:17:33 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/18 14:41:40 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/19 01:20:47 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ private:
 	unsigned int	_ATK;
 public:
 	ClapTrap(void);
-	ClapTrap(std::string name);
+	ClapTrap(const std::string &name);
 	ClapTrap(const ClapTrap& other);
 	ClapTrap&	operator=(const ClapTrap& other);
 	~ClapTrap(void);
