@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:37:16 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/18 14:25:51 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/18 14:45:13 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main(void) {
 	ClapTrap	a("Tim");
 	ClapTrap	b("Cook");
 	ClapTrap	c(b);
-	ClapTrap	d("Timmy");
+	ClapTrap	d;
 
 	d = a;	//Timmy is now Tim as well
 
