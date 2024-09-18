@@ -6,64 +6,52 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 14:55:02 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/18 17:43:34 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/19 01:05:40 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 
-FragTrap::FragTrap() {
+DiamondTrap::DiamondTrap() {
 	this->_Name = "No name";
-	this->_HP = FR_HP;
-	this->_ENG = FR_ENG;
-	this->_ATK = FR_ATK;
-	std::cout << "A FragTrap object " << this->getName() << " is created!" << std::endl;
+	ClapTrap::_Name = this->_Name + "_clap_name";
+	this->_HP = FragTrap::getHP();
+	this->_ENG = ScavTrap::getENG();
+	this->_ATK = FragTrap::getATK();
+	std::cout << "A DiamondTrap object " << this->_Name << " is created!" << std::endl;
 }
 
-FragTrap::FragTrap(std::string name) {
+DiamondTrap::DiamondTrap(const std::string &name) {
 	this->_Name = name;
-	this->_HP = FR_HP;
-	this->_ENG = FR_ENG;
-	this->_ATK = FR_ATK;
-	std::cout << "A FragTrap object " << this->getName() << " is created!" << std::endl;
+	ClapTrap::_Name = _Name + "_clap_name";
+	this->_HP = FragTrap::getHP();
+	this->_ENG = ScavTrap::getENG();
+	this->_ATK = FragTrap::getATK();
+	std::cout << "A DiamondTrap object " << this->_Name << " is created!" << std::endl;
 }
 
-FragTrap::FragTrap(const FragTrap &other) {
-	std::cout << "A FragTrap object is copied from " << other.getName() << std::endl;
+DiamondTrap::DiamondTrap(const DiamondTrap &other) {
+	std::cout << "A DiamondTrap object is copied from " << other.getName() << std::endl;
 	*this = other;
 }
 
-FragTrap&	FragTrap::operator=(const FragTrap &other) {
-	std::cout<< "[FR] assignment operator is called!" << std::endl;
+DiamondTrap&	DiamondTrap::operator=(const DiamondTrap &other) {
+	std::cout<< "[DI] assignment operator is called!" << std::endl;
 	if (this != &other) {
+		this->_Name = other._Name;
 		ClapTrap::operator=(other);
 	}
 	return *this;
 }
 
-FragTrap::~FragTrap() {
-	std::cout << "A FragTrap object " << this->getName() << " is destroyed!" << std::endl;
+DiamondTrap::~DiamondTrap() {
+	std::cout << "A DiamondTrap object " << this->_Name << " is destroyed!" << std::endl;
 }
 
-void	FragTrap::attack(const std::string &target) {
-	if (!this->_HP) {
-		std::cout << "[FR] " << this->_Name << " cannot attack. Dead already!" << std::endl;
-		return ;
-	}
-	if (!this->_ENG) {
-		std::cout << "[FR] " << this->_Name << " cannot attack. No energy!" << std::endl;
-		return ;
-	}
-	this->_ENG--;
-	
-	std::cout << "[FR] " << this->_Name << " attacks " << target << ", causing ";
-	std::cout << this->_ATK << " points of damage!" << std::endl;
-}
-
-void	FragTrap::highFivesGuys(void) {
-		std::cout << "[FR] " << this->getName() << " displays a positive high five request!" << std::endl;
-}
-
-unsigned int	FragTrap::_getMaxHP() const {
+unsigned int	DiamondTrap::_getMaxHP() const {
 	return FR_HP;
+}
+
+void	DiamondTrap::whoAmI() {
+	std::cout << "I am a diamond object " << this->_Name << ", I was once known as " << ClapTrap::_Name << std::endl;
 }
