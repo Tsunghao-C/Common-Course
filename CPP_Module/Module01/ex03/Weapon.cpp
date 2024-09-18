@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 18:03:38 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/18 09:29:36 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/18 11:44:47 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ Weapon::~Weapon(void) {
 	std::cout << "A weapon object destroyed" << std::endl;
 }
 
-std::string	Weapon::getType(void) const {
+std::string	const &Weapon::getType(void) const {
 	return this->_type;
 }
 
