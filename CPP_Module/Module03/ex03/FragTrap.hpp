@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 14:34:49 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/18 23:41:31 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/19 01:15:27 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ private:
 
 public:
 	FragTrap();
-	FragTrap(std::string name);
+	FragTrap(const std::string &name);
 	FragTrap(const FragTrap &other);
 	FragTrap	&operator=(const FragTrap &other);
 	~FragTrap();
