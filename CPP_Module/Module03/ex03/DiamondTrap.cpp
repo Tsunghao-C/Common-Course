@@ -6,14 +6,14 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 14:55:02 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/19 01:05:40 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/19 01:22:48 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "DiamondTrap.hpp"
 
-DiamondTrap::DiamondTrap() {
-	this->_Name = "No name";
+DiamondTrap::DiamondTrap() : _Name("No name") {
+	// this->_Name = "No name";
 	ClapTrap::_Name = this->_Name + "_clap_name";
 	this->_HP = FragTrap::getHP();
 	this->_ENG = ScavTrap::getENG();
@@ -21,8 +21,8 @@ DiamondTrap::DiamondTrap() {
 	std::cout << "A DiamondTrap object " << this->_Name << " is created!" << std::endl;
 }
 
-DiamondTrap::DiamondTrap(const std::string &name) {
-	this->_Name = name;
+DiamondTrap::DiamondTrap(const std::string &name) : _Name(name) {
+	// this->_Name = name;
 	ClapTrap::_Name = _Name + "_clap_name";
 	this->_HP = FragTrap::getHP();
 	this->_ENG = ScavTrap::getENG();
