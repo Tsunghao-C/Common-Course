@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 14:34:49 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/19 01:18:15 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/19 15:42:07 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ class FragTrap : public ClapTrap
 {
 private:
 	/* data */
-	unsigned int	_getMaxHP() const override;
+	unsigned int	_getMaxHP() const;
 	// to overide the virtual function in base class
 
 public:

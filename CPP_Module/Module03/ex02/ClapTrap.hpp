@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:17:33 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/19 01:18:36 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/19 15:39:00 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ public:
 	ClapTrap(const std::string &name);
 	ClapTrap(const ClapTrap& other);
 	ClapTrap&	operator=(const ClapTrap& other);
-	~ClapTrap(void);
+	virtual	~ClapTrap(void);
 
 	std::string const	&getName(void) const;
 	unsigned int	getHP(void) const;

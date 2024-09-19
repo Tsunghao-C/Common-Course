@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:25:55 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/19 01:18:51 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/19 15:39:37 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ ClapTrap::ClapTrap(const ClapTrap& other) {
 ClapTrap&	ClapTrap::operator=(const ClapTrap& other) {
 	std::cout << "[CL] assignment operater is called!" << std::endl;
 	if (this != &other) {
-		this->_Name = other._Name;
-		this->_HP = other._HP;
-		this->_ENG = other._ENG;
-		this->_ATK = other._ATK;
+		this->_Name = other.getName();
+		this->_HP = other.getHP();
+		this->_ENG = other.getENG();
+		this->_ATK = other.getATK();
 	}
 	return *this;
 }
