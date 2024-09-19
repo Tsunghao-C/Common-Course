@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 15:49:43 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/17 18:15:57 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/19 11:33:43 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ public:
 	Point(const Point& other);				// cpy constructor
 	Point&	operator=(const Point& other);	// cpy assign operator
 	~Point(void);
-	Fixed	getX(void) const;
-	Fixed	getY(void) const;
+	Fixed	const &getX(void) const;
+	Fixed	const &getY(void) const;
 
 };
 
