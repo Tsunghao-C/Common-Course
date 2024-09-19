@@ -6,31 +6,31 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:25:55 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/19 01:20:56 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/19 14:40:48 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap(void) : _Name("No name"), _HP(DFT_HP), _ENG(DFT_EP), _ATK(DFT_DM) {
-	std::cout << "A ClapTrap object " << this->_Name << " is created!" << std::endl;
+	std::cout << "A ClapTrap object " << this->_Name << " is created from default constructor!" << std::endl;
 }
 
 ClapTrap::ClapTrap(const std::string &name) : _Name(name), _HP(DFT_HP), _ENG(DFT_EP), _ATK(DFT_DM) {
-	std::cout << "A ClapTrap object " << this->_Name << " is created!" << std::endl;
+	std::cout << "A ClapTrap object " << this->_Name << " is created from name constructor!" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap& other) {
-	*this = other;
 	std::cout << "A ClapTrap object is copied from " << other._Name << std::endl;
+	*this = other;
 }
 
 ClapTrap&	ClapTrap::operator=(const ClapTrap& other) {
 	if (this != &other) {
-		this->_Name = other._Name;
-		this->_HP = other._HP;
-		this->_ENG = other._ENG;
-		this->_ATK = other._ATK;
+		this->_Name = other.getName();
+		this->_HP = other.getHP();
+		this->_ENG = other.getENG();
+		this->_ATK = other.getATK();
 	}
 	return *this;
 }
