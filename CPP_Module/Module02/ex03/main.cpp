@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 10:24:37 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/17 18:07:33 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/19 11:26:42 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,6 @@
 
 int	main(void) {
 	
-	// Point	a(Fixed(3), Fixed(-1));
-	// Point	b(Fixed(-1), Fixed(5));
-	// Point	c(Fixed(-4), Fixed(-3));
-
-	// Point	p1;
-	// Point	p2(Fixed(-3), Fixed(-2));
-	// Point	p3(Fixed(13), Fixed(-2));
-	// Point	p4(b);
 	Point	a(3, -1);
 	Point	b(-1, 5);
 	Point	c(-4, -3);
