@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 14:34:49 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/19 01:16:04 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/19 17:25:20 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ public:
 	ScavTrap(const std::string &name);
 	ScavTrap(const ScavTrap &other);
 	ScavTrap	&operator=(const ScavTrap &other);
-	~ScavTrap();
+	virtual ~ScavTrap();
+	// It's always a better practice to put "virtual" on classes that could have
+	// derived other classes
 	
 	void	attack(const std::string &target);
 	void	guardGate();

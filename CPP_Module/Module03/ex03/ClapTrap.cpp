@@ -6,32 +6,32 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:25:55 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/19 01:11:41 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/19 16:37:10 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap(void) : _Name("No name"), _HP(CL_HP), _ENG(CL_ENG), _ATK(CL_ATK) {
-	std::cout << "A ClapTrap object " << this->_Name << " is created!" << std::endl;
+	std::cout << "A ClapTrap object " << this->_Name << " is created by default constructor!" << std::endl;
 }
 
 ClapTrap::ClapTrap(const std::string &name) : _Name(name), _HP(CL_HP), _ENG(CL_ENG), _ATK(CL_ATK) {
-	std::cout << "A ClapTrap object " << this->_Name << " is created!" << std::endl;
+	std::cout << "A ClapTrap object " << this->_Name << " is created by name constructor!" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap& other) {
-	*this = other;
 	std::cout << "A ClapTrap object is copied from " << other._Name << std::endl;
+	*this = other;
 }
 
 ClapTrap&	ClapTrap::operator=(const ClapTrap& other) {
 	std::cout << "[CL] assignment operater is called!" << std::endl;
 	if (this != &other) {
-		this->_Name = other._Name;
-		this->_HP = other._HP;
-		this->_ENG = other._ENG;
-		this->_ATK = other._ATK;
+		this->_Name = other.getName();
+		this->_HP = other.getHP();
+		this->_ENG = other.getENG();
+		this->_ATK = other.getATK();
 	}
 	return *this;
 }

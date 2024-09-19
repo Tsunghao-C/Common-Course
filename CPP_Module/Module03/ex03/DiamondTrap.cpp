@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 14:55:02 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/19 01:22:48 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/19 17:20:52 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ DiamondTrap::DiamondTrap() : _Name("No name") {
 	this->_HP = FragTrap::getHP();
 	this->_ENG = ScavTrap::getENG();
 	this->_ATK = FragTrap::getATK();
-	std::cout << "A DiamondTrap object " << this->_Name << " is created!" << std::endl;
+	std::cout << "A DiamondTrap object " << this->_Name << " is created by default constructor!" << std::endl;
 }
 
 DiamondTrap::DiamondTrap(const std::string &name) : _Name(name) {
@@ -27,7 +27,7 @@ DiamondTrap::DiamondTrap(const std::string &name) : _Name(name) {
 	this->_HP = FragTrap::getHP();
 	this->_ENG = ScavTrap::getENG();
 	this->_ATK = FragTrap::getATK();
-	std::cout << "A DiamondTrap object " << this->_Name << " is created!" << std::endl;
+	std::cout << "A DiamondTrap object " << this->_Name << " is created by name constructor!" << std::endl;
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap &other) {
@@ -50,6 +50,10 @@ DiamondTrap::~DiamondTrap() {
 
 unsigned int	DiamondTrap::_getMaxHP() const {
 	return FR_HP;
+}
+
+std::string const	&DiamondTrap::getNewName(void) const {
+	return this->_Name;
 }
 
 void	DiamondTrap::whoAmI() {

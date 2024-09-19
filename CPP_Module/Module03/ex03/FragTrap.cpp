@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 14:55:02 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/19 01:15:38 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/19 16:31:38 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ FragTrap::FragTrap() {
 	this->_HP = FR_HP;
 	this->_ENG = FR_ENG;
 	this->_ATK = FR_ATK;
-	std::cout << "A FragTrap object " << this->getName() << " is created!" << std::endl;
+	std::cout << "A FragTrap object " << this->getName() << " is created by default constructor!" << std::endl;
 }
 
 FragTrap::FragTrap(const std::string &name) {
@@ -25,7 +25,7 @@ FragTrap::FragTrap(const std::string &name) {
 	this->_HP = FR_HP;
 	this->_ENG = FR_ENG;
 	this->_ATK = FR_ATK;
-	std::cout << "A FragTrap object " << this->getName() << " is created!" << std::endl;
+	std::cout << "A FragTrap object " << this->getName() << " is created by name constructor!" << std::endl;
 }
 
 FragTrap::FragTrap(const FragTrap &other) {

@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 14:34:49 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/19 01:23:52 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/19 17:20:58 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ public:
 	~DiamondTrap();
 
 	using	ScavTrap::attack;
+	std::string const	&getNewName(void) const;
 	void	whoAmI();
 };
 

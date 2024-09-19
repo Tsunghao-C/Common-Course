@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 14:55:02 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/19 01:16:13 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/19 16:32:03 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ ScavTrap::ScavTrap() : _isGuarded(0)  {
 	this->_HP = SC_HP;
 	this->_ENG = SC_ENG;
 	this->_ATK = SC_ATK;
-	std::cout << "A ScavTrap object " << this->getName() << " is created!" << std::endl;
+	std::cout << "A ScavTrap object " << this->getName() << " is created by default constructor!" << std::endl;
 }
 
 ScavTrap::ScavTrap(const std::string &name) : _isGuarded(0) {
@@ -25,7 +25,7 @@ ScavTrap::ScavTrap(const std::string &name) : _isGuarded(0) {
 	this->_HP = SC_HP;
 	this->_ENG = SC_ENG;
 	this->_ATK = SC_ATK;
-	std::cout << "A ScavTrap object " << this->getName() << " is created!" << std::endl;
+	std::cout << "A ScavTrap object " << this->getName() << " is created by name constructor!" << std::endl;
 }
 
 ScavTrap::ScavTrap(const ScavTrap &other) {
