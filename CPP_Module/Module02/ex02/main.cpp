@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 10:24:37 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/17 15:40:06 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/19 11:13:27 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ int	main(void) {
 	std::cout << b << std::endl;
 	std::cout << Fixed::max( a, b ) << std::endl;
 	
-	// std::cout << Fixed::max( a, b ).toInt() << std::endl;
-	// Fixed		c(b);
+	std::cout << Fixed::max( a, b ).toInt() << std::endl;
+	Fixed		c(b);
 
-	// std::cout << Fixed::max( a, c ).toInt() << std::endl;
-	// std::cout << (a < c) << std::endl;
+	std::cout << Fixed::max( a, c ).toInt() << std::endl;
+	std::cout << (a < c) << std::endl;
 
 	return 0;
 }

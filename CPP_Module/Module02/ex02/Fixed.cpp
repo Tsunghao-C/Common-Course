@@ -6,25 +6,22 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 10:07:31 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/17 15:46:05 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/19 11:19:34 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
-Fixed::Fixed(void) {
+Fixed::Fixed(void) : _raw(0) {
 	// std::cout << "Default constructor called" << std::endl;
-	this->setRawBits(0);
 }
 
-Fixed::Fixed(const int i) {
+Fixed::Fixed(const int i) : _raw(i << _frac_bits) {
 	// std::cout << "Int constructor called" << std::endl;
-	this->setRawBits(i << this->_frac_bits);
 }
 
-Fixed::Fixed(const float f) {
+Fixed::Fixed(const float f) : _raw(static_cast<int>(std::roundf(f * (1 << _frac_bits)))) {
 	// std::cout << "Float constructor called" << std::endl;
-	this->setRawBits(static_cast<int>(std::roundf(f * (1 << this->_frac_bits))));
 }
 
 Fixed::Fixed(const Fixed& other) {
@@ -34,7 +31,9 @@ Fixed::Fixed(const Fixed& other) {
 
 Fixed&	Fixed::operator=(const Fixed& other) {
 	// std::cout << "Copy assignment operator called" << std::endl;
-	this->_raw = other.getRawBits();
+	if (this != &other) {
+		this->_raw = other.getRawBits();
+	}
 	return *this;
 }
 
@@ -43,57 +42,51 @@ Fixed::~Fixed(void) {
 }
 
 /* Arithmetic operator overloads */
-Fixed	Fixed::operator+(const Fixed& rhs) {
-	return Fixed(this->toFloat() + rhs.toFloat());
+Fixed	Fixed::operator+(const Fixed& rhs) const {
+	Fixed	add = *this;
+	add._raw += rhs.getRawBits();
+	return (add);
+	// return Fixed(this->toFloat() + rhs.toFloat());
 }
 
-Fixed	Fixed::operator-(const Fixed& rhs) {
-	return Fixed(this->toFloat() - rhs.toFloat());
+Fixed	Fixed::operator-(const Fixed& rhs) const {
+	Fixed	sub = *this;
+	sub._raw -= rhs.getRawBits();
+	return sub;
+	// return Fixed(this->toFloat() - rhs.toFloat());
 }
 
-Fixed	Fixed::operator*(const Fixed& rhs) {
+Fixed	Fixed::operator*(const Fixed& rhs) const {
 	return Fixed(this->toFloat() * rhs.toFloat());
 }
 
-Fixed	Fixed::operator/(const Fixed& rhs) {
+Fixed	Fixed::operator/(const Fixed& rhs) const {
 	return Fixed(this->toFloat() / rhs.toFloat());
 }
 
 /* Comparison operator overloads */
-int		Fixed::operator>(const Fixed& rhs) {
-	if (this->toFloat() > rhs.toFloat())
-		return true;
-	return false;
+bool	Fixed::operator>(const Fixed& rhs) const {
+	return this->getRawBits() > rhs.getRawBits();
 }
 
-int		Fixed::operator<(const Fixed& rhs) {
-	if (this->toFloat() < rhs.toFloat())
-		return true;
-	return false;
+bool	Fixed::operator<(const Fixed& rhs) const {
+	return this->getRawBits() < rhs.getRawBits();
 }
 
-int		Fixed::operator>=(const Fixed& rhs) {
-	if (this->toFloat() >= rhs.toFloat())
-		return true;
-	return false;
+bool	Fixed::operator>=(const Fixed& rhs) const {
+	return this->getRawBits() >= rhs.getRawBits();
 }
 
-int		Fixed::operator<=(const Fixed& rhs) {
-	if (this->toFloat() <= rhs.toFloat())
-		return true;
-	return false;
+bool	Fixed::operator<=(const Fixed& rhs) const {
+	return this->getRawBits() <= rhs.getRawBits();
 }
 
-int		Fixed::operator==(const Fixed& rhs) {
-	if (this->toFloat() == rhs.toFloat())
-		return true;
-	return false;
+bool	Fixed::operator==(const Fixed& rhs) const {
+	return this->getRawBits() == rhs.getRawBits();
 }
 
-int		Fixed::operator!=(const Fixed& rhs) {
-	if (this->toFloat() != rhs.toFloat())
-		return true;
-	return false;
+bool	Fixed::operator!=(const Fixed& rhs) const {
+	return this->getRawBits() != rhs.getRawBits();
 }
 
 /* increment and decrement operator overloads */
@@ -121,29 +114,21 @@ Fixed	Fixed::operator--(int) {
 
 /* min and max functions */
 Fixed&	Fixed::min(Fixed& a, Fixed& b) {
-	if (a < b)
-		return a;
-	return b;
+	return a < b ? a : b;
 }
 
 const Fixed&	Fixed::min(const Fixed& a, const Fixed& b) {
-	if (a.toFloat() < b.toFloat())
-		return a;
-	return b;
+	return a < b ? a : b;
 }
 
 Fixed&	Fixed::max(Fixed& a, Fixed& b) {
 	// std::cout << "max normal is alled" << std::endl;
-	if (a > b)
-		return a;
-	return b;
+	return a > b ? a : b;
 }
 
 const Fixed&	Fixed::max(const Fixed& a, const Fixed& b) {
 	// std::cout << "max const is alled" << std::endl;
-	if (a.toFloat() > b.toFloat())
-		return a;
-	return b;
+	return a > b ? a : b;
 }
 
 

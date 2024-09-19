@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 10:01:23 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/17 14:48:52 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/19 11:18:45 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,18 @@ public:
 	~Fixed(void);
 
 	/* arithmetic operator overloads */
-	Fixed	operator+(const Fixed& rhs);
-	Fixed	operator-(const Fixed& rhs);
-	Fixed	operator*(const Fixed& rhs);
-	Fixed	operator/(const Fixed& rhs);
+	Fixed	operator+(const Fixed& rhs) const;
+	Fixed	operator-(const Fixed& rhs) const;
+	Fixed	operator*(const Fixed& rhs) const;
+	Fixed	operator/(const Fixed& rhs) const;
 
 	/* comparison operator overloads */
-	int		operator>(const Fixed& rhs);
-	int		operator<(const Fixed& rhs);
-	int		operator>=(const Fixed& rhs);
-	int		operator<=(const Fixed& rhs);
-	int		operator==(const Fixed& rhs);
-	int		operator!=(const Fixed& rhs);
+	bool	operator>(const Fixed& rhs) const;
+	bool	operator<(const Fixed& rhs) const;
+	bool	operator>=(const Fixed& rhs) const;
+	bool	operator<=(const Fixed& rhs) const;
+	bool	operator==(const Fixed& rhs) const;
+	bool	operator!=(const Fixed& rhs) const;
 
 	/* increment and decrement overlaods */
 	Fixed&	operator++(void);	//pre increment
