@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:17:33 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/19 01:19:37 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/19 15:32:37 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,11 @@ public:
 	ClapTrap(const std::string &name);
 	ClapTrap(const ClapTrap& other);
 	ClapTrap&	operator=(const ClapTrap& other);
-	~ClapTrap(void);
+	virtual ~ClapTrap(void);
+	// It is a better practice to make the base destructor "virtual"
+	// to make sure even if you call destructor from base class level, the destructors
+	// are already overwritten by the derived class'es destructor so all the 
+	// derived objects are destructed
 
 	std::string const	&getName(void) const;
 	unsigned int	getHP(void) const;
