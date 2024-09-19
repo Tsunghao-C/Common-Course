@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:37:16 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/18 17:36:30 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/19 16:23:32 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ int	main(void) {
 	ScavTrap	a("Tim");
 	FragTrap	b("Cook");
 	FragTrap	c(b);
-	ScavTrap	d;
+	ScavTrap	d("Timmy");
+
+	FragTrap	*e = new FragTrap("Timmy");
+	ClapTrap	*f = e;
 
 	d = a;	//Timmy is now Tim as well
 
@@ -56,5 +59,9 @@ int	main(void) {
 	a.guardGate();
 	a.guardGate();
 	b.highFivesGuys();
+	std::cout << "-------------------------------------------" << std::endl;
+	std::cout << "Calling destroy from base class on purpose" << std::endl;
+	delete f;
+	std::cout << "-------------------------------------------" << std::endl;
 	return 0;
 }
