@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 15:49:43 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/19 11:33:43 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/19 12:08:29 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ class Point
 {
 private:
 	/* data */
-	Fixed	_x;
-	Fixed	_y;
+	Fixed const	_x;
+	Fixed const _y;
 	
 public:
 	Point(void);							// default constructor

@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 16:17:03 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/19 11:33:21 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/19 12:08:59 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ Point::Point(const Point& other) : _x(other.getX()), _y(other.getY()) {
 }
 
 Point&	Point::operator=(const Point& other) {
-	if (this != &other) {
-		this->_x = other.getX();
-		this->_y = other.getY();
-	}
+	// if (this != &other) {
+	// 	this->_x = other.getX();
+	// 	this->_y = other.getY();
+	// }
+	// Not used in this exercis since private members are Fixed "const"
 	return *this;
 }
 
