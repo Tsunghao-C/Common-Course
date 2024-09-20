@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 14:34:49 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/20 11:20:28 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/20 11:23:30 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ public:
 	DiamondTrap	&operator=(const DiamondTrap &other);
 	~DiamondTrap();
 
-	unsigned int	_getMaxHP() const override;
+	unsigned int	_getMaxHP() const;
 	using	ScavTrap::attack;
 	std::string const	&getNewName(void) const;
 	void	whoAmI();
