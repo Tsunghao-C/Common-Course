@@ -6,13 +6,14 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:37:16 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/19 15:33:48 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/20 10:19:10 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
 
 int	main(void) {
+	ScavTrap	t;
 	ScavTrap	a("Tim");
 	ScavTrap	b("Cook");
 	ScavTrap	c(b);
@@ -57,6 +58,7 @@ int	main(void) {
 	c.beRepaired(10);
 	a.guardGate();
 	a.guardGate();
+	c.guardGate();
 	std::cout << "-------------------------------------------" << std::endl;
 	std::cout << "Call the destructor from base class on purpose" << std::endl;	
 	delete f;
