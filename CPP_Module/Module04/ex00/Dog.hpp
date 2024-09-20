@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/19 17:39:07 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/20 15:40:43 by tsuchen          ###   ########.fr       */
+/*   Created: 2024/09/20 14:49:09 by tsuchen           #+#    #+#             */
+/*   Updated: 2024/09/20 15:42:55 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-# define ANIMAL_HPP
+#ifndef DOG_HPP
+# define DOG_HPP
 
-# include <iostream>
-# include <string>
+# include "Animal.hpp"
 
-class Animal
+class Dog : public Animal
 {
 private:
-protected:
 	/* data */
-	std::string	_type;
-
 public:
-	Animal();
-	Animal(const Animal& other);
-	Animal&	operator=(const Animal&other);
-	virtual ~Animal();
+	Dog();
+	Dog(const Dog& other);
+	Dog&	operator=(const Dog& other);
+	~Dog();
 
-	virtual void	makeSound() const;
-	std::string const	&getType(void) const;
+	void	makeSound() const;
 };
 
 #endif
