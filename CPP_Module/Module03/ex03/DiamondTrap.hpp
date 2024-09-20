@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 14:34:49 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/19 17:20:58 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/20 11:20:28 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ class DiamondTrap : public ScavTrap, public FragTrap
 private:
 	/* data */
 	std::string	_Name;
-	unsigned int	_getMaxHP() const override;			//Frag
 public:
 	DiamondTrap();
 	DiamondTrap(const std::string &name);
@@ -29,9 +28,11 @@ public:
 	DiamondTrap	&operator=(const DiamondTrap &other);
 	~DiamondTrap();
 
+	unsigned int	_getMaxHP() const override;
 	using	ScavTrap::attack;
 	std::string const	&getNewName(void) const;
 	void	whoAmI();
 };
-
+// The order of inheritance matters, because all the share values 
+// in the base class (ClapTrap) will be override by the last initialized class
 #endif

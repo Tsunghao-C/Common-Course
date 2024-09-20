@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 14:34:49 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/19 17:25:20 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/20 11:15:08 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ class ScavTrap : virtual public ClapTrap
 private:
 	/* data */
 	int		_isGuarded;
-	unsigned int	_getMaxHP() const override;
 	// to overide the virtual function in base class
 
 public:
@@ -36,6 +35,7 @@ public:
 	// It's always a better practice to put "virtual" on classes that could have
 	// derived other classes
 	
+	unsigned int	_getMaxHP() const;
 	void	attack(const std::string &target);
 	void	guardGate();
 };

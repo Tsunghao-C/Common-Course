@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:37:16 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/19 17:21:43 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/20 11:16:33 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,14 @@ int	main(void) {
 
 	FragTrap	a("Tim");
 	a.highFivesGuys();
+	
+	std::cout << "------------------------------------" << std::endl;
+	std::cout << "Name_Base: " << a.getName() << std::endl;
+	std::cout << "HP: " << a.getHP() << std::endl;
+	std::cout << "ENG: " << a.getENG() << std::endl;
+	std::cout << "ATK: " << a.getATK() << std::endl;	
+	std::cout << "Max HP: " << a._getMaxHP() << std::endl;
+	std::cout << "------------------------------------" << std::endl;
 	
 	DiamondTrap	d("Steve");
 	
@@ -30,6 +38,7 @@ int	main(void) {
 	std::cout << "HP: " << d.getHP() << std::endl;
 	std::cout << "ENG: " << d.getENG() << std::endl;
 	std::cout << "ATK: " << d.getATK() << std::endl;	
+	std::cout << "Max HP: " << d._getMaxHP() << std::endl;
 	std::cout << "------------------------------------" << std::endl;
 	
 	d.attack(a.getName());
