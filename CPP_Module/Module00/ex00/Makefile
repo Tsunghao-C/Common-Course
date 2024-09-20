@@ -6,7 +6,7 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/06 14:29:42 by tsuchen           #+#    #+#              #
-#    Updated: 2024/09/11 14:40:16 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/09/20 16:58:20 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-.c.o:
+.cpp.o:
 	$(CC) $(CFLAGS) -c $< -o $@ -I$(HEAD)
 
 clean:
