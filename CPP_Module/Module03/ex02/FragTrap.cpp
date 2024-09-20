@@ -6,22 +6,20 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 14:55:02 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/19 16:32:52 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/20 10:26:32 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FragTrap.hpp"
 
 FragTrap::FragTrap() {
-	this->_Name = "No name";
 	this->_HP = FR_HP;
 	this->_ENG = FR_ENG;
 	this->_ATK = FR_ATK;
 	std::cout << "A FragTrap object " << this->getName() << " is created by default constructor!" << std::endl;
 }
 
-FragTrap::FragTrap(const std::string &name) {
-	this->_Name = name;
+FragTrap::FragTrap(const std::string &name) : ClapTrap(name) {
 	this->_HP = FR_HP;
 	this->_ENG = FR_ENG;
 	this->_ATK = FR_ATK;
@@ -61,7 +59,11 @@ void	FragTrap::attack(const std::string &target) {
 }
 
 void	FragTrap::highFivesGuys(void) {
-		std::cout << "[FR] " << this->getName() << " displays a positive high five request!" << std::endl;
+	if (!this->getHP()) {
+		std::cout << "[FR] " << this->getName() << " cannot highfive. Dead already!" << std::endl;
+		return ;
+	}
+	std::cout << "[FR] " << this->getName() << " displays a positive high five request!" << std::endl;
 }
 
 unsigned int	FragTrap::_getMaxHP() const {

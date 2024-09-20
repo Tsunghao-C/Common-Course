@@ -6,22 +6,20 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 14:55:02 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/19 16:32:29 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/20 10:23:29 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
 
 ScavTrap::ScavTrap() : _isGuarded(0)  {
-	this->_Name = "No name";
 	this->_HP = SC_HP;
 	this->_ENG = SC_ENG;
 	this->_ATK = SC_ATK;
 	std::cout << "A ScavTrap object " << this->getName() << " is created by default constructor!" << std::endl;
 }
 
-ScavTrap::ScavTrap(const std::string &name) : _isGuarded(0) {
-	this->_Name = name;
+ScavTrap::ScavTrap(const std::string &name) : ClapTrap(name), _isGuarded(0) {
 	this->_HP = SC_HP;
 	this->_ENG = SC_ENG;
 	this->_ATK = SC_ATK;
@@ -62,6 +60,10 @@ void	ScavTrap::attack(const std::string &target) {
 }
 
 void	ScavTrap::guardGate() {
+	if (!this->_HP) {
+		std::cout << this->getName() << " cannot guard. Dead already!" << std::endl;
+		return ;
+	}
 	if (!this->_isGuarded) {
 		std::cout << "[SC] " << this->getName() << " is now in Gate keeper mode!" << std::endl;
 		this->_isGuarded = 1;

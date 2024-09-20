@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:37:16 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/19 16:23:32 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/20 10:29:08 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int	main(void) {
 	a.guardGate();
 	a.guardGate();
 	b.highFivesGuys();
+	c.highFivesGuys();
 	std::cout << "-------------------------------------------" << std::endl;
 	std::cout << "Calling destroy from base class on purpose" << std::endl;
 	delete f;
