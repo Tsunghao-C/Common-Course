@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 17:38:33 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/20 18:50:38 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/22 12:57:16 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,16 @@ int	main() {
 	delete j;
 	delete d;
 	delete f;
+	std::cout << "--------------Array of Animals------------------" << std::endl;
+	Animal	*herd[4];
+	herd[0] = new Dog();
+	herd[1] = new Dog();
+	herd[2] = new Cat();
+	herd[3] = new Cat();
+
+	std::cout << "----------delete the array of animals-----------" << std::endl;
+	for (int z = 0; z < 4; z++) {
+		delete herd[z];
+	}
 	return 0;
 }
