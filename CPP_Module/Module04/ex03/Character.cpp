@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 10:30:01 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/23 14:07:31 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/23 14:32:24 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	Character::use(int idx, ICharacter& target) {
 		return ;
 	}
 	if (!this->_inv[idx]) {
-		std::cout << "Cannot unequip. The slot is empty!" << std::endl;
+		std::cout << "Cannot use Materia. The slot is empty!" << std::endl;
 		return ;
 	}
 	this->_inv[idx]->use(target);

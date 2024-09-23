@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 13:17:28 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/23 14:04:02 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/23 14:32:28 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,30 @@ int	main() {
 	
 	me->use(0, *bob);
 	me->use(1, *bob);
-
+	std::cout << "--------------trying to add more Materia Sources---------------" << std::endl;
+	src->learnMateria(new Ice());
+	src->learnMateria(new Cure());
+	AMateria	*tmp2;
+	tmp2 = new Ice();
+	std::cout << "!!!! should not be able to learn more  !!!!" << std::endl;
+	src->learnMateria(tmp2);
+	delete tmp2;
+	std::cout << "--------------trying to equip more Materia---------------" << std::endl;
+	std::cout << "!!!! should fail to create New Matera copy  !!!!" << std::endl;
+	tmp2 = src->createMateria("none");
+	tmp2 = src->createMateria("ice");
+    me->equip(tmp2);
+    tmp2 = src->createMateria("ice");
+	me->equip(tmp2);
+	tmp2 = src->createMateria("cure");
+	std::cout << "!!!! should fail to equip !!!!" << std::endl;
+	me->equip(tmp2);
+	delete tmp2;
+	std::cout << "--------------trying to unequip more Materia #1---------------" << std::endl;
+	me->unequip(1);
+	std::cout << "!!!! should fail to use Cure anymore !!!!" << std::endl;
+	me->use(1, *bob);
+	delete tmp;
 	std::cout << "--------------delete character without equipment---------------" << std::endl;
 	delete bob;
 	std::cout << "--------------delete character equipped with Materia---------------" << std::endl;
