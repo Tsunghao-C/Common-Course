@@ -6,15 +6,15 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/06 14:29:42 by tsuchen           #+#    #+#              #
-#    Updated: 2024/09/22 13:38:19 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/09/23 13:26:11 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= interface
 
-SRCS		= main.cpp AMateria.cpp
+SRCS		= main.cpp AMateria.cpp Character.cpp Cure.cpp Ice.cpp MateriaSource.cpp
 
-HEADERS		= AMateria.hpp
+HEADERS		= AMateria.hpp Character.hpp Cure.hpp Ice.hpp ICharacter.hpp IMateriaSource.hpp MateriaSource.hpp
 
 OBJS		= $(SRCS:.cpp=.o)
 

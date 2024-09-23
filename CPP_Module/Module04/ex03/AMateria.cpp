@@ -6,14 +6,14 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 23:46:32 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/22 23:57:24 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/23 14:00:11 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AMateria.hpp"
 
 AMateria::AMateria(std::string const &type) : _type(type) {
-	std::cout << "A AMateria is of type [" << _type << "] is created by default constructor" << std::endl;
+	std::cout << "A AMateria of type [" << _type << "] is created by default constructor" << std::endl;
 }
 
 AMateria::AMateria(const AMateria& other) {
@@ -34,4 +34,8 @@ AMateria::~AMateria() {
 
 std::string const	&AMateria::getType() const {
 	return this->_type;
+}
+
+void	AMateria::use(ICharacter &target) {
+	std::cout << "Use Materia to " << target.getName() << " in Materia class" << std::endl;
 }

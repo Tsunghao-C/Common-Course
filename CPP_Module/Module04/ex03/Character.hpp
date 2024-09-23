@@ -1,39 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AMateria.hpp                                       :+:      :+:    :+:   */
+/*   Character.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/22 13:38:37 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/23 10:12:24 by tsuchen          ###   ########.fr       */
+/*   Created: 2024/09/23 10:19:06 by tsuchen           #+#    #+#             */
+/*   Updated: 2024/09/23 13:54:51 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef AMATERIA_HPP
-# define AMATERIA_HPP
+#ifndef CHARACTER_HPP
+# define CHARACTER_HPP
 
-# include <iostream>
-# include <string>
+# include "AMateria.hpp"
 # include "ICharacter.hpp"
 
-class AMateria
+class Character : public ICharacter
 {
 private:
-    /* data */
-protected:
-    std::string     _type;
-
+	/* data */
+	std::string	_name;
+	AMateria	*_inv[4];
+	
 public:
-    AMateria(std::string const &type);
-    AMateria(const AMateria& other);
-    AMateria&   operator=(const AMateria& other);
-    virtual ~AMateria();
-
-    std::string const   &getType() const;
-    
-    virtual AMateria*   clone() const = 0;
-    virtual void    use(ICharacter  &target);
+	Character(std::string const &name);
+	Character(const Character& other);
+	Character&	operator=(const Character& other);
+	~Character();
+	
+	std::string	const &getName() const;
+	void	equip(AMateria *m);
+	void	unequip(int idx);
+	void	use(int idx, ICharacter& target);	
 };
 
 #endif
