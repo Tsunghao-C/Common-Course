@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 13:17:28 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/23 14:32:28 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/23 14:59:04 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,22 @@ int	main() {
 	std::cout << "!!!! should fail to use Cure anymore !!!!" << std::endl;
 	me->use(1, *bob);
 	delete tmp;
+	std::cout << "--------------check copy of Characters---------------" << std::endl;
+	Character	tim("Tim");
+	tim.equip(src->createMateria("ice"));
+	tim.equip(src->createMateria("cure"));
+	tim.use(1, *bob);
+	Character	cook(tim);
+	cook.use(1, *me);
+
+
 	std::cout << "--------------delete character without equipment---------------" << std::endl;
 	delete bob;
 	std::cout << "--------------delete character equipped with Materia---------------" << std::endl;
 	delete me;
 	std::cout << "--------------delete the MateriaSource---------------" << std::endl;
 	delete src;
+	std::cout << "--------------delete stack object Tim and Cook---------------" << std::endl;
 
 	return 0;	
 }
