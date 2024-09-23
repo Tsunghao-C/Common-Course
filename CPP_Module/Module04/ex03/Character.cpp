@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 10:30:01 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/23 14:32:24 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/09/23 18:26:14 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ Character::Character(std::string const &name) : _name(name) {
 
 Character::Character(const Character& other) {
 	std::cout << "A character is copied from " << other._name << std::endl;
+	for (int i = 0; i < 4; i++) {
+		this->_inv[i] = 0;
+	}
+	// We still need to initialize in the Copy Constructor. It won't call the 
+	// Default constructor here!
 	*this = other;
 }
 
