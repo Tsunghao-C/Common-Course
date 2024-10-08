@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 11:21:30 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/27 12:21:50 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/08 14:31:48 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 
 # include "AForm.hpp"
 # include <unistd.h>
+# include <ctime>
+# include <cstdlib>
 
 class RobotomyRequestForm : public AForm
 {
