@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:27:56 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/28 13:44:37 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/08 14:26:18 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ ShrubberyCreationForm::~ShrubberyCreationForm() {
 }
 
 void	ShrubberyCreationForm::rollout() const{
-	std::ofstream	ofs(this->getTarget() + "_shrubbery", std::ofstream::out | std::ofstream::trunc);
+	std::string		filename = this->getTarget() + "_shrubbery";
+	std::ofstream	ofs(filename.c_str(), std::ofstream::out | std::ofstream::trunc);
 	if (ofs.fail()) {
 		throw std::exception();
 	}
