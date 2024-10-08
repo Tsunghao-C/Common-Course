@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:18:28 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/26 16:16:18 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/08 19:06:58 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ private:
 	std::string const	_name;
 	int					_grade;
 public:
+	Bureaucrat();
 	Bureaucrat(std::string const &name);
 	Bureaucrat(std::string const &name, int	grade);
 	Bureaucrat(const Bureaucrat& other);

@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:32:09 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/08 19:03:14 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/08 19:07:24 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,12 @@ public:
 	}
 };
 
+Bureaucrat::Bureaucrat() : _name("Default"), _grade(75) {
+	std::cout << *this << " Created by default constructor" << std::endl;
+}
+
 Bureaucrat::Bureaucrat(std::string const &name) : _name(name), _grade(75) {
-	std::cout << *this << " Created by defualt grade" << std::endl;
+	std::cout << *this << " Created by default grade" << std::endl;
 }
 
 Bureaucrat::Bureaucrat(std::string const &name, int grade) : _name(name), _grade(grade) {
