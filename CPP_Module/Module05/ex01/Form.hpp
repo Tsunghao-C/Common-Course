@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 11:57:41 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/26 16:16:12 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/08 19:09:11 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ private:
 	int	const	_gradeToSign;
 	int	const	_gradeToExec;
 public:
+	Form();
 	Form(std::string const &name);
 	Form(std::string const &name, int sign, int exec);
 	Form(const Form& other);

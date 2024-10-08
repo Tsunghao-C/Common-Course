@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 14:36:15 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/26 18:07:50 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/08 19:10:30 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,12 @@ public:
 	}
 };
 
+Form::Form() : _name("Default"), _signed(false), _gradeToSign(80), _gradeToExec(70) {
+	std::cout << "A Form " << _name << " is created by default constructor" << std::endl;
+}
+
 Form::Form(std::string const &name) : _name(name), _signed(false), _gradeToSign(80), _gradeToExec(70) {
-	std::cout << "A Form " << _name << " is created by defualt" << std::endl;
+	std::cout << "A Form " << _name << " is created by default" << std::endl;
 }
 
 Form::Form(std::string const &name, int sign, int exec) : _name(name), _signed(false), _gradeToSign(sign), _gradeToExec(exec) {

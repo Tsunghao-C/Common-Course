@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 11:57:41 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/28 13:02:28 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/08 19:11:11 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ private:
 	int	const	_gradeToExec;
 	std::string		_target;
 public:
+	AForm();
 	AForm(std::string const &name);
 	AForm(std::string const &name, int sign, int exec);
 	AForm(const AForm& other);
