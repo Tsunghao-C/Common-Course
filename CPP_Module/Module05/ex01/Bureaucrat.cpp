@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:32:09 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/26 16:24:15 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/08 19:03:03 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,11 @@ Bureaucrat::Bureaucrat(std::string const &name) : _name(name), _grade(75) {
 	std::cout << *this << " Created by defualt grade" << std::endl;
 }
 
-Bureaucrat::Bureaucrat(std::string const &name, int grade) : _name(name), _grade(75) {
+Bureaucrat::Bureaucrat(std::string const &name, int grade) : _name(name), _grade(grade) {
 	if (grade < 1)
 		throw Bureaucrat::GradeTooHighException();
 	else if (grade > 150)
 		throw Bureaucrat::GradeTooLowException();
-	_grade = grade;
 	std::cout << *this << " Created with specific grade" << std::endl;
 }
 
