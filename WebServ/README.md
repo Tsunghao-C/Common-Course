@@ -1,5 +1,33 @@
 # 42 Common Core - WebServ
 
+## Objective
+
+1. This is my first Web related project in 42 common course, building a simple Web Server from scratch using C++98.
+2. The goal is to learn the basic client-Server structure and write a program that work as a werver.
+
+## Key Concepts
+
+1. What is a web server? Why is it called "Server" anyway? What actually happens when using a browser to connect to the Internet?
+2. The structure of client-Server. How user (Client) and Server communicate?
+3. What is HTTP? What does an HTTP Request or Response look like?
+4. Parsing of Configuration files and set up Sever/Cluster structure.
+5. What is Epoll and what does it mean by "Non-blocking" reading and writing? Why it matters in a server program?
+6. Parsing of HTTP string and generating string in HTTP fashion.
+7. What is CGI and how does it work? Why we use it?
+8. The file system in the server and how do you configure your server to prevent malicious client request (ex. wrong content length, trying to access or destroy stuffs in the server)
+9. What is "Cookie" and how does it work?
+10. Learn how to write scripts and test your server program
+
+## Notes
+
+Link to our Webserv git repo: https://github.com/BenjaminHThomas/WebServer.git
+
+### Shout out
+- It's a pleasure to work with Okan, my previous teammate in Minishell, and also Ben who is really smart and good at explaining complex ideas in a simple way.
+- Thanks to Okan, who has already studied on this project for almost a month and know how to split the job into three, we had a good start and be able to put together our codes and submit in two weeks.
+
+## Notes about learning Web and HTTP
+
 ### Stateless protocal vs Stateful Protocal
 - Stateless Protocal: 
 	1. Do not retain session state from previous requests.
