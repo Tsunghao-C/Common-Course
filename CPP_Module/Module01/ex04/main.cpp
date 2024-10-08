@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 19:11:57 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/15 15:53:58 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/08 14:45:30 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int main(int ac, char *av[]) {
 	}
 	std::string		outfile = av[1];
 	std::string		buff;
-	std::ofstream	ofs(outfile.append(".replace"), std::ofstream::out | std::ofstream::trunc);
+	std::ofstream	ofs(outfile.append(".replace").c_str(), std::ofstream::out | std::ofstream::trunc);
 	if (ofs.fail()) {
 		std::cerr << "Error: Failed to open file " << outfile << std::endl;
 		ifs.close();
