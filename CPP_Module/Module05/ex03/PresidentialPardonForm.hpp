@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 11:59:51 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/28 12:58:21 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/08 19:16:46 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ class PresidentialPardonForm : public AForm
 private:
 	/* data */
 public:
+	PresidentialPardonForm();
 	PresidentialPardonForm(const std::string &target);
 	PresidentialPardonForm(const PresidentialPardonForm& other);
 	PresidentialPardonForm&	operator=(const PresidentialPardonForm& other);

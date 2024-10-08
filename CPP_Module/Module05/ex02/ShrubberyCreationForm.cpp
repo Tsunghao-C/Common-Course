@@ -6,11 +6,15 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:27:56 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/08 14:26:18 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/08 19:19:33 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
+
+ShrubberyCreationForm::ShrubberyCreationForm() : AForm("Shrubbery Creation", 145, 137) {
+	std::cout << "A Shruberry is created by default constructor" << std::endl;
+}
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target) : AForm("Shrubbery Creation", 145, 137) {
 	this->setTarget(target);

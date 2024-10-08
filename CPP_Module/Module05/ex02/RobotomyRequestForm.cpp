@@ -6,11 +6,15 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 11:36:48 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/28 13:49:01 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/08 19:18:00 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
+
+RobotomyRequestForm::RobotomyRequestForm() : AForm("Robotomy Request", 72, 45) {
+	std::cout << "A Robotomy is created by default constructor" << std::endl;
+}
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string &target) : AForm("Robotomy Request", 72, 45) {
 	this->setTarget(target);

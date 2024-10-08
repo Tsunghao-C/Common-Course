@@ -6,11 +6,15 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 12:06:48 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/09/28 13:45:06 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/08 19:16:14 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PresidentialPardonForm.hpp"
+
+PresidentialPardonForm::PresidentialPardonForm() : AForm("Presidential Pardon", 25, 5) {
+	std::cout << "A Presidential Pardon is created by default constructor" << std::endl;
+}
 
 PresidentialPardonForm::PresidentialPardonForm(const std::string &target) : AForm("Presidential Pardon", 25, 5) {
 	this->setTarget(target);
