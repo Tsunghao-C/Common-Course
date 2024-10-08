@@ -13,12 +13,12 @@
 4. What is Raycasting and how it helps to make 3D rendering efficient?
 5. What is DDA algorithm? Why it helps to optimize rendering?
 6. Rendering images in a resized fashion (Wall texture rendering)
-6. Create multiple images and put in in the same window (Mini map, Sprite)
-7. Create a script of frames and generate animation effects (Animation)
+7. Create multiple images and put in in the same window (Mini map, Sprite)
+8. Create a script of frames and generate animation effects (Animation)
 
 ## Notes of this fun and interesting graphic project
 
-Link to our minishell git repo: https://github.com/Haliris/cub3d.git
+Link to our Cub3D git repo: https://github.com/Haliris/cub3d.git
 
 ### Shout out
 - First of all, great shout out to my teammate Jean. He had a brilliant idea of using the theme in the cluser of 42 MADE campus in Paris. Our original idea was to role play the school cat Moulinette who always wandering among the clusters. She is super chill. Jean also had some experiences in developing video games, so he could debug very quickly whenever we had an issue.
