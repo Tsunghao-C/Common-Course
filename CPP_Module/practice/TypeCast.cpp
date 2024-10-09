@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 09:41:14 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/09 11:39:01 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/09 11:59:07 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,37 @@
 //	int			*g = static_cast<int>c // explicit casting in C++ style
 // }
 
-// ********************			FOUR Type Casting Methods in CPP		************************ //
+// ********************			FOUR Explicit Type Casting Methods in CPP		************************ //
 // 1. Static_cast			-> type conversion at compilation time
 // 2. Dynamic_cast			-> type conversion at runtime
 // 3. Reinterpret_cast		-> type conversion at compilation, but compiler won't check for you
 // 4. Const_cast			-> type conversion handling a const type, BETTER NOT TO USE IT unless you have good reason
-// ********************************************************************************************* //
+// ***************************************************************************************************** //
 
+// ---------------------+-----------+-----------+-----------+---------------+--------------- //
+// 		Cast			+	Conv.	|	Reint.	|	Upcast	|	Downcast	|	Type qual.	 //
+// ---------------------+-----------+-----------+-----------+---------------+--------------- //
+// Implicit				|	Yes		|			|	Yes		|				|				 //
+// static_cast			|	Yes		|			|	Yes		|		Yes		|				 //
+// dynamic_cast			|			|			|	Yes		|		Yes		|				 //
+// const_cast			|			|			|			|				|		Yes		 //
+// reinterpret_cast		|			|	Yes		|	Yes		|		Yes		|				 //
+// ---------------------+-----------+-----------+-----------+---------------+--------------- //
+// Legacy C cast		|	Yes		|	Yes		| 	Yes		|		Yes		|		Yes		 //
+// ---------------------+-----------+-----------+-----------+---------------+--------------- //
+
+
+// ---------------------+-------------------+---------------------------+------------------- //
+// 		Cast			+	Semantic check	|		Reliable at run		|	Tested at run	 //
+// ---------------------+-------------------+---------------------------+------------------- //
+// Implicit				|		Yes			|			Yes				|					 //
+// static_cast			|		Yes			|							|					 //
+// dynamic_cast			|		Yes			|			Yes				|		Yes			 //
+// const_cast			|					|							|					 //
+// reinterpret_cast		|					|							|					 //
+// ---------------------+-------------------+---------------------------+------------------- //
+// Legacy C cast		|					|							|					 //
+// ---------------------+-------------------+---------------------------+------------------- //
 
 
 /* Static cast in CPP */
