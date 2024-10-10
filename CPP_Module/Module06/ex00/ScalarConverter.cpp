@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:22:03 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/10 12:37:30 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/11 01:34:22 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ ScalarConverter::Types ScalarConverter::getLiteralType(std::string const &s) {
 	{
 		float	f = std::atof(s.c_str());
 		(void)f;
-		if (*s.rbegin() == 'f' || *s.rbegin() == 'F')
+		if (s.length() != 1 && (*s.rbegin() == 'f' || *s.rbegin() == 'F'))
 			return FLOAT;
 	}
 	catch(const std::exception& e) {/* Error doing atof */}
@@ -50,7 +50,7 @@ ScalarConverter::Types ScalarConverter::getLiteralType(std::string const &s) {
 	{
 		double	d = std::atof(s.c_str());
 		(void)d;
-		if (s.find('.') != std::string::npos)
+		if (s.length() != 1 && s.find('.') != std::string::npos)
 			return DOUBLE;
 	}
 	catch(const std::exception& e) {/* Error doing atof */}
