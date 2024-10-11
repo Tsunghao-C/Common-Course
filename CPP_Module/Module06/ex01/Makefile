@@ -6,15 +6,15 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/06 14:29:42 by tsuchen           #+#    #+#              #
-#    Updated: 2024/10/10 12:49:33 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/10/11 10:53:55 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= serialization
 
-SRCS		= main.cpp ScalarConverter.cpp ScalarConverter_utils.cpp
+SRCS		= main.cpp Serializer.cpp Data.cpp
 
-HEADERS		= ScalarConverter.hpp
+HEADERS		= Serializer.hpp Data.hpp
 
 OBJS		= $(SRCS:.cpp=.o)
 
