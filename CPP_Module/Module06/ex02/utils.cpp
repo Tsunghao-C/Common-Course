@@ -6,11 +6,13 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:03:43 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/11 12:27:46 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/11 12:36:35 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.hpp"
+#include "A.hpp"
+#include "B.hpp"
+#include "C.hpp"
 
 Base *  generate(void) {
 	Base    *ptr;

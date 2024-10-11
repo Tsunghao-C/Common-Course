@@ -6,7 +6,7 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/06 14:29:42 by tsuchen           #+#    #+#              #
-#    Updated: 2024/10/11 12:31:17 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/10/11 12:36:46 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME		= identify
 
 SRCS		= main.cpp Base.cpp A.cpp B.cpp C.cpp utils.cpp
 
-HEADERS		= Base.hpp A.hpp B.hpp C.hpp utils.hpp
+HEADERS		= Base.hpp A.hpp B.hpp C.hpp
 
 OBJS		= $(SRCS:.cpp=.o)
 
