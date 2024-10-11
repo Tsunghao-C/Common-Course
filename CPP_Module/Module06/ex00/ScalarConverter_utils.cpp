@@ -6,15 +6,14 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 11:17:47 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/11 01:20:49 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/11 10:38:53 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 
-void ScalarConverter::do_nan(std::string const &s) {
+void ScalarConverter::do_nan() {
 	std::cout << "--------DO NAN-----------" << std::endl;
-	(void)s;
 	std::cout << "Char: " << "impossible" << std::endl;
 	std::cout << "Int: " << "impossible" << std::endl;
 	std::cout << "Float: " << "nan" << "f" << std::endl;
@@ -93,7 +92,7 @@ void ScalarConverter::do_other(std::string const &s) {
 	} else if (i < 32) {
 		std::cout << "Char: " << "Not displayable" << std::endl;
 	} else {
-		std::cout << "Char: " << static_cast<char>(i) << std::endl;
+		std::cout << "Char: '" << static_cast<char>(i) << "'" << std::endl;
 	}
 	if (i < std::numeric_limits<int>::min() || i > std::numeric_limits<int>::max()) {
 		std::cout << "Int: " << "impossible" << std::endl;
@@ -102,4 +101,38 @@ void ScalarConverter::do_other(std::string const &s) {
 	}
 	std::cout << "Float: " << std::fixed << std::setprecision(2) << static_cast<float>(std::atof(s.c_str())) << "f" << std::endl;
 	std::cout << "Double: " << static_cast<double>(std::atof(s.c_str())) << std::endl;
+}
+
+bool ScalarConverter::is_float(std::string const &s) {
+	std::string::const_iterator it;
+	std::string::size_type dotPos = s.find('.');
+	for (it = s.begin(); it < s.end() - 1; ++it) {
+		if (it - s.begin() - dotPos == 0) {
+			continue;
+		}
+		if (!isdigit(*it)) {
+			return false;
+		}
+	}
+	if (*it == 'f' || *it == 'F') {
+		return true;
+	}
+	return false;
+}
+
+bool ScalarConverter::is_double(std::string const &s) {
+	std::string::const_iterator it;
+	std::string::size_type dotPos = s.find('.');
+	if (dotPos == std::string::npos) {
+		return false;
+	}
+	for (it = s.begin(); it != s.end(); ++it) {
+		if (it - s.begin() - dotPos == 0) {
+			continue;
+		}
+		if (!isdigit(*it)) {
+			return false;
+		}
+	}
+	return true;
 }

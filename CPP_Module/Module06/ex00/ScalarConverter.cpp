@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:22:03 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/11 01:34:22 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/11 10:41:33 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,39 +24,23 @@ ScalarConverter& ScalarConverter::operator=(ScalarConverter const &other) {
 ScalarConverter::~ScalarConverter() {}
 
 ScalarConverter::Types ScalarConverter::getLiteralType(std::string const &s) {
-	/* limits */
+	/* nan */
 	// if (s == "nan" || s == "nanf" || s == "+inf" || s == "-inf" || s == "+inff" || s == "-inff")
 	if (s == "nan" || s == "nanf")
-		return LIMITS;
-	/* int */
-	try
-	{
-		int		i = std::atoi(s.c_str());
-		if (s == std::to_string(i))
-			return INT;
-	}
-	catch(const std::exception& e) {/* Error doing atoi */}
-	/* float */
-	try
-	{
-		float	f = std::atof(s.c_str());
-		(void)f;
-		if (s.length() != 1 && (*s.rbegin() == 'f' || *s.rbegin() == 'F'))
-			return FLOAT;
-	}
-	catch(const std::exception& e) {/* Error doing atof */}
-	/* double */
-	try
-	{
-		double	d = std::atof(s.c_str());
-		(void)d;
-		if (s.length() != 1 && s.find('.') != std::string::npos)
-			return DOUBLE;
-	}
-	catch(const std::exception& e) {/* Error doing atof */}
+		return NONE;
 	/* char */
-	if (s.length() == 1)
+	if (s.length() == 1 && !isdigit(*s.begin()))
 		return CHAR;
+	/* int */
+	int		i = std::atoi(s.c_str());
+	if (s == std::to_string(i))
+		return INT;
+	/* float */
+	if ((s == "inff" || s == "+inff" || s == "-inff") || is_float(s))
+		return FLOAT;
+	/* double */
+	if (s == "inf" || s == "+inf" || s == "-inf" || is_double(s))
+		return DOUBLE;
 	return OTHER;
 }
 
@@ -64,8 +48,8 @@ void ScalarConverter::convert(std::string s) {
 	/* first check literal type */
 	switch (getLiteralType(s))
 	{
-	case LIMITS:
-		do_nan(s);
+	case NONE:
+		do_nan();
 		break;
 	case CHAR:
 		do_char(s);
