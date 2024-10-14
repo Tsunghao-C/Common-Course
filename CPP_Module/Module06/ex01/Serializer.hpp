@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 10:54:13 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/14 15:57:11 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/14 17:12:28 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,11 @@ class Serializer
 {
 private:
 	/* data */
-public:
 	Serializer();
 	Serializer(Serializer const &other);
 	Serializer&	operator=(Serializer const &other);
 	~Serializer();
-
+public:
 	static uintptr_t	serialize(Data *ptr);
 	static Data *	deserialize(uintptr_t raw);
 	
