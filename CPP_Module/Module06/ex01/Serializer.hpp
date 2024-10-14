@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 10:54:13 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/11 11:02:47 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/14 15:57:11 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 #include <iostream>
 #include <string>
+#include <cstdlib>
+#include <stdint.h>
 #include "Data.hpp"
 
 class Serializer
