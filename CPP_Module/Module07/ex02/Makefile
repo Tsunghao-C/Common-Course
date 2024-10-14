@@ -6,7 +6,7 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/06 14:29:42 by tsuchen           #+#    #+#              #
-#    Updated: 2024/10/12 21:50:17 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/10/14 14:25:56 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME		= array
 
 SRCS		= main.cpp
 
-HEADERS		= Array.hpp
+HEADERS		= Array.hpp Array.tpp
 
 OBJS		= $(SRCS:.cpp=.o)
 
