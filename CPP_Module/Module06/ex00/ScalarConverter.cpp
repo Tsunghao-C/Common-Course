@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:22:03 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/11 10:41:33 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/14 15:53:08 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,16 @@ ScalarConverter::~ScalarConverter() {}
 ScalarConverter::Types ScalarConverter::getLiteralType(std::string const &s) {
 	/* nan */
 	// if (s == "nan" || s == "nanf" || s == "+inf" || s == "-inf" || s == "+inff" || s == "-inff")
-	if (s == "nan" || s == "nanf")
+	if (s == "nan" || s == "nanf" || s == "+nan" || s == "-nan" || s == "+nanf" || s == "-nanf")
 		return NONE;
 	/* char */
 	if (s.length() == 1 && !isdigit(*s.begin()))
 		return CHAR;
 	/* int */
 	int		i = std::atoi(s.c_str());
-	if (s == std::to_string(i))
+	std::stringstream	ss;
+	ss << i;
+	if (s == ss.str())
 		return INT;
 	/* float */
 	if ((s == "inff" || s == "+inff" || s == "-inff") || is_float(s))

@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 08:54:57 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/11 10:30:41 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/14 15:34:13 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include <iterator>
 #include <limits>
 #include <iomanip>
+#include <cstdlib>
+#include <sstream>
 
 class ScalarConverter
 {
