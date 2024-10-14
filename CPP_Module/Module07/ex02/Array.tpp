@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 10:34:05 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/14 14:33:04 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/14 15:04:33 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,3 +76,11 @@ template < typename T >
 unsigned int	Array<T>::size() const {
 	return this->_arr_size;
 };
+
+template < typename T >
+std::ostream & operator<<(std::ostream &o, Array<T> const &rhs) {
+	for (unsigned int i = 0; i < rhs.size(); i++) {
+		o << "array " << i << " is: " << rhs[i] << std::endl;
+	}
+	return o;
+}
