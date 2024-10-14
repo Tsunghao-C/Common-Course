@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 08:54:57 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/14 15:34:13 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/14 17:09:46 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ private:
     static void do_other(std::string const &s);
     static bool is_float(std::string const &s);
     static bool is_double(std::string const &s);
-public:
     ScalarConverter();
     ScalarConverter(ScalarConverter const &other);
     ScalarConverter& operator=(ScalarConverter const &other);
