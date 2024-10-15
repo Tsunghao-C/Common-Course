@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 10:22:51 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/14 15:04:25 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/15 13:18:25 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ class Array
 {
 private:
 	/* data */
-	T	*_array;
 	unsigned int	_arr_size;
+	T	*_array;
 public:
 	Array();
 	Array(unsigned int n);

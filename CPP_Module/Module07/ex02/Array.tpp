@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 10:34:05 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/15 11:45:57 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/15 13:26:26 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,37 +19,30 @@ public:
 };
 
 template < typename T >
-Array<T>::Array() : _arr_size(0) {
-	this->_array = NULL;	
+Array<T>::Array() : _arr_size(0), _array(new T[_arr_size]()) {
+	// std::cout << "Default con is called" << std::endl;
 }
 
 template < typename T >
-Array<T>::Array(unsigned int n) : _arr_size(n) {
-	if (n == 0)
-		this->_array = NULL;
-	else
-		this->_array = new T[n];
+Array<T>::Array(unsigned int n) : _arr_size(n), _array(new T[_arr_size]()) {
+	// std::cout << "number con is called" << std::endl;
 }
 
 template < typename T >
-Array<T>::Array(Array const &other) {
+Array<T>::Array(Array const &other) : _arr_size(0), _array(new T[_arr_size]()) {
+	// std::cout << "copy con called " << this->_array << " " << other._array << std::endl;
 	*this = other;
 }
 
 template < typename T >
 Array<T>& Array<T>::operator=(Array<T> const &other) {
+	// std::cout << "copy assignment called " << this->_array  << " " << other._array << std::endl;
 	if (this != &other) {
+		delete[] this->_array;
 		this->_arr_size = other._arr_size;
-		if (this->_array != NULL) {
-			delete[] this->_array;
-		}
-		if (this->_arr_size == 0) {
-			this->_array = NULL;
-		} else {
-			this->_array = new T[_arr_size];
-			for (unsigned int i = 0; i < this->_arr_size; i++) {
-				this->_array[i] = other._array[i];
-			}
+		this->_array = new T[this->_arr_size]();
+		for (unsigned int i = 0; i < this->_arr_size; i++) {
+			this->_array[i] = other._array[i];
 		}
 	}
 	return *this;
@@ -57,8 +50,7 @@ Array<T>& Array<T>::operator=(Array<T> const &other) {
 
 template < typename T >
 Array<T>::~Array() {
-	if (this->_array != NULL)
-		delete[] this->_array;
+	delete[] this->_array;
 }
 
 template < typename T >
