@@ -64,5 +64,18 @@ int main(int, char**)
     }
     std::cout << "Array size: " << messages.size() << std::endl;
     std::cout << "Array content: " << std::endl << messages;
+
+    std::cout << "-------------- check copy and memory leak ------------------- " << std::endl;
+    Array<std::string>  another_array(3);
+    another_array[0] = "1";
+    another_array[1] = "2";
+    another_array[2] = "3";
+    std::cout << "Array size: " << another_array.size() << std::endl;
+    std::cout << "Array content: " << std::endl << another_array;
+    std::cout << "        ------------After copy assignment ----------------" << std::endl;
+    another_array = messages;
+    std::cout << "Array size: " << another_array.size() << std::endl;
+    std::cout << "Array content: " << std::endl << another_array;
+
     return 0;
 }

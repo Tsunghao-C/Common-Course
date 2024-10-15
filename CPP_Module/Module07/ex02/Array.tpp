@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 10:34:05 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/14 15:04:33 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/15 11:45:57 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ template < typename T >
 Array<T>& Array<T>::operator=(Array<T> const &other) {
 	if (this != &other) {
 		this->_arr_size = other._arr_size;
+		if (this->_array != NULL) {
+			delete[] this->_array;
+		}
 		if (this->_arr_size == 0) {
 			this->_array = NULL;
 		} else {
