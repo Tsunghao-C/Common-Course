@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 17:23:17 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/15 18:44:42 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/15 19:28:23 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ int		main() {
 	{sp2.longestSpan();}
 	catch(const std::exception& e)
 	{ std::cerr << e.what() << '\n';}
-	Span	sp3 = Span(100000);
+	Span	sp3 = Span(10000);
 	srand(time(NULL));
 	std::cout << "Do 10000 numbers" << std::endl;
-	for (int i = 0; i < 100000; i++) {
+	for (int i = 0; i < 10000; i++) {
 		const int value = rand();
 		sp3.addNumber(value);
 	}
