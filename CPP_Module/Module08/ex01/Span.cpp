@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 15:29:02 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/15 19:26:09 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/16 17:21:43 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	Span::addNumber(int number) {
 	this->_stored += 1;
 }
 
-unsigned int	Span::shortestSpan() {
+unsigned int	Span::shortestSpan() const {
 	if (this->_stored < 2) {
 		throw NoRangeException();
 	}
@@ -80,14 +80,25 @@ unsigned int	Span::shortestSpan() {
 	return diff;
 }
 
-unsigned int	Span::longestSpan() {
+unsigned int	Span::longestSpan() const {
 	if (this->_stored < 2) {
 		throw NoRangeException();
 	}
 	return (this->_cont.back() - this->_cont.front());
 }
 
-void	Span::printAll() {
+void	Span::fillNumbers(unsigned int n) {
+	if (n > (this->_n - this->_stored)) {
+		throw OutOfRangeException();
+	}
+	srand(time(NULL));
+	for (unsigned int i = 0; i < n; i++) {
+		const int value = rand();
+		this->addNumber(value);
+	}
+}
+
+void	Span::printAll() const {
 	std::vector<int>::const_iterator it;
 	for (it = this->_cont.begin(); it != this->_cont.end(); ++it) {
 		std::cout << *it << std::endl;

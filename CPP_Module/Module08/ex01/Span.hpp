@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 15:13:36 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/15 19:26:06 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/16 17:21:28 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,10 @@ public:
 	~Span();
 public:
 	void	addNumber(int number);
-	unsigned int	shortestSpan();
-	unsigned int	longestSpan();
-	void	printAll();
+	unsigned int	shortestSpan()const;
+	unsigned int	longestSpan() const;
+	void	fillNumbers(unsigned int n);
+	void	printAll() const;
 public:
 	class OutOfRangeException;
 	class NoRangeException;
