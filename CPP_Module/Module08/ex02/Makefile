@@ -6,15 +6,15 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/06 14:29:42 by tsuchen           #+#    #+#              #
-#    Updated: 2024/10/15 19:29:44 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/10/16 12:19:55 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= mutant
 
-SRCS		= main.cpp Span.cpp
+SRCS		= main.cpp
 
-HEADERS		= Span.hpp
+HEADERS		= MutantStack.hpp MutantStack.tpp
 
 OBJS		= $(SRCS:.cpp=.o)
 
