@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:21:00 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/16 13:37:55 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/16 14:54:07 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ template < typename T >
 typename MutantStack<T>::iterator   MutantStack<T>::begin() {
     return this->c.begin();
 }
+// "c" is the name of the underlying container in std::stack is std::deque,
+// which already have iterators available to use
 
 template < typename T >
 typename MutantStack<T>::iterator   MutantStack<T>::end() {
@@ -49,4 +51,3 @@ template < typename T >
 typename MutantStack<T>::const_iterator   MutantStack<T>::end() const {
     return this->c.end();
 }
-
