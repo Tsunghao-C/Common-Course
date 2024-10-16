@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:20:05 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/16 14:59:26 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/16 15:30:50 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ public:
 	MutantStack<T>& operator=(MutantStack<T> const &other);
 	~MutantStack();
 public:
-	// 1. define the type of iterator and const_iterator
+	// 1. use typedef to shorten the definition of iterator and const_iterator
 	typedef typename std::stack<T>::container_type::iterator	iterator;
 	typedef typename std::stack<T>::container_type::const_iterator	const_iterator;
 	/* the typename above is necessary to resolve the ambiguity of the dependent name T */
