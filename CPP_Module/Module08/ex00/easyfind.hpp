@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 16:35:13 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/15 14:01:15 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/16 15:19:45 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,10 @@
 # include <iostream>
 # include <string>
 # include <algorithm>
-# include <list>
-# include <vector>
-# include <map>
 # include <exception>
 
-template <typename Container, typename T>
-typename Container::value_type easyfind(Container &cont, T value);
+template <typename T>
+typename T::iterator	easyfind(T	&cont, int i);
 
 # include "easyfind.tpp"
 

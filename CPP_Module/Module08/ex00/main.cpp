@@ -6,11 +6,13 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 17:47:22 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/15 14:52:51 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/16 15:28:03 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "easyfind.hpp"
+#include <list>
+#include <vector>
 
 int		main() {
 	std::cout << "--------- test on int list --------- " << std::endl;
@@ -24,8 +26,9 @@ int		main() {
 	
 	try
 	{
-		int  first_found = ::easyfind(int_list, -7);
-		std::cout << first_found << std::endl;
+		std::list<int>::iterator first_found = ::easyfind(int_list, 39);
+		std::cout << "first found(39): " << *first_found << std::endl;
+		std::cout << "next item(-7): " << *(++first_found) << std::endl;
 		::easyfind(int_list, 99);
 	}
 	catch(const std::exception& e)
@@ -33,18 +36,20 @@ int		main() {
 		std::cerr << e.what() << '\n';
 	}
 	
-	std::cout << "--------- test on string vector --------- " << std::endl;
-	std::vector<std::string> str_vector;
-	str_vector.push_back("Hello world!");
-	str_vector.push_back("Bonjour le monde!");
-	str_vector.push_back("Guten tag");
-	str_vector.push_back("Selamat Bagi");
+	std::cout << "--------- test on int vector --------- " << std::endl;
+	std::vector<int> int_vector;
+	int_vector.push_back(99);
+	int_vector.push_back(88);
+	int_vector.push_back(77);
+	int_vector.push_back(88);
+	int_vector.push_back(99);
 
 	try
 	{
-		std::string	str_found = ::easyfind(str_vector, "Guten tag");
-		std::cout << str_found << std::endl;
-		::easyfind(str_vector, "Guten morgan");
+		std::vector<int>::iterator	int_found = ::easyfind(int_vector, 88);
+		std::cout << "first found(88): " << *int_found << std::endl;
+		std::cout << "next item(77): " << *(++int_found) << std::endl;
+		::easyfind(int_vector, 66);
 	}
 	catch(const std::exception& e)
 	{
