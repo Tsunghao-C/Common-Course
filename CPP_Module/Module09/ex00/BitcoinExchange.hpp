@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 10:10:40 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/17 11:53:32 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/17 15:04:24 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 # define BITCOINEXCHANGE_HPP
 
 # include <iostream>
+# include <iomanip>
 # include <fstream>
 # include <string>
 # include <map>
 # include <algorithm>
 # include <exception>
 # include <cstdlib>
-# define DB_PATH "./cpp_09/data.csv"
+# define DB_PATH "./asset/data.csv"
 
 class BitcoinExchange
 {
