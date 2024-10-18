@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 10:48:16 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/18 12:09:33 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/18 13:09:12 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ private:
     std::stack<std::string>     _input;
     bool    parse_input(std::string input);
     static bool isoperator(int c);
+    static double do_operator(std::string const &op, double left, double right);
 public:
     RPN(std::string const &input);
     ~RPN();
     double  do_rpn_cal();
 };
-
 
 #endif

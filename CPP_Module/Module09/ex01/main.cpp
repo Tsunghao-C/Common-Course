@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 11:14:49 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/18 11:20:10 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/18 13:14:01 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		main(int ac, char *av[]) {
 	{
 		RPN		rpn(static_cast<std::string>(av[1]));
 		double	result = rpn.do_rpn_cal();
-		std::cout << std::fixed << std::setprecision(2) << result << std::endl;
+		std::cout << std::fixed << std::setprecision(0) << result << std::endl;
 	}
 	catch(const std::exception& e)
 	{
