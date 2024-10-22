@@ -6,19 +6,19 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 18:40:55 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/22 00:48:36 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/22 17:36:10 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
-PmergeMe::PmergeMe() : _size(0) {}
+PmergeMe::PmergeMe() {}
 
 PmergeMe::PmergeMe(std::vector<int> const &input) : _c_vec(input) {
 	for (std::vector<int>::const_iterator it = input.begin(); it != input.end(); ++it) {
 		_c_deque.push_back(*it);
 	}
-	this->_size = _c_vec.size();
+	// this->_size = _c_vec.size();
 }
 
 PmergeMe::PmergeMe(PmergeMe const &other) { *this = other; }
@@ -27,8 +27,8 @@ PmergeMe& PmergeMe::operator=(PmergeMe const &other) {
 	if (this != &other) {
 		this->_c_vec = other._c_vec;
 		this->_c_deque = other._c_deque;
-		this->_size = other._size;
-		this->_jacob_seq = other._jacob_seq;
+		// this->_size = other._size;
+		// this->_jacob_seq = other._jacob_seq;
 	}
 	return *this;
 }
@@ -65,8 +65,9 @@ bool	PmergeMe::isPositiveNum(std::string argv) {
 	return true;
 }
 
-std::ostream & operator<<(std::ostream &o, std::vector<int> const &rhs) {
-	for (std::vector<int>::const_iterator it = rhs.begin(); it != rhs.end(); ++it) {
+template <typename T>
+std::ostream & operator<<(std::ostream &o, std::vector<T> const &rhs) {
+	for (typename std::vector<T>::const_iterator it = rhs.begin(); it != rhs.end(); ++it) {
 		o << " " << *it;	
 	}
 	return o;
@@ -113,7 +114,6 @@ std::vector<size_t>	getInsertionIndices(size_t n) {
 	std::cout << "size n is: " << n << std::endl;
 	std::cout << "got Jacob seg, jocob size is: " << JacobSeq.size() << std::endl;
 	for (size_t	i = JacobSeq.size() - 1; i > 0; --i) {
-		std::cout << "in here\n";
 		if (JacobSeq[i] < n) {
 			indices.push_back(JacobSeq[i]);
 		}
@@ -123,7 +123,6 @@ std::vector<size_t>	getInsertionIndices(size_t n) {
 			}
 		}
 	}
-	std::cout << "here\n";
 	for (size_t i = 1; i < n && i <= JacobSeq[0] + 1; ++i) {
 		indices.push_back(i);
 	}
@@ -209,9 +208,9 @@ void	fordJohnsonSort(Iter first, Iter last) {
 		pending.push_back(pair_it->first);
 	}
 	pending.insert(pending.end(), remaining.begin(), remaining.end());
-	std::cout << "got pending\n";
+	std::cout << "got pending: " << pending.size() << std::endl;
 	std::vector<size_t> insertionOrder = getInsertionIndices(pending.size());
-	std::cout << "got insertion order\n";
+	std::cout << "got insertion order: " << insertionOrder << std::endl;
 	// do insertions
 	for (std::vector<size_t>::iterator order_it = insertionOrder.begin(); order_it != insertionOrder.end(); ++order_it) {
 		if (*order_it < pending.size()) {

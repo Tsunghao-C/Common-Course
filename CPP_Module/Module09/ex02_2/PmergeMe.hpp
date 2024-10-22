@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:48:50 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/22 00:41:35 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/22 17:34:42 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ private:
 	PmergeMe&   operator=(PmergeMe const &other);
 	std::vector<int>    _c_vec;
 	std::deque<int>      _c_deque;
-	size_t					_size;
-	std::vector<size_t>	_jacob_seq;
+	// size_t					_size;
+	// std::vector<size_t>	_jacob_seq;
 	
 public:
 	PmergeMe(std::vector<int> const &input);
@@ -45,7 +45,8 @@ public:
 std::vector<size_t>	generateJacobSeq(size_t n);
 std::vector<size_t>	getInsertionIndices(size_t n);
 
-std::ostream & operator<<(std::ostream &o, std::vector<int> const &rhs);
+template <typename T>
+std::ostream & operator<<(std::ostream &o, std::vector<T> const &rhs);
 
 template < typename Iter, typename T >
 Iter binarySearch(Iter first, Iter last, const T& value);
