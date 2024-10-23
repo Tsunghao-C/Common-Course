@@ -165,3 +165,85 @@ Key points to remember:
 5. In C++11 and later, you can also use uniform initialization syntax: `new T[size]{}`, which has the same effect as `new T[size]()`.
 
 This distinction is particularly important when working with primitive types in performance-critical code, where unnecessary initialization can impact performance. For your `Array` class template, using `new T[this->_arr_size]()` ensures that all elements are properly initialized, which is generally a safe approach.
+
+
+## Advance template: define custom memory allocation in a container
+
+I'll explain how allocators and `rebind` work in C++98:
+
+1. First, let's understand what allocators are:
+```cpp
+// When you declare a container like this:
+std::vector<int> vec;
+
+// It's actually equivalent to:
+std::vector<int, std::allocator<int> > vec;
+```
+
+Allocators are classes that handle memory allocation and deallocation for containers. The second template parameter of standard containers is always an allocator.
+
+2. The `rebind` is needed when an allocator for one type needs to allocate memory for a different type. Here's a simplified view:
+
+```cpp
+// This allocator can only allocate memory for ints
+std::allocator<int>
+
+// But in our sort, we need to allocate pairs of ints
+// So we need: std::allocator<std::pair<int, int>>
+
+// rebind helps us transform the first allocator into the second
+typename Alloc::template rebind<std::pair<T, T> >::other
+```
+
+Let's break down this syntax:
+```cpp
+template < template <typename, typename> class Container, typename T, typename Alloc >
+void merge_insertion_sort(Container<T, Alloc> &cont, ...) {
+    // Original container uses Alloc to allocate T
+    Container<T, Alloc> leftover;  // This is fine, same types as input
+
+    // But for pairs container, we need an allocator for std::pair<T,T>
+    // This is how we convert Alloc<T> to Alloc<std::pair<T,T>>:
+    typedef typename Alloc::template rebind<std::pair<T, T> >::other PairAlloc;
+    Container<std::pair<T, T>, PairAlloc> pairs;
+}
+```
+
+Here's a concrete example:
+```cpp
+// Let's say you call the function with a deque of ints
+std::deque<int> my_deque;  // implicitly uses std::allocator<int>
+
+merge_insertion_sort(my_deque, my_deque.begin(), my_deque.end());
+
+// Inside the function:
+// Container = std::deque
+// T = int
+// Alloc = std::allocator<int>
+
+// When creating leftover:
+std::deque<int, std::allocator<int> > leftover;  // Same as input
+
+// When creating pairs:
+// Need: std::deque<std::pair<int,int>, std::allocator<std::pair<int,int> > >
+// rebind helps transform std::allocator<int> into std::allocator<std::pair<int,int>>
+typedef typename std::allocator<int>::template rebind<std::pair<int,int> >::other PairAlloc;
+std::deque<std::pair<int,int>, PairAlloc> pairs;
+```
+
+3. Why is this necessary?
+- Different types might have different memory requirements
+- The allocator needs to know the size of the type it's allocating
+- Without rebind, we'd need to manually specify new allocator types for each container
+
+4. A simpler shorthand could be:
+```cpp
+// Instead of writing:
+Container<std::pair<T, T>, typename Alloc::template rebind<std::pair<T, T> >::other> pairs;
+
+// You could define a typedef:
+typedef typename Alloc::template rebind<std::pair<T, T> >::other PairAlloc;
+Container<std::pair<T, T>, PairAlloc> pairs;
+```
+
+This is essential in C++98 to maintain the same allocator family across different types while ensuring proper memory management. In modern C++ (C++11 and later), this has been simplified with features like `allocator_traits`, but in C++98, we need to use `rebind`.
