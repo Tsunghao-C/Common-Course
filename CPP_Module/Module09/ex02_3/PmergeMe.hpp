@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:48:50 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/23 14:09:59 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/23 16:34:42 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <string>
 # include <vector>
 # include <deque>
+# include <list>
 # include <algorithm>
 # include <ctime>
 # include <exception>
@@ -30,7 +31,8 @@ private:
 	PmergeMe(PmergeMe const &other);
 	PmergeMe&   operator=(PmergeMe const &other);
 	std::vector<int>    _c_vec;
-	std::deque<int>      _c_deque;
+	std::deque<int>     _c_deque;
+	std::list<int>		_c_list;
 	// int					_compares;
 	// size_t					_size;
 	// std::vector<size_t>	_jacob_seq;

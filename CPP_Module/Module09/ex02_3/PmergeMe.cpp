@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 18:40:55 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/23 16:16:30 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/23 17:07:55 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ PmergeMe::PmergeMe() {}
 PmergeMe::PmergeMe(std::vector<int> const &input) : _c_vec(input) {
 	for (std::vector<int>::const_iterator it = input.begin(); it != input.end(); ++it) {
 		_c_deque.push_back(*it);
+		_c_list.push_back(*it);
 	}
 }
 
@@ -26,6 +27,7 @@ PmergeMe& PmergeMe::operator=(PmergeMe const &other) {
 	if (this != &other) {
 		this->_c_vec = other._c_vec;
 		this->_c_deque = other._c_deque;
+		this->_c_list = other._c_list;
 	}
 	return *this;
 }
@@ -44,10 +46,18 @@ void	PmergeMe::sort_compare() {
 	clock_t	deque_start = clock();
 	merge_insertion_sort(_c_deque, _c_deque.begin(), _c_deque.end());
 	clock_t deque_end = clock();
+
+	// do list sort
+	clock_t	list_start = clock();
+	merge_insertion_sort(_c_list, _c_list.begin(), _c_list.end());
+	clock_t list_end = clock();
+
 	std::cout << "Time to process a range of " << _c_vec.size() << " elements with std::[vector] : ";
 	std::cout << std::fixed << std::setprecision(5) << static_cast<double>(vec_end - vec_start) / CLOCKS_PER_SEC << " us" << std::endl;
 	std::cout << "Time to process a range of " << _c_deque.size() << " elements with std::[deque] : ";
 	std::cout << std::fixed << std::setprecision(5) << static_cast<double>(deque_end - deque_start) / CLOCKS_PER_SEC << " us" << std::endl;
+	std::cout << "Time to process a range of " << _c_list.size() << " elements with std::[list] : ";
+	std::cout << std::fixed << std::setprecision(5) << static_cast<double>(list_end - list_start) / CLOCKS_PER_SEC << " us" << std::endl;
 }
 
 bool	PmergeMe::isPositiveNum(std::string argv) {
@@ -149,16 +159,15 @@ void	merge_insertion_sort(Container<T, Alloc> &cont,
 		typename Container<T, Alloc>::iterator first,
 		typename Container<T, Alloc>::iterator last)
 {
-	// Step 1: create n/2 pairs
 	typedef typename Container<T, Alloc>::iterator	cont_it;
 	typedef typename Alloc::template rebind<std::pair<T, T> >::other PairAlloc;
 	typedef typename Container<std::pair<T, T>, PairAlloc>::iterator pair_it;
+	(void)cont;
 	
 	size_t	diff = std::distance(first, last);
 	if (diff <= 1) {return ;}
-
-	(void)cont;
 	
+	// Step 1: create n/2 pairs
 	Container<std::pair<T, T>, PairAlloc> pairs;
 	Container<T, Alloc>		leftover;
 	
@@ -173,34 +182,21 @@ void	merge_insertion_sort(Container<T, Alloc> &cont,
 	}
 	if (it != last) { leftover.push_back(*it); }
 	// // Step 1 printing check
-	// std::cout << " ^^^^^^ Pairs ^^^^^^^\n";
-	// for (pair_it itp = pairs.begin(); itp != pairs.end(); ++itp) {
-	// 	std::cout << " (" << itp->first << ", " << itp->second << ")"; }
-	// std::cout << "\n ###### LeftOver #########\n";
-	// for (cont_it itl = leftover.begin(); itl != leftover.end(); ++itl) {
-	// 	std::cout << " " << *itl; }
-	// std::cout << std::endl;
 	
 	// Step 2: Recusively sort the larger number
-	Container<T, Alloc>		largers;
+	Container<T, Alloc>		mainChain;
 	for (pair_it itp = pairs.begin(); itp != pairs.end(); ++itp) {
-		largers.push_back(itp->second);
+		mainChain.push_back(itp->second);
 	}
-	if (largers.size() >= 2)
-		merge_insertion_sort(largers, largers.begin(), largers.end());
+	if (mainChain.size() >= 2)
+		merge_insertion_sort(mainChain, mainChain.begin(), mainChain.end());
 	// // Step 2 printing check (largers should be sorted by here)
-	// std::cout << "********** Larger **********\n";
-	// for (cont_it it = largers.begin(); it != largers.end(); ++it) {
-	// 	std::cout << " " << *it; }
-	// std::cout << std::endl;
 	
 	// Step 3: Form main chain and pending based on sorted largers
-	Container<T, Alloc>		mainChain;
 	Container<T, Alloc>		pending;
-	// since largers are sorted, push directly to mainChain
-	// but for pending, need to find the corresponding first element in pair
-	for (cont_it it = largers.begin(); it != largers.end(); ++it) {
-		mainChain.push_back(*it);
+	// since largers are sorted now, it is the mainChain directly. But for pending, need to find the corresponding first element in pairs
+	for (cont_it it = mainChain.begin(); it != mainChain.end(); ++it) {
+		// mainChain.push_back(*it);
 		for (pair_it itp = pairs.begin(); itp != pairs.end(); ++itp) {
 			if (itp->second == *it) {
 				pending.push_back(itp->first);
@@ -209,6 +205,41 @@ void	merge_insertion_sort(Container<T, Alloc> &cont,
 	}
 	pending.insert(pending.end(), leftover.begin(), leftover.end());
 	// // Step 3 printing check
+
+	// Step 4: Insert pending stuffs based on Jacobsthal sequence
+	std::vector<size_t>		indices = getInsertionIndices(pending.size());
+	for (size_t i = 0; i < indices.size(); i++) {
+		size_t	probe = indices[i];
+		cont_it insertTarget = pending.begin();
+		if (probe == 1) {
+			mainChain.insert(mainChain.begin(), *insertTarget);
+		} else {
+			std::advance(insertTarget, probe - 1);
+			cont_it	insertPos = binarySearch(mainChain.begin(), mainChain.end(), *insertTarget);
+			mainChain.insert(insertPos, *insertTarget);
+		}
+	}
+
+	// Step 5: copy back to original container
+	std::copy(mainChain.begin(), mainChain.end(), first);
+}
+
+	// // Step 1 printing check
+	// std::cout << " ^^^^^^ Pairs ^^^^^^^\n";
+	// for (pair_it itp = pairs.begin(); itp != pairs.end(); ++itp) {
+	// 	std::cout << " (" << itp->first << ", " << itp->second << ")"; }
+	// std::cout << "\n ###### LeftOver #########\n";
+	// for (cont_it itl = leftover.begin(); itl != leftover.end(); ++itl) {
+	// 	std::cout << " " << *itl; }
+	// std::cout << std::endl;
+
+	// // Step 2 printing check (largers should be sorted by here)
+	// std::cout << "********** MainChain (Larger) **********\n";
+	// for (cont_it it = mainChain.begin(); it != mainChain.end(); ++it) {
+	// 	std::cout << " " << *it; }
+	// std::cout << std::endl;
+
+	// // Step 3 printing check
 	// std::cout << "********** mainChain **********\n";
 	// for (cont_it it = mainChain.begin(); it != mainChain.end(); ++it) {
 	// 	std::cout << " " << *it; }
@@ -216,19 +247,3 @@ void	merge_insertion_sort(Container<T, Alloc> &cont,
 	// for (cont_it it = pending.begin(); it != pending.end(); ++it) {
 	// 	std::cout << " " << *it; }
 	// std::cout << std::endl;
-
-	// Step 4: Insert pending stuffs based on Jacobsthal sequence
-	std::vector<size_t>		indices = getInsertionIndices(pending.size());
-	for (size_t i = 0; i < indices.size(); i++) {
-		size_t	probe = indices[i];
-		if (probe == 1) {
-			mainChain.insert(mainChain.begin(), pending[0]);
-		} else {
-			cont_it	insertPos = binarySearch(mainChain.begin(), mainChain.end(), pending[probe - 1]);
-			mainChain.insert(insertPos, pending[probe - 1]);
-		}
-	}
-
-	// Step 5: copy back to original container
-	std::copy(mainChain.begin(), mainChain.end(), first);
-}
