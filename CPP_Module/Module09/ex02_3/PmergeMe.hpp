@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:48:50 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/23 16:34:42 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/23 17:30:27 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ std::vector<size_t>	generateJacobSeq(size_t n);
 std::vector<size_t>	getInsertionIndices(size_t n);
 
 template < typename Iter, typename T >
-Iter binarySearch(Iter first, Iter last, const T& value);
+Iter binarySearch(Iter first, Iter last, const T& value, size_t *_compares);
 
 template < template <typename, typename> class Container, typename T, typename Alloc >
-void	merge_insertion_sort(Container<T, Alloc> &cont,
+size_t	merge_insertion_sort(Container<T, Alloc> &cont,
 		typename Container<T, Alloc>::iterator first, typename Container<T, Alloc>::iterator last);
 
 

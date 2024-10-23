@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 18:40:55 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/23 17:07:55 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/23 17:33:12 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,26 +38,29 @@ void	PmergeMe::sort_compare() {
 	std::cout << "Before: " << _c_vec << std::endl;
 	// do vector sort
 	clock_t	vec_start = clock();
-	merge_insertion_sort(_c_vec, _c_vec.begin(), _c_vec.end());
+	size_t num_compares_vec = merge_insertion_sort(_c_vec, _c_vec.begin(), _c_vec.end());
 	clock_t	vec_end = clock();
 	std::cout << "After:  " << _c_vec << std::endl;
 
 	// do deque sort
 	clock_t	deque_start = clock();
-	merge_insertion_sort(_c_deque, _c_deque.begin(), _c_deque.end());
+	size_t num_compares_deq = merge_insertion_sort(_c_deque, _c_deque.begin(), _c_deque.end());
 	clock_t deque_end = clock();
 
 	// do list sort
 	clock_t	list_start = clock();
-	merge_insertion_sort(_c_list, _c_list.begin(), _c_list.end());
+	size_t num_compares_lst = merge_insertion_sort(_c_list, _c_list.begin(), _c_list.end());
 	clock_t list_end = clock();
 
 	std::cout << "Time to process a range of " << _c_vec.size() << " elements with std::[vector] : ";
-	std::cout << std::fixed << std::setprecision(5) << static_cast<double>(vec_end - vec_start) / CLOCKS_PER_SEC << " us" << std::endl;
+	std::cout << std::fixed << std::setprecision(5) << static_cast<double>(vec_end - vec_start) / CLOCKS_PER_SEC << " us. "
+			<< "Number of compares: " << num_compares_vec << std::endl;
 	std::cout << "Time to process a range of " << _c_deque.size() << " elements with std::[deque] : ";
-	std::cout << std::fixed << std::setprecision(5) << static_cast<double>(deque_end - deque_start) / CLOCKS_PER_SEC << " us" << std::endl;
+	std::cout << std::fixed << std::setprecision(5) << static_cast<double>(deque_end - deque_start) / CLOCKS_PER_SEC << " us. "
+			<< "Number of compares: " << num_compares_deq << std::endl;
 	std::cout << "Time to process a range of " << _c_list.size() << " elements with std::[list] : ";
-	std::cout << std::fixed << std::setprecision(5) << static_cast<double>(list_end - list_start) / CLOCKS_PER_SEC << " us" << std::endl;
+	std::cout << std::fixed << std::setprecision(5) << static_cast<double>(list_end - list_start) / CLOCKS_PER_SEC << " us. "
+			<< "Number of compares: " << num_compares_lst << std::endl;
 }
 
 bool	PmergeMe::isPositiveNum(std::string argv) {
@@ -134,7 +137,7 @@ std::vector<size_t>	getInsertionIndices(size_t n) {
 }
 
 template < typename Iter, typename T >
-Iter binarySearch(Iter first, Iter last, const T& value) {
+Iter binarySearch(Iter first, Iter last, const T& value, size_t *_compares) {
 	Iter	it;
 	typename std::iterator_traits<Iter>::difference_type count, step;
 	count = std::distance(first, last);
@@ -144,6 +147,7 @@ Iter binarySearch(Iter first, Iter last, const T& value) {
 		step = count / 2;
 		std::advance(it, step);
 
+		*_compares += 1;
 		if (*it < value) {
 			first = ++it;
 			count -= step + 1;
@@ -155,7 +159,7 @@ Iter binarySearch(Iter first, Iter last, const T& value) {
 }
 
 template < template <typename, typename> class Container, typename T, typename Alloc >
-void	merge_insertion_sort(Container<T, Alloc> &cont,
+size_t	merge_insertion_sort(Container<T, Alloc> &cont,
 		typename Container<T, Alloc>::iterator first,
 		typename Container<T, Alloc>::iterator last)
 {
@@ -163,9 +167,10 @@ void	merge_insertion_sort(Container<T, Alloc> &cont,
 	typedef typename Alloc::template rebind<std::pair<T, T> >::other PairAlloc;
 	typedef typename Container<std::pair<T, T>, PairAlloc>::iterator pair_it;
 	(void)cont;
+	size_t	compares = 0;
 	
 	size_t	diff = std::distance(first, last);
-	if (diff <= 1) {return ;}
+	if (diff <= 1) {return compares;}
 	
 	// Step 1: create n/2 pairs
 	Container<std::pair<T, T>, PairAlloc> pairs;
@@ -175,6 +180,7 @@ void	merge_insertion_sort(Container<T, Alloc> &cont,
 	while (std::distance(it, last) >= 2) {
 		T	first_val = *(it++);
 		T	second_val = *(it++);
+		compares++;
 		if (second_val < first_val) {
 			std::swap(first_val, second_val);
 		}
@@ -189,7 +195,7 @@ void	merge_insertion_sort(Container<T, Alloc> &cont,
 		mainChain.push_back(itp->second);
 	}
 	if (mainChain.size() >= 2)
-		merge_insertion_sort(mainChain, mainChain.begin(), mainChain.end());
+		compares += merge_insertion_sort(mainChain, mainChain.begin(), mainChain.end());
 	// // Step 2 printing check (largers should be sorted by here)
 	
 	// Step 3: Form main chain and pending based on sorted largers
@@ -215,13 +221,14 @@ void	merge_insertion_sort(Container<T, Alloc> &cont,
 			mainChain.insert(mainChain.begin(), *insertTarget);
 		} else {
 			std::advance(insertTarget, probe - 1);
-			cont_it	insertPos = binarySearch(mainChain.begin(), mainChain.end(), *insertTarget);
+			cont_it	insertPos = binarySearch(mainChain.begin(), mainChain.end(), *insertTarget, &compares);
 			mainChain.insert(insertPos, *insertTarget);
 		}
 	}
 
 	// Step 5: copy back to original container
 	std::copy(mainChain.begin(), mainChain.end(), first);
+	return compares;
 }
 
 	// // Step 1 printing check
