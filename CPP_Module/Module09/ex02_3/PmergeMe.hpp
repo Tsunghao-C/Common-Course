@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:48:50 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/23 17:30:27 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/23 17:50:18 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ private:
 	PmergeMe(PmergeMe const &other);
 	PmergeMe&   operator=(PmergeMe const &other);
 	std::vector<int>    _c_vec;
+	std::vector<int>    _c_vec2;
 	std::deque<int>     _c_deque;
 	std::list<int>		_c_list;
 	// int					_compares;
@@ -57,5 +58,10 @@ template < template <typename, typename> class Container, typename T, typename A
 size_t	merge_insertion_sort(Container<T, Alloc> &cont,
 		typename Container<T, Alloc>::iterator first, typename Container<T, Alloc>::iterator last);
 
+template < typename Container >
+size_t	merge(Container &cont, typename Container::iterator first, typename Container::iterator middle, typename Container::iterator last);
+
+template < typename Container >
+size_t	merge_sort2(Container &cont, typename Container::iterator first, typename Container::iterator last);
 
 #endif
