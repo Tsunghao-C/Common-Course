@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 18:40:55 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/23 23:37:01 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/23 23:49:30 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,18 +295,16 @@ size_t	merge_insertion_sort(Container<T, Alloc> &cont,
 template < typename Container >
 size_t	merge(Container &cont, typename Container::iterator first, typename Container::iterator middle, typename Container::iterator last) {
 	typedef	typename Container::iterator	c_it;
-	typename std::iterator_traits<c_it>::difference_type count;
 	(void)cont;
 	size_t	compares = 0;
 	
-	count = std::distance(first, last);
-	Container	tmp(count);
+	Container	tmp(std::distance(first, last));
 	c_it	left = first;
 	c_it	right = middle;
 	c_it	tmp_it = tmp.begin();
 
 	// sorting and copy to tmp
-	while (std::distance(left, middle) > 0 && std::distance(right, last) > 0) {
+	while (left != middle && right != last) {
 		compares++;
 		if (*left <= *right) {
 			*tmp_it = *left;
@@ -318,12 +316,12 @@ size_t	merge(Container &cont, typename Container::iterator first, typename Conta
 		++tmp_it;
 	}
 	// copying the remaining, could be left or right
-	while (std::distance(left, middle) > 0) {
+	while (left != middle) {
 		*tmp_it = *left;
 		++left;
 		++tmp_it;
 	}
-	while (std::distance(right, last) > 0) {
+	while (right != last) {
 		*tmp_it = *right;
 		++right;
 		++tmp_it;
