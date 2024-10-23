@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 18:40:55 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/23 18:59:27 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/23 19:17:15 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,15 @@ void	PmergeMe::sort_compare() {
 	clock_t	vec_end = clock();
 	std::cout << "After:  " << _c_vec << std::endl;
 
-	// // do deque sort
-	// clock_t	deque_start = clock();
-	// size_t num_compares_deq = merge_insertion_sort(_c_deque, _c_deque.begin(), _c_deque.end());
-	// clock_t deque_end = clock();
+	// do deque sort
+	clock_t	deque_start = clock();
+	size_t num_compares_deq = merge_insertion_sort(_c_deque, _c_deque.begin(), _c_deque.end());
+	clock_t deque_end = clock();
 
-	// // do list sort
-	// clock_t	list_start = clock();
-	// size_t num_compares_lst = merge_insertion_sort(_c_list, _c_list.begin(), _c_list.end());
-	// clock_t list_end = clock();
+	// do list sort
+	clock_t	list_start = clock();
+	size_t num_compares_lst = merge_insertion_sort(_c_list, _c_list.begin(), _c_list.end());
+	clock_t list_end = clock();
 
 	// do vector sort using merge sort
 	clock_t	vec2_start = clock();
@@ -64,12 +64,12 @@ void	PmergeMe::sort_compare() {
 	std::cout << "Time to process a range of " << _c_vec2.size() << " elements with std::[vector] : ";
 	std::cout << std::fixed << std::setprecision(5) << static_cast<double>(vec2_end - vec2_start) / CLOCKS_PER_SEC << " us. "
 			<< "Number of compares: " << num_compares_vec2 << std::endl;
-	// std::cout << "Time to process a range of " << _c_deque.size() << " elements with std::[deque] : ";
-	// std::cout << std::fixed << std::setprecision(5) << static_cast<double>(deque_end - deque_start) / CLOCKS_PER_SEC << " us. "
-	// 		<< "Number of compares: " << num_compares_deq << std::endl;
-	// std::cout << "Time to process a range of " << _c_list.size() << " elements with std::[list] : ";
-	// std::cout << std::fixed << std::setprecision(5) << static_cast<double>(list_end - list_start) / CLOCKS_PER_SEC << " us. "
-	// 		<< "Number of compares: " << num_compares_lst << std::endl;
+	std::cout << "Time to process a range of " << _c_deque.size() << " elements with std::[deque] : ";
+	std::cout << std::fixed << std::setprecision(5) << static_cast<double>(deque_end - deque_start) / CLOCKS_PER_SEC << " us. "
+			<< "Number of compares: " << num_compares_deq << std::endl;
+	std::cout << "Time to process a range of " << _c_list.size() << " elements with std::[list] : ";
+	std::cout << std::fixed << std::setprecision(5) << static_cast<double>(list_end - list_start) / CLOCKS_PER_SEC << " us. "
+			<< "Number of compares: " << num_compares_lst << std::endl;
 }
 
 bool	PmergeMe::isPositiveNum(std::string argv) {
@@ -297,6 +297,7 @@ size_t	merge(Container &cont, typename Container::iterator first, typename Conta
 
 	// sorting and copy to tmp
 	while (left < middle && right < last) {
+		compares += 2;
 		compares++;
 		if (*left <= *right) {
 			*tmp_it = *left;
