@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 18:40:55 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/23 19:17:15 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/23 23:37:01 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ PmergeMe::PmergeMe() {}
 PmergeMe::PmergeMe(std::vector<int> const &input) : _c_vec(input), _c_vec2(input) {
 	for (std::vector<int>::const_iterator it = input.begin(); it != input.end(); ++it) {
 		_c_deque.push_back(*it);
+		_c_deque2.push_back(*it);
 		_c_list.push_back(*it);
+		_c_list2.push_back(*it);
 	}
 }
 
@@ -28,7 +30,9 @@ PmergeMe& PmergeMe::operator=(PmergeMe const &other) {
 		this->_c_vec = other._c_vec;
 		this->_c_vec2 = other._c_vec2;
 		this->_c_deque = other._c_deque;
+		this->_c_deque2 = other._c_deque2;
 		this->_c_list = other._c_list;
+		this->_c_list = other._c_list2;
 	}
 	return *this;
 }
@@ -37,39 +41,55 @@ PmergeMe::~PmergeMe() {}
 
 void	PmergeMe::sort_compare() {
 	std::cout << "Before: " << _c_vec << std::endl;
-	// do vector sort
+	// do vector merge-insertion sort
 	clock_t	vec_start = clock();
 	size_t num_compares_vec = merge_insertion_sort(_c_vec, _c_vec.begin(), _c_vec.end());
 	clock_t	vec_end = clock();
 	std::cout << "After:  " << _c_vec << std::endl;
 
-	// do deque sort
+	// do deque merge-insertion sort
 	clock_t	deque_start = clock();
 	size_t num_compares_deq = merge_insertion_sort(_c_deque, _c_deque.begin(), _c_deque.end());
 	clock_t deque_end = clock();
 
-	// do list sort
+	// do list merge-insertion sort
 	clock_t	list_start = clock();
 	size_t num_compares_lst = merge_insertion_sort(_c_list, _c_list.begin(), _c_list.end());
 	clock_t list_end = clock();
 
-	// do vector sort using merge sort
+	// do vector merge sort
 	clock_t	vec2_start = clock();
 	size_t num_compares_vec2 = merge_sort2(_c_vec, _c_vec.begin(), _c_vec.end());
 	clock_t	vec2_end = clock();
 	
+	// do deque merge sort
+	clock_t	deque2_start = clock();
+	size_t num_compares_deq2 = merge_sort2(_c_deque2, _c_deque2.begin(), _c_deque2.end());
+	clock_t	deque2_end = clock();
+	
+	// do list merge sort
+	clock_t	list2_start = clock();
+	size_t num_compares_lst2 = merge_sort2(_c_list2, _c_list2.begin(), _c_list2.end());
+	clock_t	list2_end = clock();
+	
 	std::cout << "Time to process a range of " << _c_vec.size() << " elements with std::[vector] : ";
-	std::cout << std::fixed << std::setprecision(5) << static_cast<double>(vec_end - vec_start) / CLOCKS_PER_SEC << " us. "
+	std::cout << std::fixed << std::setprecision(5) << static_cast<double>(vec_end - vec_start) / CLOCKS_PER_SEC << " s. "
 			<< "Number of compares: " << num_compares_vec << std::endl;
 	std::cout << "Time to process a range of " << _c_vec2.size() << " elements with std::[vector] : ";
-	std::cout << std::fixed << std::setprecision(5) << static_cast<double>(vec2_end - vec2_start) / CLOCKS_PER_SEC << " us. "
-			<< "Number of compares: " << num_compares_vec2 << std::endl;
-	std::cout << "Time to process a range of " << _c_deque.size() << " elements with std::[deque] : ";
-	std::cout << std::fixed << std::setprecision(5) << static_cast<double>(deque_end - deque_start) / CLOCKS_PER_SEC << " us. "
+	std::cout << std::fixed << std::setprecision(5) << static_cast<double>(vec2_end - vec2_start) / CLOCKS_PER_SEC << " s. "
+			<< "Number of compares: " << num_compares_vec2 <<  " (merge_sort)" << std::endl;
+	std::cout << "Time to process a range of " << _c_deque.size() << " elements with std::[deque]  : ";
+	std::cout << std::fixed << std::setprecision(5) << static_cast<double>(deque_end - deque_start) / CLOCKS_PER_SEC << " s. "
 			<< "Number of compares: " << num_compares_deq << std::endl;
-	std::cout << "Time to process a range of " << _c_list.size() << " elements with std::[list] : ";
-	std::cout << std::fixed << std::setprecision(5) << static_cast<double>(list_end - list_start) / CLOCKS_PER_SEC << " us. "
+	std::cout << "Time to process a range of " << _c_deque2.size() << " elements with std::[deque]  : ";
+	std::cout << std::fixed << std::setprecision(5) << static_cast<double>(deque2_end - deque2_start) / CLOCKS_PER_SEC << " s. "
+			<< "Number of compares: " << num_compares_deq2 <<  " (merge_sort)" << std::endl;
+	std::cout << "Time to process a range of " << _c_list.size() << " elements with std::[list]   : ";
+	std::cout << std::fixed << std::setprecision(5) << static_cast<double>(list_end - list_start) / CLOCKS_PER_SEC << " s. "
 			<< "Number of compares: " << num_compares_lst << std::endl;
+	std::cout << "Time to process a range of " << _c_list2.size() << " elements with std::[list]   : ";
+	std::cout << std::fixed << std::setprecision(5) << static_cast<double>(list2_end - list2_start) / CLOCKS_PER_SEC << " s. "
+			<< "Number of compares: " << num_compares_lst2  << " (merge_sort)" << std::endl;
 }
 
 bool	PmergeMe::isPositiveNum(std::string argv) {
@@ -89,16 +109,6 @@ std::ostream & operator<<(std::ostream &o, std::vector<T> const &rhs) {
 	}
 	return o;
 }
-
-// n = 0 -> {}
-// n = 1 -> {0}
-// n = 2 -> {0, 1, 1}
-// n = 3 -> {0, 1, 1, 1(3)}
-// n = 4 -> {0, 1, 1, 2(3)}
-// n = 5 -> {0, 1, 1, 3}
-
-// 0, 1, 1, 3, 5, 11, 21...
-// [11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1,]
 
 std::vector<size_t>    generateJacobSeq(size_t n) {
 	std::vector<size_t>    JacobSeq;
@@ -150,7 +160,6 @@ Iter binarySearch(Iter first, Iter last, const T& value, size_t *_compares) {
 	Iter	it;
 	typename std::iterator_traits<Iter>::difference_type count, step;
 	count = std::distance(first, last);
-	size_t	counts = 0;
 
 	while (count > 0) {
 		it = first;
@@ -158,7 +167,6 @@ Iter binarySearch(Iter first, Iter last, const T& value, size_t *_compares) {
 		std::advance(it, step);
 
 		*_compares += 1;
-		counts++;
 		if (*it < value) {
 			first = ++it;
 			count -= step + 1;
@@ -217,10 +225,10 @@ size_t	merge_insertion_sort(Container<T, Alloc> &cont,
 		for (pair_it itp = pairs.begin(); itp != pairs.end(); ++itp) {
 			if (itp->second == *it) {
 				pending.push_back(itp->first);
+				break;
 			}
 		}
 	}
-
 	// // Step 3 printing check
 
 	// Step 4: Insert pending stuffs based on Jacobsthal sequence
@@ -287,17 +295,18 @@ size_t	merge_insertion_sort(Container<T, Alloc> &cont,
 template < typename Container >
 size_t	merge(Container &cont, typename Container::iterator first, typename Container::iterator middle, typename Container::iterator last) {
 	typedef	typename Container::iterator	c_it;
+	typename std::iterator_traits<c_it>::difference_type count;
 	(void)cont;
 	size_t	compares = 0;
 	
-	Container	tmp(last - first);
+	count = std::distance(first, last);
+	Container	tmp(count);
 	c_it	left = first;
 	c_it	right = middle;
 	c_it	tmp_it = tmp.begin();
 
 	// sorting and copy to tmp
-	while (left < middle && right < last) {
-		compares += 2;
+	while (std::distance(left, middle) > 0 && std::distance(right, last) > 0) {
 		compares++;
 		if (*left <= *right) {
 			*tmp_it = *left;
@@ -309,16 +318,16 @@ size_t	merge(Container &cont, typename Container::iterator first, typename Conta
 		++tmp_it;
 	}
 	// copying the remaining, could be left or right
-	while (left < middle) {
+	while (std::distance(left, middle) > 0) {
 		*tmp_it = *left;
 		++left;
 		++tmp_it;
 	}
-	while (right < last) {
+	while (std::distance(right, last) > 0) {
 		*tmp_it = *right;
 		++right;
 		++tmp_it;
-	}
+	}	
 	// overwrite sorted tmp to original container
 	std::copy(tmp.begin(), tmp.end(), first);
 	return compares;
@@ -326,10 +335,14 @@ size_t	merge(Container &cont, typename Container::iterator first, typename Conta
 
 template < typename Container >
 size_t	merge_sort2(Container &cont, typename Container::iterator first, typename Container::iterator last) {
+	typedef typename Container::iterator	c_it;
+	typename std::iterator_traits<c_it>::difference_type count;
+	count = std::distance(first, last);
 	size_t	compares = 0;
-	if (last - first > 1) {
+	if (count > 1) {
 		// find middle point
-		typename Container::iterator middle = first + (last - first) / 2;
+		c_it	middle = first;
+		std::advance(middle, count / 2);
 		// recusively split to left and right
 		compares += merge_sort2(cont, first, middle);
 		compares += merge_sort2(cont, middle, last);

@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:48:50 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/23 17:50:18 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/23 22:56:05 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,9 @@ private:
 	std::vector<int>    _c_vec;
 	std::vector<int>    _c_vec2;
 	std::deque<int>     _c_deque;
+	std::deque<int>     _c_deque2;
 	std::list<int>		_c_list;
-	// int					_compares;
-	// size_t					_size;
-	// std::vector<size_t>	_jacob_seq;
+	std::list<int>		_c_list2;
 	
 public:
 	PmergeMe(std::vector<int> const &input);
@@ -58,6 +57,7 @@ template < template <typename, typename> class Container, typename T, typename A
 size_t	merge_insertion_sort(Container<T, Alloc> &cont,
 		typename Container<T, Alloc>::iterator first, typename Container<T, Alloc>::iterator last);
 
+// Adding merge sort to compare the number of counts and time needed
 template < typename Container >
 size_t	merge(Container &cont, typename Container::iterator first, typename Container::iterator middle, typename Container::iterator last);
 
