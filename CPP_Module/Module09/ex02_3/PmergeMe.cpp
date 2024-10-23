@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 18:40:55 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/10/23 23:49:30 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/10/24 00:03:53 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	PmergeMe::sort_compare() {
 
 	// do vector merge sort
 	clock_t	vec2_start = clock();
-	size_t num_compares_vec2 = merge_sort2(_c_vec, _c_vec.begin(), _c_vec.end());
+	size_t num_compares_vec2 = merge_sort2(_c_vec2, _c_vec2.begin(), _c_vec2.end());
 	clock_t	vec2_end = clock();
 	
 	// do deque merge sort
