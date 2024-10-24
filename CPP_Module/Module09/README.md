@@ -40,7 +40,7 @@ Here I share my sketch while I was trying to understand the mechanism of this al
 
 ### Final thoughts about this exercise
 1. I think the main point of CPP09 exercises are to understand different standard containers choose them wisely.
-2. I am guessing that learning ford-johnson sorting method is not the main purpose. It is slow and complex algorithm that through it you can see the performance difference among different containers (data structure).
+2. I am guessing that learning ford-johnson sorting method is not the main purpose. It is slow and complex algorithm. But via using this slow and complex algorithm, we can better see the performance difference among different containers (data structure).
 
 ### References
 1. https://codereview.stackexchange.com/questions/116367/ford-johnson-merge-insertion-sort
