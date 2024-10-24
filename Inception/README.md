@@ -40,6 +40,16 @@ picture reference: https://docs.docker.com/get-started/docker-overview/
     - A container is a runnable instance of an image. You can create, start, stop, move, or delete a container.
     - A container is by default isolated from other containers and its host machine. You can configure the network connections of a container to other container, storage, or other underlying subsystems.
 
+#### Docker Cammands
+
+- Run a container: docker run
+- List running containers: docker ps
+- Stop a container: docker stop
+- Remove a container: docker rm
+- Pull an image: docker pull
+- Build an image: docker build
+- See logs from a container: docker logs <container-id>
+
 #### VM in 42
 - username: tsuchen
 - pw: Myinception
