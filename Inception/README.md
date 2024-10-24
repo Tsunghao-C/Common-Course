@@ -21,3 +21,9 @@
     a. NGINX: works as a webserver that request to and translate response using HTTP.
     b. WordPress: content management interface
     c. SQLDB: database
+
+
+
+#### VM in 42
+- username: tsuchen
+- pw: Myinception
