@@ -42,13 +42,18 @@ picture reference: https://docs.docker.com/get-started/docker-overview/
 
 #### Docker Cammands
 
-- Run a container: docker run
+- Run a container: docker run -d(to detach) -p 8080:80 (set port) [image-id]
 - List running containers: docker ps
+- List all containers:  docker ps -a
 - Stop a container: docker stop
-- Remove a container: docker rm
+- Remove a container: docker rm [container-name]
 - Pull an image: docker pull
 - Build an image: docker build
-- See logs from a container: docker logs <container-id>
+- See iamge list: docker image ls
+- Tag an image: docker tag [image-id]
+- Push an image to remote docker repo: docker push [username]/[repo-name]
+- Remove an image: docker rmi [image-id]
+- See logs from a container: docker logs [container-id]
 
 #### VM in 42
 - username: tsuchen
