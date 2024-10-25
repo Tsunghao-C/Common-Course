@@ -99,6 +99,9 @@ picture reference: https://docs.docker.com/get-started/docker-overview/
 - To remove the docker network: docker compose down
 - To remove the docker network including volumes: docker compose down --volumes
 
+**Volume Persistence**
+By default, volumes are not automatically removed when tearing down a composed docker network. The idea is if you want to build up again the service later, you will still have the data back again. Super light weight and portable!
+
 ### Building images
 
 #### Dockerfile Common Instructions
@@ -112,9 +115,28 @@ picture reference: https://docs.docker.com/get-started/docker-overview/
 - `USER <user-or-uid>` - this instruction sets the default user for all subsequent instructions.
 - `CMD ["<command>", "<arg1>"]` - this instruction sets the default command a container using this image will run.
 
-**Volume Persistence**
-By default, volumes are not automatically removed when tearing down a composed docker network. The idea is if you want to build up again the service later, you will still have the data back again. Super light weight and portable!
+#### Tagging images
 
+Now you have the Dockerile ready to build an image. You can simply do `docker build .` to build an image. However, this image is not tagged with the information about what it is and the revision.
+
+**Structure of tagging image**\
+`[HOST[:PORT_NUMBER]/]PATH[:TAG]`
+
+- `HOST`: the optional registry name. if not specified, by default it will use `docker.io`.
+- `PORT_NUMBER`: the registry port number if a hostname is provided.
+- `PATH`: the path of the image. For Docker Hub, the format is `[NAMESPACE/]REPOSITORY`, where namespace is an **userid**. If no namespace is specified, `library` is used, which is the namespace for **Docker Official Images**.
+- `TAG`: A human-readable identifier used to identify different versions of variants of an image. If no tage is specified, `latest` is used by default.
+
+**Example**
+1. `nginx` is equivalent to `docker.io/library/nginx:latest`
+2. `docker/welcom-to-docker` = `docker.io/docker/welcome-to-docker:latest`
+3. `ghcr.io/dockersamples/example-voting-app-vote:pr-311`\
+    - host: Github Container Registry `ghcr.io`
+    - namespace: `dockersamples`
+    - repository: `example-voting-app-vote`
+    - tag: `pr-311`
+
+So to build an image with tagged info, do `docker build -t my-username/my-imagerepo .`
 
 #### VM in 42
 - username: tsuchen
