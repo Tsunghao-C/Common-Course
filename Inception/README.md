@@ -24,7 +24,7 @@
 
 
 ### Docker Architectur
-![alt text](docker-architecture.webp)
+![alt text](image/docker-architecture.webp)
 picture reference: https://docs.docker.com/get-started/docker-overview/
 
 1. Docker uses a client-server architecture. Like `git`, the client do commands to the service (daemon), and the daemon communicate with the server.
@@ -98,6 +98,19 @@ picture reference: https://docs.docker.com/get-started/docker-overview/
 - To build up the docker network: docker compose up -d --build
 - To remove the docker network: docker compose down
 - To remove the docker network including volumes: docker compose down --volumes
+
+### Building images
+
+#### Dockerfile Common Instructions
+
+- `FROM <image>` - this specifies the base image that the build will extend.
+- `WORKDIR <path>` - this instruction specifies the "working directory" or the path in the image where files will be copied and commands will be executed.
+- `COPY <host-path> <image-path>` - this instruction tells the builder to copy files from the host and put them into the container image.
+- `RUN <command>` - this instruction tells the builder to run the specified command.
+- `ENV <name> <value>` - this instruction sets an environment variable that a running container will use.
+- `EXPOSE <port-number>` - this instruction sets configuration on the image that indicates a port the image would like to expose.
+- `USER <user-or-uid>` - this instruction sets the default user for all subsequent instructions.
+- `CMD ["<command>", "<arg1>"]` - this instruction sets the default command a container using this image will run.
 
 **Volume Persistence**
 By default, volumes are not automatically removed when tearing down a composed docker network. The idea is if you want to build up again the service later, you will still have the data back again. Super light weight and portable!
