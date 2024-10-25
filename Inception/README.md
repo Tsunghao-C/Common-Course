@@ -87,6 +87,22 @@ picture reference: https://docs.docker.com/get-started/docker-overview/
 - Remove an image: docker rmi [image-id]
 - See logs from a container: docker logs [container-id]
 
+### Docker Compose
+
+- One best practice for using containers is that each container should do only one thing and focus on doing it well. We should avoid the tendency to have one container to do multiple things.
+- So, in order to respect this rule, how do we manage multiple containers and make them work at the same time? To do this, we must have a **Network** of containers, and configure how they should interact with each other.
+- `Docker Compose` is here to build a net work of containers using a single YAML file. Inside the `compose.yml` file, you have several Dockerfile that build several containers.
+
+#### Commands of Docker Compose
+
+- To build up the docker network: docker compose up -d --build
+- To remove the docker network: docker compose down
+- To remove the docker network including volumes: docker compose down --volumes
+
+**Volume Persistence**
+By default, volumes are not automatically removed when tearing down a composed docker network. The idea is if you want to build up again the service later, you will still have the data back again. Super light weight and portable!
+
+
 #### VM in 42
 - username: tsuchen
 - pw: Myinception
