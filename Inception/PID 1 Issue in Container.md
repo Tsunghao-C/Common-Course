@@ -14,8 +14,8 @@
 
 ### Is Bash the answer to the PID 1 in Container?
 
-1. Yes, if you init the container via `bash`, the bash will be the PID 1, and can `reap child processes` avoid zombie processes from filling up the kernel process resouce table.
-#### Donside
+1. Not entirely. If you init the container via `bash`, the bash will be the PID 1, and can `reap child processes` avoid zombie processes from filling up the kernel process resouce table.
+#### Downside
 1. Bash is poor at propagate signals. If it receives the signal `SIGTERM` from `Docker stop`, the application process will not shutdown. After 10 seconds, docker will send `SIGKILL` to bash and that's a problem!!!
 2. In order to handle signals, you need to add a script to **trap the signals** and pass it to the application for a clean exit.
 3. Example bash Script;
