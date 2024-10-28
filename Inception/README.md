@@ -138,6 +138,20 @@ Now you have the Dockerile ready to build an image. You can simply do `docker bu
 
 So to build an image with tagged info, do `docker build -t my-username/my-imagerepo .`
 
+#### Using the buid cache
+
+1. When we do `docker build` command to create a new image, Docker executes each instructions in the Dockerfile, creating a layer for each command and **in the order specified in the Dockerfile**.
+2. Docker will check line by line and see if it can reuse the instruction from a previous build. If yes, it will **using cache build** and doesn't need to redo it again.
+3. Situations that can cause cache to be invalidated:
+    - Any changes to the command of  `RUN`.
+    - Any changes to files copied into the image with `COPY` or `ADD` instructions. Whether it is a chainge in content or properties like file permissions, Docker considers these modifications as triggers to invalidate the cache.
+    - Once a layer is invalidated, **all the following laters are also invalidated.** This way Docker ensures the subsequent layers replying on previous layers are updated and prevents inconsistencies.
+4. In summary, compose the sequence of Dockerfile wisely so it doesn't need to rebuild everything everytime. 
+
+#### Multi-stage builds
+
+
+
 #### VM in 42
 - username: tsuchen
 - pw: Myinception
