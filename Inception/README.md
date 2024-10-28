@@ -150,7 +150,75 @@ So to build an image with tagged info, do `docker build -t my-username/my-imager
 
 #### Multi-stage builds
 
+- Typically, multi stage building split the entire imaging building into `building stage` and `running stage` in a single `Dockerfile`.
+- It helps reduces the final image fsize and increase security by **only copying essential files and dependencies** into the final image. You don't need to copy the entire resouce that will no longer be needed after compilation to the final image.
+- Both interpreted and compiled language can benefit from using multi-stage build.\
+[What is Interpreted vs Compiled Language?](<Interpreted vs Compiled Language.md>)
 
+##### Why Multi-Stage Builds Are Important
+
+1. Reduced Image Size: Only the necessary files and dependencies are included in the final image, reducing the size of the image and making it faster to deploy.
+2. Improved Security: By keeping development tools (like compilers or build dependencies) out of the final image, you minimize attack surfaces.
+3. Easier Management of Build and Runtime Environments: Multi-stage builds allow you to use different base images for building and running the application, helping tailor each stage to its specific purpose.
+
+##### Example of multi-stage Builds
+1. Compiled language
+```
+# Stage 1: Build the application
+FROM golang:1.16 AS builder
+
+# Set working directory and copy the source code
+WORKDIR /app
+COPY . .
+
+# Compile the application
+RUN go build -o myapp
+
+# Stage 2: Create the minimal runtime image
+FROM alpine:latest
+
+# Copy the compiled binary from the builder stage
+COPY --from=builder /app/myapp /usr/local/bin/myapp
+
+# Set the entrypoint to the executable
+ENTRYPOINT ["myapp"]
+```
+2. Interpreted language
+```
+# Stage 1: Build stage
+FROM python:3.9-slim AS builder
+
+# Set working directory and copy the requirements file
+WORKDIR /app
+COPY requirements.txt .
+
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the application source code
+COPY . .
+
+# Stage 2: Production stage
+FROM python:3.9-alpine
+
+# Copy only the installed dependencies and source code from the builder stage
+COPY --from=builder /app /app
+
+# Set working directory and define entrypoint
+WORKDIR /app
+CMD ["python", "app.py"]
+
+```
+
+- **For compiled languages:** In the runtime stage, we typically only copy the **compiled binary** since it already includes everything needed to execute the code.
+- **For interpreted languages:** We copy both the **application source code** and any **dependencies installed** during the build stage, as the interpreter (Python, Node, Ruby, etc.) still needs access to the original source code to execute it.
+
+##### Who should be PID 1 in the container?\
+1. [What's the best practice for PID 1 in Container?](<PID 1 Issue in Container.md>)
+2. [What's the difference between CMD and ENTRYPOINT?](CMD_ENTRYPOINT.md)
+
+#### References
+[Best practice for buiding images](https://docs.docker.com/build/building/best-practices/)
 
 #### VM in 42
 - username: tsuchen
