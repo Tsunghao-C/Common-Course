@@ -59,7 +59,7 @@ STOPSIGNAL SIGRTMIN+3
 
 1. If you follow the rule of thumb that each container only do one simple tast:
     1. use `ENTRYPOINT` or `CMD` in **exec form**
-    2. Always use `Docker run --init` with the `--init` flag
+    2. Always use `Docker run --init` with the `--init` flag (or `init: true` in dockercompose.yml file)
 2. If you really want to have multiple processes in the container, **init the container with a bash script** that can handle Signals.
 3. If you want to have more advance system feature, and you have enough resouce to accomodate systemd, **consider to add Systemd and run systemd** in the container.
 
