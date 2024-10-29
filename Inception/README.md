@@ -220,6 +220,19 @@ CMD ["python", "app.py"]
 #### References
 [Best practice for buiding images](https://docs.docker.com/build/building/best-practices/)
 
+
+### Nginx
+
+#### References:
+[Server and Location Blocks](https://www.digitalocean.com/community/tutorials/understanding-nginx-server-and-location-block-selection-algorithms)
+
+
+Reference Github:
+1. https://github.com/llescure/42_Inception
+2. https://github.com/vbachele/Inception/tree/main
+
 #### VM in 42
 - username: tsuchen
 - pw: Myinception
+- username: new_user
+- pw: newuser
