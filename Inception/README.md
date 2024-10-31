@@ -244,3 +244,9 @@ Reference Github:
 - pw: Myinception
 - username: new_user
 - pw: newuser
+
+##### WordPress
+- Site title: tsuchen_inception
+- username: tsuchen
+- Password: Tsuchen_inception42
+- email: tsuchen@student.42.fr
