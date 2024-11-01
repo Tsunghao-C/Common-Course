@@ -250,3 +250,5 @@ Reference Github:
 - username: tsuchen
 - Password: Tsuchen_inception42
 - email: tsuchen@student.42.fr
+
+To access log-in page, you can add `wp-admin` in the end of url.

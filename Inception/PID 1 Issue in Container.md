@@ -69,3 +69,31 @@ STOPSIGNAL SIGRTMIN+3
 1. https://cloud.theodo.com/en/blog/docker-processes-container
 2. https://hasgeek.com/rootconf/2017/sub/what-should-be-pid-1-in-a-container-JQ6nkBv13XeZzR6zAiFsip
 3. https://daveiscoding.hashnode.dev/why-do-you-need-an-init-process-inside-your-docker-container-pid-1
+
+
+### Appendix - When to use `init: true` in docker-compose.yml
+
+When running containers without `init: true`, Docker does indeed assign PID 1 to the primary process defined in the `CMD` or `ENTRYPOINT` of the container, such as `nginx -g daemon off` or `php-fpm`. Normally, PID 1 has a unique role in Unix-like systems: it's responsible for "reaping" zombie processes. This reaping process clears defunct child processes after they've exited, preventing them from lingering in the process table as zombies.
+
+#### Why There Are No Zombie Processes in Your Case
+
+In Docker containers, however, there are a few reasons why you might not see zombie processes, even without using `init: true`:
+
+1. **Well-Behaved Processes**: Programs like `nginx` and `php-fpm` are designed to run as daemons or service managers, often taking on the responsibility of managing their own child processes and reaping them if they exit. Since they handle their own process trees carefully, they usually do not leave zombies behind.
+
+2. **Container Lifecycle Management**: Docker containers are often short-lived, stateless, or restarted regularly. This means they rarely accumulate zombie processes, as the container lifecycle is managed by Docker itself. When a container stops, Docker cleans up all processes associated with it, effectively clearing any zombie processes that might have lingered.
+
+3. **Small Process Trees**: In many containers, the primary process doesn’t spawn many child processes (or any at all), minimizing the potential for zombie processes. For example, if your container runs only `nginx -g "daemon off;"` without forking additional processes, there’s no risk of zombies because no child processes are created that would need to be reaped.
+
+4. **Docker’s Default Reaping Mechanism**: While Docker doesn’t automatically provide an `init` process unless specified, it has some mechanisms in place to help ensure container processes behave correctly. For example, Docker’s runtime includes basic handling for common container states, which minimizes the number of zombie processes that survive between container runs.
+
+#### When to Use `init: true`
+
+If you were to use a process that frequently spawns child processes and doesn’t handle reaping (for example, a custom script that forks and ignores child processes), you would eventually see zombie processes accumulate. In such cases, adding `init: true` in `docker-compose.yml` or using a lightweight init system (like `tini`) as the entrypoint can help manage zombies by acting as the true PID 1 process and reaping any zombies left behind by the main process.
+
+Using `init: true` is a best practice in cases where:
+- The container process spawns many child processes.
+- The main process does not manage child processes effectively.
+- You’re running a custom script or application without good process management.
+
+In your case, it’s likely unnecessary, as both `nginx` and `php-fpm` handle process management well on their own.
