@@ -276,3 +276,8 @@ To access log-in page, you can add `wp-admin` in the end of url.
 3. Currently the static-webpage container simply copy and add static pages to volume. It will exit soon after finishing the job. It doesn't need to stay running during the application runtime.
 
 #### Demo Adminer
+1. Use `adminer.tsuchen.42.fr` as hostname and will redirect to adminer web interface
+2. log in with Servername=MYSQL_HOSTNAME, Username=MYSQL_USER, Password=MYSQL_PWD, Database=MYSQL_DATABASE.
+3. Once logged in, you can see a user-friendly interface to review and retrieve data. You can also modify database in realtime with adminer.
+
+#### Demo Extra Service
