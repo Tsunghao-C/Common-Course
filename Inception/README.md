@@ -280,4 +280,5 @@ To access log-in page, you can add `wp-admin` in the end of url.
 2. log in with Servername=MYSQL_HOSTNAME, Username=MYSQL_USER, Password=MYSQL_PWD, Database=MYSQL_DATABASE.
 3. Once logged in, you can see a user-friendly interface to review and retrieve data. You can also modify database in realtime with adminer.
 
-#### Demo Extra Service
+#### Demo Extra Service - Promethus and Grafana
+1. Theses two services are web interact-able resource visualization tool. Help you to monitor the resources uses in real-time
