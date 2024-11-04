@@ -252,3 +252,19 @@ Reference Github:
 - email: tsuchen@student.42.fr
 
 To access log-in page, you can add `wp-admin` in the end of url.
+
+
+### For eval
+
+#### Bonus Part
+##### Demo Redis
+1. Go into WP container and do `wp redis status --allow-root` to check if it is connected
+2. Go into Redis container with `docker compose exec redis redis-cli monitor` to see the realtime caching logs. (Or go inside redis container, and then do `redis-cli` and then `KEYS *`)
+3. Go to WP plugin pages to see the history of redis
+
+##### Demo FTP
+1. Go to a local repository that you are going to download or upload file
+2. Then, do `ftp hostname(or local host) 21` to login`
+3. Do `ls` to check if you can see the ftp server directory
+4. To upload file, do `put filename.file`
+5. To download file, do `get filename.file`
