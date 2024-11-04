@@ -239,13 +239,15 @@ Reference Github:
 1. https://github.com/llescure/42_Inception
 2. https://github.com/vbachele/Inception/tree/main
 
+### For eval
+
 #### VM in 42
 - username: tsuchen
 - pw: Myinception
 - username: new_user
 - pw: newuser
 
-##### WordPress
+#### WordPress
 - Site title: tsuchen_inception
 - username: tsuchen
 - Password: Tsuchen_inception42
@@ -254,17 +256,23 @@ Reference Github:
 To access log-in page, you can add `wp-admin` in the end of url.
 
 
-### For eval
 
-#### Bonus Part
-##### Demo Redis
+### Bonus Part
+#### Demo Redis
 1. Go into WP container and do `wp redis status --allow-root` to check if it is connected
 2. Go into Redis container with `docker compose exec redis redis-cli monitor` to see the realtime caching logs. (Or go inside redis container, and then do `redis-cli` and then `KEYS *`)
 3. Go to WP plugin pages to see the history of redis
 
-##### Demo FTP
+#### Demo FTP
 1. Go to a local repository that you are going to download or upload file
 2. Then, do `ftp hostname(or local host) 21` to login`
 3. Do `ls` to check if you can see the ftp server directory
 4. To upload file, do `put filename.file`
 5. To download file, do `get filename.file`
+
+#### Demo Static
+1. append `/static/` to the end of url, it will show the static pages storded in `wordpress_data/static`
+2. Can do real time demo together with FTP, and show that if I add pages or remove pages using FTP, the static pages are affected accordingly.
+3. Currently the static-webpage container simply copy and add static pages to volume. It will exit soon after finishing the job. It doesn't need to stay running during the application runtime.
+
+#### Demo Adminer
