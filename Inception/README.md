@@ -1,5 +1,11 @@
 # 42 Project - Inception
 
+My final Inception projet digram:
+1. blue blocks: Mandatory part - Webserver, Front-end, Back-end
+2. yellow blocks: Bonus part1 - Helper modules to improve user experience and maintenance
+3. pink blocks: Bonus part2 - Monitoring and visualizing modules
+![alt text](image/Docker_Application_Diagram.png)
+
 
 ## Docker learning notes
 
