@@ -4,6 +4,7 @@
 #include <string.h>
 #include <sys/socket.h>
 #include <sys/types.h>
+#include <sys/select.h>
 #include <netinet/in.h>
 
 typedef	struct	s_client
@@ -33,8 +34,11 @@ void	send_to_all(int except)
 	for (int fd = 0; fd <= maxfd; fd++)
 	{
 		if (FD_ISSET(fd, &write_set) && fd != except)
+		{
+			printf("Sending to fd %d: %s\n", fd, send_buffer);
 			if (send(fd, send_buffer, strlen(send_buffer), 0) == -1)
 				err(NULL);
+		}
 	}
 }
 
@@ -43,34 +47,31 @@ int	main(int ac, char *av[])
 	if (ac != 2)
 		err("Wrong number of arguments");
 	struct	sockaddr_in	serveraddr;
-	socklen_t		len;
+	socklen_t		len = sizeof(serveraddr);
 	// Socket Creation
-	int	serverfd = socket(AF_INET, SOCK_STREAM, 0);
-	//int	opt = 1;
 	// AF_INET: IPV4 domain
 	// SOCK_STREAM: TCP type
 	// 0: protocal value for IP
+	int	serverfd = socket(AF_INET, SOCK_STREAM, 0);
 	if (serverfd == -1)
 		err(NULL);
+	// set up maxfd and init client, current, serveraddr
 	maxfd = serverfd;
-
 	FD_ZERO(&current);
 	FD_SET(serverfd, &current);
 	bzero(clients, sizeof(clients));
 	bzero(&serveraddr, sizeof(serveraddr));
 
 	// Forcefully attaching socket to desired port
-	printf("HERE\n");
-	//if (setsockopt(serverfd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt)))
-	//	err(NULL);
-
 	serveraddr.sin_family = AF_INET;
-	serveraddr.sin_addr.s_addr = INADDR_ANY;
+	serveraddr.sin_addr.s_addr = htonl(INADDR_ANY);
 	serveraddr.sin_port = htons(atoi(av[1]));
 
 	// bind the server to server address and start to listen
 	if (bind(serverfd, (const struct sockaddr *)&serveraddr, sizeof(serveraddr)) < 0 || listen(serverfd, 3) < 0)
 		err(NULL);
+	
+	printf("Server is listening on port %s...\n", av[1]);
 
 	while (1)
 	{
