@@ -23,7 +23,7 @@ graph TB
 
     CDN --> Port80[":80, :443"]
 
-    subgraph Docker
+    subgraph Docker Network
         Port80 --> NGINX["Nginx :80"]
         
         subgraph Frontend
