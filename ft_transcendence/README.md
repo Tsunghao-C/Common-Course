@@ -102,19 +102,19 @@ graph TB
         NGINX --> WSGateway[Django Channels]
     end
 
+    subgraph User Services
+        APIGateway --> UserService[Django User Service]
+        APIGateway --> LeaderboardService[Leaderboard Service]
+        UserService --> UserDB[(User DB)]
+        LeaderboardService --> Redis[(Redis Cache)]
+    end
+
     subgraph Game Services
         WSGateway --> GameServer[Django Game Server]
         GameServer --> GameState[Game State Manager]
         GameServer --> MatchMaking[Matchmaking Service]
         GameState --> GameDB[(Game DB)]
         MatchMaking --> MatchDB[(Matchmaking DB)]
-    end
-
-    subgraph User Services
-        APIGateway --> UserService[Django User Service]
-        APIGateway --> LeaderboardService[Leaderboard Service]
-        UserService --> UserDB[(User DB)]
-        LeaderboardService --> Redis[(Redis Cache)]
     end
 
     subgraph Monitoring Stack
