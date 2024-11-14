@@ -2,17 +2,19 @@
 
 Document and notes for learning this project
 
+![Alt text](image.png)
+
 ### Final Version_1
 ```mermaid
 graph TB
     %% Style definitions
     classDef external fill:#001219,stroke:#001219,color:#fff,stroke-width:2px
     classDef frontend fill:#005F73,stroke:#005F73,color:#fff,stroke-width:2px
-    classDef auth fill:#BB3E03,stroke:#BB3E03,color:#fff,stroke-width:2px
+    classDef auth fill:#0A9396,stroke:#0A9396,color:#fff,stroke-width:2px
     classDef gateway fill:#94D2BD,stroke:#94D2BD,color:#000,stroke-width:2px
-    classDef game fill:#E9D8A6,stroke:#E9D8A6,color:#000,stroke-width:2px
+    classDef game fill:#BB3E03,stroke:#BB3E03,color:#fff,stroke-width:2px
     classDef monitoring fill:#EE9B00,stroke:#EE9B00,color:#000,stroke-width:2px
-    classDef port fill:#9B2226,stroke:#9B2226,color:#fff,stroke-width:2px
+    classDef security fill:#9B2226,stroke:#9B2226,color:#fff,stroke-width:2px
 
     subgraph External
         MobileWeb["Mobile Web"] --> CDN
@@ -21,11 +23,18 @@ graph TB
         CDN["Content Delivery Network"]
     end
 
-    CDN --> Port80[":80, :443"]
+    CDN --> WAF["WAF :443"]
+    class WAF security
 
-    subgraph Docker Network
-        Port80 --> NGINX["Nginx :80"]
+    subgraph Docker
+        WAF --> NGINX["Nginx :80"]
         
+        subgraph Security["Security Layer"]
+            Vault["HashiCorp Vault :8200"]
+            TwoFA["2FA Service :8082"]
+            class Vault,TwoFA security
+        end
+
         subgraph Frontend
             NGINX --> SPA["SPA :3000"]
         end
@@ -33,30 +42,36 @@ graph TB
         subgraph Auth
             NGINX --> OAuth["OAuth :8080"]
             OAuth --> AuthService["Auth :8081"]
+            AuthService --> TwoFA
             OAuth --> ExternalOAuth["External OAuth"]
             AuthService --> AuthDB[("Auth DB :5432")]
+            AuthService --> Vault
             class AuthDB auth
         end
 
-        subgraph Gateway Layer
-            NGINX --> APIGateway["Django REST API :8000"]
-            NGINX --> WSGateway["Django Channel WS :8001"]
+        subgraph Gateway
+            NGINX --> APIGateway["API :8000"]
+            NGINX --> WSGateway["WS :8001"]
+            APIGateway --> Vault
+            WSGateway --> Vault
             
             subgraph Users
                 APIGateway --> UserService["Users :8002"]
                 APIGateway --> LeaderboardService["Leaderboard :8003"]
                 UserService --> UserDB[("User DB :5433")]
                 LeaderboardService --> Redis[("Redis :6379")]
+                UserService --> Vault
                 class UserDB,Redis gateway
             end
         end
 
         subgraph Game
-            WSGateway --> GameServer["Game Server :8004"]
-            GameServer --> GameState["Game State :8005"]
-            GameServer --> MatchMaking["Match Making :8006"]
+            WSGateway --> GameServer["Game :8004"]
+            GameServer --> GameState["State :8005"]
+            GameServer --> MatchMaking["Match :8006"]
             GameState --> GameDB[("Game DB :5434")]
             MatchMaking --> MatchDB[("Match DB :5435")]
+            GameServer --> Vault
             class GameDB,MatchDB game
         end
 
@@ -70,7 +85,7 @@ graph TB
             
             %% cAdvisor collecting container metrics
             CAdvisor["cAdvisor :8080"] -.-> NGINX & SPA
-            CAdvisor -.-> OAuth & AuthService & AuthDB
+            CAdvisor -.-> OAuth & AuthService & AuthDB & TwoFA
             CAdvisor -.-> APIGateway & WSGateway
             CAdvisor -.-> UserService & LeaderboardService & UserDB & Redis
             CAdvisor -.-> GameServer & GameState & MatchMaking & GameDB & MatchDB
@@ -93,13 +108,91 @@ graph TB
 
     %% Apply styles
     class MobileWeb,DesktopWeb,TabletWeb,CDN external
-    class Port80 port
     class NGINX,SPA frontend
     class OAuth,AuthService,ExternalOAuth auth
     class APIGateway,WSGateway,UserService,LeaderboardService gateway
     class GameServer,GameState,MatchMaking game
     class Prometheus,Grafana,Logstash,Elasticsearch,Kibana,NodeExp,CAdvisor monitoring
 ```
+
+#### Flow with All Cybersecurity Modules
+
+```mermaid
+graph TD
+    classDef user fill:#001219,stroke:#001219,color:#fff
+    classDef security fill:#BB3E03,stroke:#BB3E03,color:#fff
+    classDef service fill:#0A9396,stroke:#0A9396,color:#fff
+    classDef data fill:#94D2BD,stroke:#94D2BD,color:#000
+
+    subgraph "Initial Access Flow"
+        User[Player] -->|1. HTTPS Request| WAF
+        WAF[WAF] -->|2. Security Check| NGINX
+        NGINX -->|3. Auth Request| Auth[Auth Service]
+        Auth -->|4. 2FA Request| TwoFA[2FA Service]
+        Auth -->|5. Get Secrets| Vault[HashiCorp Vault]
+        
+        TwoFA -->|6. Verify Code| Auth
+        Auth -->|7. JWT Token| User
+    end
+
+    subgraph "Game Session Flow"
+        User -->|8. WS Connection| WAF
+        WAF -->|9. Inspect WS| WSGateway
+        WSGateway -->|10. Validate Token| Auth
+        WSGateway -->|11. Get Game Keys| Vault
+        WSGateway -->|12. Establish WS| GameServer
+    end
+
+    subgraph "Database Access Flow"
+        GameServer -->|13. Request Credentials| Vault
+        Vault -->|14. Temp DB Creds| GameServer
+        GameServer -->|15. Query| GameDB[(Game DB)]
+    end
+
+    %% Apply styles
+    class User user
+    class WAF,TwoFA,Vault security
+    class NGINX,Auth,WSGateway,GameServer service
+    class GameDB data
+```
+
+#### Flow explanation
+
+```mermaid
+graph TB
+    %% Style definitions
+    classDef client fill:#001219,stroke:#001219,color:#fff,stroke-width:2px
+    classDef frontend fill:#005F73,stroke:#005F73,color:#fff,stroke-width:2px
+    classDef gateway fill:#0A9396,stroke:#0A9396,color:#fff,stroke-width:2px
+    classDef game fill:#94D2BD,stroke:#94D2BD,color:#000,stroke-width:2px
+    classDef data fill:#E9D8A6,stroke:#E9D8A6,color:#000,stroke-width:2px
+
+    subgraph Initial["Initial Load"]
+        Browser["Browser"] --> NGINX
+        NGINX --> SPA["SPA Bundle"]
+        SPA --> InitialRender["Initial Game UI"]
+    end
+
+    subgraph GamePlay["Real-time Gameplay"]
+        Browser2["Browser/Client"] -->|"1. WebSocket Connection"| WS["WebSocket Gateway"]
+        
+        %% Game events flow
+        Browser2 -->|"2. Player Input\n(WS Message)"| GameServer
+        GameServer -->|"3. Game State Update"| GameState
+        GameState -->|"4. Broadcast State"| WS
+        WS -->|"5. State Update"| Browser2
+        
+        %% Local state management
+        Browser2 -->|"6. Local State\nUpdate"| LocalUI["Local Game UI"]
+    end
+
+    %% Apply styles
+    class Browser,Browser2 client
+    class NGINX,SPA,InitialRender,LocalUI frontend
+    class WS gateway
+    class GameServer,GameState game
+```
+
 
 
 ### Draft version
