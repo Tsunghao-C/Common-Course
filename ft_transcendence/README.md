@@ -2,6 +2,105 @@
 
 Document and notes for learning this project
 
+### Final Version_1
+```mermaid
+graph TB
+    %% Style definitions
+    classDef external fill:#001219,stroke:#001219,color:#fff,stroke-width:2px
+    classDef frontend fill:#005F73,stroke:#005F73,color:#fff,stroke-width:2px
+    classDef auth fill:#BB3E03,stroke:#BB3E03,color:#fff,stroke-width:2px
+    classDef gateway fill:#94D2BD,stroke:#94D2BD,color:#000,stroke-width:2px
+    classDef game fill:#E9D8A6,stroke:#E9D8A6,color:#000,stroke-width:2px
+    classDef monitoring fill:#EE9B00,stroke:#EE9B00,color:#000,stroke-width:2px
+    classDef port fill:#9B2226,stroke:#9B2226,color:#fff,stroke-width:2px
+
+    subgraph External
+        MobileWeb["Mobile Web"] --> CDN
+        DesktopWeb["Desktop Web"] --> CDN
+        TabletWeb["Tablet Web"] --> CDN
+        CDN["Content Delivery Network"]
+    end
+
+    CDN --> Port80[":80, :443"]
+
+    subgraph Docker
+        Port80 --> NGINX["Nginx :80"]
+        
+        subgraph Frontend
+            NGINX --> SPA["SPA :3000"]
+        end
+
+        subgraph Auth
+            NGINX --> OAuth["OAuth :8080"]
+            OAuth --> AuthService["Auth :8081"]
+            OAuth --> ExternalOAuth["External OAuth"]
+            AuthService --> AuthDB[("Auth DB :5432")]
+            class AuthDB auth
+        end
+
+        subgraph Gateway
+            NGINX --> APIGateway["API :8000"]
+            NGINX --> WSGateway["WS :8001"]
+            
+            subgraph Users
+                APIGateway --> UserService["Users :8002"]
+                APIGateway --> LeaderboardService["Leaderboard :8003"]
+                UserService --> UserDB[("User DB :5433")]
+                LeaderboardService --> Redis[("Redis :6379")]
+                class UserDB,Redis gateway
+            end
+        end
+
+        subgraph Game
+            WSGateway --> GameServer["Game :8004"]
+            GameServer --> GameState["State :8005"]
+            GameServer --> MatchMaking["Match :8006"]
+            GameState --> GameDB[("Game DB :5434")]
+            MatchMaking --> MatchDB[("Match DB :5435")]
+            class GameDB,MatchDB game
+        end
+
+        subgraph Monitor
+            %% Admin UI access through Nginx
+            NGINX --> Grafana["Grafana UI :3001"]
+            NGINX --> Prometheus["Prometheus UI :9090"]
+            NGINX --> Kibana["Kibana UI :5601"]
+            
+            NodeExp["Node Exporter :9100"] -.-> Prometheus
+            
+            %% cAdvisor collecting container metrics
+            CAdvisor["cAdvisor :8080"] -.-> NGINX & SPA
+            CAdvisor -.-> OAuth & AuthService & AuthDB
+            CAdvisor -.-> APIGateway & WSGateway
+            CAdvisor -.-> UserService & LeaderboardService & UserDB & Redis
+            CAdvisor -.-> GameServer & GameState & MatchMaking & GameDB & MatchDB
+            
+            %% Monitoring stack metrics
+            CAdvisor -.-> Elasticsearch["ES :9200"] & Logstash["Logstash :5000"] & Kibana
+            CAdvisor -.-> Prometheus
+            
+            %% Grafana data source
+            Grafana --> Prometheus
+            
+            %% Logging flow
+            NGINX & APIGateway & WSGateway -.-> Logstash
+            GameServer & GameState & MatchMaking -.-> Logstash
+            UserService & LeaderboardService -.-> Logstash
+            Logstash -.-> Elasticsearch
+            Elasticsearch -.-> Kibana
+        end
+    end
+
+    %% Apply styles
+    class MobileWeb,DesktopWeb,TabletWeb,CDN external
+    class Port80 port
+    class NGINX,SPA frontend
+    class OAuth,AuthService,ExternalOAuth auth
+    class APIGateway,WSGateway,UserService,LeaderboardService gateway
+    class GameServer,GameState,MatchMaking game
+    class Prometheus,Grafana,Logstash,Elasticsearch,Kibana,NodeExp,CAdvisor monitoring
+```
+
 
 ### Draft version
 ```mermaid
