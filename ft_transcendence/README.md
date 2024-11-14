@@ -38,9 +38,9 @@ graph TB
             class AuthDB auth
         end
 
-        subgraph Gateway
-            NGINX --> APIGateway["API :8000"]
-            NGINX --> WSGateway["WS :8001"]
+        subgraph Gateway Layer
+            NGINX --> APIGateway["Django REST API :8000"]
+            NGINX --> WSGateway["Django Channel WS :8001"]
             
             subgraph Users
                 APIGateway --> UserService["Users :8002"]
@@ -52,9 +52,9 @@ graph TB
         end
 
         subgraph Game
-            WSGateway --> GameServer["Game :8004"]
-            GameServer --> GameState["State :8005"]
-            GameServer --> MatchMaking["Match :8006"]
+            WSGateway --> GameServer["Game Server :8004"]
+            GameServer --> GameState["Game State :8005"]
+            GameServer --> MatchMaking["Match Making :8006"]
             GameState --> GameDB[("Game DB :5434")]
             MatchMaking --> MatchDB[("Match DB :5435")]
             class GameDB,MatchDB game
