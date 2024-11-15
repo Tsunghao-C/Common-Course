@@ -2,7 +2,7 @@
 
 Document and notes for learning this project
 
-![Alt text](image.png)
+![Alt text](image2.png)
 
 ### Final Version_1
 ```mermaid
