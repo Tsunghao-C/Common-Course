@@ -32,7 +32,7 @@ PmergeMe& PmergeMe::operator=(PmergeMe const &other) {
 		this->_c_deque = other._c_deque;
 		this->_c_deque2 = other._c_deque2;
 		this->_c_list = other._c_list;
-		this->_c_list = other._c_list2;
+		this->_c_list2 = other._c_list2;
 	}
 	return *this;
 }
